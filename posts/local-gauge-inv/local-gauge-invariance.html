@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2019-12-12">
+<meta name="description" content="If we insist on a symmetry on the Dirac Lagrangian, which we seemingly have no right to expect, the entire structure of QED falls out.">
+
+<title>Local Gauge Invariance – Youssef Kharchouf</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e59259e973b8ed943f20071542c807ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Youssef Kharchouf</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nightowl97"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/youssefkhar/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=rjjVxSYAAAAJ"> <i class="bi bi-mortarboard-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Local Gauge Invariance</h1>
+                  <div>
+        <div class="description">
+          If we insist on a symmetry on the Dirac Lagrangian, which we seemingly have no right to expect, the entire structure of QED falls out.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">gauge theory</div>
+                <div class="quarto-category">quantum field theory</div>
+                <div class="quarto-category">electromagnetism</div>
+                <div class="quarto-category">quantum electrodynamics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 12, 2019</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Our current understanding of the fundamental nature of reality is deeply tied with the concept of symmetry. One of my favourite mathematicians is Emmy Noether. Her theorem, which states that to every symmetry that exists in any laws of physics is associated to a conserved quantity, is one of the most beautiful and fundamental statements in all of physics. In fact, there is an entire field in mathematics that studies the sets of transformations (or groups) that act on a certain space X while still leaving it invariant, it’s called Group Theory and it is essential to Standard Model of Particle physics which is based on what is called Gauge theories.</p>
+<blockquote class="blockquote">
+<p>In physics, a gauge theory is a type of field theory in which the Lagrangian does not change (is invariant) under local transformations from certain Lie groups.<br>
+– Wikipedia</p>
+</blockquote>
+<p>Given a certain Lagrangian density (for a free fermion field <span class="math inline">\(\psi\)</span> for example), one could attempt to find the sets of different transformations in which it is invariant. In this post we will do just that and see that it leads to surprising results!</p>
+<section id="global-symmetry" class="level1">
+<h1>Global Symmetry</h1>
+<p>Let’s start simple. The Lagrangian density of a Dirac Bi-spinor field is: <span class="math display">\[\mathcal{L}_{Dirac}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + m c^2 \bar{\psi} \psi\]</span></p>
+<p>Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we’re not interested in that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start off, we’ll try one of the simplest possible transformations, a global phase-shift. This basically amounts to changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit circle in complex space: <span class="math display">\[\psi \rightarrow \psi′ = e^{i q \phi}\psi\]</span></p>
+<p>A minor detail that we will need is that the Dirac adjoint is defined as <span class="math inline">\(\bar{\psi}= i\psi^\dagger \gamma^0\)</span> and it transforms like so: <span class="math display">\[\bar{\psi} \rightarrow \bar{\psi'} = \bar{\psi}e^{-iq\phi}\]</span></p>
+<p>Plugging this new transformed field in to the Lagrangian: <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi'} \gamma^\mu \partial_\mu \psi' + m c^2 \bar{\psi'} \psi'\]</span> <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi}e^{-iq\phi} \gamma^\mu \partial_\mu e^{iq\phi}\psi + m c^2 \bar{\psi}e^{-iq\phi} e^{iq\phi}\psi\]</span></p>
+<p>Now <span class="math inline">\(e^{iq\phi}\)</span> and <span class="math inline">\(e^{-iq\phi}\)</span> are just complex phases and have no spacetime dependance so we can just move them next to eachother, they cancel out and our Lagrangian is invariant: <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + m c^2 \bar{\psi} \psi = \mathcal{L}\]</span></p>
+</section>
+<section id="local-symmetry" class="level1">
+<h1>Local Symmetry</h1>
+<p>It turns out our Lagrangian is already symmetric under this global transformation, but it doesn’t take us very far. Gauge theories for some reason arise when we try to enforce symmetry under Local Transformations. Let’s what that looks like:</p>
+<p><span class="math display">\[\psi \rightarrow \psi′ = e^{i q \phi(x^\mu)}\psi \quad \quad \bar{\psi} \rightarrow \bar{\psi'} = \bar{\psi}e^{-iq\phi(x^\mu)}\]</span></p>
+<p>In a way this is a “stronger” constraint because we could just get back the global transformation by using a constant ϕ(xμ). But now our transformation can be local because it depends on where we are in spacetime. Depending on the function ϕ(xμ), we could really mess up the ψ field. I can already hear you mumbling “that’s all well and good but what the blazes is that gonna achieve?”, but let’s try it anyway:</p>
+<p><span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu \partial_\mu e^{iq\phi(x^\mu)}\psi + m c^2 \bar{\psi} e^{-iq\phi(x^\mu)} e^{iq\phi(x^\mu)}\psi\]</span> <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu \partial_\mu e^{iq\phi(x^\mu)}\psi + m c^2 \bar{\psi} \psi\]</span> <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu e^{iq\phi(x^\mu)} \partial_\mu \psi + i q \hbar c \bar{\psi} e^{-iq\phi(x^\mu)} \gamma^\mu e^{iq\phi(x^\mu)} \partial_\mu \phi(x^\mu) \psi + m c^2 \bar{\psi} \psi\]</span></p>
+<p>Not so good but let’s go further.. <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi + m c^2 \bar{\psi} \psi\]</span></p>
+<p>So the mass term is invariant just like before, but now since the phase-shift depends on position, we cannot simply move it past the derivative <span class="math inline">\(\partial_\mu\)</span> like last time, we get that pesky middle term with <span class="math inline">\(\partial_\mu \phi(x^\mu)\)</span>. Seems like a bust, unless..</p>
+<p>Let’s do something crazy, we clearly have an issue with <span class="math inline">\(\partial_\mu\)</span> so let’s mess it up in just the right way. Introducing <span class="math inline">\(D_\mu = \partial_\mu + i q A_\mu\)</span> where <span class="math inline">\(A_\mu \rightarrow A′_\mu\)</span>. The Lagrangian becomes:</p>
+<p><span class="math display">\[ \mathcal{L} = \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi + m c^2 \bar{\psi} \psi\]</span></p>
+<p>We can clearly make this invariant if: <span class="math inline">\(A_\mu \rightarrow A′_\mu = A_\mu - \partial_\mu \phi(x^\mu)\)</span></p>
+<p>Using the same process as before:</p>
+<p><span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi +
+i q \hbar c \bar{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi - i q \hbar c \bar{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi + m c^2 \bar{\psi} \psi\]</span></p>
+<p><span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi + m c^2 \bar{\psi} \psi = \mathcal{L}\]</span></p>
+<p>So we managed to make the Lagrangian invariant but look! The new field is interacting with our Dirac field in the term <span class="math inline">\(i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi\)</span>, and there’s a weird coupling constant <span class="math inline">\(q\)</span> dictating the strength of the interaction. What does this mean? We do know of a field that behaves in this specific way.</p>
+<p>Behold! The Electromagnetic Field! In fact, <span class="math inline">\(A_\mu\)</span> is the E&amp;M four-potential <span class="math inline">\(A_\mu = (\phi , \textbf{A})\)</span>. The weird constant <span class="math inline">\(q\)</span> is nothing but electric charge! It seems obvious now that it should be the coupling strength of the E&amp;M field with the Dirac field. We insisted on a symmetry we had no right to, and rediscovered electromagnetism in its quantum nature. Isn’t that mindblowing?</p>
+</section>
+<section id="tying-up-some-loose-ends" class="level1">
+<h1>Tying up some loose ends</h1>
+<p>Since Aμ is now a field itself, it needs to play by the rules of Special Relativity, a.k.a obey the Klein-Gordon equation which arises from the Proca Lagrangian:</p>
+<p><span class="math display">\[\mathcal{L_{Proca}} = \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu} + \frac{1}{8\pi} \left(\frac{mc^2}{\hbar}\right) A^\mu A_\mu\]</span></p>
+<p>The first term is already invariant, but we need to eliminate the second term to make the whole Lagrangian invariant by setting <span class="math inline">\(m=0\)</span>. This is to be expected because excitations in the E&amp;M field (a.k.a photons) are massless. Hence, our new full-blown Lagrangian of Quantum Electrodynamics is:</p>
+<p><span class="math display">\[\mathcal{L_{QED}} = \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi + \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu}\]</span></p>
+<p>We can construct the well known antisymmetric Electromagnetic Field Tensor as follows: <span class="math display">\[F_{\mu \nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\]</span></p>
+<p>When we imposed <span class="math inline">\(A_\mu \rightarrow A′_\mu = A_\mu - \partial_\mu \phi(x^\mu)\)</span>, that is nothing but the Lorenz Gauge condition from classical electrodynamics.</p>
+<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell’s equations can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for Aμ where the four-current is defined as <span class="math inline">\(J^\mu = (c\rho, \mathbf{J})\)</span>: <span class="math display">\[\partial_\mu F^{\alpha \beta} = \mu_0 J^\beta\]</span></p>
+</section>
+<section id="epilogue" class="level1">
+<h1>Epilogue</h1>
+<p>Let’s recap, we started with a simple free Lagrangian density which was already symmetric under global phase shifts. We tried to impose local gauge symmetry which, a priori, we have no right to expect should work. It turns out, this local gauge symmetry imposes the conservation of a certain quantity, and that is electric charge.</p>
+<p>We tried one trick and we got the Electromagnetic field, Electric charge, Quantum Electrodynamics and the kitchen sink!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nightowl97\.github\.io\/personal_blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
