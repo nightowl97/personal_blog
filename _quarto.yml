@@ -3,7 +3,7 @@ project:
 
 website:
   description: "Youssef Kharchouf's personal notes"
-  site-url: https://www.kharchouf.com # you must change this appropriately for RSS feeds to work properly
+  site-url: https://nightowl97.github.io/personal_blog/ # you must change this appropriately for RSS feeds to work properly
   title: "Youssef Kharchouf"
   navbar:
     right:
@@ -20,7 +20,7 @@ format:
       - flatly 
       - customtheme.scss
     css: styles.css
-    fontsize: 1.3em
+    # fontsize: 1.3em
     # template-partials:
     #   - title-block.html
 

@@ -1,16 +1,214 @@
 /*-- scss:defaults --*/
-$font-family-serif: 'Source Serif 4', serif;
-$font-family-base: 'Source Serif 4', serif;
-$body-font-size: 1rem;
+$font-family-base:   'Source Serif 4', serif;
+$body-font-size:     1rem;
+$body-bg:            #1E1C1A;
+$body-color:         #F2EDE4;
+$link-color:         #B8693C;
+$primary:            #2C2926;
+$navbar-bg:          #2C2926;
 
 /*-- scss:rules --*/
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif 4:opsz,wght@8..60,400;8..60,600&family=DM+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Sans:wght@400;500&display=swap');
 
-h1.title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
-  line-height: 1.15;
-  font-weight: 700;
+/* ─────────────────────────────────────────
+   TOKENS
+   #F2EDE4  — primary text (warm white)
+   #ABA49A  — secondary text (descriptions)
+   #5C5450  — tertiary text (dates, meta)
+   #2C2926  — surface / dividers
+   #3D3830  — subtle borders
+   #1E1C1A  — background
+   #B8693C  — accent (terracotta) — use sparingly
+   ───────────────────────────────────────── */
+
+/* ── Navbar ── */
+.navbar                  { background-color: #2C2926 !important; }
+.nav-link, .navbar-brand { color: #ABA49A !important; }
+.nav-link:hover          { color: #F2EDE4 !important; }
+
+/* ── Banners ── */
+.quarto-title-banner {
+  background-color: #2C2926 !important;
+  border-bottom: 1px solid #3D3830;
+}
+.page-title-block,
+.quarto-page-columns > .page-title { background-color: #2C2926 !important; }
+.quarto-title-banner h1.title,
+.quarto-title-banner .title        { color: #F2EDE4 !important; }
+.quarto-title-banner .description,
+.quarto-title-banner p             { color: #ABA49A !important; }
+
+/* accent: tags in article banner */
+.quarto-title-banner .quarto-categories .quarto-category {
+  color: #B8693C !important;
+  border-color: #704030 !important;
 }
 
-.description { font-style: italic; color: #555; }
+/* ── Article metadata ── */
+.quarto-title-meta           { color: #5C5450; margin-top: 1rem !important; margin-bottom: 0 !important; }
+.quarto-title-meta-heading   { color: #5C5450 !important; letter-spacing: 0.08em; }
+.quarto-title-meta-contents  { color: #ABA49A !important; }
+
+/* ── Page title "Posts" ── */
+.page-title,
+#title-block-header h1.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #F2EDE4 !important;
+  letter-spacing: -0.01em;
+}
+
+/* ── Post rows ── */
+.quarto-post {
+  // padding: 2rem 0 !important;
+  margin: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.quarto-post + .quarto-post { border-top: 1px solid #2C2926 !important; }
+
+/* ── Post titles ── */
+.listing-title { margin-bottom: 0.55rem !important; }
+.listing-title a {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #F2EDE4 !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+}
+.listing-title a:hover { color: #B8693C !important; }
+
+/* ── Dates ── */
+.listing-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5C5450 !important;
+  padding-top: 0.35rem !important;
+  vertical-align: top;
+}
+
+/* ── Tags ── */
+.listing-categories {
+  margin-bottom: 0.35rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+}
+.quarto-listing .listing-category,
+.quarto-post .listing-category {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #5C5450 !important;
+  border: 1px solid #3D3830 !important;
+  border-radius: 2px;
+  padding: 2px 7px;
+  margin: 0 3px 4px 0;
+  background: transparent !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.quarto-listing .listing-category:hover {
+  color: #B8693C !important;
+  border-color: #B8693C !important;
+}
+
+/* ── Descriptions ── */
+.listing-description,
+.listing-description a,
+.listing-description a p,
+.delink.listing-description a {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #ABA49A !important;
+  text-decoration: none !important;
+}
+.listing-description p,
+.listing-description a p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── Thumbnails ── */
+.listing-image img,
+.quarto-post img {
+  border-radius: 4px;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+.quarto-post:hover img { opacity: 1; }
+
+/* ── Sidebar: "CATEGORIES" label ── */
+.quarto-listing-category-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B8693C !important;
+  border-bottom: 1px solid #2C2926;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Category links ── */
+.quarto-listing-category .category {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  color: #5C5450 !important;
+  text-decoration: none !important;
+  display: block;
+  padding: 2px 0;
+  transition: color 0.15s ease;
+}
+.quarto-listing-category .category:hover { color: #ABA49A !important; }
+.quarto-listing-category .category.active {
+  color: #F2EDE4 !important;
+  font-weight: 500;
+  border-left: 2px solid #B8693C;
+  padding-left: 6px;
+}
+
+/* ── Sidebar padding ── */
+#quarto-margin-sidebar { padding-top: 4rem !important; }
+
+/* ── Article body ── */
+#quarto-document-content {
+  color: #ABA49A;
+}
+
+#quarto-document-content h2,
+#quarto-document-content h3,
+#quarto-document-content h4 {
+  font-family: 'Playfair Display', serif;
+  color: #F2EDE4 !important;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+#quarto-document-content p  { line-height: 1.8; }
+#quarto-document-content li { line-height: 1.8; }
+
+#quarto-document-content blockquote {
+  border-left: 2px solid #B8693C;
+  padding-left: 1.25rem;
+  margin-left: 0;
+  color: #ABA49A !important;
+  font-style: italic;
+}
+
+/* Invert images for dark mode */
+img.inverted {
+  filter: invert(1);
+}
