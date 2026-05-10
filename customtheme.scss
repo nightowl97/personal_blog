@@ -1,0 +1,16 @@
+/*-- scss:defaults --*/
+$font-family-serif: 'Source Serif 4', serif;
+$font-family-base: 'Source Serif 4', serif;
+$body-font-size: 1rem;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif 4:opsz,wght@8..60,400;8..60,600&family=DM+Sans:wght@400;500&display=swap');
+
+h1.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.description { font-style: italic; color: #555; }

@@ -1,0 +1,80 @@
+---
+title: Hagarism The Making of the Islamic World (by Crone & Cook)
+date: 2023-08-19 22:30
+categories: [history, book notes]
+description: Important book, from the school of skeptical historiography, which explores the early history of Islam and its relationship with Judaism and Christianity.
+---
+
+# Judeo-Hagarism 
+
+Authors begin by stepping outside the traditional islamic sources due to their problematic nature:
+
+>There is no hard evidence for the existence of the Koran in any form before the last decade of the seventh century, and the tradition which places this rather opaque revelation in its historical context is not attested before the middle of the eighth.
+
+- They say that while there is no specific reason to reject it that are internal to islamic sources (a disputable fact in my own opinion), there is also no specific reason that is external to them for rejecting it. 
+
+- Our first step outside islamic tradition is to the ***[Doctrina Jacobi](https://en.wikipedia.org/wiki/Teaching_of_Jacob)***, a greek anti-jewish tract which is apparently a weeks long discussion between jews in Carthage circa 634-640 who have been forcibly baptized by order of the byzantine emperor Heraclius. One of them, Jacob, has come to accept the Messiah and is trying to convince his peers to follow suit
+
+> A fa1se prophet has appeared among the Saracens ... They say that the prophet has appeared coming with the Saracens, and is proclaiming the advent of the anointed one who is to come. I, Abraham, went off to Sykamina and referred the matter to an old man very well versed in the Scriptures. I asked him: 'What is your view, master and teacher, of the prophet who has appeared among the Saracens?' He replied, groaning mightily: 'He is an impostor. Do the prophets come with sword and chariot? Truly these happenings today are works of disorder ... But you go off, Master Abraham, and find out about the prophet who has appeared.' So I, Abraham, made enquiries, and was told by those who had met him: 'There is no truth to be found in the so-called prophet, only bloodshed; for he says he has the keys of paradise, which is incredible.'
+
+It is striking that the concept of the *keys of paradise* is mentioned, despite the existence of some hadiths in which it is 'sublimated' into harmless metaphor. There is also a byzantine oath of abjuration (which is a formal renunciation or disavowal of allegiance to a particular belief) of Islam also includes this concept in the sense that the prophet would hold the keys of paradise as part of a secret Saracen doctrine. This seemingly makes the Doctrina older than islamic tradition itself.
+
+The second important point is that it seems to present the prophet as being still alive during the conquest of Palestine, which is irreconcilable with the islamic Siira which claims that he was dead at the point.
+However, authors claim that this fact has independent confirmation in the historical traditions of the Jacobites, Nestorians and Samaritans [7, 8]. 
+
+The third startling fact is the Judaic/Messianic nature of the message that the prophet seems to preach, namely the advent of "The anointed one" which is also apparemtly confirmed by external evidence [9].
+
+<!-- divider -->
+Before we continue the book, a quick reminder that helps make sense of what will follow: Abraham, a patriarch in Judaism, Christianity, and Islam, had two sons: Ishmael and Isaac.
+
+1. **Ishmael**: Abraham's first son, born to him by Hagar, Sarah's Egyptian maidservant. According to the biblical narrative in Genesis, Sarah was barren and suggested that Abraham should father a child with her maidservant Hagar. Ishmael is considered the progenitor of the Arab people in some religious traditions.
+
+2. **Isaac**: Abraham's second son, born to him by his wife Sarah. The birth of Isaac was miraculous, as Sarah was considered to be past the age of childbearing. Isaac is an important figure in the Jewish, Christian, and Islamic traditions. In Judaism and Christianity, Isaac is considered the ancestor of the Israelites through his son Jacob (later renamed Israel).
+   The relevant verses in the Quran are As-Saffaat 37:100 and the few verses that follow it
+Both sons play significant roles in the religious traditions that recognize Abraham as a patriarch. 
+
+<!-- divider -->
+
+This is a Jewish apocalypse of the mid-eighth century, the 'Secrets of Rabbi Simon ben Yohay', which preserves a messianic interpretation of the Arab conquest [10] :
+
+>When he saw the kingdom of Ishmael that was coming, he began to say: 'Was it not enough, what the wicked kingdom of Edom did to us, but we must have the kingdom of Ishmael too?' At once Metatron the prince of the countenance answered and said: 'Do not fear, son of man, for the Holy One, blessed be He, only brings the kingdom of Ishmael in order to save you from this wickedness. He raises up over them a Prophet according to His will and will conquer the land for them and they will come and restore it in greatness, and there will be great terror between them and the sons of Esau.' Rabbi Simon answered and said: 'How do we know that they are our salvation?' He answered: 'Did not the Prophet Isaiah say thus: "And he saw a troop with a pair of horsemen, etc."? 13 Why did he put the troop of asses before the troop of camels, when he need only have said: "A troop of camels and a troop of asses"? But when he, the rider on the camel, 14 goes forth the kingdom will arise through the rider on an ass. Again: "a troop of asses", since he rides on an ass, shows that they are the salvation of Israel, like the salvation of the rider on an ass.'
+
+Also worthy of note that the author of the passage presents the role of the Ishmaelites and their prophet as intrinsic to the messianic events themselves. Which makes sense when set alongside the testimony of the *Doctrina* that the Prophet was in fact proclaiming the advent of the messiah, and at the same time provides independent confirmation of its authenticity. Moreover, there seems to be precedent for jews accepting an arab as a prophetic figure proclaiming the advent of the Messiah [17]
+
+This is a mind-blowing one: Apparently Islamic tradition also contains confirmation of this messianism in a 'fossilized' form, through the identity of the Messiah himself: Umar [18] the second caliph or ***Al-Faaruuq - The Redeemer***. He seemingly plays his role very well through his entry into Jerusalem [20]. 'The secrets' also attributes to him the messianic task of restoring the temple [21]. From the islamic traditional point of view, the embarrassing title eventually lost its original Aramaic meaning, and acquired a harmless Arabic etymology and was held to have been attributed by the prophet himself. There is also an earlier view that it was the people of the book that called Umar this by-name, and it somehow transferred into the islamic orthodoxy [22]. It's also interesting that Umar was hailed as the Faaruuq in Syria [23] while simultaneously being attributed acts which are decidedly non Redeemer-y in a Judaic sense at least [24].
+Authors claim it's hardly coincidence that contemporary evidence of the messianism of Muhammad exists while the Man who came after (jumping over abu-bakr here) holds a Messianic title even in Islamic Tradition.
+
+Page 6 is about a supposed intimacy between Jews and Saracens, in *The Secrets* and due to the *Doctrina* confirming a certain warmth of the Jewish reaction towards the Arab invasion (by referring to the *Jews who mix with the Saracens*), and Jacob himself claiming that he would not deny Christ even if the Jews and Saracens catch him and cut him to pieces. This warmth is far less evident in Orthodox and Heretical Christian sources, as well as later Jewish sources. A contemporary Christian Sermon puts among the misdeeds of the Saracens burning churches, monasteries, crosses etc.
+
+Next we turn to my favorite primary source in the subject, the Armenian Chronicle of Bishop Sebeos, written in the 660s. The story begins with the exodus of Jewish refugees from Edessa following its recovery by Heraclius from the Sassanid Persians towards 628 :
+
+>They set out into the desert and came to Arabia, among the children of Ishmael; they sought their help, and explained to them that they were kinsmen according to the Bible. Although they (*the Ishmadites*) were ready to accept this close kinship, they (*the Jews*) nevertheless could not convince the mass of the people, because their cults were different. At this time there was an Ishmaelite called **Mahmet**, [37] a merchant; he presented himself to them as though at God's command, as a preacher, as the way of truth, and taught them to know the God of Abraham, for he was very well-informed, and very well-acquainted with the story of Moses. As the command came: from on high, they all united under the authority of a single man, under a single law, and, abandoning vain cults, returned to the: living God who had revealed himself to their father Abraham. Mahmet forbade them to eat the Flesh of any dead animal, to drink wine, [38] to lie or to fornicate. He added: 'God has promised this land to Abraham and his posterity after him forever; he acted according to his promise: while he loved lsrael. Now you, you are: the sons of Abraham and God fulfills in you the promise made to Abraham and his posterity. Only love the God of Abraham, go and take possession of your country which God gave to your father Abraham, and none will be able to resist you in the struggle, for God is with you.' Then they all gathered together from Havilah unto Shur and before Egypt [Gen. 2 5:I 8]; they came: out of the: desert of Pharan divided into twelve tribes according to the lineages of their patriarchs. They divided among their tribes the twelve thousand lsraelites, a thousand per tribe, to guide them into the land of Israel. They set out, camp by camp, in the order of their patriarchs: Nebajoth, Kedar, Abdeel, Mibsam, Mishma, Dumah, Massa, Hadar, Tema, Jetur, Naphish and Kedemah [Gen. 2J:I3-IJ]. These are the tribes of Ishmael ... All that remained of the peoples of the children of Israel came to join them, and they constituted a mighty army. Then they sent an embassy to the emperor of the Greeks, saying: 'God has given this land as a heritage to our father Abraham and his posterity after him; we are the children of Abraham; you have had our country long enough; give it up peacefully, and we will not invade your territory; otherwise we will retake with interest what you have taken.'
+
+According to the authors this passage is 
+>demonstrably wrong in the role it ascribes to the Jewish refugees from Edessa. This role, quite apart from its geographical implausibility, is in effect chronologically impossible: it means that Muhammad's polity could hardly have been founded much before 628, whereas as early as 643 we have documentary evidence that the Arabs were using an era beginning in 622. [39]
+
+However, it does not invalidate the role of Jewish-Arab relations that Sebeos describes, mainly due to it conforming well with the [Constitution of the Medina](https://en.wikipedia.org/wiki/Constitution_of_Medina).
+Due to this conformity authors claim that *"Sebeos can therefore be accepted as providing the basic narrative framework within which the closeness of Judeo-Arab relations"*
+
+There is a remark in page 8 that there is no good reason to assume that this early community of arabs  called themselves muslims, a term whose earliest occurance is in the Dome of The Rock in Jerusalem 691 (Probably at the time of Umayyad Caliph Abdulmalik, confirm this later). Outside the islamic tradition, it is only first mentioned far into the eighth century.
+
+We then finish this first section by discussing the designation that was used for this community as early as the 640s, which in appears in a papyrus in greek is "***Magaritai***" in 642 or in Syriac as ***Mahgre*** or ***Mahgraye*** [51]. The corresponding arabic term is ***Muhajiruun***. Authors attribute to notions to this appellation, the one that remains in full within islamic tradition, which is for the "Hijra" or exodus from Mecca to Medina. This even in Islamic Tradition is marked as the beginning of the calendar in 622, but no contemporary sources attest to such an exodus, but do talk about the exodus from arabia to the Promised Land. In this respect they cite a tradition that even talk of a Hijra after the Hijra, specifying Palestine as a destination [59]. A second notion attributed to ***Magaritai***  is genealogical, that affirms their descendance from Abraham by Hagar [54].
+
+# Hagarism without Judaism
+
+The mutual assistance that might have existed between Jews and Arabs due to the compatibility of their goals was faced with problems after the success of the Arab conquest of Palestine. The question of restoring the Kingdom of Israel would become a bit of a doctrinal embarrassment for the Arabs, unlike Jesus of Nazareth who could evade the question of whether he, as a Messianic figure, would fulfill this Jewish expectation and this would pave the way for the development of Christian theology:
+
+>In the New Testament (Acts 1:6), Jesus' disciples ask him, "Lord, are you at this time going to restore the kingdom to Israel?" 
+
+Jesus' response was not a straightforward yes or no. Instead, he said, 
+
+>"It is not for you to know the times or dates the Father has set by his own authority."
+
+The authors are suggesting that Jesus' response was a way of evading the question, and that this evasion became a central part of the formation of Christianity. This reinterpretation paved the way for the development of Christian theology, which diverged from traditional Jewish messianic expectations.
+
+For the Arabs, success precluded a gradual dissociation from Jewish messianism, and required instead a sharp and immediate break. Their acquirement of large numbers of Christian subjects also meant a doctrinal softening of the Arabs towards Christians
+
+The rest of the chapter is about the specifics of how the Hagarenes adopted Christian messianism and the technicalities and contradictions that it faced, while solving the problem of their separation from their jewish proteges while not diffusing into the Christians they were ruling in Palestine. With the conclusion that the only consistent way out was to erect an Ishmaelite prophetology of their own.
+
+# The prophet like Moses
+

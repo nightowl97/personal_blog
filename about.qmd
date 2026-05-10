@@ -1,0 +1,23 @@
+---
+title: "About"
+image: pp.png
+about:
+  template: jolla
+  links:
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/youssefkhar/
+    - icon: github
+      text: Github
+      href: https://github.com/nightowl97
+
+---
+
+I'm Youssef, a physical chemistry researcher. My work sits at the intersection of Physics, chemistry and computation. I build numerical models of physical phenomena that help understand and optimize energy systems like batteries, fuel cells, electrolyzers, photovoltaics, and more.
+
+I also have other interests, as the rest of this blog will make embarrassingly clear. This is where I keep notes on things I find interesting enough to write down, books, ideas and newly learned concepts. It has no fixed audience and no particular agenda, which is probably why it contains both a derivation of the QED Lagrangian and strong opinions about Yuval Noah Harari.
+
+If you're here professionally, feel free to reach out either via [email](mailto:kharchouf-youssef@outlook.com) or one of the links below.

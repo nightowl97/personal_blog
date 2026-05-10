@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  description: "Youssef Kharchouf's personal notes"
+  site-url: https://www.kharchouf.com # you must change this appropriately for RSS feeds to work properly
+  title: "Youssef Kharchouf"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/nightowl97
+      - icon: linkedin
+        href: https://www.linkedin.com/in/youssefkhar/
+      - icon: bi-mortarboard-fill
+        href: https://scholar.google.com/citations?user=rjjVxSYAAAAJ
+format:
+  html:
+    theme:
+      - flatly 
+      - customtheme.scss
+    css: styles.css
+    fontsize: 1.3em
+    # template-partials:
+    #   - title-block.html
+
+
+
