@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-05-10">
+<meta name="description" content="Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics — axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.">
+
+<title>Lectures notes on the Geometrical Anatomy of Theoretical Physics – Youssef Kharchouf</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9d5cfa64be14feea77f5ec138296d188.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Youssef Kharchouf</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nightowl97"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/youssefkhar/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=rjjVxSYAAAAJ"> <i class="bi bi-mortarboard-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Lectures notes on the Geometrical Anatomy of Theoretical Physics</h1>
+                  <div>
+        <div class="description">
+          Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics — axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">physics</div>
+                <div class="quarto-category">topology</div>
+                <div class="quarto-category">set theory</div>
+                <div class="quarto-category">notes</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 10, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Notes from <a href="https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic">this lecture series</a> by Frederic Schuller, building the mathematical background for Classical Mechanics, Statistical Mechanics, SR, GR, EM &amp; QM.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/V49i_LM8B0E" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="introduction-logic-of-propositions-and-predicates" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-logic-of-propositions-and-predicates">Introduction — Logic of Propositions and Predicates</h2>
+<section id="structure-of-the-course" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-the-course">Structure of the Course</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Screenshot_from_2021-11-07_01-56-56.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="i.i-propositional-logic" class="level3">
+<h3 class="anchored" data-anchor-id="i.i-propositional-logic">I.I: Propositional Logic</h3>
+</section>
+</section>
+<section id="chapter-i-axiomatic-set-theory" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-i-axiomatic-set-theory">Chapter I: Axiomatic Set Theory</h2>
+<p>A <em>proposition</em> is a variable that can be true or false. No others. We can create new propositions from given ones using <em>logical operators.</em></p>
+<section id="a-unary-operators" class="level3">
+<h3 class="anchored" data-anchor-id="a-unary-operators">a) Unary Operators</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>P</th>
+<th>Not P</th>
+<th>Identity</th>
+<th>Tautology</th>
+<th>Contradiction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i.iv-the-epsilon-relation" class="level3">
+<h3 class="anchored" data-anchor-id="i.iv-the-epsilon-relation">I.IV The <span class="math inline">\(\epsilon\)</span>-relation</h3>
+<p>Set Theory is built on the postulate that there is a fundamental relation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> called <span class="math inline">\(\epsilon\)</span>. There will not be a definition in the strict sense of what <span class="math inline">\(\epsilon\)</span> or what a set is. Instead, there will be 9 axioms that speak of <span class="math inline">\(\epsilon\)</span> and of sets.</p>
+<section id="overview-of-axioms" class="level4">
+<h4 class="anchored" data-anchor-id="overview-of-axioms">Overview of Axioms</h4>
+<p>Using the <span class="math inline">\(\epsilon\)</span>-relation we can immediately define:</p>
+<p><span class="math display">\[x \notin y \iff \neg(x \in y)\]</span></p>
+<p><span class="math display">\[x\subseteq y \iff \forall a: (a \in x \implies a \in y)\]</span></p>
+<p><span class="math display">\[x = y \iff (x \subseteq y)\ \land\ (y \subseteq x)\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="i.v-zermelo-fraenkel-axioms-of-set-theory" class="level3">
+<h3 class="anchored" data-anchor-id="i.v-zermelo-fraenkel-axioms-of-set-theory">I.V Zermelo-Fraenkel Axioms of Set Theory</h3>
+<section id="axiom-on-the-epsilon-relation-e" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-the-epsilon-relation-e">Axiom on the <span class="math inline">\(\epsilon\)</span>-relation (E)</h4>
+<p><span class="math inline">\(x \in y\)</span> is a proposition (either true or false) if and only if <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are <strong>both</strong> sets.</p>
+<p><em>Counterexample (Russell’s Paradox and naive Set Theory):</em></p>
+<p>Assume there is a set <span class="math inline">\(u\)</span> of all sets that do not contain themselves:</p>
+<p><span class="math display">\[\exists u: \forall z: (z \in u \iff z \notin z)\]</span></p>
+<p>Is <span class="math inline">\(u\)</span> a set? If so, one must decide whether <span class="math inline">\(u \in u\)</span> is true or false<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p><strong>Assume <span class="math inline">\(u \in u\)</span> is true:</strong> then by definition <span class="math inline">\(u \notin u\)</span>, which is contradictory.</p>
+<p><strong>Assume <span class="math inline">\(u \in u\)</span> is false:</strong> <span class="math inline">\(\iff u \in u\)</span>, also a contradiction.</p>
+<p>We must conclude therefore that <span class="math inline">\(u\)</span> <strong><em>is not a set.</em></strong></p>
+<p><span class="math inline">\(x \in y\)</span> is either true or false, formally:</p>
+<p><span class="math display">\[\forall x: \forall y: (x \in y) \veebar(x\notin y)\]</span></p>
+</section>
+<section id="axiom-on-the-existence-of-the-empty-set-e" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-the-existence-of-the-empty-set-e">Axiom on the Existence of the Empty Set (E)</h4>
+<p>There exists a set that contains no elements:</p>
+<p><span class="math display">\[\exists x: \forall y:\ y\notin x\]</span></p>
+<p><strong>Theorem.</strong> There is only one empty set, we therefore call it <span class="math inline">\(\varnothing\)</span>.</p>
+<p><strong>Proof (textbook).</strong> Assume <span class="math inline">\(x\)</span> and <span class="math inline">\(x'\)</span> are both empty sets:</p>
+<p><span class="math display">\[\forall y: y \in x \implies y \in x'\]</span></p>
+<p><span class="math display">\[x \subset x'\]</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Conversely:</p>
+<p><span class="math display">\[\forall y: y \in x' \implies y \in x\]</span></p>
+<p><span class="math display">\[x' \subset x\]</span></p>
+<p><span class="math display">\[x = x' \implies \text{the empty sets must be the same}\]</span></p>
+<p><strong>Proof (formal).</strong></p>
+<p><span class="math display">\[a_1 \Leftrightarrow \forall y: y\notin x\]</span></p>
+<p><span class="math display">\[a_2 \Leftrightarrow \forall y: y\notin x'\]</span></p>
+<p><span class="math display">\[q_1 \Leftrightarrow \forall y: y\notin x \implies \forall y: (y \in x \implies y \in x')\]</span></p>
+<p><span class="math display">\[q_2 \Leftrightarrow \forall y: y\notin x\]</span></p>
+<p><span class="math display">\[q_3 \Leftrightarrow q_1 \land q_2 \Leftrightarrow \forall y: (y \in x \implies y \in x')\]</span></p>
+<p>Similar steps to get <span class="math inline">\(x' \in x \implies x = x'\)</span>.</p>
+</section>
+<section id="axiom-on-pair-sets-p" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-pair-sets-p">Axiom on Pair Sets (P)</h4>
+<p>Let <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> be sets. There exists a set that contains as its elements precisely <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[\forall x: \forall y: \exists m: \forall u: (u \in m \Leftrightarrow u = x \lor u = y)\]</span></p>
+<p><strong>Notation.</strong> Denote this set <span class="math inline">\(m\)</span> by <span class="math inline">\(\{x,y\}\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><strong>Definition.</strong> <span class="math inline">\(\{x\} \coloneqq \{x, x\}\)</span></p>
+</section>
+<section id="axiom-on-union-sets-u" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-union-sets-u">Axiom on Union Sets (U)</h4>
+<p>Let <span class="math inline">\(x\)</span> be a set, there exists a set <span class="math inline">\(u\)</span> whose elements are precisely the elements of the elements of <span class="math inline">\(x\)</span>.</p>
+<p><strong>Notation.</strong> <span class="math inline">\(u = \cup\ x\)</span></p>
+<p><strong>Example.</strong> Let <span class="math inline">\(a, b\)</span> be sets. Using the pair sets axiom: <span class="math inline">\(\implies \{a\}\)</span> is a set, <span class="math inline">\(\{b\}\)</span> is a set <span class="math inline">\(\implies x = \{\{a\}, \{b\}\}\)</span> is a set, <span class="math inline">\(\cup x = \{a, b\}\)</span></p>
+<p><strong>Example.</strong> <span class="math inline">\(a,b,c\)</span> are sets: <span class="math inline">\(x = \{\{a\}, \{b,c\}\}\)</span> is a set <span class="math inline">\(\implies \cup x \coloneqq \{a,b,c\}\)</span> is a set</p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(a_1, a_2, .., a_N\)</span> be sets, recursively for all <span class="math inline">\(N \geq 3\)</span>:</p>
+<p><span class="math display">\[\{a_1,.., a_{N}\} \coloneqq \bigcup \{\{a_1, .., a_{N-1}\}, \{a_N\}\}\]</span></p>
+</section>
+<section id="axiom-of-replacement-r" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-replacement-r">Axiom of Replacement (R)</h4>
+<p>Let <span class="math inline">\(R\)</span> be a functional relation and <span class="math inline">\(m\)</span> be a set. The image of <span class="math inline">\(m\)</span> under <span class="math inline">\(R\)</span> is again a set.</p>
+<p><strong>Definition.</strong> A relation <span class="math inline">\(R\)</span> is called functional if <span class="math inline">\(\forall x: \exists! y: R(x,y)\)</span>.</p>
+<p>The image of a set <span class="math inline">\(m\)</span> under a functional relation <span class="math inline">\(R\)</span> consists of all <span class="math inline">\(y\)</span> for which there is <span class="math inline">\(x \in m\)</span> such that <span class="math inline">\(R(x,y)\)</span>.</p>
+<p><strong>Theorem.</strong> Let <span class="math inline">\(P\)</span> be a predicate of one variable and <span class="math inline">\(m\)</span> a set. The elements <span class="math inline">\(y\in m\)</span> for which <span class="math inline">\(P(y)\)</span> holds constitute a set.</p>
+<p><strong>Notation.</strong> <span class="math inline">\(\{\ y \in m\ |\ P(y)\ \}\)</span></p>
+<p><strong>Proof.</strong> Case 1: <span class="math inline">\(\neg (\exists y \in m): P(y)\)</span> — in this case <span class="math inline">\(\{y \in m | P(y)\} \coloneqq \emptyset\)</span>.</p>
+<p>Case 2: <span class="math inline">\((\exists y' \in m): P(y')\)</span>, then define <span class="math inline">\(R(x,y) \coloneqq (P(x) \land x = y) \lor (\neg P(x) \land y = y')\)</span>.</p>
+<p><strong>Definition.</strong> <span class="math inline">\(\{y \in m\ | P(y)\} \coloneqq \text{im}_R(m)\)</span></p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(x \subset m\)</span>, then <span class="math inline">\(m\setminus n \coloneqq \{x \in m \mid x \notin n\}\)</span></p>
+</section>
+<section id="axiom-of-power-set-p" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-power-set-p">Axiom of Power Set (P)</h4>
+<p>Let <span class="math inline">\(m\)</span> be a set, there exists a set denoted <span class="math inline">\(\mathcal{P}(m)\)</span> whose elements are the subsets of <span class="math inline">\(m\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\(m = \{a, b\} \Rightarrow \mathcal{P}(m) = \{\varnothing, \{a\}, \{b\}, \{a, b\} \}\)</span></p>
+</section>
+<section id="axiom-of-infinity-i" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-infinity-i">Axiom of Infinity (I)</h4>
+<p>There exists a set that contains the empty set, and for every <span class="math inline">\(y\)</span> also contains <span class="math inline">\(\{y\}\)</span>.</p>
+<p><strong>Remark.</strong> One such set contains the elements <span class="math inline">\(\varnothing = 0, \{\varnothing\} = 1, \{\{\varnothing\}\}=2, \{\{\{\varnothing\}\}\} = 3\)</span>, …</p>
+<p><strong>Corollary.</strong> <span class="math inline">\(\mathbb{N}\)</span> is a set.</p>
+<p><strong>Remark.</strong> As a set, <span class="math inline">\(\mathbb{R}\)</span> can be understood as <span class="math inline">\(\mathcal{P}(\mathbb{N})\)</span>.</p>
+</section>
+<section id="axiom-of-choice-c" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-choice-c">Axiom of Choice (C)</h4>
+<p>Let <span class="math inline">\(x\)</span> be a set whose elements are non-empty and mutually disjoint (no intersections), then there exists a set <span class="math inline">\(y\)</span> which contains exactly one element of each element in <span class="math inline">\(x\)</span>.</p>
+<p><strong>Remark.</strong> The axiom of choice is independent of the other axioms — we could choose not to use it, but it is used in standard mathematics.</p>
+<p><strong>Remark.</strong> The proof that every vector space has a basis requires the axiom of choice, as does the existence of a complete system of representatives of an equivalence relation.</p>
+</section>
+<section id="axiom-of-foundation-f" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-foundation-f">Axiom of Foundation (F)</h4>
+<p>Every non-empty set <span class="math inline">\(x\)</span> contains an element <span class="math inline">\(y\)</span> that has none of its elements in common with <span class="math inline">\(x\)</span>.</p>
+<p>Immediate implication: there is no set that contains itself as an element — <span class="math inline">\(x \in x\)</span> for no set <span class="math inline">\(x\)</span>.</p>
+</section>
+</section>
+<section id="i.vi-classification-of-sets" class="level3">
+<h3 class="anchored" data-anchor-id="i.vi-classification-of-sets">I.VI Classification of Sets</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/6EIWRg-6ftQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> A map <span class="math inline">\(\phi: A \rightarrow B\)</span> is a relation such that for every <span class="math inline">\(a \in A\)</span> there exists exactly one <span class="math inline">\(b \in B\)</span> such that <span class="math inline">\(\phi(a,b)\)</span>.</p>
+<p><strong>Terminology.</strong></p>
+<ul>
+<li><span class="math inline">\(A\)</span> is the domain of <span class="math inline">\(\phi\)</span></li>
+<li><span class="math inline">\(B\)</span> is the target</li>
+<li><span class="math inline">\(\phi(A) \equiv \text{im}_\phi(A) \coloneqq \{\phi(a)\ |\ a \in A \}\)</span></li>
+</ul>
+<p><strong>Definition.</strong> A map <span class="math inline">\(\phi: A \rightarrow B\)</span> is:</p>
+<ul>
+<li>Surjective if <span class="math inline">\(\phi(A) = B\)</span></li>
+<li>Injective if <span class="math inline">\(\phi(a_1) = \phi(a_2) \implies a_1 = a_2\)</span></li>
+<li>Bijective if injective and surjective</li>
+</ul>
+<p><strong>Definition.</strong> Two sets are called set-theoretically isomorphic, <span class="math inline">\(A \cong B\)</span>, if there exists a bijection <span class="math inline">\(\phi: A \rightarrow B\)</span>.</p>
+<p><strong>Remark.</strong> If there is a bijection, then generically there are many.</p>
+<section id="classification-of-sets" class="level4">
+<h4 class="anchored" data-anchor-id="classification-of-sets">Classification of Sets</h4>
+<p>A set <span class="math inline">\(A\)</span> is infinite if there exists a proper subset <span class="math inline">\(B \subset A\)</span> that is isomorphic to <span class="math inline">\(A\)</span>, i.e.&nbsp;<span class="math inline">\(B \cong A\)</span>.</p>
+<ul>
+<li><span class="math inline">\(A\)</span> is countably infinite if <span class="math inline">\(A \cong \mathbb{N}\)</span></li>
+<li><span class="math inline">\(A\)</span> is non-countably infinite otherwise</li>
+</ul>
+<p>A set <span class="math inline">\(A\)</span> is finite if <span class="math inline">\(A \cong \{1, 2, .., N\}\)</span> for some <span class="math inline">\(N \in \mathbb{N}\)</span> and we write <span class="math inline">\(|A| = N\)</span>.</p>
+<p>Given two maps <span class="math inline">\(A \xrightarrow[]{\phi} B\)</span> and <span class="math inline">\(B \xrightarrow[]{\psi} C\)</span> one can construct a map <span class="math inline">\(\psi\circ\phi (a) = \psi(\phi(a))\)</span> known as the composition of maps.</p>
+<p>Composition is associative: <span class="math inline">\(\xi\circ(\psi\circ\phi) = (\xi\circ\psi)\circ\phi\)</span></p>
+<p><strong>Definition.</strong> The inverse map: <span class="math inline">\(\phi^{-1}: B \rightarrow A\)</span> such that <span class="math inline">\(\phi^{-1}\circ\phi = \text{id}_A\)</span> and <span class="math inline">\(\phi \circ \phi^{-1}= \text{id}_B\)</span>.</p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(\phi: A \rightarrow B\)</span> be any map and <span class="math inline">\(V \subset B\)</span>:</p>
+<p><span class="math display">\[\text{preim}_\phi(V) \coloneqq \{a \in A\ |\ \phi(a) \in V\}\]</span></p>
+</section>
+</section>
+<section id="i.vii-equivalence-relations" class="level3">
+<h3 class="anchored" data-anchor-id="i.vii-equivalence-relations">I.VII Equivalence Relations</h3>
+<p><strong>Definition.</strong> Let <span class="math inline">\(M\)</span> be a set and <span class="math inline">\(\sim\)</span> a relation such that:</p>
+<ol type="1">
+<li>Reflexivity: <span class="math inline">\(\forall m \in M: m \sim m\)</span></li>
+<li>Symmetry: <span class="math inline">\(\forall m,n \in M: m\sim n \implies n\sim m\)</span></li>
+<li>Transitivity: <span class="math inline">\(\forall m,n,p \in M: (m \sim n) \land (n \sim p) \implies m \sim p\)</span></li>
+</ol>
+<p>Then <span class="math inline">\(\sim\)</span> is an equivalence relation.</p>
+<p><strong>Definition.</strong> If <span class="math inline">\(\sim\)</span> is an equivalence relation on <span class="math inline">\(M\)</span>, then for any <span class="math inline">\(m \in M\)</span>, define the set <span class="math inline">\([m] \coloneqq \{n \in M\ |\ m \sim n\} \subseteq M\)</span>, called the equivalence class of <span class="math inline">\(m\)</span>.</p>
+<p>Two key properties:</p>
+<ol type="1">
+<li><span class="math inline">\(a \in [m] \implies [a] = [m]\)</span> — any element of the class can be a representative</li>
+<li>Either <span class="math inline">\([m] = [n]\)</span> or <span class="math inline">\([m] \cap [n] = \varnothing\)</span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>We see a coarser <span class="math inline">\(M\)</span> through the equivalence relation.</p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(\sim\)</span> be an equivalence relation on <span class="math inline">\(M\)</span>. We define the <em>quotient set</em> <span class="math inline">\(M /\sim\)</span> (M modulo <span class="math inline">\(\sim\)</span>) <span class="math inline">\(\coloneqq \{ [m]\ |\ m \in M\}\)</span>.</p>
+<p><strong>Remark.</strong> Due to the axiom of choice, there exists a complete set of representatives for <span class="math inline">\(\sim\)</span>, i.e.&nbsp;a set <span class="math inline">\(R\)</span> such that <span class="math inline">\(R\cong M/\sim\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Remark.</strong> This could be inconsistent because changing the representatives could change the class depending on how the map is defined, which leads to ill-defined maps.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr" class="level3">
+<h3 class="anchored" data-anchor-id="i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr">I.VIII Construction of <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q}\)</span> and <span class="math inline">\(\mathbb{R}\)</span></h3>
+<section id="naturals" class="level4">
+<h4 class="anchored" data-anchor-id="naturals">Naturals</h4>
+<p>Recall <span class="math inline">\(\mathbb{N} \coloneqq \{0 \coloneqq \varnothing, 1 \coloneqq \{\varnothing\}, 2 \coloneqq \{\{\varnothing\}\}, ..\}\)</span></p>
+<p><strong>Definition.</strong> To establish addition on <span class="math inline">\(\mathbb{N}\)</span>, we define a successor map:</p>
+<p><span class="math display">\[S: \mathbb{N} \rightarrow \mathbb{N},\ n \rightarrow \{n\}, \qquad \text{e.g.}\ S(2) = S(\{\{\varnothing\}\}) = \{\{\{\varnothing\}\}\} = 3\]</span></p>
+<p><strong>Definition.</strong> Predecessor map (<span class="math inline">\(\mathbb{N}^* \coloneqq \mathbb{N}\backslash\{\varnothing\}\)</span>):</p>
+<p><span class="math display">\[P: \mathbb{N}^* \rightarrow \mathbb{N},\quad n \rightarrow m\ |\ m\in n, \qquad \text{e.g.}\ P(2) = P(\{\{\varnothing\}\}) = \{\varnothing\} = 1\]</span></p>
+<p><strong>Definition.</strong> The <span class="math inline">\(n\)</span>-th power of <span class="math inline">\(S\)</span>:</p>
+<p><span class="math display">\[S^n \coloneqq S \circ S^{P(n)}\ \text{if}\ n \in \mathbb{N}^*, \qquad S^0 \coloneqq \text{id}_\mathbb{N}\]</span></p>
+<p><strong>Definition.</strong> Addition:</p>
+<p><span class="math display">\[+: \mathbb{N} \times \mathbb{N} \longrightarrow \mathbb{N}, \qquad (m,n) \longrightarrow m + n \coloneqq S^n(m)\]</span></p>
+<p><strong>Generalization.</strong> Can show commutativity, associativity, and a neutral element.</p>
+</section>
+<section id="integers" class="level4">
+<h4 class="anchored" data-anchor-id="integers">Integers</h4>
+<p><span class="math inline">\(\mathbb{Z} \coloneqq (\mathbb{N} \times \mathbb{N}) / \sim\)</span> given a suitable equivalence relation <span class="math inline">\(\sim\)</span>.</p>
+<p><strong>Definition.</strong> <span class="math inline">\(\sim\)</span> on <span class="math inline">\(\mathbb{N}\times\mathbb{N}\)</span>: <span class="math inline">\((m,n) \sim (p, q) :\iff m + q = p + n\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="rational-numbers" class="level4">
+<h4 class="anchored" data-anchor-id="rational-numbers">Rational Numbers</h4>
+<p><span class="math display">\[\mathbb{Q}\coloneqq (\mathbb{Z}\times \mathbb{Z}^*)/\sim, \qquad (x,y) \sim (u, v) :\iff x \cdot v = u \cdot y\]</span></p>
+<p><strong>Example.</strong> <span class="math inline">\((2,3) \sim (4,6)\)</span> since <span class="math inline">\(2 \cdot 6 = 3 \cdot 4\)</span>.</p>
+<p>Embedding of <span class="math inline">\(\mathbb{Z}\)</span> in <span class="math inline">\(\mathbb{Q}\)</span>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <span class="math inline">\(+_\mathbb{Q} : \mathbb{Q}\times\mathbb{Q}\longrightarrow \mathbb{Q}\)</span> and <span class="math inline">\(\cdot_\mathbb{Q} : \mathbb{Q}\times\mathbb{Q}\longrightarrow \mathbb{Q}\)</span>:</p>
+<p><span class="math display">\[[(x,\ y)]+_\mathbb{Q}[(u,\ v)]\coloneqq [(x \cdot v+y \cdot u,\ y \cdot v)]\]</span></p>
+<p><span class="math display">\[[(x,\ y)]\cdot_\mathbb{Q}[(u,\ v)]\coloneqq [(x \cdot u,\ y \cdot v)]\]</span></p>
+</section>
+<section id="reals" class="level4">
+<h4 class="anchored" data-anchor-id="reals">Reals</h4>
+<p>A quotient set <span class="math inline">\(\mathcal{A}/\sim\)</span> with <span class="math inline">\(\mathcal{A}\)</span> being the set of almost homomorphisms on <span class="math inline">\(\mathbb{Z}\)</span> and <span class="math inline">\(\sim\)</span> a suitable equivalence relation.</p>
+</section>
+</section>
+</section>
+<section id="chapter-ii-topological-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-ii-topological-spaces">Chapter II: Topological Spaces</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1wyOoLUjUeI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> Let <span class="math inline">\(M\)</span> be some set. A choice <span class="math inline">\(\mathcal{O} \subseteq \mathcal{P}(M)\)</span> is called a topology on <span class="math inline">\(M\)</span> if:</p>
+<ol type="1">
+<li><span class="math inline">\(\varnothing \in \mathcal{O}\)</span> and <span class="math inline">\(M \in \mathcal{O}\)</span></li>
+<li><span class="math inline">\(U, V \in \mathcal{O} \implies \bigcap\{U, V\} \in \mathcal{O}\)</span></li>
+<li><span class="math inline">\(C \subseteq \mathcal{O} \implies \bigcup C \in \mathcal{O}\)</span></li>
+</ol>
+<p>The pair <span class="math inline">\((M, \mathcal{O})\)</span> is called a <strong><em>topological space.</em></strong></p>
+<p><strong>Examples.</strong></p>
+<ol type="1">
+<li><span class="math inline">\(M\)</span> is any set, <span class="math inline">\(\mathcal{O} = \{\varnothing, M\}\)</span> is the <em>chaotic topology</em></li>
+<li><span class="math inline">\(M\)</span> is any set, <span class="math inline">\(\mathcal{O} = \mathcal{P}(M)\)</span> is the <em>discrete topology</em></li>
+<li><span class="math inline">\(M = \{1, 2, 3\}, \mathcal{O} = \{ \varnothing, \{1\}, \{2\}, \{1, 2\}, \{1, 2, 3\}\}\)</span></li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(|M|\)</span></th>
+<th># of topologies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>355</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>9,535,241</td>
+</tr>
+</tbody>
+</table>
+<p>Important example: <span class="math inline">\(M = \mathbb{R}^d \coloneqq \mathbb{R}\times\mathbb{R}\times ... \times \mathbb{R}\)</span></p>
+<p><span class="math inline">\(\mathcal{O}_{\text{standard}\mathbb{R}^d}\)</span> is constructed in 3 steps:</p>
+<ol type="1">
+<li><span class="math inline">\(\forall x \in \mathbb{R}^d, \forall r \in \mathbb{R}^+\)</span>:</li>
+</ol>
+<p><span class="math display">\[\mathcal{B}^{2n}_r(x)\coloneqq \left\{y \in \mathbb{R}^d\ \bigg|\ \sqrt[2n]{\sum_{i=1}^{d}(y^i - x^i)^{2n}} \lt r\right\}\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(U \in \mathcal{O}_{\text{standard}\mathbb{R}^d} :\iff \forall p \in U, \exists r \in \mathbb{R}^+: \mathcal{B}_r(p) \subseteq U\)</span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 10.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Proof that <span class="math inline">\(\mathcal{O}_{\text{standard}\mathbb{R}^d}\)</span> is a topology:
+<ul>
+<li>Is <span class="math inline">\(\varnothing \in \mathcal{O}_{\text{standard}\mathbb{R}^d}\)</span>? <span class="math inline">\(M \in \mathcal{O}_{\text{standard}\mathbb{R}^d}\)</span> because any <span class="math inline">\(B_r(x \in M) \subseteq M\)</span>.</li>
+<li>Consider <span class="math inline">\(p \in U\cap V \implies (p \in U) \land (p \in V)\)</span>. Then <span class="math inline">\(\exists r, s \in \mathbb{R}^+\)</span> such that <span class="math inline">\(\mathcal{B}_r(p) \subseteq U\)</span> and <span class="math inline">\(\mathcal{B}_s(p) \subseteq V\)</span>, therefore <span class="math inline">\(\mathcal{B}_{\min(r,s)}(p) \subseteq (U\cap V)\)</span>.</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="ii.ii-construction-of-new-topologies-from-given-ones" class="level3">
+<h3 class="anchored" data-anchor-id="ii.ii-construction-of-new-topologies-from-given-ones">II.II Construction of New Topologies from Given Ones</h3>
+<p>Let <span class="math inline">\((M, \mathcal{O})\)</span> be a topological space.</p>
+<p><strong>Theorem.</strong> Let <span class="math inline">\(N \subset M\)</span>, then:</p>
+<p><span class="math display">\[\mathcal{O}\Bigr|_N \coloneqq \left\{ U \cap V \Bigr| U \in \mathcal{O} \right\} \subseteq \mathcal{P}(N)\]</span></p>
+<p>is a topology on <span class="math inline">\(N\)</span>, called the induced (subset) topology.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Example.</strong> <span class="math inline">\((\mathbb{R}, \mathcal{O}_{st.})\)</span>, <span class="math inline">\(N = [-1, 1] \coloneqq \left\{ x \in \mathbb{R}\ \big|\ -1 \leq x \leq 1\right\}\)</span></p>
+<p>A subset can be not open with respect to a topology and yet be open within the induced topology on a subset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 14.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <span class="math inline">\((M, \mathcal{O})\)</span> is a topological space. <span class="math inline">\(C \subseteq M\)</span> is called <em>closed</em> if <span class="math inline">\(M\backslash C\)</span> is open.</p>
+<p><strong>Example.</strong> <span class="math inline">\([0, 1]\)</span> is not open because of the points <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, but it is closed because <span class="math inline">\(\mathbb{R}\backslash[0,1] = (-\infty, 0)\cup(1,\infty)\)</span> is open.</p>
+<p><strong>Remark.</strong> A topological space can be: open, closed, open and closed, open and not closed, not open and closed, or not open and not closed.</p>
+<p><strong>Observation.</strong> For any <span class="math inline">\((M, \mathcal{O})\)</span> topological space:</p>
+<ol type="1">
+<li><span class="math inline">\(\varnothing = M\backslash M\)</span> is open <span class="math inline">\(\implies \varnothing\)</span> is closed</li>
+<li><span class="math inline">\(M = M\backslash \varnothing\)</span> is open <span class="math inline">\(\implies M\)</span> is closed</li>
+<li><span class="math inline">\(\implies M\)</span> and <span class="math inline">\(\varnothing\)</span> are both open and closed</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 15.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Product topology:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 16.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.iii-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="ii.iii-convergence">II.III Convergence</h3>
+<p><strong>Definition.</strong> A sequence <span class="math inline">\(q\)</span> (i.e.&nbsp;a map <span class="math inline">\(q: \mathbb{N} \longrightarrow M\)</span>) on a topological space <span class="math inline">\((M, \mathcal{O})\)</span> is said to converge to a limit point <span class="math inline">\(a\)</span> when:</p>
+<p><span class="math display">\[\forall\ U\in\mathcal{O}:\quad\exists N\in \mathbb{N}:\quad \forall n \gt N:\quad q(n) \in U\]</span></p>
+<p><strong>Example.</strong> <span class="math inline">\((M, \left\{\varnothing, M\right\})\)</span> — chaotic topology. Any sequence converges to any point.</p>
+<p><strong>Example.</strong> <span class="math inline">\((M, \mathcal{P}(M))\)</span> — discrete topology. Only eventually constant sequences converge.</p>
+<p><strong>Example.</strong> <span class="math inline">\((M = \mathbb{R}^d, \mathcal{O}_{\text{standard}\mathbb{R}^d})\)</span></p>
+<p><strong>Theorem.</strong> <span class="math inline">\(q:\mathbb{N} \longrightarrow \mathbb{R}\)</span> converges to <span class="math inline">\(a \in \mathbb{R}^d\)</span> if:</p>
+<p><span class="math display">\[\forall \epsilon&gt;0:\quad \exists N\in \mathbb{N}:\quad \forall n\gt N:\qquad \Vert q(n) - a \Vert \lt \epsilon\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 17.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.iv-continuity" class="level3">
+<h3 class="anchored" data-anchor-id="ii.iv-continuity">II.IV Continuity</h3>
+<p><strong>Definition.</strong> Let <span class="math inline">\((M,\mathcal{O}_M)\)</span> and <span class="math inline">\((N, \mathcal{O}_N)\)</span> be topological spaces and <span class="math inline">\(\phi: M \longrightarrow N\)</span> a map. Then <span class="math inline">\(\phi\)</span> is continuous if:</p>
+<p><span class="math display">\[\forall V \in \mathcal{O}_N: \qquad \text{preim}_\phi(V) \in \mathcal{O}_M\]</span></p>
+<p><strong>Example.</strong> <span class="math inline">\(\phi: M \longrightarrow N\)</span> where <span class="math inline">\(M\)</span> is equipped with the discrete topology — every map is continuous because every subset of <span class="math inline">\(M\)</span> is open.</p>
+<p><strong>Example.</strong> <span class="math inline">\(\phi: M \longrightarrow N\)</span> where <span class="math inline">\(N\)</span> is equipped with the chaotic topology — every map is continuous since <span class="math inline">\(\text{preim}_\phi(\varnothing) = \varnothing\)</span> and <span class="math inline">\(\text{preim}_\phi(N) = M\)</span> are both open.</p>
+<p><strong>Example.</strong> <span class="math inline">\(\phi: \mathbb{R}^d \longrightarrow \mathbb{R}^f\)</span> — we recover the <span class="math inline">\(\epsilon\)</span>-<span class="math inline">\(\delta\)</span> definition of continuity.</p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(\phi: M \longrightarrow N\)</span> be a bijection with <span class="math inline">\((M, \mathcal{O}_M), (N, \mathcal{O}_N)\)</span>. We call <span class="math inline">\(\phi\)</span> a <em>homeomorphism</em> if:</p>
+<ol type="1">
+<li><span class="math inline">\(\phi: M \longrightarrow N\)</span> is continuous</li>
+<li><span class="math inline">\(\phi^{-1}: N \longrightarrow M\)</span> is continuous</li>
+</ol>
+<p><strong>Remark.</strong> Homeomorphisms are structure-preserving maps in topology.</p>
+<p><strong>Definition.</strong> If <span class="math inline">\(\exists\)</span> homeomorphism <span class="math inline">\(\phi: M \leftrightarrows N\)</span>, then <span class="math inline">\(\phi\)</span> provides a one-to-one pairing of the open sets of <span class="math inline">\(M\)</span> with those of <span class="math inline">\(N\)</span>. Therefore: <span class="math inline">\((M, \mathcal{O}_M) \cong_\text{top.} (N, \mathcal{O}_N)\)</span>.</p>
+</section>
+<section id="ii.v-topological-properties-i-separation" class="level3">
+<h3 class="anchored" data-anchor-id="ii.v-topological-properties-i-separation">II.V Topological Properties I: Separation</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hiD6Tz06k30" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> A topological space <span class="math inline">\((M, \mathcal{O})\)</span> is called T1 if for any two distinct points <span class="math inline">\(p \neq q\)</span>, <span class="math inline">\(\exists U\in\mathcal{O}\)</span> with <span class="math inline">\(p \in U\)</span> such that <span class="math inline">\(q \notin U\)</span>.</p>
+<p><strong>Definition.</strong> A topological space <span class="math inline">\((M, \mathcal{O})\)</span> is called T2 (Hausdorff) if for any two <span class="math inline">\(p\neq q\)</span>, <span class="math inline">\(\exists U \in \mathcal{O}\)</span> with <span class="math inline">\(p \in U\)</span> and <span class="math inline">\(\exists V \in \mathcal{O}\)</span> with <span class="math inline">\(q \in V\)</span> such that <span class="math inline">\(U\cap V = \varnothing\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\((\mathbb{R}^d, \mathcal{O}_\text{std})\)</span> is T2 <span class="math inline">\(\implies\)</span> T1. The Zariski topology is T1 but not Hausdorff.</p>
+<p><strong>Remark.</strong> Separation axioms get progressively stronger: <a href="https://en.wikipedia.org/wiki/History_of_the_separation_axioms">T1, T2, T2.5, T3, T4, T5, T6</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 18.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 19.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 20.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Examples.</strong> The interval <span class="math inline">\([0, 1]\)</span> is compact. <span class="math inline">\(\mathbb{R}\)</span> is not compact (construct a cover that has no finite subcover).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 21.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Theorem.</strong> If <span class="math inline">\((M, \mathcal{O}_M)\)</span> and <span class="math inline">\((N, \mathcal{O}_N)\)</span> are compact topological spaces, then <span class="math inline">\((M\times N, \mathcal{O}_{M\times N})\)</span> is again compact.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 22.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 23.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 24.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Theorem.</strong> Let <span class="math inline">\((M, \mathcal{O}_M)\)</span> be a Hausdorff topological space. Then it is paracompact if and only if every open cover admits a partition of unity subordinate to that cover.</p>
+<p>A partition of unity is a set <span class="math inline">\(\mathcal{F}\)</span> of continuous functions <span class="math inline">\(f \in \mathcal{F}: M \longrightarrow [0, 1]\)</span> such that:</p>
+<ol type="1">
+<li><span class="math inline">\(\forall f \in \mathcal{F}, \exists U \in C: f(p)\neq 0 \implies p \in U\)</span></li>
+<li><span class="math inline">\(\forall p \in M\)</span>, there exists an open neighborhood <span class="math inline">\(V \in \mathcal{O}\)</span> such that <span class="math inline">\(V\cap U\neq \varnothing\)</span> only for finitely many <span class="math inline">\(U \in C\)</span>, and such that only finitely many <span class="math inline">\(f_1, f_2, ..,f_N \in \mathcal{F}\)</span> are non-zero on <span class="math inline">\(V\)</span>, with:</li>
+</ol>
+<p><span class="math display">\[\sum_{n=1}^{N}f_n = 1\qquad \text{on}\ V\]</span></p>
+<p><strong>Example.</strong> <span class="math inline">\((\mathbb{R}, \mathcal{O}_\text{std})\)</span>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 25.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.vi-connectedness-path-connectedness" class="level3">
+<h3 class="anchored" data-anchor-id="ii.vi-connectedness-path-connectedness">II.VI Connectedness &amp; Path-Connectedness</h3>
+<p><strong>Definition.</strong> A topological space <span class="math inline">\((M, \mathcal{O})\)</span> is called connected unless there exist two non-empty, non-intersecting open sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> such that <span class="math inline">\(M = A \cup B\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\((\mathbb{R}\backslash\{0\}, \mathcal{O}_\text{std}\vert_{\mathbb{R}\backslash\{0\}})\)</span> is not connected because <span class="math inline">\(A = (-\infty, 0) \neq \varnothing\)</span> and <span class="math inline">\(B = (0,+\infty) \neq \varnothing\)</span> with <span class="math inline">\(A\cap B = \varnothing\)</span> and <span class="math inline">\(A \cup B = M\)</span>.</p>
+<p><strong>Theorem.</strong> The interval <span class="math inline">\([0, 1]\)</span> is connected.</p>
+<p><strong>Theorem.</strong> A topological space is connected if <span class="math inline">\(\varnothing\)</span> and the whole <span class="math inline">\(M\)</span> are the only subsets that are both open and closed.</p>
+<p><strong>Proof.</strong> (By contradiction) Suppose there is another set <span class="math inline">\(U \subseteq M\)</span> that is also open and closed (<span class="math inline">\(U \neq \varnothing\)</span> and <span class="math inline">\(U \neq M\)</span>). Then <span class="math inline">\(M = U \cup M\backslash U\)</span> and <span class="math inline">\(M\)</span> is not connected.</p>
+<p>2nd part: Assume <span class="math inline">\(M\)</span> is not connected, <span class="math inline">\(\implies \exists\)</span> non-empty, non-intersecting open subsets <span class="math inline">\(A, B\)</span> such that <span class="math inline">\(M = A\cup B = A \cup M\backslash A\)</span>. <span class="math inline">\(A\)</span> is open <span class="math inline">\(\implies\)</span> <span class="math inline">\(M\backslash A = B\)</span> is closed, but <span class="math inline">\(B\)</span> is also open. <span class="math inline">\(\implies A\)</span> is closed and open. <span class="math inline">\(\square\)</span></p>
+<p><strong>Definition.</strong> <span class="math inline">\((M, \mathcal{O})\)</span> is called path-connected if for every pair of points <span class="math inline">\(p,q\in M\)</span> there exists a continuous curve <span class="math inline">\(\gamma: [0,1] \longrightarrow M\)</span> such that <span class="math inline">\(\gamma(0) = p\)</span> and <span class="math inline">\(\gamma(1) = q\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\((\mathbb{R}^d, \mathcal{O}_\text{std})\)</span> is path-connected. <strong>Proof:</strong> <span class="math inline">\(\forall p,q \in \mathbb{R}^d\)</span>, define <span class="math inline">\(\gamma(\lambda) = p + \lambda(q - p)\)</span>.</p>
+<p><strong>Example.</strong> <span class="math inline">\(S := \left\{\left(x, \sin\left(\frac{1}{x}\right)\right) \bigg|\ x \in (0,1]\right\}\cup \left\{(0,0)\right\}\)</span> is connected but not path-connected.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 26.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 27.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.viii-homotopic-curves-and-the-fundamental-group" class="level3">
+<h3 class="anchored" data-anchor-id="ii.viii-homotopic-curves-and-the-fundamental-group">II.VIII Homotopic Curves and the Fundamental Group</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 28.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 29.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <span class="math inline">\((M, \mathcal{O})\)</span> is a topological space. For every <span class="math inline">\(p \in M\)</span> we define a space of loops on <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[\mathcal{L}_p:= \left\{ \gamma : [0, 1] \longrightarrow M \Big|\ \gamma\ \text{is continuous,}\ \gamma(0) = \gamma(1) = p \right\}\]</span></p>
+<p><strong>Definition.</strong> <span class="math inline">\(*_p: \mathcal{L}_p\times\mathcal{L}_p \longrightarrow\mathcal{L}_p\)</span>, for <span class="math inline">\(\lambda \in [0,1]\)</span>:</p>
+<p><span class="math display">\[(\gamma * \delta)(\lambda) := \begin{cases} \gamma(2\lambda) &amp; 0\leq\lambda\leq\tfrac{1}{2}\\ \delta(2\lambda - 1) &amp; \tfrac{1}{2}\leq \lambda \leq 1 \end{cases}\]</span></p>
+<p><img src="Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center">{fig-align=“center”}</p>
+<p>If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.</p>
+<p><strong>Definition.</strong> The fundamental group <span class="math inline">\((\pi_1, \cdot)\)</span> of a topological space is the set <span class="math inline">\(\pi_{1,p} := \mathcal{L}_p/_\sim\ = \left\{[\gamma]_\sim\ \Big|\ \gamma \in \mathcal{L}_p\right\}\)</span> together with:</p>
+<p><span class="math display">\[\cdot:\pi_{1,p}\times\pi_{1,p}\longrightarrow \pi_{1,p}, \qquad [\gamma]\cdot[\delta]:=[\gamma*\delta]\]</span></p>
+<p>The <span class="math inline">\(\cdot\)</span> operation is:</p>
+<ol type="1">
+<li>Associative</li>
+<li>Has a neutral element <span class="math inline">\(\gamma_{\text{id},p}:[0,1]\longrightarrow M\)</span> with <span class="math inline">\(\gamma(\lambda) = p\)</span></li>
+<li>Has an inverse (the same curve traversed backwards)</li>
+</ol>
+<p><strong>Examples.</strong></p>
+<ul>
+<li>The sphere <span class="math inline">\(S^2\)</span>: <span class="math inline">\(\pi_1 = \left\{[\gamma_\text{id,p}] \right\}\)</span> — all loops are homotopic to the identity</li>
+<li>The infinite cylinder <span class="math inline">\(C = \mathbb{R} \times S^1\)</span>: <span class="math inline">\(\pi_1 = \mathbb{Z}\)</span></li>
+<li>The torus <span class="math inline">\(T^2 = S^1 \times S^1\)</span>: <span class="math inline">\(\pi_1 \cong \mathbb{Z} \times \mathbb{Z}\)</span></li>
+</ul>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>i.e.&nbsp;a predicate of two variables<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>because that is a proposition from the epsilon axiom<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>because <span class="math inline">\(y \in x\)</span> is false, the implication is true<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>no worries: <span class="math inline">\(\{x,y\} = \{y, x\}\)</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nightowl97\.github\.io\/personal_blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

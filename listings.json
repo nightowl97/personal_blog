@@ -2,9 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/geometrical-anatomy/index.html",
       "/posts/hagarism/index.html",
       "/posts/dawn-of-everything/index.html",
+      "/posts/brasil/index.html",
       "/posts/ideo-arabe-contemp/index.html",
+      "/posts/electrochemistry-basics/index.html",
       "/posts/local-gauge-inv/local-gauge-invariance.html",
       "/posts/dynamic-prog/index.html",
       "/posts/alien-attack/index.html"

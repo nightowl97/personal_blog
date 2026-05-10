@@ -10,7 +10,582 @@
 <atom:link href="https://nightowl97.github.io/personal_blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Youssef Kharchouf&#39;s personal notes</description>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Sat, 19 Aug 2023 20:30:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 09 May 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lectures notes on the Geometrical Anatomy of Theoretical Physics</title>
+  <link>https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Notes from <a href="https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic">this lecture series</a> by Frederic Schuller, building the mathematical background for Classical Mechanics, Statistical Mechanics, SR, GR, EM &amp; QM.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/V49i_LM8B0E" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="introduction-logic-of-propositions-and-predicates" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-logic-of-propositions-and-predicates">Introduction — Logic of Propositions and Predicates</h2>
+<section id="structure-of-the-course" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-the-course">Structure of the Course</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Screenshot_from_2021-11-07_01-56-56.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="i.i-propositional-logic" class="level3">
+<h3 class="anchored" data-anchor-id="i.i-propositional-logic">I.I: Propositional Logic</h3>
+</section>
+</section>
+<section id="chapter-i-axiomatic-set-theory" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-i-axiomatic-set-theory">Chapter I: Axiomatic Set Theory</h2>
+<p>A <em>proposition</em> is a variable that can be true or false. No others. We can create new propositions from given ones using <em>logical operators.</em></p>
+<section id="a-unary-operators" class="level3">
+<h3 class="anchored" data-anchor-id="a-unary-operators">a) Unary Operators</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>P</th>
+<th>Not P</th>
+<th>Identity</th>
+<th>Tautology</th>
+<th>Contradiction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i.iv-the-epsilon-relation" class="level3">
+<h3 class="anchored" data-anchor-id="i.iv-the-epsilon-relation">I.IV The <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">-relation</h3>
+<p>Set Theory is built on the postulate that there is a fundamental relation<sup>1</sup> called <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">. There will not be a definition in the strict sense of what <img src="https://latex.codecogs.com/png.latex?%5Cepsilon"> or what a set is. Instead, there will be 9 axioms that speak of <img src="https://latex.codecogs.com/png.latex?%5Cepsilon"> and of sets.</p>
+<section id="overview-of-axioms" class="level4">
+<h4 class="anchored" data-anchor-id="overview-of-axioms">Overview of Axioms</h4>
+<p>Using the <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">-relation we can immediately define:</p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Cnotin%20y%20%5Ciff%20%5Cneg(x%20%5Cin%20y)"></p>
+<p><img src="https://latex.codecogs.com/png.latex?x%5Csubseteq%20y%20%5Ciff%20%5Cforall%20a:%20(a%20%5Cin%20x%20%5Cimplies%20a%20%5Cin%20y)"></p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20=%20y%20%5Ciff%20(x%20%5Csubseteq%20y)%5C%20%5Cland%5C%20(y%20%5Csubseteq%20x)"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="i.v-zermelo-fraenkel-axioms-of-set-theory" class="level3">
+<h3 class="anchored" data-anchor-id="i.v-zermelo-fraenkel-axioms-of-set-theory">I.V Zermelo-Fraenkel Axioms of Set Theory</h3>
+<section id="axiom-on-the-epsilon-relation-e" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-the-epsilon-relation-e">Axiom on the <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">-relation (E)</h4>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Cin%20y"> is a proposition (either true or false) if and only if <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?y"> are <strong>both</strong> sets.</p>
+<p><em>Counterexample (Russell’s Paradox and naive Set Theory):</em></p>
+<p>Assume there is a set <img src="https://latex.codecogs.com/png.latex?u"> of all sets that do not contain themselves:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cexists%20u:%20%5Cforall%20z:%20(z%20%5Cin%20u%20%5Ciff%20z%20%5Cnotin%20z)"></p>
+<p>Is <img src="https://latex.codecogs.com/png.latex?u"> a set? If so, one must decide whether <img src="https://latex.codecogs.com/png.latex?u%20%5Cin%20u"> is true or false<sup>2</sup>.</p>
+<p><strong>Assume <img src="https://latex.codecogs.com/png.latex?u%20%5Cin%20u"> is true:</strong> then by definition <img src="https://latex.codecogs.com/png.latex?u%20%5Cnotin%20u">, which is contradictory.</p>
+<p><strong>Assume <img src="https://latex.codecogs.com/png.latex?u%20%5Cin%20u"> is false:</strong> <img src="https://latex.codecogs.com/png.latex?%5Ciff%20u%20%5Cin%20u">, also a contradiction.</p>
+<p>We must conclude therefore that <img src="https://latex.codecogs.com/png.latex?u"> <strong><em>is not a set.</em></strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Cin%20y"> is either true or false, formally:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20x:%20%5Cforall%20y:%20(x%20%5Cin%20y)%20%5Cveebar(x%5Cnotin%20y)"></p>
+</section>
+<section id="axiom-on-the-existence-of-the-empty-set-e" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-the-existence-of-the-empty-set-e">Axiom on the Existence of the Empty Set (E)</h4>
+<p>There exists a set that contains no elements:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cexists%20x:%20%5Cforall%20y:%5C%20y%5Cnotin%20x"></p>
+<p><strong>Theorem.</strong> There is only one empty set, we therefore call it <img src="https://latex.codecogs.com/png.latex?%5Cvarnothing">.</p>
+<p><strong>Proof (textbook).</strong> Assume <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?x'"> are both empty sets:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20y:%20y%20%5Cin%20x%20%5Cimplies%20y%20%5Cin%20x'"></p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20%5Csubset%20x'"><sup>3</sup></p>
+<p>Conversely:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20y:%20y%20%5Cin%20x'%20%5Cimplies%20y%20%5Cin%20x"></p>
+<p><img src="https://latex.codecogs.com/png.latex?x'%20%5Csubset%20x"></p>
+<p><img src="https://latex.codecogs.com/png.latex?x%20=%20x'%20%5Cimplies%20%5Ctext%7Bthe%20empty%20sets%20must%20be%20the%20same%7D"></p>
+<p><strong>Proof (formal).</strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?a_1%20%5CLeftrightarrow%20%5Cforall%20y:%20y%5Cnotin%20x"></p>
+<p><img src="https://latex.codecogs.com/png.latex?a_2%20%5CLeftrightarrow%20%5Cforall%20y:%20y%5Cnotin%20x'"></p>
+<p><img src="https://latex.codecogs.com/png.latex?q_1%20%5CLeftrightarrow%20%5Cforall%20y:%20y%5Cnotin%20x%20%5Cimplies%20%5Cforall%20y:%20(y%20%5Cin%20x%20%5Cimplies%20y%20%5Cin%20x')"></p>
+<p><img src="https://latex.codecogs.com/png.latex?q_2%20%5CLeftrightarrow%20%5Cforall%20y:%20y%5Cnotin%20x"></p>
+<p><img src="https://latex.codecogs.com/png.latex?q_3%20%5CLeftrightarrow%20q_1%20%5Cland%20q_2%20%5CLeftrightarrow%20%5Cforall%20y:%20(y%20%5Cin%20x%20%5Cimplies%20y%20%5Cin%20x')"></p>
+<p>Similar steps to get <img src="https://latex.codecogs.com/png.latex?x'%20%5Cin%20x%20%5Cimplies%20x%20=%20x'">.</p>
+</section>
+<section id="axiom-on-pair-sets-p" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-pair-sets-p">Axiom on Pair Sets (P)</h4>
+<p>Let <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?y"> be sets. There exists a set that contains as its elements precisely <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?y">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20x:%20%5Cforall%20y:%20%5Cexists%20m:%20%5Cforall%20u:%20(u%20%5Cin%20m%20%5CLeftrightarrow%20u%20=%20x%20%5Clor%20u%20=%20y)"></p>
+<p><strong>Notation.</strong> Denote this set <img src="https://latex.codecogs.com/png.latex?m"> by <img src="https://latex.codecogs.com/png.latex?%5C%7Bx,y%5C%7D">.<sup>4</sup></p>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?%5C%7Bx%5C%7D%20%5Ccoloneqq%20%5C%7Bx,%20x%5C%7D"></p>
+</section>
+<section id="axiom-on-union-sets-u" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-on-union-sets-u">Axiom on Union Sets (U)</h4>
+<p>Let <img src="https://latex.codecogs.com/png.latex?x"> be a set, there exists a set <img src="https://latex.codecogs.com/png.latex?u"> whose elements are precisely the elements of the elements of <img src="https://latex.codecogs.com/png.latex?x">.</p>
+<p><strong>Notation.</strong> <img src="https://latex.codecogs.com/png.latex?u%20=%20%5Ccup%5C%20x"></p>
+<p><strong>Example.</strong> Let <img src="https://latex.codecogs.com/png.latex?a,%20b"> be sets. Using the pair sets axiom: <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20%5C%7Ba%5C%7D"> is a set, <img src="https://latex.codecogs.com/png.latex?%5C%7Bb%5C%7D"> is a set <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20x%20=%20%5C%7B%5C%7Ba%5C%7D,%20%5C%7Bb%5C%7D%5C%7D"> is a set, <img src="https://latex.codecogs.com/png.latex?%5Ccup%20x%20=%20%5C%7Ba,%20b%5C%7D"></p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?a,b,c"> are sets: <img src="https://latex.codecogs.com/png.latex?x%20=%20%5C%7B%5C%7Ba%5C%7D,%20%5C%7Bb,c%5C%7D%5C%7D"> is a set <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20%5Ccup%20x%20%5Ccoloneqq%20%5C%7Ba,b,c%5C%7D"> is a set</p>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?a_1,%20a_2,%20..,%20a_N"> be sets, recursively for all <img src="https://latex.codecogs.com/png.latex?N%20%5Cgeq%203">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5C%7Ba_1,..,%20a_%7BN%7D%5C%7D%20%5Ccoloneqq%20%5Cbigcup%20%5C%7B%5C%7Ba_1,%20..,%20a_%7BN-1%7D%5C%7D,%20%5C%7Ba_N%5C%7D%5C%7D"></p>
+</section>
+<section id="axiom-of-replacement-r" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-replacement-r">Axiom of Replacement (R)</h4>
+<p>Let <img src="https://latex.codecogs.com/png.latex?R"> be a functional relation and <img src="https://latex.codecogs.com/png.latex?m"> be a set. The image of <img src="https://latex.codecogs.com/png.latex?m"> under <img src="https://latex.codecogs.com/png.latex?R"> is again a set.</p>
+<p><strong>Definition.</strong> A relation <img src="https://latex.codecogs.com/png.latex?R"> is called functional if <img src="https://latex.codecogs.com/png.latex?%5Cforall%20x:%20%5Cexists!%20y:%20R(x,y)">.</p>
+<p>The image of a set <img src="https://latex.codecogs.com/png.latex?m"> under a functional relation <img src="https://latex.codecogs.com/png.latex?R"> consists of all <img src="https://latex.codecogs.com/png.latex?y"> for which there is <img src="https://latex.codecogs.com/png.latex?x%20%5Cin%20m"> such that <img src="https://latex.codecogs.com/png.latex?R(x,y)">.</p>
+<p><strong>Theorem.</strong> Let <img src="https://latex.codecogs.com/png.latex?P"> be a predicate of one variable and <img src="https://latex.codecogs.com/png.latex?m"> a set. The elements <img src="https://latex.codecogs.com/png.latex?y%5Cin%20m"> for which <img src="https://latex.codecogs.com/png.latex?P(y)"> holds constitute a set.</p>
+<p><strong>Notation.</strong> <img src="https://latex.codecogs.com/png.latex?%5C%7B%5C%20y%20%5Cin%20m%5C%20%7C%5C%20P(y)%5C%20%5C%7D"></p>
+<p><strong>Proof.</strong> Case 1: <img src="https://latex.codecogs.com/png.latex?%5Cneg%20(%5Cexists%20y%20%5Cin%20m):%20P(y)"> — in this case <img src="https://latex.codecogs.com/png.latex?%5C%7By%20%5Cin%20m%20%7C%20P(y)%5C%7D%20%5Ccoloneqq%20%5Cemptyset">.</p>
+<p>Case 2: <img src="https://latex.codecogs.com/png.latex?(%5Cexists%20y'%20%5Cin%20m):%20P(y')">, then define <img src="https://latex.codecogs.com/png.latex?R(x,y)%20%5Ccoloneqq%20(P(x)%20%5Cland%20x%20=%20y)%20%5Clor%20(%5Cneg%20P(x)%20%5Cland%20y%20=%20y')">.</p>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?%5C%7By%20%5Cin%20m%5C%20%7C%20P(y)%5C%7D%20%5Ccoloneqq%20%5Ctext%7Bim%7D_R(m)"></p>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?x%20%5Csubset%20m">, then <img src="https://latex.codecogs.com/png.latex?m%5Csetminus%20n%20%5Ccoloneqq%20%5C%7Bx%20%5Cin%20m%20%5Cmid%20x%20%5Cnotin%20n%5C%7D"></p>
+</section>
+<section id="axiom-of-power-set-p" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-power-set-p">Axiom of Power Set (P)</h4>
+<p>Let <img src="https://latex.codecogs.com/png.latex?m"> be a set, there exists a set denoted <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BP%7D(m)"> whose elements are the subsets of <img src="https://latex.codecogs.com/png.latex?m">.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?m%20=%20%5C%7Ba,%20b%5C%7D%20%5CRightarrow%20%5Cmathcal%7BP%7D(m)%20=%20%5C%7B%5Cvarnothing,%20%5C%7Ba%5C%7D,%20%5C%7Bb%5C%7D,%20%5C%7Ba,%20b%5C%7D%20%5C%7D"></p>
+</section>
+<section id="axiom-of-infinity-i" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-infinity-i">Axiom of Infinity (I)</h4>
+<p>There exists a set that contains the empty set, and for every <img src="https://latex.codecogs.com/png.latex?y"> also contains <img src="https://latex.codecogs.com/png.latex?%5C%7By%5C%7D">.</p>
+<p><strong>Remark.</strong> One such set contains the elements <img src="https://latex.codecogs.com/png.latex?%5Cvarnothing%20=%200,%20%5C%7B%5Cvarnothing%5C%7D%20=%201,%20%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D=2,%20%5C%7B%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D%5C%7D%20=%203">, …</p>
+<p><strong>Corollary.</strong> <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D"> is a set.</p>
+<p><strong>Remark.</strong> As a set, <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D"> can be understood as <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BP%7D(%5Cmathbb%7BN%7D)">.</p>
+</section>
+<section id="axiom-of-choice-c" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-choice-c">Axiom of Choice (C)</h4>
+<p>Let <img src="https://latex.codecogs.com/png.latex?x"> be a set whose elements are non-empty and mutually disjoint (no intersections), then there exists a set <img src="https://latex.codecogs.com/png.latex?y"> which contains exactly one element of each element in <img src="https://latex.codecogs.com/png.latex?x">.</p>
+<p><strong>Remark.</strong> The axiom of choice is independent of the other axioms — we could choose not to use it, but it is used in standard mathematics.</p>
+<p><strong>Remark.</strong> The proof that every vector space has a basis requires the axiom of choice, as does the existence of a complete system of representatives of an equivalence relation.</p>
+</section>
+<section id="axiom-of-foundation-f" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-of-foundation-f">Axiom of Foundation (F)</h4>
+<p>Every non-empty set <img src="https://latex.codecogs.com/png.latex?x"> contains an element <img src="https://latex.codecogs.com/png.latex?y"> that has none of its elements in common with <img src="https://latex.codecogs.com/png.latex?x">.</p>
+<p>Immediate implication: there is no set that contains itself as an element — <img src="https://latex.codecogs.com/png.latex?x%20%5Cin%20x"> for no set <img src="https://latex.codecogs.com/png.latex?x">.</p>
+</section>
+</section>
+<section id="i.vi-classification-of-sets" class="level3">
+<h3 class="anchored" data-anchor-id="i.vi-classification-of-sets">I.VI Classification of Sets</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/6EIWRg-6ftQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> A map <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20A%20%5Crightarrow%20B"> is a relation such that for every <img src="https://latex.codecogs.com/png.latex?a%20%5Cin%20A"> there exists exactly one <img src="https://latex.codecogs.com/png.latex?b%20%5Cin%20B"> such that <img src="https://latex.codecogs.com/png.latex?%5Cphi(a,b)">.</p>
+<p><strong>Terminology.</strong></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?A"> is the domain of <img src="https://latex.codecogs.com/png.latex?%5Cphi"></li>
+<li><img src="https://latex.codecogs.com/png.latex?B"> is the target</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cphi(A)%20%5Cequiv%20%5Ctext%7Bim%7D_%5Cphi(A)%20%5Ccoloneqq%20%5C%7B%5Cphi(a)%5C%20%7C%5C%20a%20%5Cin%20A%20%5C%7D"></li>
+</ul>
+<p><strong>Definition.</strong> A map <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20A%20%5Crightarrow%20B"> is:</p>
+<ul>
+<li>Surjective if <img src="https://latex.codecogs.com/png.latex?%5Cphi(A)%20=%20B"></li>
+<li>Injective if <img src="https://latex.codecogs.com/png.latex?%5Cphi(a_1)%20=%20%5Cphi(a_2)%20%5Cimplies%20a_1%20=%20a_2"></li>
+<li>Bijective if injective and surjective</li>
+</ul>
+<p><strong>Definition.</strong> Two sets are called set-theoretically isomorphic, <img src="https://latex.codecogs.com/png.latex?A%20%5Ccong%20B">, if there exists a bijection <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20A%20%5Crightarrow%20B">.</p>
+<p><strong>Remark.</strong> If there is a bijection, then generically there are many.</p>
+<section id="classification-of-sets" class="level4">
+<h4 class="anchored" data-anchor-id="classification-of-sets">Classification of Sets</h4>
+<p>A set <img src="https://latex.codecogs.com/png.latex?A"> is infinite if there exists a proper subset <img src="https://latex.codecogs.com/png.latex?B%20%5Csubset%20A"> that is isomorphic to <img src="https://latex.codecogs.com/png.latex?A">, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?B%20%5Ccong%20A">.</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?A"> is countably infinite if <img src="https://latex.codecogs.com/png.latex?A%20%5Ccong%20%5Cmathbb%7BN%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?A"> is non-countably infinite otherwise</li>
+</ul>
+<p>A set <img src="https://latex.codecogs.com/png.latex?A"> is finite if <img src="https://latex.codecogs.com/png.latex?A%20%5Ccong%20%5C%7B1,%202,%20..,%20N%5C%7D"> for some <img src="https://latex.codecogs.com/png.latex?N%20%5Cin%20%5Cmathbb%7BN%7D"> and we write <img src="https://latex.codecogs.com/png.latex?%7CA%7C%20=%20N">.</p>
+<p>Given two maps <img src="https://latex.codecogs.com/png.latex?A%20%5Cxrightarrow%5B%5D%7B%5Cphi%7D%20B"> and <img src="https://latex.codecogs.com/png.latex?B%20%5Cxrightarrow%5B%5D%7B%5Cpsi%7D%20C"> one can construct a map <img src="https://latex.codecogs.com/png.latex?%5Cpsi%5Ccirc%5Cphi%20(a)%20=%20%5Cpsi(%5Cphi(a))"> known as the composition of maps.</p>
+<p>Composition is associative: <img src="https://latex.codecogs.com/png.latex?%5Cxi%5Ccirc(%5Cpsi%5Ccirc%5Cphi)%20=%20(%5Cxi%5Ccirc%5Cpsi)%5Ccirc%5Cphi"></p>
+<p><strong>Definition.</strong> The inverse map: <img src="https://latex.codecogs.com/png.latex?%5Cphi%5E%7B-1%7D:%20B%20%5Crightarrow%20A"> such that <img src="https://latex.codecogs.com/png.latex?%5Cphi%5E%7B-1%7D%5Ccirc%5Cphi%20=%20%5Ctext%7Bid%7D_A"> and <img src="https://latex.codecogs.com/png.latex?%5Cphi%20%5Ccirc%20%5Cphi%5E%7B-1%7D=%20%5Ctext%7Bid%7D_B">.</p>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20A%20%5Crightarrow%20B"> be any map and <img src="https://latex.codecogs.com/png.latex?V%20%5Csubset%20B">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7Bpreim%7D_%5Cphi(V)%20%5Ccoloneqq%20%5C%7Ba%20%5Cin%20A%5C%20%7C%5C%20%5Cphi(a)%20%5Cin%20V%5C%7D"></p>
+</section>
+</section>
+<section id="i.vii-equivalence-relations" class="level3">
+<h3 class="anchored" data-anchor-id="i.vii-equivalence-relations">I.VII Equivalence Relations</h3>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?M"> be a set and <img src="https://latex.codecogs.com/png.latex?%5Csim"> a relation such that:</p>
+<ol type="1">
+<li>Reflexivity: <img src="https://latex.codecogs.com/png.latex?%5Cforall%20m%20%5Cin%20M:%20m%20%5Csim%20m"></li>
+<li>Symmetry: <img src="https://latex.codecogs.com/png.latex?%5Cforall%20m,n%20%5Cin%20M:%20m%5Csim%20n%20%5Cimplies%20n%5Csim%20m"></li>
+<li>Transitivity: <img src="https://latex.codecogs.com/png.latex?%5Cforall%20m,n,p%20%5Cin%20M:%20(m%20%5Csim%20n)%20%5Cland%20(n%20%5Csim%20p)%20%5Cimplies%20m%20%5Csim%20p"></li>
+</ol>
+<p>Then <img src="https://latex.codecogs.com/png.latex?%5Csim"> is an equivalence relation.</p>
+<p><strong>Definition.</strong> If <img src="https://latex.codecogs.com/png.latex?%5Csim"> is an equivalence relation on <img src="https://latex.codecogs.com/png.latex?M">, then for any <img src="https://latex.codecogs.com/png.latex?m%20%5Cin%20M">, define the set <img src="https://latex.codecogs.com/png.latex?%5Bm%5D%20%5Ccoloneqq%20%5C%7Bn%20%5Cin%20M%5C%20%7C%5C%20m%20%5Csim%20n%5C%7D%20%5Csubseteq%20M">, called the equivalence class of <img src="https://latex.codecogs.com/png.latex?m">.</p>
+<p>Two key properties:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?a%20%5Cin%20%5Bm%5D%20%5Cimplies%20%5Ba%5D%20=%20%5Bm%5D"> — any element of the class can be a representative</li>
+<li>Either <img src="https://latex.codecogs.com/png.latex?%5Bm%5D%20=%20%5Bn%5D"> or <img src="https://latex.codecogs.com/png.latex?%5Bm%5D%20%5Ccap%20%5Bn%5D%20=%20%5Cvarnothing"></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>We see a coarser <img src="https://latex.codecogs.com/png.latex?M"> through the equivalence relation.</p>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?%5Csim"> be an equivalence relation on <img src="https://latex.codecogs.com/png.latex?M">. We define the <em>quotient set</em> <img src="https://latex.codecogs.com/png.latex?M%20/%5Csim"> (M modulo <img src="https://latex.codecogs.com/png.latex?%5Csim">) <img src="https://latex.codecogs.com/png.latex?%5Ccoloneqq%20%5C%7B%20%5Bm%5D%5C%20%7C%5C%20m%20%5Cin%20M%5C%7D">.</p>
+<p><strong>Remark.</strong> Due to the axiom of choice, there exists a complete set of representatives for <img src="https://latex.codecogs.com/png.latex?%5Csim">, i.e.&nbsp;a set <img src="https://latex.codecogs.com/png.latex?R"> such that <img src="https://latex.codecogs.com/png.latex?R%5Ccong%20M/%5Csim">.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Remark.</strong> This could be inconsistent because changing the representatives could change the class depending on how the map is defined, which leads to ill-defined maps.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr" class="level3">
+<h3 class="anchored" data-anchor-id="i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr">I.VIII Construction of <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D,%5C%20%5Cmathbb%7BZ%7D,%5C%20%5Cmathbb%7BQ%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D"></h3>
+<section id="naturals" class="level4">
+<h4 class="anchored" data-anchor-id="naturals">Naturals</h4>
+<p>Recall <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D%20%5Ccoloneqq%20%5C%7B0%20%5Ccoloneqq%20%5Cvarnothing,%201%20%5Ccoloneqq%20%5C%7B%5Cvarnothing%5C%7D,%202%20%5Ccoloneqq%20%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D,%20..%5C%7D"></p>
+<p><strong>Definition.</strong> To establish addition on <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D">, we define a successor map:</p>
+<p><img src="https://latex.codecogs.com/png.latex?S:%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D,%5C%20n%20%5Crightarrow%20%5C%7Bn%5C%7D,%20%5Cqquad%20%5Ctext%7Be.g.%7D%5C%20S(2)%20=%20S(%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D)%20=%20%5C%7B%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D%5C%7D%20=%203"></p>
+<p><strong>Definition.</strong> Predecessor map (<img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D%5E*%20%5Ccoloneqq%20%5Cmathbb%7BN%7D%5Cbackslash%5C%7B%5Cvarnothing%5C%7D">):</p>
+<p><img src="https://latex.codecogs.com/png.latex?P:%20%5Cmathbb%7BN%7D%5E*%20%5Crightarrow%20%5Cmathbb%7BN%7D,%5Cquad%20n%20%5Crightarrow%20m%5C%20%7C%5C%20m%5Cin%20n,%20%5Cqquad%20%5Ctext%7Be.g.%7D%5C%20P(2)%20=%20P(%5C%7B%5C%7B%5Cvarnothing%5C%7D%5C%7D)%20=%20%5C%7B%5Cvarnothing%5C%7D%20=%201"></p>
+<p><strong>Definition.</strong> The <img src="https://latex.codecogs.com/png.latex?n">-th power of <img src="https://latex.codecogs.com/png.latex?S">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?S%5En%20%5Ccoloneqq%20S%20%5Ccirc%20S%5E%7BP(n)%7D%5C%20%5Ctext%7Bif%7D%5C%20n%20%5Cin%20%5Cmathbb%7BN%7D%5E*,%20%5Cqquad%20S%5E0%20%5Ccoloneqq%20%5Ctext%7Bid%7D_%5Cmathbb%7BN%7D"></p>
+<p><strong>Definition.</strong> Addition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?+:%20%5Cmathbb%7BN%7D%20%5Ctimes%20%5Cmathbb%7BN%7D%20%5Clongrightarrow%20%5Cmathbb%7BN%7D,%20%5Cqquad%20(m,n)%20%5Clongrightarrow%20m%20+%20n%20%5Ccoloneqq%20S%5En(m)"></p>
+<p><strong>Generalization.</strong> Can show commutativity, associativity, and a neutral element.</p>
+</section>
+<section id="integers" class="level4">
+<h4 class="anchored" data-anchor-id="integers">Integers</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BZ%7D%20%5Ccoloneqq%20(%5Cmathbb%7BN%7D%20%5Ctimes%20%5Cmathbb%7BN%7D)%20/%20%5Csim"> given a suitable equivalence relation <img src="https://latex.codecogs.com/png.latex?%5Csim">.</p>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?%5Csim"> on <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D%5Ctimes%5Cmathbb%7BN%7D">: <img src="https://latex.codecogs.com/png.latex?(m,n)%20%5Csim%20(p,%20q)%20:%5Ciff%20m%20+%20q%20=%20p%20+%20n"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="rational-numbers" class="level4">
+<h4 class="anchored" data-anchor-id="rational-numbers">Rational Numbers</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D%5Ccoloneqq%20(%5Cmathbb%7BZ%7D%5Ctimes%20%5Cmathbb%7BZ%7D%5E*)/%5Csim,%20%5Cqquad%20(x,y)%20%5Csim%20(u,%20v)%20:%5Ciff%20x%20%5Ccdot%20v%20=%20u%20%5Ccdot%20y"></p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(2,3)%20%5Csim%20(4,6)"> since <img src="https://latex.codecogs.com/png.latex?2%20%5Ccdot%206%20=%203%20%5Ccdot%204">.</p>
+<p>Embedding of <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BZ%7D"> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?+_%5Cmathbb%7BQ%7D%20:%20%5Cmathbb%7BQ%7D%5Ctimes%5Cmathbb%7BQ%7D%5Clongrightarrow%20%5Cmathbb%7BQ%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Ccdot_%5Cmathbb%7BQ%7D%20:%20%5Cmathbb%7BQ%7D%5Ctimes%5Cmathbb%7BQ%7D%5Clongrightarrow%20%5Cmathbb%7BQ%7D">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5B(x,%5C%20y)%5D+_%5Cmathbb%7BQ%7D%5B(u,%5C%20v)%5D%5Ccoloneqq%20%5B(x%20%5Ccdot%20v+y%20%5Ccdot%20u,%5C%20y%20%5Ccdot%20v)%5D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5B(x,%5C%20y)%5D%5Ccdot_%5Cmathbb%7BQ%7D%5B(u,%5C%20v)%5D%5Ccoloneqq%20%5B(x%20%5Ccdot%20u,%5C%20y%20%5Ccdot%20v)%5D"></p>
+</section>
+<section id="reals" class="level4">
+<h4 class="anchored" data-anchor-id="reals">Reals</h4>
+<p>A quotient set <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D/%5Csim"> with <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BA%7D"> being the set of almost homomorphisms on <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BZ%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Csim"> a suitable equivalence relation.</p>
+</section>
+</section>
+</section>
+<section id="chapter-ii-topological-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-ii-topological-spaces">Chapter II: Topological Spaces</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1wyOoLUjUeI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?M"> be some set. A choice <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D%20%5Csubseteq%20%5Cmathcal%7BP%7D(M)"> is called a topology on <img src="https://latex.codecogs.com/png.latex?M"> if:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?%5Cvarnothing%20%5Cin%20%5Cmathcal%7BO%7D"> and <img src="https://latex.codecogs.com/png.latex?M%20%5Cin%20%5Cmathcal%7BO%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?U,%20V%20%5Cin%20%5Cmathcal%7BO%7D%20%5Cimplies%20%5Cbigcap%5C%7BU,%20V%5C%7D%20%5Cin%20%5Cmathcal%7BO%7D"></li>
+<li><img src="https://latex.codecogs.com/png.latex?C%20%5Csubseteq%20%5Cmathcal%7BO%7D%20%5Cimplies%20%5Cbigcup%20C%20%5Cin%20%5Cmathcal%7BO%7D"></li>
+</ol>
+<p>The pair <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is called a <strong><em>topological space.</em></strong></p>
+<p><strong>Examples.</strong></p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?M"> is any set, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D%20=%20%5C%7B%5Cvarnothing,%20M%5C%7D"> is the <em>chaotic topology</em></li>
+<li><img src="https://latex.codecogs.com/png.latex?M"> is any set, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D%20=%20%5Cmathcal%7BP%7D(M)"> is the <em>discrete topology</em></li>
+<li><img src="https://latex.codecogs.com/png.latex?M%20=%20%5C%7B1,%202,%203%5C%7D,%20%5Cmathcal%7BO%7D%20=%20%5C%7B%20%5Cvarnothing,%20%5C%7B1%5C%7D,%20%5C%7B2%5C%7D,%20%5C%7B1,%202%5C%7D,%20%5C%7B1,%202,%203%5C%7D%5C%7D"></li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><img src="https://latex.codecogs.com/png.latex?%7CM%7C"></th>
+<th># of topologies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>355</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>9,535,241</td>
+</tr>
+</tbody>
+</table>
+<p>Important example: <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Cmathbb%7BR%7D%5Ed%20%5Ccoloneqq%20%5Cmathbb%7BR%7D%5Ctimes%5Cmathbb%7BR%7D%5Ctimes%20...%20%5Ctimes%20%5Cmathbb%7BR%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D"> is constructed in 3 steps:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?%5Cforall%20x%20%5Cin%20%5Cmathbb%7BR%7D%5Ed,%20%5Cforall%20r%20%5Cin%20%5Cmathbb%7BR%7D%5E+">:</li>
+</ol>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D%5E%7B2n%7D_r(x)%5Ccoloneqq%20%5Cleft%5C%7By%20%5Cin%20%5Cmathbb%7BR%7D%5Ed%5C%20%5Cbigg%7C%5C%20%5Csqrt%5B2n%5D%7B%5Csum_%7Bi=1%7D%5E%7Bd%7D(y%5Ei%20-%20x%5Ei)%5E%7B2n%7D%7D%20%5Clt%20r%5Cright%5C%7D"></p>
+<ol start="2" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?U%20%5Cin%20%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D%20:%5Ciff%20%5Cforall%20p%20%5Cin%20U,%20%5Cexists%20r%20%5Cin%20%5Cmathbb%7BR%7D%5E+:%20%5Cmathcal%7BB%7D_r(p)%20%5Csubseteq%20U"></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 10.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Proof that <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D"> is a topology:
+<ul>
+<li>Is <img src="https://latex.codecogs.com/png.latex?%5Cvarnothing%20%5Cin%20%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D">? <img src="https://latex.codecogs.com/png.latex?M%20%5Cin%20%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D"> because any <img src="https://latex.codecogs.com/png.latex?B_r(x%20%5Cin%20M)%20%5Csubseteq%20M">.</li>
+<li>Consider <img src="https://latex.codecogs.com/png.latex?p%20%5Cin%20U%5Ccap%20V%20%5Cimplies%20(p%20%5Cin%20U)%20%5Cland%20(p%20%5Cin%20V)">. Then <img src="https://latex.codecogs.com/png.latex?%5Cexists%20r,%20s%20%5Cin%20%5Cmathbb%7BR%7D%5E+"> such that <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D_r(p)%20%5Csubseteq%20U"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D_s(p)%20%5Csubseteq%20V">, therefore <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BB%7D_%7B%5Cmin(r,s)%7D(p)%20%5Csubseteq%20(U%5Ccap%20V)">.</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="ii.ii-construction-of-new-topologies-from-given-ones" class="level3">
+<h3 class="anchored" data-anchor-id="ii.ii-construction-of-new-topologies-from-given-ones">II.II Construction of New Topologies from Given Ones</h3>
+<p>Let <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> be a topological space.</p>
+<p><strong>Theorem.</strong> Let <img src="https://latex.codecogs.com/png.latex?N%20%5Csubset%20M">, then:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D%5CBigr%7C_N%20%5Ccoloneqq%20%5Cleft%5C%7B%20U%20%5Ccap%20V%20%5CBigr%7C%20U%20%5Cin%20%5Cmathcal%7BO%7D%20%5Cright%5C%7D%20%5Csubseteq%20%5Cmathcal%7BP%7D(N)"></p>
+<p>is a topology on <img src="https://latex.codecogs.com/png.latex?N">, called the induced (subset) topology.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D,%20%5Cmathcal%7BO%7D_%7Bst.%7D)">, <img src="https://latex.codecogs.com/png.latex?N%20=%20%5B-1,%201%5D%20%5Ccoloneqq%20%5Cleft%5C%7B%20x%20%5Cin%20%5Cmathbb%7BR%7D%5C%20%5Cbig%7C%5C%20-1%20%5Cleq%20x%20%5Cleq%201%5Cright%5C%7D"></p>
+<p>A subset can be not open with respect to a topology and yet be open within the induced topology on a subset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 14.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is a topological space. <img src="https://latex.codecogs.com/png.latex?C%20%5Csubseteq%20M"> is called <em>closed</em> if <img src="https://latex.codecogs.com/png.latex?M%5Cbackslash%20C"> is open.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?%5B0,%201%5D"> is not open because of the points <img src="https://latex.codecogs.com/png.latex?0"> and <img src="https://latex.codecogs.com/png.latex?1">, but it is closed because <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D%5Cbackslash%5B0,1%5D%20=%20(-%5Cinfty,%200)%5Ccup(1,%5Cinfty)"> is open.</p>
+<p><strong>Remark.</strong> A topological space can be: open, closed, open and closed, open and not closed, not open and closed, or not open and not closed.</p>
+<p><strong>Observation.</strong> For any <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> topological space:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?%5Cvarnothing%20=%20M%5Cbackslash%20M"> is open <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20%5Cvarnothing"> is closed</li>
+<li><img src="https://latex.codecogs.com/png.latex?M%20=%20M%5Cbackslash%20%5Cvarnothing"> is open <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20M"> is closed</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cimplies%20M"> and <img src="https://latex.codecogs.com/png.latex?%5Cvarnothing"> are both open and closed</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 15.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Product topology:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 16.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.iii-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="ii.iii-convergence">II.III Convergence</h3>
+<p><strong>Definition.</strong> A sequence <img src="https://latex.codecogs.com/png.latex?q"> (i.e.&nbsp;a map <img src="https://latex.codecogs.com/png.latex?q:%20%5Cmathbb%7BN%7D%20%5Clongrightarrow%20M">) on a topological space <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is said to converge to a limit point <img src="https://latex.codecogs.com/png.latex?a"> when:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%5C%20U%5Cin%5Cmathcal%7BO%7D:%5Cquad%5Cexists%20N%5Cin%20%5Cmathbb%7BN%7D:%5Cquad%20%5Cforall%20n%20%5Cgt%20N:%5Cquad%20q(n)%20%5Cin%20U"></p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cleft%5C%7B%5Cvarnothing,%20M%5Cright%5C%7D)"> — chaotic topology. Any sequence converges to any point.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BP%7D(M))"> — discrete topology. Only eventually constant sequences converge.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(M%20=%20%5Cmathbb%7BR%7D%5Ed,%20%5Cmathcal%7BO%7D_%7B%5Ctext%7Bstandard%7D%5Cmathbb%7BR%7D%5Ed%7D)"></p>
+<p><strong>Theorem.</strong> <img src="https://latex.codecogs.com/png.latex?q:%5Cmathbb%7BN%7D%20%5Clongrightarrow%20%5Cmathbb%7BR%7D"> converges to <img src="https://latex.codecogs.com/png.latex?a%20%5Cin%20%5Cmathbb%7BR%7D%5Ed"> if:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20%5Cepsilon%3E0:%5Cquad%20%5Cexists%20N%5Cin%20%5Cmathbb%7BN%7D:%5Cquad%20%5Cforall%20n%5Cgt%20N:%5Cqquad%20%5CVert%20q(n)%20-%20a%20%5CVert%20%5Clt%20%5Cepsilon"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 17.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.iv-continuity" class="level3">
+<h3 class="anchored" data-anchor-id="ii.iv-continuity">II.IV Continuity</h3>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?(M,%5Cmathcal%7BO%7D_M)"> and <img src="https://latex.codecogs.com/png.latex?(N,%20%5Cmathcal%7BO%7D_N)"> be topological spaces and <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Clongrightarrow%20N"> a map. Then <img src="https://latex.codecogs.com/png.latex?%5Cphi"> is continuous if:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20V%20%5Cin%20%5Cmathcal%7BO%7D_N:%20%5Cqquad%20%5Ctext%7Bpreim%7D_%5Cphi(V)%20%5Cin%20%5Cmathcal%7BO%7D_M"></p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Clongrightarrow%20N"> where <img src="https://latex.codecogs.com/png.latex?M"> is equipped with the discrete topology — every map is continuous because every subset of <img src="https://latex.codecogs.com/png.latex?M"> is open.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Clongrightarrow%20N"> where <img src="https://latex.codecogs.com/png.latex?N"> is equipped with the chaotic topology — every map is continuous since <img src="https://latex.codecogs.com/png.latex?%5Ctext%7Bpreim%7D_%5Cphi(%5Cvarnothing)%20=%20%5Cvarnothing"> and <img src="https://latex.codecogs.com/png.latex?%5Ctext%7Bpreim%7D_%5Cphi(N)%20=%20M"> are both open.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20%5Cmathbb%7BR%7D%5Ed%20%5Clongrightarrow%20%5Cmathbb%7BR%7D%5Ef"> — we recover the <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">-<img src="https://latex.codecogs.com/png.latex?%5Cdelta"> definition of continuity.</p>
+<p><strong>Definition.</strong> Let <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Clongrightarrow%20N"> be a bijection with <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M),%20(N,%20%5Cmathcal%7BO%7D_N)">. We call <img src="https://latex.codecogs.com/png.latex?%5Cphi"> a <em>homeomorphism</em> if:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Clongrightarrow%20N"> is continuous</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cphi%5E%7B-1%7D:%20N%20%5Clongrightarrow%20M"> is continuous</li>
+</ol>
+<p><strong>Remark.</strong> Homeomorphisms are structure-preserving maps in topology.</p>
+<p><strong>Definition.</strong> If <img src="https://latex.codecogs.com/png.latex?%5Cexists"> homeomorphism <img src="https://latex.codecogs.com/png.latex?%5Cphi:%20M%20%5Cleftrightarrows%20N">, then <img src="https://latex.codecogs.com/png.latex?%5Cphi"> provides a one-to-one pairing of the open sets of <img src="https://latex.codecogs.com/png.latex?M"> with those of <img src="https://latex.codecogs.com/png.latex?N">. Therefore: <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M)%20%5Ccong_%5Ctext%7Btop.%7D%20(N,%20%5Cmathcal%7BO%7D_N)">.</p>
+</section>
+<section id="ii.v-topological-properties-i-separation" class="level3">
+<h3 class="anchored" data-anchor-id="ii.v-topological-properties-i-separation">II.V Topological Properties I: Separation</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hiD6Tz06k30" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Definition.</strong> A topological space <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is called T1 if for any two distinct points <img src="https://latex.codecogs.com/png.latex?p%20%5Cneq%20q">, <img src="https://latex.codecogs.com/png.latex?%5Cexists%20U%5Cin%5Cmathcal%7BO%7D"> with <img src="https://latex.codecogs.com/png.latex?p%20%5Cin%20U"> such that <img src="https://latex.codecogs.com/png.latex?q%20%5Cnotin%20U">.</p>
+<p><strong>Definition.</strong> A topological space <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is called T2 (Hausdorff) if for any two <img src="https://latex.codecogs.com/png.latex?p%5Cneq%20q">, <img src="https://latex.codecogs.com/png.latex?%5Cexists%20U%20%5Cin%20%5Cmathcal%7BO%7D"> with <img src="https://latex.codecogs.com/png.latex?p%20%5Cin%20U"> and <img src="https://latex.codecogs.com/png.latex?%5Cexists%20V%20%5Cin%20%5Cmathcal%7BO%7D"> with <img src="https://latex.codecogs.com/png.latex?q%20%5Cin%20V"> such that <img src="https://latex.codecogs.com/png.latex?U%5Ccap%20V%20=%20%5Cvarnothing">.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D%5Ed,%20%5Cmathcal%7BO%7D_%5Ctext%7Bstd%7D)"> is T2 <img src="https://latex.codecogs.com/png.latex?%5Cimplies"> T1. The Zariski topology is T1 but not Hausdorff.</p>
+<p><strong>Remark.</strong> Separation axioms get progressively stronger: <a href="https://en.wikipedia.org/wiki/History_of_the_separation_axioms">T1, T2, T2.5, T3, T4, T5, T6</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 18.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 19.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 20.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Examples.</strong> The interval <img src="https://latex.codecogs.com/png.latex?%5B0,%201%5D"> is compact. <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D"> is not compact (construct a cover that has no finite subcover).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 21.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Theorem.</strong> If <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M)"> and <img src="https://latex.codecogs.com/png.latex?(N,%20%5Cmathcal%7BO%7D_N)"> are compact topological spaces, then <img src="https://latex.codecogs.com/png.latex?(M%5Ctimes%20N,%20%5Cmathcal%7BO%7D_%7BM%5Ctimes%20N%7D)"> is again compact.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 22.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 23.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 24.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Theorem.</strong> Let <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M)"> be a Hausdorff topological space. Then it is paracompact if and only if every open cover admits a partition of unity subordinate to that cover.</p>
+<p>A partition of unity is a set <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BF%7D"> of continuous functions <img src="https://latex.codecogs.com/png.latex?f%20%5Cin%20%5Cmathcal%7BF%7D:%20M%20%5Clongrightarrow%20%5B0,%201%5D"> such that:</p>
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?%5Cforall%20f%20%5Cin%20%5Cmathcal%7BF%7D,%20%5Cexists%20U%20%5Cin%20C:%20f(p)%5Cneq%200%20%5Cimplies%20p%20%5Cin%20U"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cforall%20p%20%5Cin%20M">, there exists an open neighborhood <img src="https://latex.codecogs.com/png.latex?V%20%5Cin%20%5Cmathcal%7BO%7D"> such that <img src="https://latex.codecogs.com/png.latex?V%5Ccap%20U%5Cneq%20%5Cvarnothing"> only for finitely many <img src="https://latex.codecogs.com/png.latex?U%20%5Cin%20C">, and such that only finitely many <img src="https://latex.codecogs.com/png.latex?f_1,%20f_2,%20..,f_N%20%5Cin%20%5Cmathcal%7BF%7D"> are non-zero on <img src="https://latex.codecogs.com/png.latex?V">, with:</li>
+</ol>
+<p><img src="https://latex.codecogs.com/png.latex?%5Csum_%7Bn=1%7D%5E%7BN%7Df_n%20=%201%5Cqquad%20%5Ctext%7Bon%7D%5C%20V"></p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D,%20%5Cmathcal%7BO%7D_%5Ctext%7Bstd%7D)">:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 25.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.vi-connectedness-path-connectedness" class="level3">
+<h3 class="anchored" data-anchor-id="ii.vi-connectedness-path-connectedness">II.VI Connectedness &amp; Path-Connectedness</h3>
+<p><strong>Definition.</strong> A topological space <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is called connected unless there exist two non-empty, non-intersecting open sets <img src="https://latex.codecogs.com/png.latex?A"> and <img src="https://latex.codecogs.com/png.latex?B"> such that <img src="https://latex.codecogs.com/png.latex?M%20=%20A%20%5Ccup%20B">.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D%5Cbackslash%5C%7B0%5C%7D,%20%5Cmathcal%7BO%7D_%5Ctext%7Bstd%7D%5Cvert_%7B%5Cmathbb%7BR%7D%5Cbackslash%5C%7B0%5C%7D%7D)"> is not connected because <img src="https://latex.codecogs.com/png.latex?A%20=%20(-%5Cinfty,%200)%20%5Cneq%20%5Cvarnothing"> and <img src="https://latex.codecogs.com/png.latex?B%20=%20(0,+%5Cinfty)%20%5Cneq%20%5Cvarnothing"> with <img src="https://latex.codecogs.com/png.latex?A%5Ccap%20B%20=%20%5Cvarnothing"> and <img src="https://latex.codecogs.com/png.latex?A%20%5Ccup%20B%20=%20M">.</p>
+<p><strong>Theorem.</strong> The interval <img src="https://latex.codecogs.com/png.latex?%5B0,%201%5D"> is connected.</p>
+<p><strong>Theorem.</strong> A topological space is connected if <img src="https://latex.codecogs.com/png.latex?%5Cvarnothing"> and the whole <img src="https://latex.codecogs.com/png.latex?M"> are the only subsets that are both open and closed.</p>
+<p><strong>Proof.</strong> (By contradiction) Suppose there is another set <img src="https://latex.codecogs.com/png.latex?U%20%5Csubseteq%20M"> that is also open and closed (<img src="https://latex.codecogs.com/png.latex?U%20%5Cneq%20%5Cvarnothing"> and <img src="https://latex.codecogs.com/png.latex?U%20%5Cneq%20M">). Then <img src="https://latex.codecogs.com/png.latex?M%20=%20U%20%5Ccup%20M%5Cbackslash%20U"> and <img src="https://latex.codecogs.com/png.latex?M"> is not connected.</p>
+<p>2nd part: Assume <img src="https://latex.codecogs.com/png.latex?M"> is not connected, <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20%5Cexists"> non-empty, non-intersecting open subsets <img src="https://latex.codecogs.com/png.latex?A,%20B"> such that <img src="https://latex.codecogs.com/png.latex?M%20=%20A%5Ccup%20B%20=%20A%20%5Ccup%20M%5Cbackslash%20A">. <img src="https://latex.codecogs.com/png.latex?A"> is open <img src="https://latex.codecogs.com/png.latex?%5Cimplies"> <img src="https://latex.codecogs.com/png.latex?M%5Cbackslash%20A%20=%20B"> is closed, but <img src="https://latex.codecogs.com/png.latex?B"> is also open. <img src="https://latex.codecogs.com/png.latex?%5Cimplies%20A"> is closed and open. <img src="https://latex.codecogs.com/png.latex?%5Csquare"></p>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is called path-connected if for every pair of points <img src="https://latex.codecogs.com/png.latex?p,q%5Cin%20M"> there exists a continuous curve <img src="https://latex.codecogs.com/png.latex?%5Cgamma:%20%5B0,1%5D%20%5Clongrightarrow%20M"> such that <img src="https://latex.codecogs.com/png.latex?%5Cgamma(0)%20=%20p"> and <img src="https://latex.codecogs.com/png.latex?%5Cgamma(1)%20=%20q">.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D%5Ed,%20%5Cmathcal%7BO%7D_%5Ctext%7Bstd%7D)"> is path-connected. <strong>Proof:</strong> <img src="https://latex.codecogs.com/png.latex?%5Cforall%20p,q%20%5Cin%20%5Cmathbb%7BR%7D%5Ed">, define <img src="https://latex.codecogs.com/png.latex?%5Cgamma(%5Clambda)%20=%20p%20+%20%5Clambda(q%20-%20p)">.</p>
+<p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?S%20:=%20%5Cleft%5C%7B%5Cleft(x,%20%5Csin%5Cleft(%5Cfrac%7B1%7D%7Bx%7D%5Cright)%5Cright)%20%5Cbigg%7C%5C%20x%20%5Cin%20(0,1%5D%5Cright%5C%7D%5Ccup%20%5Cleft%5C%7B(0,0)%5Cright%5C%7D"> is connected but not path-connected.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 26.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 27.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="ii.viii-homotopic-curves-and-the-fundamental-group" class="level3">
+<h3 class="anchored" data-anchor-id="ii.viii-homotopic-curves-and-the-fundamental-group">II.VIII Homotopic Curves and the Fundamental Group</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 28.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 29.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is a topological space. For every <img src="https://latex.codecogs.com/png.latex?p%20%5Cin%20M"> we define a space of loops on <img src="https://latex.codecogs.com/png.latex?p">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D_p:=%20%5Cleft%5C%7B%20%5Cgamma%20:%20%5B0,%201%5D%20%5Clongrightarrow%20M%20%5CBig%7C%5C%20%5Cgamma%5C%20%5Ctext%7Bis%20continuous,%7D%5C%20%5Cgamma(0)%20=%20%5Cgamma(1)%20=%20p%20%5Cright%5C%7D"></p>
+<p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?*_p:%20%5Cmathcal%7BL%7D_p%5Ctimes%5Cmathcal%7BL%7D_p%20%5Clongrightarrow%5Cmathcal%7BL%7D_p">, for <img src="https://latex.codecogs.com/png.latex?%5Clambda%20%5Cin%20%5B0,1%5D">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?(%5Cgamma%20*%20%5Cdelta)(%5Clambda)%20:=%20%5Cbegin%7Bcases%7D%20%5Cgamma(2%5Clambda)%20&amp;%200%5Cleq%5Clambda%5Cleq%5Ctfrac%7B1%7D%7B2%7D%5C%5C%20%5Cdelta(2%5Clambda%20-%201)%20&amp;%20%5Ctfrac%7B1%7D%7B2%7D%5Cleq%20%5Clambda%20%5Cleq%201%20%5Cend%7Bcases%7D"></p>
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center">{fig-align=“center”}</p>
+<p>If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.</p>
+<p><strong>Definition.</strong> The fundamental group <img src="https://latex.codecogs.com/png.latex?(%5Cpi_1,%20%5Ccdot)"> of a topological space is the set <img src="https://latex.codecogs.com/png.latex?%5Cpi_%7B1,p%7D%20:=%20%5Cmathcal%7BL%7D_p/_%5Csim%5C%20=%20%5Cleft%5C%7B%5B%5Cgamma%5D_%5Csim%5C%20%5CBig%7C%5C%20%5Cgamma%20%5Cin%20%5Cmathcal%7BL%7D_p%5Cright%5C%7D"> together with:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ccdot:%5Cpi_%7B1,p%7D%5Ctimes%5Cpi_%7B1,p%7D%5Clongrightarrow%20%5Cpi_%7B1,p%7D,%20%5Cqquad%20%5B%5Cgamma%5D%5Ccdot%5B%5Cdelta%5D:=%5B%5Cgamma*%5Cdelta%5D"></p>
+<p>The <img src="https://latex.codecogs.com/png.latex?%5Ccdot"> operation is:</p>
+<ol type="1">
+<li>Associative</li>
+<li>Has a neutral element <img src="https://latex.codecogs.com/png.latex?%5Cgamma_%7B%5Ctext%7Bid%7D,p%7D:%5B0,1%5D%5Clongrightarrow%20M"> with <img src="https://latex.codecogs.com/png.latex?%5Cgamma(%5Clambda)%20=%20p"></li>
+<li>Has an inverse (the same curve traversed backwards)</li>
+</ol>
+<p><strong>Examples.</strong></p>
+<ul>
+<li>The sphere <img src="https://latex.codecogs.com/png.latex?S%5E2">: <img src="https://latex.codecogs.com/png.latex?%5Cpi_1%20=%20%5Cleft%5C%7B%5B%5Cgamma_%5Ctext%7Bid,p%7D%5D%20%5Cright%5C%7D"> — all loops are homotopic to the identity</li>
+<li>The infinite cylinder <img src="https://latex.codecogs.com/png.latex?C%20=%20%5Cmathbb%7BR%7D%20%5Ctimes%20S%5E1">: <img src="https://latex.codecogs.com/png.latex?%5Cpi_1%20=%20%5Cmathbb%7BZ%7D"></li>
+<li>The torus <img src="https://latex.codecogs.com/png.latex?T%5E2%20=%20S%5E1%20%5Ctimes%20S%5E1">: <img src="https://latex.codecogs.com/png.latex?%5Cpi_1%20%5Ccong%20%5Cmathbb%7BZ%7D%20%5Ctimes%20%5Cmathbb%7BZ%7D"></li>
+</ul>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>i.e.&nbsp;a predicate of two variables↩︎</p></li>
+<li id="fn2"><p>because that is a proposition from the epsilon axiom↩︎</p></li>
+<li id="fn3"><p>because <img src="https://latex.codecogs.com/png.latex?y%20%5Cin%20x"> is false, the implication is true↩︎</p></li>
+<li id="fn4"><p>no worries: <img src="https://latex.codecogs.com/png.latex?%5C%7Bx,y%5C%7D%20=%20%5C%7By,%20x%5C%7D">↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>mathematics</category>
+  <category>physics</category>
+  <category>topology</category>
+  <category>set theory</category>
+  <category>notes</category>
+  <guid>https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/</guid>
+  <pubDate>Sat, 09 May 2026 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Hagarism The Making of the Islamic World (by Crone &amp; Cook)</title>
   <link>https://nightowl97.github.io/personal_blog/posts/hagarism/</link>
@@ -567,6 +1142,284 @@
   <pubDate>Thu, 17 Aug 2023 20:30:00 GMT</pubDate>
 </item>
 <item>
+  <title>Reading Notes on Brazilian Governance (2002–2023)</title>
+  <link>https://nightowl97.github.io/personal_blog/posts/brasil/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="lula-da-silva" class="level2">
+<h2 class="anchored" data-anchor-id="lula-da-silva">Lula da Silva</h2>
+<p><a href="https://v.redd.it/0kezfxhjk7z91">During Lula’s presidency in Brazil (2003–2011), the country officially left the UN “Hunger Map” after reaching total food sovereignty for the first time.</a></p>
+<p>Number-crunchers say rising incomes catapulted more than 29 million Brazilians into the middle class during the eight-year presidency of Luiz Inácio Lula da Silva, a former trade unionist elected in 2002. (<a href="https://apnews.com/article/5c74f94eadaf47c28995416d5e9fae85">AP News</a>)</p>
+<p>Brazilians stayed in school longer, which secured higher wages, which drove consumption, which in turn fuelled a booming domestic economy. He left office in 2010, having presided over average annual growth of 4.5%, a 50% increase in average Brazilian incomes, and a hefty drop in unemployment, poverty and government debt. (<a href="https://www.economist.com/the-americas/2023/01/26/as-lula-takes-over-brazils-economic-prospects-are-looking-up">The Economist</a>)</p>
+<p><strong>Bolsa Família</strong> → Direct cash payments to poor families. Bolsa Família has been mentioned as one factor contributing to the reduction of poverty in Brazil, which fell 27.7% during the first term. In 2006, the Center for Political Studies of the <a href="https://en.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_Get%C3%BAlio_Vargas">Getulio Vargas Foundation</a> published a study showing a sharp reduction in the number of people in poverty in Brazil between 2003 and 2005.</p>
+<p><strong>Luz Para Todos</strong> → Electricity for remote and rural areas.</p>
+<p>Lula was twice elected by large margins, in 2002 and then again in 2006, and left office with an 87 percent approval rate.</p>
+<section id="unpopular-with-the-wealthy-and-elites" class="level3">
+<h3 class="anchored" data-anchor-id="unpopular-with-the-wealthy-and-elites">Unpopular with the Wealthy and Elites</h3>
+<p>…among wealthier Brazilians and some politically influential actors such as businesspeople, the mainstream media and evangelical churches (Almeida, 2019; Pereira and Viola, 2019; see also Van Dijk, 2017).</p>
+<p><em>Almeida, R. (2019) ‘Bolsonaro presidente: conservadorismo, evangelismo e a crise brasileira’. Novos Estudos CEBRAP 38(1): 185–213.</em></p>
+<p><em>Pereira, J. C. and Viola, E. (2019) ‘Catastrophic Climate Risk and Brazilian Amazonian Politics and Policies: A New Research Agenda’. Global Environmental Politics 19(2): 93–103.</em></p>
+<p><em>Van Dijk, T. A. (2017) ‘How Globo Media Manipulated the Impeachment of Brazilian President Dilma Rousseff’. Discourse &amp; Communication 11(2): 199–229.</em></p>
+</section>
+<section id="prelude-to-the-bolsonaro-regime" class="level3">
+<h3 class="anchored" data-anchor-id="prelude-to-the-bolsonaro-regime">Prelude to the Bolsonaro Regime</h3>
+<p>Once Michel Temer became president through Rousseff’s controversial impeachment in 2016, several authoritarian and neoliberal reforms were then advanced, reducing labour rights, public spending, and governmental programmes aimed at social inclusion (Søndergaard, 2020).</p>
+<p><em>Søndergaard, N. (2020) ‘Reforming in a Democratic Vacuum: The Authoritarian Neoliberalism of the Temer Administration from 2016 to 2018’. Globalizations 18(4): 568–583.</em></p>
+<p>Work on sustainable development in Brazil had, therefore, already been watered down when Bolsonaro’s ascension galvanised the reversal of social and environmental protections (Siegel and Bastos Lima, 2020).</p>
+<p><em>Siegel, K. and Bastos Lima, M. G. (2020) ‘When International Sustainability Frameworks Encounter Domestic Politics: The Sustainable Development Goals and Agri-Food Governance in South America’. World Development 135: 1–13.</em></p>
+</section>
+</section>
+<section id="bolsonaro" class="level2">
+<h2 class="anchored" data-anchor-id="bolsonaro">Bolsonaro</h2>
+<p>Bolsonaro sowed doubt about the reliability of the nation’s electronic voting system — without any evidence:</p>
+<ul>
+<li><a href="https://edition.cnn.com/2021/08/06/americas/bolsonaro-brazil-elections-intl-latam/index.html">Bolsonaro is sowing doubt in Brazil’s electoral system (CNN)</a></li>
+<li><a href="https://www.cnbc.com/2022/09/14/bolsonaro-vs-lula-all-you-need-to-know-ahead-of-brazils-election.html">Bolsonaro vs.&nbsp;Lula: All you need to know (CNBC)</a></li>
+<li><a href="https://www.theguardian.com/world/2022/jul/19/bolsonaro-attack-on-brazil-electoral-system-sparks-outrage">Bolsonaro’s attack on Brazil’s electoral system sparks outrage (The Guardian)</a></li>
+</ul>
+<p>He also sought to dismiss the severity of torture and human rights abuses committed during Brazil’s military dictatorship (1964–1985):</p>
+<ul>
+<li><a href="https://www.hrw.org/news/2019/03/27/brazil-bolsonaro-celebrates-brutal-dictatorship">Brazil: Bolsonaro Celebrates Brutal Dictatorship (HRW)</a></li>
+<li><a href="https://www.hrw.org/news/2021/06/22/first-conviction-dictatorship-crimes-brazil">First Conviction for Dictatorship Crimes in Brazil (HRW)</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>“I am in favour of torture, you know that. And the people are in favour as well.” — Jair Bolsonaro (<a href="https://www.nytimes.com/2018/10/28/world/americas/brazil-president-jair-bolsonaro-quotes.html">1999</a>)</p>
+</blockquote>
+<p>Once, following a visit to a settlement of African slave descendants called a quilombo, Bolsonaro suggested they were all overweight:</p>
+<blockquote class="blockquote">
+<p>“I visited a quilombo and the least heavy afro-descendant weighed seven arrobas (approximately 230 pounds). They do nothing! They are not even good for procreation.”</p>
+</blockquote>
+<p>From a <a href="https://eu.usatoday.com/story/news/world/2018/10/29/jair-bolsonaro-brazils-new-president-has-said-many-offensive-things/1804519002/">1999 interview on Brazilian television</a>:</p>
+<blockquote class="blockquote">
+<p>“Elections won’t change anything in this country. It will only change on the day that we break out in civil war here and do the job that the military regime didn’t do: killing 30,000. If some innocent people die, that’s fine. In every war, innocent people die.”</p>
+</blockquote>
+<p><a href="https://www.tandfonline.com/doi/full/10.1080/01436597.2022.2153664">In 2015, Bolsonaro referred to immigrants from Haiti, Senegal, Bolivia and Syria as the</a></p>
+<blockquote class="blockquote">
+<p>‘scum of the world’</p>
+</blockquote>
+<p><a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/blar.13166">When expressing his opposition to the 2017 Migration Law, Bolsonaro stated that</a>:</p>
+<blockquote class="blockquote">
+<p>‘[immigrants’] behaviour, their culture, is completely different from ours’ and that the law would ‘open wide’ the country ‘to all sorts of people’</p>
+</blockquote>
+<p><a href="https://www.bbc.com/news/world-latin-america-45746013">In 2017, he controversially said that</a>:</p>
+<blockquote class="blockquote">
+<p>“a policeman who doesn’t kill isn’t a policeman”</p>
+</blockquote>
+<p>He once said to Congress (<a href="https://www.theguardian.com/world/2019/sep/11/carlos-bolsonaro-brazil-democracy-dictatorship-jair">The Guardian</a>, <a href="https://www1.folha.uol.com.br/poder/2018/06/nos-anos-90-bolsonaro-defendeu-novo-golpe-militar-e-guerra.shtml">Folha de S.Paulo</a>):</p>
+<blockquote class="blockquote">
+<p>“Yes, I’m in favor of a dictatorship.”</p>
+</blockquote>
+<p><a href="https://youtu.be/qIDyw9QKIvw?t=890">Câmara Aberta TV program</a>, May 23, 1999:</p>
+<blockquote class="blockquote">
+<p>“The pau-de-arara [a torture technique] works. I’m in favor of torture, you know that. And the people are in favor as well.”</p>
+</blockquote>
+<p><a href="https://www.youtube.com/watch?v=KTPT_oCtbDU">Câmara Aberta TV program</a>, May 23, 1999:</p>
+<blockquote class="blockquote">
+<p>“Through the vote, you will not change anything in this country, nothing, absolutely nothing! It will only change, unfortunately, when, one day, we start a civil war here and do the work that the military regime did not do. Killing some 30,000, starting with FHC [then-President Fernando Henrique Cardoso], not kicking them out, killing! If some innocent people are going to die, fine, in any war, innocents die.”</p>
+</blockquote>
+<section id="against-indigenous-populations" class="level3">
+<h3 class="anchored" data-anchor-id="against-indigenous-populations">Against Indigenous Populations</h3>
+<p>He weakened the Brazilian Institute of the Environment and Renewable Natural Resources (IBAMA), the Institute for the Conservation of Biodiversity (ICMBio) and the government agency tasked with protecting Indigenous rights (FUNAI). The Brazilian government also halted the recognition of traditional Indigenous lands and issued regulations harmful to Indigenous people. Bolsonaro’s policies emboldened miners, loggers, land-grabbers and poachers, leading to devastating consequences for Indigenous people and the environment. Marcelo Xavier, appointed by Bolsonaro to preside over FUNAI, is accused of creating a climate of fear and intimidation within the agency.</p>
+<p><a href="https://www.hrw.org/news/2022/08/09/brazil-indigenous-rights-under-serious-threat">Brazil: Indigenous Rights Under Serious Threat (HRW)</a></p>
+<p><a href="https://www.survivalinternational.org/articles/3540-Bolsonaro">Summary of racist remarks against indigenous people (Survival International)</a></p>
+<blockquote class="blockquote">
+<p>“If I become President there will not be a centimeter more of Indigenous land.” — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><a href="https://www.theguardian.com/world/2020/jan/24/jair-bolsonaro-racist-comment-sparks-outrage-indigenous-groups">“Indians are undoubtedly changing … They are increasingly becoming human beings just like us.”</a> — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“The Indians do not speak our language, they do not have money, they do not have culture. They are native peoples. How did they manage to get 13% of the national territory?” — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“[Indigenous reserves] are an obstacle to agri-business. You can’t reduce Indigenous land by even a square meter in Brazil.” — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“In 2019 we’re going to rip up Raposa Serra do Sol [Indigenous Territory in Roraima, northern Brazil]. We’re going to give all the ranchers guns.” — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“If I’m elected, I’ll serve a blow to FUNAI (Brazil’s department for Indigenous affairs); a blow to the neck. There’s no other way. It’s not useful anymore.” — Jair Bolsonaro</p>
+</blockquote>
+</section>
+<section id="sexist-and-homophobic-remarks" class="level3">
+<h3 class="anchored" data-anchor-id="sexist-and-homophobic-remarks">Sexist and Homophobic Remarks</h3>
+<p><a href="https://www1.folha.uol.com.br/fsp/cotidian/ff1905200210.htm">Folha de São Paulo</a>, May 19, 2002:</p>
+<blockquote class="blockquote">
+<p>“I will not fight nor discriminate, but if I see two men kissing in the street, I’ll hit them.”</p>
+</blockquote>
+<p>He publicly claimed that Patricia Campos Mello, a reporter for Folha de Sao Paulo, offered sex in exchange for information regarding an investigative piece on the 2018 Brazilian presidential election. In response, Campos Mello sued Bolsonaro. <a href="https://edition.cnn.com/2022/06/29/americas/bolsonaro-court-order-compensation-sexist-remarks-intl-latam/index.html">A court ruled that Bolsonaro must pay “moral damages” of 35,000 reais to the journalist.</a></p>
+<p>He stated <a href="https://www.redetv.uol.com.br/superpop/videos/ultimos-programas/bolsonaro-diz-que-nao-pagaria-a-mulheres-o-mesmo-salario-dos-homens">he wouldn’t pay women the same salary as men</a>.</p>
+<p><a href="http://noticias.terra.com.br/brasil/polemicas-de-bolsonaro/">Bolsonaro said before Congress in 2011</a>:</p>
+<blockquote class="blockquote">
+<p>“If you like homosexuals, admit it. If your thing is homosexual love, admit it. But don’t let that cowardliness get into first grade.”</p>
+</blockquote>
+<p><a href="http://noticias.terra.com.br/brasil/polemicas-de-bolsonaro/">Bolsonaro told Playboy magazine in 2011 that he’d rather his child die than be gay</a>:</p>
+<blockquote class="blockquote">
+<p>“I would be incapable of loving a gay son.”</p>
+</blockquote>
+</section>
+<section id="the-policies-of-bolsonaro" class="level3">
+<h3 class="anchored" data-anchor-id="the-policies-of-bolsonaro">The Policies of Bolsonaro</h3>
+<p>Bolsonaro increasingly disengaged Brazil from the international sustainability agenda. He cancelled the country’s scheduled hosting of COP 25 in 2019, suspended the submission of further voluntary national reviews on the SDGs, and ditched most international collaboration on environmental conservation. Domestically, he abolished the Comissão Nacional para os Objetivos do Desenvolvimento Sustentável (CNODS, National Commission for the Sustainable Development Goals), created in October 2016 to coordinate SDG implementation between federal government agencies and civil society organisations. In April 2019 the Bolsonaro administration dissolved most public bodies that were not established by law but by decrees or ministerial orders — CNODS was terminated alongside about 500 other multi-stakeholder commissions and councils.</p>
+<p><em>Russo Lopes, G. and Bastos Lima, M. G. (2020) ‘Necropolitics in the Jungle: COVID-19 and the Marginalisation of Brazil’s Forest Peoples’. Bulletin of Latin American Research 39(S1): 92–97.</em></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/OWVrKNScCc0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Instead of bolstering the institutions of law and order so that they can restore calm and prosecute gang bosses, Bolsonaro argued the way to tackle violence was with more violence. He allowed more Brazilians to own and carry guns, encouraging them to confront criminals themselves, and sought to make it harder to punish police officers who kill suspects. (<a href="https://www.economist.com/leaders/2019/05/30/jair-bolsonaro-will-not-defeat-crime-in-brazil-by-tolerating-militias">The Economist</a>)</p>
+<section id="disastrous-response-to-the-2019-oil-spill" class="level4">
+<h4 class="anchored" data-anchor-id="disastrous-response-to-the-2019-oil-spill">Disastrous Response to the 2019 Oil Spill</h4>
+<p>Through its measures to reduce public spending in April 2019, the federal government had shut down the executive and support committees created in 2013 as part of the Contingency Plan for Oil Pollution Incidents. Both the delay in enforcing the contingency plan and the closure of its main bodies seriously affected federal authorities’ response, described by some as ‘government malfeasance’ (Brum, Campos-Silva and Oliveira, 2020). Mismanagement is clear, though perverse intentionality has never been evidenced.</p>
+<p><em>Soares, M. O. et al.&nbsp;(2020) ‘Oil Spill in South Atlantic (Brazil): Environmental and Governmental Disaster’. Marine Policy 115: 103879.</em></p>
+</section>
+<section id="brazil-returns-to-the-un-hunger-map" class="level4">
+<h4 class="anchored" data-anchor-id="brazil-returns-to-the-un-hunger-map">Brazil Returns to the UN Hunger Map</h4>
+<ul>
+<li><a href="https://documents.wfp.org/stellent/groups/public/documents/communications/wfp229328.pdf">WFP documentation</a></li>
+<li><a href="https://globalvoices.org/2022/08/30/why-the-un-added-brazil-to-the-hunger-map-once-again/">Why the UN added Brazil to the hunger map (Global Voices)</a></li>
+<li><a href="https://www.lemonde.fr/en/economy/article/2022/06/09/brazil-is-facing-the-return-of-hunger_5986229_19.html">Brazil faces the return of hunger (Le Monde)</a></li>
+</ul>
+<p>Agribusiness agents assassinated 430 indigenous people during 2021 according to CIMI (<a href="https://revistaperiferias.org/en/materia/cimi-the-missionary-council-for-indigenous-peoples/">The Missionary Council for Indigenous Peoples</a>). 345 territories burned in 2019, an 87% increase since 2018. 1,530 new pesticides were authorised by his government during 2019–2021.</p>
+<p>According to <a href="https://www.gov.br/inpe/pt-br">Instituto Nacional de Pesquisas Espaciais (INPE)</a>, land expropriation significantly increased, with fires almost doubling between 2018 and 2019.</p>
+<p><strong>Deforestation</strong>: Between 2019 and 2021, the surface equivalent of Belgium was razed in the Amazon forest according to satellite imagery. 20 environmentalists were assassinated in 2020 according to <em>Global Witness</em>.</p>
+<p>For the problem of Amazon destruction, Bolsonaro responded by <a href="https://www.theguardian.com/world/2019/aug/02/brazil-space-institute-director-sacked-in-amazon-deforestation-row">firing the head of the scientific body</a> that reports the data, which the president called “lies.” His appointed environment minister, Ricardo Salles, was known to relax environmental and logging restrictions so much he earned the nickname “Mr.&nbsp;Chainsaw” from some US authorities.</p>
+<p>Brazil’s position as one of the world’s largest economies fell from 7th place (2010–2014) to 13th. The minimum wage was adjusted below inflation levels.</p>
+</section>
+</section>
+<section id="on-the-amazon" class="level3">
+<h3 class="anchored" data-anchor-id="on-the-amazon">On the Amazon</h3>
+<p>Amazon deforestation is once again on the rise after Brazil successfully reduced its annual rate by 70 percent between 2005 and 2014 (Moutinho, Guerra and Azevedo-Ramos, 2016).</p>
+<p><em>Moutinho, P., Guerra, R. and Azevedo-Ramos, C. (2016) ‘Achieving Zero Deforestation in the Brazilian Amazon: What is Missing?’. Elementa: Science of the Anthropocene 4: 1–11.</em></p>
+<p><a href="https://journals.sagepub.com/doi/pdf/10.1177/0309816820971131">Bolsonaro’s neoliberal program (Capital &amp; Class)</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/brasil/e8motepc.bmp" class="img-fluid figure-img"></p>
+<figcaption>Illegal mining operations in the Amazon</figcaption>
+</figure>
+</div>
+<p><a href="https://www.nytimes.com/interactive/2022/08/02/world/americas/brazil-airstrips-illegal-mining.html">The Illegal Airstrips Bringing Toxic Mining to Brazil’s Indigenous Land (NYT)</a></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/IA-Rk_hdl4M" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/brasil/airstrip_in_the_amazon_rainforest-49-2000.jpg" class="img-fluid figure-img"></p>
+<figcaption>Illegal miners spread empty fuel canisters along an airstrip, making a landing impossible.</figcaption>
+</figure>
+</div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JojArKa_HLA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="firing-the-head-of-inpe-over-deforestation-data" class="level3">
+<h3 class="anchored" data-anchor-id="firing-the-head-of-inpe-over-deforestation-data">Firing the Head of INPE Over Deforestation Data</h3>
+<ul>
+<li><a href="https://www.science.org/content/article/brazilian-institute-head-fired-after-clashing-nation-s-president-over-deforestation">Brazilian institute head fired after clashing with president over deforestation data (Science)</a></li>
+<li><a href="https://www.science.org/content/article/deforestation-amazon-shooting-brazil-s-president-calls-data-lie">Deforestation in the Amazon is shooting up, but Brazil’s president calls the data ‘a lie’ (Science)</a></li>
+</ul>
+<p>INPE released a statement to “reaffirm its confidence in the quality of the data produced by DETER,” noting that it has consistently used a well-known method for 15 years. Official deforestation rates fell by 80% between 2004, when DETER became operational, and 2014. Since then, they have been trending up slightly.</p>
+</section>
+<section id="undermining-ibama-and-its-funding" class="level3">
+<h3 class="anchored" data-anchor-id="undermining-ibama-and-its-funding">Undermining IBAMA and Its Funding</h3>
+<p><a href="https://www.reuters.com/article/us-brazil-environment-ibama-exclusive-idUSKCN1VI14I">IBAMA funding cuts (Reuters)</a></p>
+</section>
+<section id="corruption" class="level3">
+<h3 class="anchored" data-anchor-id="corruption">Corruption</h3>
+<p>Bolsonaro acquired around 50 properties in cash: <a href="https://amp.theguardian.com/world/2022/aug/30/jair-bolsonaro-brazil-property-payments-cash-allegations">The Guardian</a></p>
+<p>Leonardo Sakamoto, a UOL columnist, <a href="https://noticias.uol.com.br/colunas/leonardo-sakamoto/2022/08/30/investigacao-aponta-que-familia-bolsonaro-e-grande-lavanderia-de-dinheiro.htm">wrote</a>: “You don’t need to be a financial genius to understand that the use of large sums of cash to buy property is a means of laundering resources of illegal origin.”</p>
+<p>His senator son, Flávio Bolsonaro, <a href="https://g1.globo.com/rj/rio-de-janeiro/noticia/2019/12/19/flavio-bolsonaro-pagou-r-638-mil-em-dinheiro-para-lavar-compra-de-imoveis-diz-mp.ghtml">paid 638,000 reais in cash</a> for two flats in Rio’s Copacabana neighbourhood. They never explained the origin of this money or why they decided to use cash instead of making an electronic transfer.</p>
+</section>
+<section id="covid-19" class="level3">
+<h3 class="anchored" data-anchor-id="covid-19">COVID-19</h3>
+<blockquote class="blockquote">
+<p>“because of my background as an athlete, I wouldn’t need to worry if I was infected by the virus. I wouldn’t feel anything or at the very worst it would be like a little flu or a bit of a cold.” — Jair Bolsonaro</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“the people will soon see that they were tricked by these governors and by the large part of the media when it comes to coronavirus.”</p>
+</blockquote>
+<p>On 28 April 2020, when a reporter pointed out that Brazil’s death toll had surpassed China’s, he replied:</p>
+<blockquote class="blockquote">
+<p>“So what? I’m sorry, but what do you want me to do?”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“the majority of Brazilians contract this virus and don’t notice a thing. Life goes on. Brazil needs to produce. You need to get the economy in gear.”</p>
+</blockquote>
+<p><a href="https://www.tandfonline.com/doi/abs/10.1080/17441692.2020.1795223">Governing COVID-19 without government in Brazil: Ignorance, neoliberal authoritarianism, and the collapse of public health leadership</a></p>
+</section>
+</section>
+<section id="operação-lava-jato" class="level2">
+<h2 class="anchored" data-anchor-id="operação-lava-jato">Operação Lava Jato</h2>
+<p><a href="https://en.wikipedia.org/wiki/Operation_Car_Wash">Operation Car Wash (Wikipedia)</a></p>
+<ul>
+<li><a href="https://www.brasilwire.com/sao-paulo-court-rules-lula-family-never-owned-triplex/">São Paulo court rules Lula family never owned triplex (Brasil Wire)</a></li>
+<li><a href="https://www.bbc.co.uk/programmes/p063dcss">BBC podcast on Lava Jato</a></li>
+<li><a href="https://www.brasilwire.com/white-house-admits-cia-involvement-in-latin-americas-war-on-corruption/">White House admits CIA involvement in Latin America’s war on corruption (Brasil Wire)</a></li>
+</ul>
+<p>Operation Car Wash is the infamous large-scale corruption investigation that began in Brazil in 2014. The operation initially focused on uncovering a money laundering scheme involving the state-owned oil company Petrobras, but it eventually expanded to investigate corruption across various sectors of Brazilian politics and business. The climax of <em>Lava Jato</em> was the conviction and imprisonment of Lula, the former president of Brazil, for allegedly accepting a triplex apartment in Guarujá from a company called OAS in exchange for contracts with Petrobras.</p>
+<p>Bolsonaro appointed Sergio Moro — the judge who put Lula in jail and prevented him from running in the 2018 election — as his “super justice minister” after his election. He also promised Moro a supreme court seat: <a href="https://www1.folha.uol.com.br/internacional/en/brazil/2019/05/bolsonaro-says-he-will-nominate-sergio-moro-to-the-supreme-court.shtml">Folha de S.Paulo</a>.</p>
+<p><a href="https://www.theatlantic.com/international/archive/2019/08/anti-corruption-crusades-paved-way-bolsonaro/596449/">How anti-corruption crusades paved the way for Bolsonaro (The Atlantic)</a></p>
+<p>It is now apparent that Moro was not acting as an impartial judge, but actively conspiring with the prosecution to ensure Lula was imprisoned. The prosecution presented evidence despite knowing it was weak; Moro gave the team tips on how to go after Lula and attack him in the press. The most recent of many explosive reports indicate prosecutors coordinated to put pressure on Brazil’s Supreme Court.</p>
+<ul>
+<li><a href="https://theintercept.com/2021/03/15/brazil-lula-sergio-moro-supreme-court/">The Intercept, March 2021</a></li>
+<li><a href="https://theintercept.com/2020/01/20/linha-do-tempo-vaza-jato/">The Intercept, timeline</a></li>
+</ul>
+<p>The Intercept Brasil also revealed that wiretapping on Lula’s phones was kept from the public; that there was a plot to <a href="https://theintercept.com/2019/07/09/brazil-car-wash-sergio-moro-venezuela-maduro/">leak information to the Venezuelan opposition</a> at the suggestion of Moro; and that chief prosecutor Deltan Dallagnol gave <a href="https://theintercept.com/2019/07/26/brazil-car-wash-deltan-dallagnol-paid-speaking/">paid lectures</a> to the very same banks he would later be tasked with investigating.</p>
+<p>Moro had accelerated court dates to ensure that Lula was sentenced and that an appellate court ruling could come in just in time for the former president to be barred from running in the 2018 elections. The rulings rendered Lula ineligible for the presidency — and in April 2018, he was arrested on Moro’s orders. One of Moro’s last acts in his judgeship was to publicly release plea-bargain testimony from one of Lula’s former allies, Antonio Palocci, six days before the first round of elections.</p>
+<p>“In a democratic and accusatory penal case, the role of prosecution must not be mixed with that of judgment,” said Minister Gilmar Mendes. The chats published by The Intercept had <a href="https://theintercept.com/2019/06/09/brazil-lula-operation-car-wash-sergio-moro/">documented prohibited collaboration</a> between the prosecutors and Moro, which Mendes said revealed lawbreaking: “Without a doubt, from the content of the conversations divulged, we can highlight manifestly illegal situations.”</p>
+<p>On March 8, just a day before the judges publicly deliberated Moro’s bias, Supreme Court Minister Edson Fachin made a surprise decision throwing out all the Car Wash convictions against Lula — on the grounds that Moro’s mandate at the court in Curitiba was to judge crimes related to Petrobras, and so Lula’s case fell outside his purview. Many critics saw this as a last-ditch effort to spare Moro the embarrassment of having the court rule against him on bias grounds. The remaining judges decided to continue their deliberations regardless — and finally ruled.</p>
+<p>Car Wash prosecutors, who long insisted that they were apolitical, were in fact internally plotting how to prevent the return to power of Lula: <a href="https://theintercept.com/2019/06/09/brazil-car-wash-prosecutors-workers-party-lula">The Intercept</a>.</p>
+<section id="the-telegram-leaks" class="level3">
+<h3 class="anchored" data-anchor-id="the-telegram-leaks">The Telegram Leaks</h3>
+<p><a href="https://theintercept.com/2019/06/09/brazil-lula-operation-car-wash-sergio-moro/">The Intercept, June 9, 2019</a></p>
+<p>In the leaked files, conversations between lead prosecutor Deltan Dallagnol and then-presiding Judge Sergio Moro reveal that Moro offered strategic advice to prosecutors and passed on tips for new avenues of investigation. In Brazil, as in the United States, judges are required to be impartial and are barred from secretly collaborating with one side in a case.</p>
+<p>Lula was accused of having received a beachfront triplex apartment from a contractor as a kickback for facilitating multimillion-dollar contracts with Petrobras.</p>
+<blockquote class="blockquote">
+<p>Dallagnol expressed his increasing doubts over two key elements of the prosecution’s case: whether the triplex was in fact Lula’s and whether it had anything to do with Petrobras.</p>
+</blockquote>
+<p>Selected messages from the leaked chats:</p>
+<ul>
+<li>After a month of silence from the Car Wash task force, Moro asked: “Hasn’t it been a long time without an operation?” In another instance, Moro said, “You cannot make that kind of mistake now.”</li>
+<li>“What do you think of these crazy statements from the PT national board? Should we officially rebut?” — Moro, using “we,” showing he viewed himself and the Car Wash prosecutors as united in the same cause.</li>
+<li>December 7, 2015 — Moro informally passed on an investigative tip to prosecutors: “Source informed me that the contact person is annoyed at having been asked to issue draft property transfer deeds for one of the ex-president’s children. Apparently the person would be willing to provide the information. I’m therefore passing it along. The source is serious.” “Thank you!! We’ll make contact,” Dallagnol promptly replied.</li>
+</ul>
+<p>Because they had no proof that Lula owned a triplex and were looking for one, they seized on an O Globo article:</p>
+<ul>
+<li>Dallagnol messaged the group: “I’m so horny for this O GLOBO article from 2010. I’m going to kiss whichever one of you found this.”</li>
+</ul>
+<blockquote class="blockquote">
+<p>The <a href="https://oglobo.globo.com/politica/caso-bancoop-triplex-do-casal-lula-esta-atrasado-3041591">article</a>, headlined “Bancoop Case: Lula Couple’s Triplex Is Delayed,” was the first to publicly mention Lula owning an apartment in Guarujá. It does not mention OAS or Petrobras and covers instead the bankruptcy of the construction cooperative behind the development. There is also a telling inconsistency: the article puts Lula’s penthouse in Tower B, while the prosecutors alleged he owned the beachfront triplex in Tower A — a different building. Car Wash prosecutors used the article as evidence but indicted and convicted Lula on a triplex in a different building, demonstrating imprecision on the central point of their case.</p>
+<p>In a now infamous moment, Dallagnol presented a typo-laden PowerPoint presentation that showed “Lula” written in a blue bubble surrounded by 14 other bubbles containing everything from “Lula’s reaction” and “expressiveness” to “illicit enrichment” and “bribeocracy.” All arrows pointed back to Lula, whom they characterised as the mastermind behind a sprawling criminal enterprise.</p>
+</blockquote>
+<ul>
+<li>Moro responded: “Definitely, the criticisms of your presentation are disproportionate. Stand firm.”</li>
+<li>“Maybe, tomorrow, you should prepare a press release to point out inconsistencies in Lula’s arguments. The defense already put on their little show.” — Moro. Prosecutors did as he asked.</li>
+</ul>
+<p>Despite repeatedly using the phrase “alleged messages,” Moro <a href="https://www1.folha.uol.com.br/poder/2019/06/foi-descuido-meu-diz-moro-sobre-mensagem-a-lava-jato-com-pistas-contra-lula.shtml">acknowledged the authenticity</a> of at least one of the conversations. Questioned about having passed on an investigative lead to prosecutors on December 7, 2015, Moro said it was an “oversight on my part.”</p>
+<section id="flávio-bolsonaro" class="level4">
+<h4 class="anchored" data-anchor-id="flávio-bolsonaro">Flávio Bolsonaro</h4>
+<p><a href="https://theintercept.com/2019/07/21/in-secret-chats-brazils-chief-corruption-prosecutor-worried-that-bolsonaros-justice-minister-would-protect-bolsonaros-senator-son-flavio-from-scandals/">The Intercept, July 2019</a></p>
+<p>Senator Flávio Bolsonaro is accused of links to paramilitary gangs in Rio de Janeiro, stemming from a corruption scandal involving his former driver, Fabricio Queiroz, who is accused of transferring more than $1.5 million to Flávio’s account — at least one of which ended up in the account of Jair Bolsonaro’s wife, Michelle. Queiroz is also alleged to have connections to paramilitary gangs, and Flávio is accused of employing family members of one of the gang leaders. Deep worries were expressed that broader and more serious allegations might not be investigated, because Moro was concerned about angering the president.</p>
+<p>Lava Jato prosecutors mocking the death of Lula’s wife: <a href="https://noticias.uol.com.br/politica/ultimas-noticias/2019/08/27/procuradora-da-lava-jato-pede-desculpas-a-lula-por-ironizar-morte-de-marisa.htm">UOL Notícias</a></p>
+<p>Each time Lula’s case made its way to the highest court, members of the military, both active and retired, <a href="http://agenciabrasil.ebc.com.br/en/politica/noticia/2018-04/amnesty-international-condemns-statement-brazil-army-commandant">warned the court</a> in quite explicit terms that they were being watched. Bolsonaro’s son Eduardo warned that adverse Supreme Court decisions <a href="https://www.reuters.com/article/us-brazil-election/brazils-right-wing-candidate-scolds-son-for-threat-to-shut-top-court-idUSKCN1MW13C">could be addressed</a> by “sending a soldier and a corporal” to the doors of the court.</p>
+<p><a href="https://theintercept.com/2020/03/12/united-states-justice-department-brazil-car-wash-lava-jato-international-treaty/">US Justice Department involvement in Car Wash (The Intercept)</a></p>
+</section>
+</section>
+</section>
+<section id="epilogue" class="level2">
+<h2 class="anchored" data-anchor-id="epilogue">Epilogue</h2>
+<p>Lula won the 2022 election and returned to the presidency in January 2023. Among his first acts:</p>
+<ul>
+<li><a href="https://amazonwatch.org/news/2023/0105-in-sweeping-moves-president-lula-reestablished-the-amazon-fund-and-signed-environmental-executive-orders">In sweeping moves, Lula reestablished the Amazon Fund and signed environmental executive orders (Amazon Watch)</a></li>
+<li><a href="https://www.bbc.com/news/world-latin-america-65433284">Brazil’s Lula recognises six new indigenous reserves (BBC)</a>: <em>The lands — including a vast area of Amazon rainforest — cover about 620,000 hectares (1.5m acres).</em></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <category>political-economy</category>
+  <guid>https://nightowl97.github.io/personal_blog/posts/brasil/</guid>
+  <pubDate>Tue, 01 Nov 2022 23:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Book notes - L’idéologie arabe contemporaine (by Abdallah Laroui)</title>
   <link>https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/</link>
   <description><![CDATA[ 
@@ -663,6 +1516,188 @@
   <pubDate>Wed, 17 Aug 2022 20:30:00 GMT</pubDate>
 </item>
 <item>
+  <title>Electrochemistry Basics</title>
+  <link>https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="balancing-redox-half-reactions" class="level2">
+<h2 class="anchored" data-anchor-id="balancing-redox-half-reactions">Balancing Redox Half-Reactions</h2>
+<ul>
+<li>Balancing the main element</li>
+<li>Balancing oxygen by adding water molecules <img src="https://latex.codecogs.com/png.latex?H_2O"></li>
+<li>Balancing hydrogen with Hydronium <img src="https://latex.codecogs.com/png.latex?H%5E+"></li>
+</ul>
+<p>The <strong>anode</strong> <img src="https://latex.codecogs.com/png.latex?%5Crightarrow"> where <strong>oxidation</strong> happens The <strong>cathode</strong> <img src="https://latex.codecogs.com/png.latex?%5Crightarrow"> where <strong>reduction</strong> happens</p>
+<p>There is no link between electrode polarity and whether it’s an anode or cathode. Generator (battery or accumulator) <img src="https://latex.codecogs.com/png.latex?%5Crightarrow"> + is the cathode, Electrolysis <img src="https://latex.codecogs.com/png.latex?%5Crightarrow"> + is the anode</p>
+</section>
+<section id="reference-electrodes" class="level2">
+<h2 class="anchored" data-anchor-id="reference-electrodes">Reference Electrodes</h2>
+<p>Because only potential <em>differences</em> are measured, reference electrodes are used.</p>
+<p>The ideal <em>Standard Hydrogen Electrode (SHE)</em> has a 0V potential at all temperatures, it’s defined by the couple <img src="https://latex.codecogs.com/png.latex?H%5E+%20/%20H_2"> (STD: 1 bar pressure perfect gas and a <img src="https://latex.codecogs.com/png.latex?H%5E+"> concentration of <img src="https://latex.codecogs.com/png.latex?1%5C%20%5Ctext%7Bmol.L%7D%5E%7B-1%7D">). This redox reaction occurs at a platinized <a href="https://en.wikipedia.org/wiki/Platinum">platinum</a> electrode. The electrode is dipped in an acidic solution and pure hydrogen gas is bubbled through it. The concentration of both the reduced form and oxidized form is maintained at unity.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A2%20H%5E+_%7B(aq)%7D%20+%202%20e%5E%E2%88%92%20%E2%86%92%20H_%7B2(g)%7D%0A"></p>
+<p>The <em>Normal Hydrogen Electrode</em><sup>1</sup> is the closest real electrode to the SHE with identical pressure and concentration. Its potential is <img src="https://latex.codecogs.com/png.latex?6%5Ctext%7BmV%7D/">SHE, the concentration needs to be slightly higher to approximate SHE even further.</p>
+<p><em>Calomel Electrode:</em></p>
+<p>The calomel electrode is a type of half-cell in which the electrode is mercury coated with calomel (<img src="https://latex.codecogs.com/png.latex?%5Ctext%7BHg%7D_2%5Ctext%7BCl%7D_2">) and the electrolyte is a solution of potassium chloride and saturated calomel.</p>
+<p>The electrode reaction is:</p>
+<p><img src="https://www.corrosionpedia.com/images/uploads/bc90e3a5-fdc1-4ce6-ae96-b0d21e28203f.png" class="img-fluid"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BHg%7D%5E%7B2+%7D_2%20+%202e%5E-%20%5Cleftrightharpoons%202%5Ctext%7BHg(l)%7D,%20%5Cqquad%20E%5E0_%7B%5Ctext%7BHg%7D%5E%7B2+%7D_2%20/%20%5Ctext%7BHg%7D%7D%20=%20+0.80%5Ctext%7BV%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BHg%7D_2%5Ctext%7BCl%7D_2%20+%202e%5E-%20%5Cleftrightharpoons%202%5Ctext%7BHg(l)%7D%20+%202%20%5Ctext%7BCl%7D%5E-,%20%5Cqquad%20E%5E0_%7B%5Ctext%7BHg%7D_2%5Ctext%7BCl%7D_2%20/%20%5Ctext%7BHg(l)%7D,%5Ctext%7BCl%7D%5E-%7D%20=%20+0.27%5Ctext%7BV%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BHg%7D%5E%7B2+%7D_2%20+%202%5Ctext%7BHg(l)%7D%20+%202%20%5Ctext%7BCl%7D%5E-%20%5Cleftrightharpoons%20%5Ctext%7BHg%7D_2%5Ctext%7BCl%7D_2%20+%202%5Ctext%7BHg(l)%7D,%20%5Cqquad%20E%5E0_%7B%5Ctext%7BHg%7D_2%5Ctext%7BCl%7D_2%20/%20%5Ctext%7BHg%7D%5E%7B2+%7D_2,%20%5Ctext%7BCl%7D%5E-%7D%20=%20+0.53%5Ctext%7BV%7D%0A"></p>
+</section>
+<section id="nernst-equation" class="level2">
+<h2 class="anchored" data-anchor-id="nernst-equation">Nernst Equation</h2>
+<p>For this half equation:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ax%20%5Ctext%7BOx%7D%20+%20n%20e%5E-%20%5Cleftrightharpoons%20y%20%5Ctext%7BRed%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AE%20=%20E_0%20+%20%5Cfrac%7BRT%7D%7BnF%7D%5Cln%5Cleft(%5Cfrac%7B%5B%5Ctext%7BOx%7D%5D%7D%7B%5B%5Ctext%7BRed%7D%5D%7D%5Cright)%0A"></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?E">: Reduction potential at temperature of interest / Fermi level</li>
+<li><img src="https://latex.codecogs.com/png.latex?E%5E0">: Standard half-cell reduction potential</li>
+<li><img src="https://latex.codecogs.com/png.latex?n">: Number of electrons exchanged</li>
+</ul>
+</section>
+<section id="cyclic-voltammetry" class="level2">
+<h2 class="anchored" data-anchor-id="cyclic-voltammetry">Cyclic Voltammetry</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NG1x-aiHdW4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>The peak happens because the rising Fermi level of the electrode allows it to give (and falling <img src="https://latex.codecogs.com/png.latex?E_F"> allows it to take <img src="https://latex.codecogs.com/png.latex?e%5E-">) electrons from the solution.</p>
+<p>Keep in mind the metal electrode’s Fermi level will match the solution’s Fermi level which is defined as <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7B2%7D">(HOMO + LUMO) almost instantaneously after putting the electrode in the solution.</p>
+<p>The peak is not a plateau because the reaction is limited by mass transport — the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.</p>
+</section>
+<section id="levich-treatment" class="level2">
+<h2 class="anchored" data-anchor-id="levich-treatment">Levich Treatment</h2>
+<p>Can be used to find the diffusion constant <img src="https://latex.codecogs.com/png.latex?D"> for a given species as a function of the rotation rate of the rotating disk electrode<sup>2</sup>. Sigmoidal voltammograms are expected with a steady-state limiting current <img src="https://latex.codecogs.com/png.latex?I_L">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AI_L%20=%200.201%20n%20F%20A%20D%5E%5Cfrac%7B2%7D%7B3%7D%5Comega%5E%5Cfrac%7B1%7D%7B2%7D%5Cnu%5E%5Cfrac%7B-1%7D%7B6%7D%20C%0A"></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?n">: Number of moles of electrons</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Comega">: Rotation rate in rpm (for <img src="https://latex.codecogs.com/png.latex?rad/s">)</li>
+<li><img src="https://latex.codecogs.com/png.latex?D">: Diffusion coefficient <img src="https://latex.codecogs.com/png.latex?cm%5E2/s"></li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cnu">: Kinematic viscosity in <img src="https://latex.codecogs.com/png.latex?cm%5E2/s"></li>
+<li><img src="https://latex.codecogs.com/png.latex?C">: Bulk analyte concentration in <img src="https://latex.codecogs.com/png.latex?mol/cm%5E3"></li>
+</ul>
+</section>
+<section id="koutecky-levich-treatment" class="level2">
+<h2 class="anchored" data-anchor-id="koutecky-levich-treatment">Koutecky-Levich Treatment</h2>
+<p>The Koutecký-Levich analysis allows researchers to obtain kinetic parameters for a redox reaction such as the standard reaction constant<sup>3</sup> <em>k</em>° and the symmetry factor α.</p>
+<p>The <em>first step</em> is to plot at a fixed potential the values of the current at the various rotation rates (Fig. 1a). The value of the potential is chosen before the current plateau. The <em>second step</em> is to plot the inverse of the current values as a function of the inverse of the square root of the rotation speed (Fig. 1b). This is what is called the Koutecký-Levich plot.</p>
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/kouteckylevich_fig1.gif" class="img-fluid"></p>
+<p><em><strong>Figure 1:</strong> <strong>(a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>.</em></p>
+<p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> — the current that you would obtain if there was absolutely no limitation by mass transport.</p>
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/kouteckylevich_fig2.gif" class="img-fluid"></p>
+<p><em><strong>Figure 2: (a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>. This is carried out at various potentials to obtain the Tafel curve shown in <strong>(e)</strong>.</em></p>
+<p>Performing these three steps at several potential values (Fig. 2a, b, c, d) allows you to plot the Tafel curve (Fig. 2e). The slope of this curve gives the value of the symmetry factor <img src="https://latex.codecogs.com/png.latex?%5Calpha_r"> while the current value at <img src="https://latex.codecogs.com/png.latex?E%20=%20E%C2%B0"> gives the value of the standard kinetic constant <img src="https://latex.codecogs.com/png.latex?k%C2%B0">, given the concentration of the reactive species and the number of electrons involved in the redox reaction.</p>
+</section>
+<section id="impedance-spectroscopy" class="level2">
+<h2 class="anchored" data-anchor-id="impedance-spectroscopy">Impedance Spectroscopy</h2>
+<p><em>Some resources:</em></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Pk7SVcRIWac" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/5puDQjCl2pk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GM0o1BbbXy8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kexDd0kFAK8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system — the AC part of the signal is too big and becomes non-linear.</p>
+<p>Sometimes the chosen AC amplitude is good for some frequency ranges but not for others, meaning you have to make different measurements with different AC amplitudes.</p>
+<p>Electrochemical systems are modeled using equivalent circuits (with basic R, L, C components or others like CPE: Constant Phase Element).</p>
+<section id="some-basic-bodenyquist-plots" class="level3">
+<h3 class="anchored" data-anchor-id="some-basic-bodenyquist-plots">Some Basic Bode/Nyquist Plots</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 1.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 2.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>The peak of a semi-circle (parallel RC) corresponds to the time constant of the system <img src="https://latex.codecogs.com/png.latex?%5Comega%20=%20%5Cfrac%7B1%7D%7B%5Ctau%7D%20=%20%5Cfrac%7B1%7D%7BRC%7D"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 3.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="randles-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="randles-circuit">Randles Circuit</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 4.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?R_e">: Models the bulk electrolyte resistance</li>
+<li><img src="https://latex.codecogs.com/png.latex?R_t">: Charge transfer resistance at the electrode-electrolyte interface</li>
+<li><img src="https://latex.codecogs.com/png.latex?C_d">: Double-layer capacitance (charge build-up at the interface)</li>
+<li><img src="https://latex.codecogs.com/png.latex?W">: Models slow diffusion processes (Warburg impedance)</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/rElEJ2UkGU0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kexDd0kFAK8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</section>
+<section id="electrode-kinetics" class="level2">
+<h2 class="anchored" data-anchor-id="electrode-kinetics">Electrode Kinetics</h2>
+<section id="butler-volmer" class="level3">
+<h3 class="anchored" data-anchor-id="butler-volmer">Butler-Volmer</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aj%20=%20j_0%20%5Cleft%5C%7Be%5E%7B%5Cleft(%5Cfrac%7B%5Calpha_a%20z%20F%7D%7BRT%7D(E-E_%7Beq%7D)%5Cright)%7D%20-%20e%5E%7B%5Cleft(-%5Cfrac%7B%5Calpha_c%20z%20F%7D%7BRT%7D(E-E_%7Beq%7D)%5Cright)%7D%5Cright%5C%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aj%20=%20j_0%20%5Cleft%5C%7Be%5E%7B%5Cleft(%5Cfrac%7B%5Calpha_a%20z%20F%7D%7BRT%7D%5Ceta%5Cright)%7D%20-%20e%5E%7B%5Cleft(-%5Cfrac%7B%5Calpha_c%20z%20F%7D%7BRT%7D%5Ceta%5Cright)%7D%5Cright%5C%7D%0A"></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?E">: Electrode potential</li>
+<li><img src="https://latex.codecogs.com/png.latex?E_%7Beq%7D">: Equilibrium potential</li>
+<li><img src="https://latex.codecogs.com/png.latex?z">: Number of electrons involved in the electrode reaction</li>
+</ul>
+</section>
+<section id="tafel" class="level3">
+<h3 class="anchored" data-anchor-id="tafel">Tafel</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta%20=%20A%20%5Clog%5Cleft(%5Cfrac%7Bj%7D%7Bj_0%7D%5Cright)%0A"></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Ceta">: Overpotential</li>
+<li><img src="https://latex.codecogs.com/png.latex?A">: Tafel slope</li>
+<li><img src="https://latex.codecogs.com/png.latex?j">: Current density <img src="https://latex.codecogs.com/png.latex?(A/m%5E2)"></li>
+<li><img src="https://latex.codecogs.com/png.latex?j_0">: <a href="https://en.wikipedia.org/wiki/Exchange_current_density">Exchange current density</a></li>
+</ul>
+<p>The Tafel equation is an approximation of the Butler-Volmer equation at high overpotentials <img src="https://latex.codecogs.com/png.latex?(%5Clvert%5Ceta%5Crvert%20%3E%200.1%20V)">. It assumes that the concentrations at the electrode are practically equal to the concentrations in the bulk electrolyte, allowing the current to be expressed as a function of potential only. In other words, it assumes that the electrode mass transfer rate is much greater than the reaction rate, and that the reaction is dominated by the slower chemical reaction rate. Also, at a given electrode the Tafel equation assumes that the reverse half reaction rate is negligible compared to the forward reaction rate.</p>
+<section id="supporting-electrolyte" class="level4">
+<h4 class="anchored" data-anchor-id="supporting-electrolyte">Supporting Electrolyte</h4>
+<p>When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution — this artificially added salt is called supporting electrolyte. The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.</p>
+<p>A negligible electric field provides two advantages for electroanalysis:</p>
+<ul>
+<li>The voltage due to the resistance of the electrolyte when the cell draws current (“ohmic drop”) is minimal. Therefore, the potential difference applied across the electrochemical cell is localized at the electrode–electrolyte interfaces, and so the activation overpotential perceived by the redox couple at this interface is almost exactly proportional to the applied cell voltage. The kinetic behavior of the electrochemical cell then has no explicit dependence on the magnitude of the drawn current.</li>
+<li>The contribution of migration to the transport of charged chemical species is negligible compared to the contribution of diffusion (and of convection, in a forced flow). Therefore the transport properties of the system are linearized, and they do not depend on the magnitude of the drawn current.</li>
+</ul>
+<p>Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven — such as electrolysis, electrodeposition, batteries, and fuel cells — current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.</p>
+</section>
+<section id="scan-rate-influence" class="level4">
+<h4 class="anchored" data-anchor-id="scan-rate-influence">Scan Rate Influence</h4>
+<p>The scan rate of the experiment controls how fast the applied potential is scanned. Faster scan rates lead to a decrease in the size of the diffusion layer; as a consequence, higher currents are observed.<sup>4</sup> For electrochemically reversible electron transfer processes involving freely diffusing redox species, the Randles–Ševčík equation describes how the peak current <img src="https://latex.codecogs.com/png.latex?i_p"> (A) increases linearly with the square root of the scan rate <img src="https://latex.codecogs.com/png.latex?%5Cupsilon"> (V s<img src="https://latex.codecogs.com/png.latex?%5E%7B-1%7D">), where <img src="https://latex.codecogs.com/png.latex?n"> is the number of electrons transferred, <img src="https://latex.codecogs.com/png.latex?A"> (cm<img src="https://latex.codecogs.com/png.latex?%5E2">) is the electrode surface area, <img src="https://latex.codecogs.com/png.latex?D_0"> (cm<img src="https://latex.codecogs.com/png.latex?%5E2"> s<img src="https://latex.codecogs.com/png.latex?%5E%7B-1%7D">) is the diffusion coefficient of the oxidized analyte, and <img src="https://latex.codecogs.com/png.latex?C%5E0"> (mol cm<img src="https://latex.codecogs.com/png.latex?%5E%7B-3%7D">) is the bulk concentration of the analyte.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ai_p%20=%200.446%5C,%20nFAC%5E0%20%5Cleft(%5Cfrac%7BnF%5Cnu%20D_0%7D%7BRT%7D%5Cright)%5E%7B%5Cfrac%7B1%7D%7B2%7D%7D%0A"></p>
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Debatable — “normal” is the old name for “standard” in France.↩︎</p></li>
+<li id="fn2"><p>Bard, Allen J.; Larry R. Faulkner (2000). <em>Electrochemical Methods: Fundamentals and Applications</em> (2nd ed.). Wiley. p.&nbsp;336.↩︎</p></li>
+<li id="fn3"><p>In theory, the Koutecký-Levich analysis only works for redox reactions with a standard kinetic constant <img src="https://latex.codecogs.com/png.latex?k%C2%B0"> smaller or equal to several <img src="https://latex.codecogs.com/png.latex?10%5E2"> cm s<img src="https://latex.codecogs.com/png.latex?%5E%7B-1%7D">, that is to say, for sluggish reactions. In practice, most reactions are neither sluggish nor rapid.↩︎</p></li>
+<li id="fn4"><p>For a review see: Elgrishi, N. et al.&nbsp;<em>J. Chem. Educ.</em> 2018, 95, 197–206.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>electrochemistry</category>
+  <category>notes</category>
+  <guid>https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/</guid>
+  <pubDate>Fri, 15 Oct 2021 22:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Local Gauge Invariance</title>
   <link>https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/local-gauge-invariance.html</link>
   <description><![CDATA[ 
@@ -721,8 +1756,8 @@
 </section>
 
  ]]></description>
+  <category>physics</category>
   <category>gauge theory</category>
-  <category>quantum field theory</category>
   <category>electromagnetism</category>
   <category>quantum electrodynamics</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/local-gauge-invariance.html</guid>
