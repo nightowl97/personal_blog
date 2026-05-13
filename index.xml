@@ -6,14 +6,14 @@
       version="2.0">
 <channel>
 <title>Youssef Kharchouf</title>
-<link>https://nightowl97.github.io/personal_blog/</link>
-<atom:link href="https://nightowl97.github.io/personal_blog/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://kharchouf.com/</link>
+<atom:link href="https://kharchouf.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Youssef Kharchouf&#39;s personal notes</description>
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Sat, 09 May 2026 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Lectures notes on the Geometrical Anatomy of Theoretical Physics</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/</link>
+  <link>https://kharchouf.com/posts/geometrical-anatomy/</link>
   <description><![CDATA[ 
 
 
@@ -28,7 +28,7 @@
 <h3 class="anchored" data-anchor-id="structure-of-the-course">Structure of the Course</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Screenshot_from_2021-11-07_01-56-56.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Screenshot_from_2021-11-07_01-56-56.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -80,7 +80,7 @@
 <p><img src="https://latex.codecogs.com/png.latex?x%20=%20y%20%5Ciff%20(x%20%5Csubseteq%20y)%5C%20%5Cland%5C%20(y%20%5Csubseteq%20x)"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -222,12 +222,12 @@
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>We see a coarser <img src="https://latex.codecogs.com/png.latex?M"> through the equivalence relation.</p>
@@ -235,18 +235,18 @@
 <p><strong>Remark.</strong> Due to the axiom of choice, there exists a complete set of representatives for <img src="https://latex.codecogs.com/png.latex?%5Csim">, i.e.&nbsp;a set <img src="https://latex.codecogs.com/png.latex?R"> such that <img src="https://latex.codecogs.com/png.latex?R%5Ccong%20M/%5Csim">.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Remark.</strong> This could be inconsistent because changing the representatives could change the class depending on how the map is defined, which leads to ill-defined maps.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -271,12 +271,12 @@
 <p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?%5Csim"> on <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BN%7D%5Ctimes%5Cmathbb%7BN%7D">: <img src="https://latex.codecogs.com/png.latex?(m,n)%20%5Csim%20(p,%20q)%20:%5Ciff%20m%20+%20q%20=%20p%20+%20n"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 6.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -287,12 +287,12 @@
 <p>Embedding of <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BZ%7D"> in <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BQ%7D">:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?+_%5Cmathbb%7BQ%7D%20:%20%5Cmathbb%7BQ%7D%5Ctimes%5Cmathbb%7BQ%7D%5Clongrightarrow%20%5Cmathbb%7BQ%7D"> and <img src="https://latex.codecogs.com/png.latex?%5Ccdot_%5Cmathbb%7BQ%7D%20:%20%5Cmathbb%7BQ%7D%5Ctimes%5Cmathbb%7BQ%7D%5Clongrightarrow%20%5Cmathbb%7BQ%7D">:</p>
@@ -362,7 +362,7 @@
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 10.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 10.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <ol start="3" type="1">
@@ -374,7 +374,7 @@
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <section id="ii.ii-construction-of-new-topologies-from-given-ones" class="level3">
@@ -385,19 +385,19 @@
 <p>is a topology on <img src="https://latex.codecogs.com/png.latex?N">, called the induced (subset) topology.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D,%20%5Cmathcal%7BO%7D_%7Bst.%7D)">, <img src="https://latex.codecogs.com/png.latex?N%20=%20%5B-1,%201%5D%20%5Ccoloneqq%20%5Cleft%5C%7B%20x%20%5Cin%20%5Cmathbb%7BR%7D%5C%20%5Cbig%7C%5C%20-1%20%5Cleq%20x%20%5Cleq%201%5Cright%5C%7D"></p>
 <p>A subset can be not open with respect to a topology and yet be open within the induced topology on a subset.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 14.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 14.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is a topological space. <img src="https://latex.codecogs.com/png.latex?C%20%5Csubseteq%20M"> is called <em>closed</em> if <img src="https://latex.codecogs.com/png.latex?M%5Cbackslash%20C"> is open.</p>
@@ -411,13 +411,13 @@
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 15.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 15.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Product topology:</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 16.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 16.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -432,7 +432,7 @@
 <p><img src="https://latex.codecogs.com/png.latex?%5Cforall%20%5Cepsilon%3E0:%5Cquad%20%5Cexists%20N%5Cin%20%5Cmathbb%7BN%7D:%5Cquad%20%5Cforall%20n%5Cgt%20N:%5Cqquad%20%5CVert%20q(n)%20-%20a%20%5CVert%20%5Clt%20%5Cepsilon"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 17.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 17.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -460,39 +460,39 @@
 <p><strong>Remark.</strong> Separation axioms get progressively stronger: <a href="https://en.wikipedia.org/wiki/History_of_the_separation_axioms">T1, T2, T2.5, T3, T4, T5, T6</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 18.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 18.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 19.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 19.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 20.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 20.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Examples.</strong> The interval <img src="https://latex.codecogs.com/png.latex?%5B0,%201%5D"> is compact. <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D"> is not compact (construct a cover that has no finite subcover).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 21.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 21.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Theorem.</strong> If <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M)"> and <img src="https://latex.codecogs.com/png.latex?(N,%20%5Cmathcal%7BO%7D_N)"> are compact topological spaces, then <img src="https://latex.codecogs.com/png.latex?(M%5Ctimes%20N,%20%5Cmathcal%7BO%7D_%7BM%5Ctimes%20N%7D)"> is again compact.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 22.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 22.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 23.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 23.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 24.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 24.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Theorem.</strong> Let <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D_M)"> be a Hausdorff topological space. Then it is paracompact if and only if every open cover admits a partition of unity subordinate to that cover.</p>
@@ -505,7 +505,7 @@
 <p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?(%5Cmathbb%7BR%7D,%20%5Cmathcal%7BO%7D_%5Ctext%7Bstd%7D)">:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 25.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 25.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -522,12 +522,12 @@
 <p><strong>Example.</strong> <img src="https://latex.codecogs.com/png.latex?S%20:=%20%5Cleft%5C%7B%5Cleft(x,%20%5Csin%5Cleft(%5Cfrac%7B1%7D%7Bx%7D%5Cright)%5Cright)%20%5Cbigg%7C%5C%20x%20%5Cin%20(0,1%5D%5Cright%5C%7D%5Ccup%20%5Cleft%5C%7B(0,0)%5Cright%5C%7D"> is connected but not path-connected.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 26.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 26.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 27.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 27.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -535,12 +535,12 @@
 <h3 class="anchored" data-anchor-id="ii.viii-homotopic-curves-and-the-fundamental-group">II.VIII Homotopic Curves and the Fundamental Group</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 28.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 28.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 29.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 29.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?(M,%20%5Cmathcal%7BO%7D)"> is a topological space. For every <img src="https://latex.codecogs.com/png.latex?p%20%5Cin%20M"> we define a space of loops on <img src="https://latex.codecogs.com/png.latex?p">:</p>
@@ -549,7 +549,7 @@
 <p><img src="https://latex.codecogs.com/png.latex?(%5Cgamma%20*%20%5Cdelta)(%5Clambda)%20:=%20%5Cbegin%7Bcases%7D%20%5Cgamma(2%5Clambda)%20&amp;%200%5Cleq%5Clambda%5Cleq%5Ctfrac%7B1%7D%7B2%7D%5C%5C%20%5Cdelta(2%5Clambda%20-%201)%20&amp;%20%5Ctfrac%7B1%7D%7B2%7D%5Cleq%20%5Clambda%20%5Cleq%201%20%5Cend%7Bcases%7D"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/geometrical-anatomy/Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.</p>
@@ -587,12 +587,12 @@
   <category>topology</category>
   <category>set theory</category>
   <category>notes</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/</guid>
+  <guid>https://kharchouf.com/posts/geometrical-anatomy/</guid>
   <pubDate>Sat, 09 May 2026 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Morocco’s Wage Landscape: An Analysis of 1.6 Million Employees</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/cnss-analysis/</link>
+  <link>https://kharchouf.com/posts/cnss-analysis/</link>
   <description><![CDATA[ 
 
 
@@ -649,7 +649,7 @@
 <p>The gap between the mean (6,279 DH) and the median (3,538 DH) is a signature of a right-skewed distribution: a relatively small number of very high earners pulls the mean well above what most workers actually take home. More than half of formal-sector employees earn under 3,538 DH per month.</p>
 <p>The <strong>Gini coefficient is 0.4857</strong> — classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong> — meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
 <div class="column-screen-inset" style="text-align: center;">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/inequality_analysis.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="https://kharchouf.com/posts/cnss-analysis/inequality_analysis.png" class="img-fluid" style="width:80.0%"></p>
 </div>
 </section>
 <section id="gender-pay-gap" class="level2 page-columns page-full">
@@ -688,24 +688,24 @@
 </table>
 <p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms — roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
 <div class="column-screen-inset" style="text-align: center;">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/histogram.png" class="img-fluid" style="width:60.0%"></p>
+<p><img src="https://kharchouf.com/posts/cnss-analysis/histogram.png" class="img-fluid" style="width:60.0%"></p>
 </div>
 <div class="column-screen-inset" style="text-align: center;">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/cdf.png" class="img-fluid" style="width:60.0%"></p>
+<p><img src="https://kharchouf.com/posts/cnss-analysis/cdf.png" class="img-fluid" style="width:60.0%"></p>
 </div>
 <p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises — women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
 <div class="column-screen-inset" style="text-align: center;">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/salary_tranches_gender.png" class="img-fluid" style="width:70.0%"></p>
+<p><img src="https://kharchouf.com/posts/cnss-analysis/salary_tranches_gender.png" class="img-fluid" style="width:70.0%"></p>
 </div>
 <div class="column-screen-inset" style="text-align: center;">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/gender_by_decile.png" class="img-fluid" style="width:60.0%"></p>
+<p><img src="https://kharchouf.com/posts/cnss-analysis/gender_by_decile.png" class="img-fluid" style="width:60.0%"></p>
 </div>
 </section>
 <section id="geography" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="geography">Geography</h2>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p class="page-columns page-full"><img src="https://kharchouf.com/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities — Casablanca, Tanger, Rabat, Marrakech, and Kénitra — together represent <strong>66.7%</strong> of the total workforce.</p>
@@ -778,14 +778,14 @@
 </table>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/city_employee_count.png" class="img-fluid figure-img column-page"></p>
+<p class="page-columns page-full"><img src="https://kharchouf.com/posts/cnss-analysis/city_employee_count.png" class="img-fluid figure-img column-page"></p>
 <figcaption>City employee count</figcaption>
 </figure>
 </div>
 <p>The gender pay gap also varies substantially by city. The largest gaps appear in Safi (41.8%), Tétouan (31.2%), and Kénitra (30.7%). Mohammedia is the only major city where women’s mean salary <strong>exceeds</strong> men’s (by 5.5%), likely reflecting the specific industrial profile of that city.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p class="page-columns page-full"><img src="https://kharchouf.com/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -875,7 +875,7 @@
 <p>The sector-level gender pay gap follows a similar pattern: the largest gaps appear precisely in the most feminized industries, where women earn 50–58% less than men on average in the same sector.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/sectoral_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p class="page-columns page-full"><img src="https://kharchouf.com/posts/cnss-analysis/sectoral_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -1020,13 +1020,13 @@
   <category>data</category>
   <category>economics</category>
   <category>morocco</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/cnss-analysis/</guid>
+  <guid>https://kharchouf.com/posts/cnss-analysis/</guid>
   <pubDate>Thu, 29 Feb 2024 23:00:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/city_employee_count.png" medium="image" type="image/png" height="136" width="144"/>
+  <media:content url="https://kharchouf.com/posts/cnss-analysis/city_employee_count.png" medium="image" type="image/png" height="136" width="144"/>
 </item>
 <item>
   <title>Book notes - Hagarism The Making of the Islamic World (by Crone &amp; Cook)</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/hagarism/</link>
+  <link>https://kharchouf.com/posts/hagarism/</link>
   <description><![CDATA[ 
 
 
@@ -1093,13 +1093,13 @@
  ]]></description>
   <category>history</category>
   <category>book notes</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/hagarism/</guid>
+  <guid>https://kharchouf.com/posts/hagarism/</guid>
   <pubDate>Sat, 19 Aug 2023 20:30:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/hagarism/hagarism_cover_2.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://kharchouf.com/posts/hagarism/hagarism_cover_2.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Book notes - The Dawn of Everything (by Graeber &amp; Wengrow)</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/</link>
+  <link>https://kharchouf.com/posts/dawn-of-everything/</link>
   <description><![CDATA[ 
 
 
@@ -1200,7 +1200,7 @@
 <p><em>Haklay, G., &amp; Gopher, A. (2020). Geometry and architectural planning at Göbekli Tepe, Turkey. Cambridge Archaeological Journal, 30(2), 343-357.</em></p>
 </blockquote></li>
 </ul>
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled2.png" class="img-fluid"> <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled.png" class="img-fluid"> <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled4.png" class="img-fluid"> <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled.png" class="img-fluid"> <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled1.png" class="img-fluid"> <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled3.png" class="img-fluid"></p>
+<p><img src="https://kharchouf.com/posts/dawn-of-everything/Untitled2.png" class="img-fluid"> <img src="https://kharchouf.com/posts/dawn-of-everything/Untitled.png" class="img-fluid"> <img src="https://kharchouf.com/posts/dawn-of-everything/Untitled4.png" class="img-fluid"> <img src="https://kharchouf.com/posts/dawn-of-everything/Untitled.png" class="img-fluid"> <img src="https://kharchouf.com/posts/dawn-of-everything/Untitled1.png" class="img-fluid"> <img src="https://kharchouf.com/posts/dawn-of-everything/Untitled3.png" class="img-fluid"></p>
 <ul>
 <li>The main point to stress is that while some humans in the vicinity had begun cultivating crops, it does not seem like the humans who built these monuments had. This is the most striking example of monumentality beyond the emergence of agriculture.</li>
 </ul>
@@ -1275,11 +1275,11 @@
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/poverty_point_hroe.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/dawn-of-everything/poverty_point_hroe.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <ul>
-<li><p>An aerial view of the earthworks at Poverty Point. Excerpt from USDA Agricultural Stabilization and Conservation Service aerial photograph CTK-2BB-125. Aerial photograph taken November 11, 1960: <img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/poverty_point_aerial.jpg" class="img-fluid"></p></li>
+<li><p>An aerial view of the earthworks at Poverty Point. Excerpt from USDA Agricultural Stabilization and Conservation Service aerial photograph CTK-2BB-125. Aerial photograph taken November 11, 1960: <img src="https://kharchouf.com/posts/dawn-of-everything/poverty_point_aerial.jpg" class="img-fluid"></p></li>
 <li><p>145 contains new (to me at least) information about the archaic period of american prehistory:</p></li>
 </ul>
 <blockquote class="blockquote">
@@ -1470,7 +1470,7 @@
 <li><p>These Basque villages, due to the fact that they contain around 100 households, and therefore form communities of a size beyond Dunbar’s number, are taken as evidence that large groups do not necessarily require administrators or chiefs to function. The ‘mega-sites’ in Ukraine are also considered evidence that egalitarianism on an urban scale was possible in early cities. - 297</p></li>
 <li><p>Book turns back to Mesopotamia, where urban societies seem to have existed since 3500BC in the arid landscapes of the Persian Gulf, and up to 4000BC in the north:</p></li>
 </ul>
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/Untitled5.png" class="img-fluid"> Area TW from the west; the lowest level excavated up to now lies still some 15m above modern plain level, this depth representing occupation dating to the earlier fifth and sixth millennia. The visible section spans the late fifth, the whole of the fourth and the very early third millennia BC.*</p>
+<p><img src="https://kharchouf.com/posts/dawn-of-everything/Untitled5.png" class="img-fluid"> Area TW from the west; the lowest level excavated up to now lies still some 15m above modern plain level, this depth representing occupation dating to the earlier fifth and sixth millennia. The visible section spans the late fifth, the whole of the fourth and the very early third millennia BC.*</p>
 <blockquote class="blockquote">
 <p>Oates, J., McMahon, A., Karsgaard, P., Al Quntar, S., &amp; Ur, J. (2007). <em>Early Mesopotamian urbanism: a new view from the north</em>. <em>antiquity</em>, <em>81</em>(313), 585-600.</p>
 </blockquote>
@@ -1575,13 +1575,13 @@
   <category>book notes</category>
   <category>anthropology</category>
   <category>archaeology</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/</guid>
+  <guid>https://kharchouf.com/posts/dawn-of-everything/</guid>
   <pubDate>Thu, 17 Aug 2023 20:30:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/graeber.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://kharchouf.com/posts/dawn-of-everything/graeber.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Reading Notes on Brazilian Governance (2002–2023)</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/brasil/</link>
+  <link>https://kharchouf.com/posts/brasil/</link>
   <description><![CDATA[ 
 
 
@@ -1732,7 +1732,7 @@
 <p><a href="https://journals.sagepub.com/doi/pdf/10.1177/0309816820971131">Bolsonaro’s neoliberal program (Capital &amp; Class)</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/brasil/e8motepc.bmp" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/brasil/e8motepc.bmp" class="img-fluid figure-img"></p>
 <figcaption>Illegal mining operations in the Amazon</figcaption>
 </figure>
 </div>
@@ -1740,7 +1740,7 @@
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/IA-Rk_hdl4M" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/brasil/airstrip_in_the_amazon_rainforest-49-2000.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/brasil/airstrip_in_the_amazon_rainforest-49-2000.jpg" class="img-fluid figure-img"></p>
 <figcaption>Illegal miners spread empty fuel canisters along an airstrip, making a landing impossible.</figcaption>
 </figure>
 </div>
@@ -1854,13 +1854,13 @@
  ]]></description>
   <category>notes</category>
   <category>political-economy</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/brasil/</guid>
+  <guid>https://kharchouf.com/posts/brasil/</guid>
   <pubDate>Tue, 01 Nov 2022 23:00:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/brasil/bra_flag.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://kharchouf.com/posts/brasil/bra_flag.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Book notes - L’idéologie arabe contemporaine (by Abdallah Laroui)</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/</link>
+  <link>https://kharchouf.com/posts/ideo-arabe-contemp/</link>
   <description><![CDATA[ 
 
 
@@ -1951,13 +1951,13 @@
   <category>politics</category>
   <category>culture</category>
   <category>history</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/</guid>
+  <guid>https://kharchouf.com/posts/ideo-arabe-contemp/</guid>
   <pubDate>Wed, 17 Aug 2022 20:30:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/cover.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://kharchouf.com/posts/ideo-arabe-contemp/cover.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Electrochemistry Basics</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/</link>
+  <link>https://kharchouf.com/posts/electrochemistry-basics/</link>
   <description><![CDATA[ 
 
 
@@ -2022,10 +2022,10 @@
 <h2 class="anchored" data-anchor-id="koutecky-levich-treatment">Koutecky-Levich Treatment</h2>
 <p>The Koutecký-Levich analysis allows researchers to obtain kinetic parameters for a redox reaction such as the standard reaction constant<sup>3</sup> <em>k</em>° and the symmetry factor α.</p>
 <p>The <em>first step</em> is to plot at a fixed potential the values of the current at the various rotation rates (Fig. 1a). The value of the potential is chosen before the current plateau. The <em>second step</em> is to plot the inverse of the current values as a function of the inverse of the square root of the rotation speed (Fig. 1b). This is what is called the Koutecký-Levich plot.</p>
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/kouteckylevich_fig1.gif" class="img-fluid"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/kouteckylevich_fig1.gif" class="img-fluid"></p>
 <p><em><strong>Figure 1:</strong> <strong>(a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>.</em></p>
 <p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> — the current that you would obtain if there was absolutely no limitation by mass transport.</p>
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/kouteckylevich_fig2.gif" class="img-fluid"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/kouteckylevich_fig2.gif" class="img-fluid"></p>
 <p><em><strong>Figure 2: (a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>. This is carried out at various potentials to obtain the Tafel curve shown in <strong>(e)</strong>.</em></p>
 <p>Performing these three steps at several potential values (Fig. 2a, b, c, d) allows you to plot the Tafel curve (Fig. 2e). The slope of this curve gives the value of the symmetry factor <img src="https://latex.codecogs.com/png.latex?%5Calpha_r"> while the current value at <img src="https://latex.codecogs.com/png.latex?E%20=%20E%C2%B0"> gives the value of the standard kinetic constant <img src="https://latex.codecogs.com/png.latex?k%C2%B0">, given the concentration of the reactive species and the number of electrons involved in the redox reaction.</p>
 </section>
@@ -2043,23 +2043,23 @@
 <h3 class="anchored" data-anchor-id="some-basic-bodenyquist-plots">Some Basic Bode/Nyquist Plots</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/Untitled.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 1.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/Untitled 1.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 2.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/Untitled 2.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>The peak of a semi-circle (parallel RC) corresponds to the time constant of the system <img src="https://latex.codecogs.com/png.latex?%5Comega%20=%20%5Cfrac%7B1%7D%7B%5Ctau%7D%20=%20%5Cfrac%7B1%7D%7BRC%7D"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 3.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/Untitled 3.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -2067,7 +2067,7 @@
 <h3 class="anchored" data-anchor-id="randles-circuit">Randles Circuit</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/Untitled 4.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://kharchouf.com/posts/electrochemistry-basics/Untitled 4.png" class="inverted img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <ul>
@@ -2134,12 +2134,12 @@
 </section></div> ]]></description>
   <category>electrochemistry</category>
   <category>notes</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/electrochemistry-basics/</guid>
+  <guid>https://kharchouf.com/posts/electrochemistry-basics/</guid>
   <pubDate>Fri, 15 Oct 2021 22:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Local Gauge Invariance</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/local-gauge-invariance.html</link>
+  <link>https://kharchouf.com/posts/local-gauge-inv/local-gauge-invariance.html</link>
   <description><![CDATA[ 
 
 
@@ -2200,13 +2200,13 @@
   <category>gauge theory</category>
   <category>electromagnetism</category>
   <category>quantum electrodynamics</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/local-gauge-invariance.html</guid>
+  <guid>https://kharchouf.com/posts/local-gauge-inv/local-gauge-invariance.html</guid>
   <pubDate>Thu, 12 Dec 2019 09:20:00 GMT</pubDate>
-  <media:content url="https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/u1_phase.png" medium="image" type="image/png" height="125" width="144"/>
+  <media:content url="https://kharchouf.com/posts/local-gauge-inv/u1_phase.png" medium="image" type="image/png" height="125" width="144"/>
 </item>
 <item>
   <title>A first look into Dynamic Programming</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/dynamic-prog/</link>
+  <link>https://kharchouf.com/posts/dynamic-prog/</link>
   <description><![CDATA[ 
 
 
@@ -2256,7 +2256,7 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
 <p>As an example, let’s take a look at the recursion tree when we compute fib(6):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dynamic-prog/tree.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/tree.jpg" class="img-fluid figure-img"></p>
 <figcaption>fib6</figcaption>
 </figure>
 </div>
@@ -2266,7 +2266,7 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
 <p>This is a time complexity <img src="https://latex.codecogs.com/png.latex?O(2%5En)"> hence an exponential time algorithm. If you can help it, you should always try to avoid exponential time, because it is very costly as you can see from the diagram:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dynamic-prog/complexity.png" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/complexity.png" class="img-fluid figure-img"></p>
 <figcaption>comp</figcaption>
 </figure>
 </div>
@@ -2352,7 +2352,7 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
 --- 0.00100016593933 seconds ---</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/dynamic-prog/ndt.gif" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/ndt.gif" class="img-fluid figure-img"></p>
 <figcaption>ndt</figcaption>
 </figure>
 </div>
@@ -2372,12 +2372,12 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
   <category>algorithms</category>
   <category>recursion</category>
   <category>code</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/dynamic-prog/</guid>
+  <guid>https://kharchouf.com/posts/dynamic-prog/</guid>
   <pubDate>Thu, 19 Jan 2017 14:20:00 GMT</pubDate>
 </item>
 <item>
   <title>What would happen if aliens attack</title>
-  <link>https://nightowl97.github.io/personal_blog/posts/alien-attack/</link>
+  <link>https://kharchouf.com/posts/alien-attack/</link>
   <description><![CDATA[ 
 
 
@@ -2403,7 +2403,7 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
 <p>I will be (badly) drawing Penrose diagrams in order to describe the situation. Because I can only draw on 2 dimensional paper, I am going to use one dimension for time, and one for space, nothing unusual so far. the pulse will be represented as two converging beams coming from the left and the right, essentially trapping Earth in its one spacial dimension universe. Also, two enemy spaceships on each side of Earth would suffice to represent the sphere of spaceships that would be used in actual 3D space. If you think this is cheating, try to project a sphere (3 dimensions) onto a line (1 dimension). If you do the projection down the middle (not the special case of a tangent), you’ll get two intersection points, hence two spaceships. Here’s the what the situation would look like:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/alien-attack/kugel1.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/alien-attack/kugel1.jpg" class="img-fluid figure-img"></p>
 <figcaption>kugel1</figcaption>
 </figure>
 </div>
@@ -2411,7 +2411,7 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
 <p>When the beams have moved into a small enough region, the event horizon will form. Cutting Earth off from the rest of the universe. Believe it or not, Earth would still not notice anything for a short time after the event horizon forms. This is because the supposed force carrier of gravity would also move at c, which is the same speed as the converging beams. Here’s the Penrose diagram when the event horizon forms.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nightowl97.github.io/personal_blog/posts/alien-attack/kugel2.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://kharchouf.com/posts/alien-attack/kugel2.jpg" class="img-fluid figure-img"></p>
 <figcaption>kugel2</figcaption>
 </figure>
 </div>
@@ -2437,7 +2437,7 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
  ]]></description>
   <category>physics</category>
   <category>sci-fi</category>
-  <guid>https://nightowl97.github.io/personal_blog/posts/alien-attack/</guid>
+  <guid>https://kharchouf.com/posts/alien-attack/</guid>
   <pubDate>Wed, 18 Jan 2017 23:00:00 GMT</pubDate>
 </item>
 </channel>
