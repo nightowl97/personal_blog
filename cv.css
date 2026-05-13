@@ -1,0 +1,197 @@
+/* ============================================================
+   CV page — editorial styling, aligned with site dark theme.
+   ============================================================ */
+
+:root {
+  --cv-accent:  #B8693C;          /* terracotta — matches site $link-color */
+  --cv-rule:    #3D3830;          /* subtle border tone */
+  --cv-muted:   #5C5450;          /* tertiary text (dates, meta) */
+  --cv-secondary: #ABA49A;        /* secondary text */
+  --cv-text:    #F2EDE4;          /* primary text (warm white) */
+  --cv-serif:   'Merriweather', Georgia, serif;
+  --cv-display: 'Playfair Display', 'Merriweather', serif;
+  --cv-sans:    'DM Sans', sans-serif;
+}
+
+/* ---------- Header ---------- */
+
+.cv-header {
+  margin: 0 0 2.5rem 0;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--cv-rule);
+}
+
+.cv-name {
+  font-family: var(--cv-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  letter-spacing: -0.01em;
+  color: var(--cv-text);
+  margin: 0 0 0.4rem 0;
+  border: none;
+}
+
+.cv-tagline {
+  display: block;
+  font-family: var(--cv-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--cv-accent);
+  margin-bottom: 0.15rem;
+}
+
+.cv-subtagline {
+  display: block;
+  font-family: var(--cv-sans);
+  font-size: 0.95rem;
+  color: var(--cv-secondary);
+  margin-bottom: 1.5rem;
+}
+
+
+/* ---------- Summary ---------- */
+
+.cv-summary {
+  font-family: var(--cv-serif);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--cv-secondary);
+  margin: 0 0 2.5rem 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--cv-accent);
+}
+
+/* ---------- Section headings ---------- */
+
+h2.cv-section {
+  font-family: var(--cv-sans);
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cv-accent);
+  margin: 2.5rem 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  padding-top:2rem;
+  border-bottom: 3px solid var(--cv-rule);
+}
+
+/* ---------- Roles ---------- */
+
+h3.cv-role {
+  font-family: var(--cv-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--cv-text);
+  margin: 1.75rem 0 0.2rem 0;
+  letter-spacing: -0.005em;
+}
+
+.cv-role-meta {
+  display: block;
+  font-family: var(--cv-sans);
+  font-size: 0.88rem;
+  color: var(--cv-muted);
+  font-style: italic;
+  margin-bottom: 0.9rem;
+}
+
+/* tighten bullet spacing inside experience */
+h3.cv-role ~ ul {
+  margin-top: 0.5rem;
+  color: var(--cv-secondary);
+}
+
+/* ---------- Education ---------- */
+
+.cv-edu-item {
+  margin-bottom: 1rem;
+  line-height: 1.55;
+  color: var(--cv-secondary);
+}
+
+.cv-edu-meta {
+  color: var(--cv-muted);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ---------- Publications ---------- */
+
+.cv-pub-meta {
+  color: var(--cv-muted);
+  font-family: var(--cv-sans);
+  font-size: 0.82rem;
+  font-style: italic;
+  margin-left: 0.25rem;
+}
+
+h2.cv-section ~ ul li {
+  border-bottom: 0.5px solid var(--cv-rule);
+  /* padding-bottom: 0.85rem; */
+  margin-bottom: 0.85rem;
+}
+
+h2.cv-section ~ ul li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* ---------- Skills grid ---------- */
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem 2rem;
+  margin-top: 1rem;
+}
+
+.cv-skill-label {
+  display: block;
+  font-family: var(--cv-sans);
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cv-accent);
+  margin-bottom: 0.5rem;
+}
+
+.cv-skill-block p,
+.cv-skill-block {
+  font-family: var(--cv-serif);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--cv-secondary);
+}
+
+/* ---------- Languages ---------- */
+
+.cv-lang {
+  font-family: var(--cv-serif);
+  font-weight: 600;
+  color: var(--cv-text);
+}
+
+
+/* ---------- Print ---------- */
+
+@media print {
+  :root {
+    --cv-accent:    #8a3324;
+    --cv-rule:      rgba(0, 0, 0, 0.15);
+    --cv-muted:     #555;
+    --cv-secondary: #333;
+    --cv-text:      #111;
+  }
+  a { text-decoration: none; border-bottom: none; color: inherit; }
+}
+
+/* Subtle bullet hover */
+h3.cv-role ~ ul li {
+  transition: color 0.2s ease;
+}
+
+h3.cv-role ~ ul li:hover {
+  color: var(--cv-text);
+}

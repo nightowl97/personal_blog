@@ -547,7 +547,11 @@
 <p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D_p:=%20%5Cleft%5C%7B%20%5Cgamma%20:%20%5B0,%201%5D%20%5Clongrightarrow%20M%20%5CBig%7C%5C%20%5Cgamma%5C%20%5Ctext%7Bis%20continuous,%7D%5C%20%5Cgamma(0)%20=%20%5Cgamma(1)%20=%20p%20%5Cright%5C%7D"></p>
 <p><strong>Definition.</strong> <img src="https://latex.codecogs.com/png.latex?*_p:%20%5Cmathcal%7BL%7D_p%5Ctimes%5Cmathcal%7BL%7D_p%20%5Clongrightarrow%5Cmathcal%7BL%7D_p">, for <img src="https://latex.codecogs.com/png.latex?%5Clambda%20%5Cin%20%5B0,1%5D">:</p>
 <p><img src="https://latex.codecogs.com/png.latex?(%5Cgamma%20*%20%5Cdelta)(%5Clambda)%20:=%20%5Cbegin%7Bcases%7D%20%5Cgamma(2%5Clambda)%20&amp;%200%5Cleq%5Clambda%5Cleq%5Ctfrac%7B1%7D%7B2%7D%5C%5C%20%5Cdelta(2%5Clambda%20-%201)%20&amp;%20%5Ctfrac%7B1%7D%7B2%7D%5Cleq%20%5Clambda%20%5Cleq%201%20%5Cend%7Bcases%7D"></p>
-<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center">{fig-align=“center”}</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/geometrical-anatomy/Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <p>If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.</p>
 <p><strong>Definition.</strong> The fundamental group <img src="https://latex.codecogs.com/png.latex?(%5Cpi_1,%20%5Ccdot)"> of a topological space is the set <img src="https://latex.codecogs.com/png.latex?%5Cpi_%7B1,p%7D%20:=%20%5Cmathcal%7BL%7D_p/_%5Csim%5C%20=%20%5Cleft%5C%7B%5B%5Cgamma%5D_%5Csim%5C%20%5CBig%7C%5C%20%5Cgamma%20%5Cin%20%5Cmathcal%7BL%7D_p%5Cright%5C%7D"> together with:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Ccdot:%5Cpi_%7B1,p%7D%5Ctimes%5Cpi_%7B1,p%7D%5Clongrightarrow%20%5Cpi_%7B1,p%7D,%20%5Cqquad%20%5B%5Cgamma%5D%5Ccdot%5B%5Cdelta%5D:=%5B%5Cgamma*%5Cdelta%5D"></p>
@@ -587,7 +591,441 @@
   <pubDate>Sat, 09 May 2026 22:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Hagarism The Making of the Islamic World (by Crone &amp; Cook)</title>
+  <title>Morocco’s Wage Landscape: An Analysis of 1.6 Million Employees</title>
+  <link>https://nightowl97.github.io/personal_blog/posts/cnss-analysis/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>In 2022, the database of declared employees registered with Morocco’s <em>Caisse Nationale de Sécurité Sociale</em> (CNSS) was leaked and made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco’s formal labor market.</p>
+<p>After cleaning the data (removing entries with missing or inconsistent values), the working dataset contains <strong>1,590,950 employees</strong> spread across <strong>160 cities</strong>, <strong>22,338 declared activity sectors</strong>, and <strong>40,184 companies</strong>, representing 94.6% of the raw records. Gender was inferred from first names using a name-gender mapping dictionary, achieving a 97% match rate; 33.2% of identified employees are women.</p>
+<section id="salary-distribution" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="salary-distribution">Salary Distribution</h2>
+<p>The headline figures already reveal a starkly unequal distribution:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Statistic</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean salary</td>
+<td>6,279 DH/month</td>
+</tr>
+<tr class="even">
+<td>Median salary</td>
+<td>3,538 DH/month</td>
+</tr>
+<tr class="odd">
+<td>10th percentile</td>
+<td>2,099 DH</td>
+</tr>
+<tr class="even">
+<td>25th percentile</td>
+<td>2,970 DH</td>
+</tr>
+<tr class="odd">
+<td>75th percentile</td>
+<td>5,669 DH</td>
+</tr>
+<tr class="even">
+<td>90th percentile</td>
+<td>11,220 DH</td>
+</tr>
+<tr class="odd">
+<td>99th percentile</td>
+<td>48,170 DH</td>
+</tr>
+<tr class="even">
+<td>Maximum</td>
+<td>7,399,227 DH</td>
+</tr>
+</tbody>
+</table>
+<p>The gap between the mean (6,279 DH) and the median (3,538 DH) is a signature of a right-skewed distribution: a relatively small number of very high earners pulls the mean well above what most workers actually take home. More than half of formal-sector employees earn under 3,538 DH per month.</p>
+<p>The <strong>Gini coefficient is 0.4857</strong> — classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong> — meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
+<div class="column-screen-inset" style="text-align: center;">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/inequality_analysis.png" class="img-fluid" style="width:80.0%"></p>
+</div>
+</section>
+<section id="gender-pay-gap" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="gender-pay-gap">Gender Pay Gap</h2>
+<p>The dataset shows a persistent and statistically significant gender pay gap across all salary metrics:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Women (515,118)</th>
+<th>Men (1,031,308)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean salary</td>
+<td>5,863 DH</td>
+<td>6,483 DH</td>
+</tr>
+<tr class="even">
+<td>Median salary</td>
+<td>3,415 DH</td>
+<td>3,607 DH</td>
+</tr>
+<tr class="odd">
+<td>25th percentile</td>
+<td>2,728 DH</td>
+<td>2,970 DH</td>
+</tr>
+<tr class="even">
+<td>75th percentile</td>
+<td>5,467 DH</td>
+<td>5,757 DH</td>
+</tr>
+</tbody>
+</table>
+<p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms — roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
+<div class="column-screen-inset" style="text-align: center;">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/histogram.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+<div class="column-screen-inset" style="text-align: center;">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/cdf.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+<p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises — women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
+<div class="column-screen-inset" style="text-align: center;">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/salary_tranches_gender.png" class="img-fluid" style="width:70.0%"></p>
+</div>
+<div class="column-screen-inset" style="text-align: center;">
+<p><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/gender_by_decile.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+</section>
+<section id="geography" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="geography">Geography</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities — Casablanca, Tanger, Rabat, Marrakech, and Kénitra — together represent <strong>66.7%</strong> of the total workforce.</p>
+<p>Salary levels vary significantly by city, with Casablanca leading by a wide margin:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>City</th>
+<th>Mean salary (DH)</th>
+<th>Median (DH)</th>
+<th>% Women</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Casablanca</td>
+<td>8,115</td>
+<td>4,131</td>
+<td>31.4%</td>
+</tr>
+<tr class="even">
+<td>Rabat</td>
+<td>6,929</td>
+<td>3,561</td>
+<td>42.2%</td>
+</tr>
+<tr class="odd">
+<td>Salé</td>
+<td>6,496</td>
+<td>3,227</td>
+<td>43.8%</td>
+</tr>
+<tr class="even">
+<td>Tanger</td>
+<td>5,189</td>
+<td>3,583</td>
+<td>37.4%</td>
+</tr>
+<tr class="odd">
+<td>Marrakech</td>
+<td>5,034</td>
+<td>3,624</td>
+<td>33.2%</td>
+</tr>
+<tr class="even">
+<td>Agadir</td>
+<td>4,788</td>
+<td>3,479</td>
+<td>31.6%</td>
+</tr>
+<tr class="odd">
+<td>Fès</td>
+<td>4,586</td>
+<td>3,300</td>
+<td>42.8%</td>
+</tr>
+<tr class="even">
+<td>Kénitra</td>
+<td>4,439</td>
+<td>3,362</td>
+<td>50.8%</td>
+</tr>
+<tr class="odd">
+<td>Safi</td>
+<td>3,066</td>
+<td>2,863</td>
+<td>47.1%</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/city_employee_count.png" class="img-fluid figure-img column-page"></p>
+<figcaption>City employee count</figcaption>
+</figure>
+</div>
+<p>The gender pay gap also varies substantially by city. The largest gaps appear in Safi (41.8%), Tétouan (31.2%), and Kénitra (30.7%). Mohammedia is the only major city where women’s mean salary <strong>exceeds</strong> men’s (by 5.5%), likely reflecting the specific industrial profile of that city.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="sector-analysis" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sector-analysis">Sector Analysis</h2>
+<p>The most common declared activity sectors are dominated by temporary labor supply, garment manufacturing, banking, agricultural work, and automotive parts manufacturing. The spread in pay across sectors is enormous:</p>
+<p><strong>Highest-paying sectors (mean salary):</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sector</th>
+<th>Mean (DH)</th>
+<th>% Women</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Banking (BANQUE)</td>
+<td>18,140</td>
+<td>44.2%</td>
+</tr>
+<tr class="even">
+<td>Engineering consulting</td>
+<td>17,448</td>
+<td>33.1%</td>
+</tr>
+<tr class="odd">
+<td>Banking operations support</td>
+<td>14,712</td>
+<td>54.9%</td>
+</tr>
+<tr class="even">
+<td>Automotive vehicle sales</td>
+<td>9,395</td>
+<td>9.5%</td>
+</tr>
+<tr class="odd">
+<td>Multilingual telecom support</td>
+<td>7,777</td>
+<td>53.2%</td>
+</tr>
+<tr class="even">
+<td>Call centers</td>
+<td>6,954</td>
+<td>51.1%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lowest-paying sectors (mean salary):</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sector</th>
+<th>Mean (DH)</th>
+<th>% Women</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Labor/manpower supply</td>
+<td>2,400</td>
+<td>60.9%</td>
+</tr>
+<tr class="even">
+<td>Agricultural exploitation</td>
+<td>2,713</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Security / guarding</td>
+<td>2,779–2,939</td>
+<td>~3%</td>
+</tr>
+<tr class="even">
+<td>Tomato farming</td>
+<td>3,014</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Preschool education</td>
+<td>3,108</td>
+<td>80.7%</td>
+</tr>
+</tbody>
+</table>
+<p>The pattern is stark: the most feminized sectors are also among the lowest-paid. Sectors with more than 60% female workforce — automotive parts manufacturing (87% women), preschool education (81%), garment manufacturing (67%), cable manufacturing (75%) — cluster at the bottom of the wage distribution. Conversely, the lowest-feminization sectors (construction, security, heavy industry) tend to pay more.</p>
+<p>The sector-level gender pay gap follows a similar pattern: the largest gaps appear precisely in the most feminized industries, where women earn 50–58% less than men on average in the same sector.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/sectoral_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="employer-concentration" class="level2">
+<h2 class="anchored" data-anchor-id="employer-concentration">Employer Concentration</h2>
+<p>The labor market is highly fragmented. The <strong>Herfindahl-Hirschman Index (HHI) is 18.34</strong>, well below the threshold that would indicate concentration. The top 20 employers together account for only <strong>14%</strong> of total jobs. No single employer commands more than ~2% of the workforce.</p>
+<p>The largest employers are dominated by temporary staffing agencies (TECTRA, 32,583 employees), agricultural conglomerates (SA STE MARAISSA, 19,782), automotive manufacturers (LEAR AUTOMOTIVE MOROCCO, 18,883), and the preschool education foundation FONDA MAROC (18,639).</p>
+<p>The highest-paying companies tell a very different story, smaller, concentrated in finance, holding groups, and multinationals:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Company</th>
+<th>Mean salary (DH)</th>
+<th>Employees</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SIGER</td>
+<td>362,848</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>AL MADA</td>
+<td>328,936</td>
+<td>62</td>
+</tr>
+<tr class="odd">
+<td>ZALAR HOLDING</td>
+<td>238,692</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td>MICROSOFT MAROC</td>
+<td>183,574</td>
+<td>35</td>
+</tr>
+<tr class="odd">
+<td>NAREVA HOLDING</td>
+<td>108,365</td>
+<td>67</td>
+</tr>
+<tr class="even">
+<td>AKWA GROUP</td>
+<td>92,180</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>PHILIP MORRIS MAROC</td>
+<td>90,203</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>COCA-COLA MAROC</td>
+<td>88,837</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-top-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-top-1">The Top 1%</h2>
+<p>The top 1% of earners (15,505 individuals) sit above a threshold of <strong>48,170 DH/month</strong>, with a mean of <strong>87,630 DH</strong> and a maximum of <strong>7,399,227 DH</strong> — over 7.3 million dirhams per month, declared to CNSS.</p>
+<p>The ten highest individual salaries in the database:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Monthly salary (DH)</th>
+<th>Company</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OURIAGLI MOHAMMED HASSAN</td>
+<td>7,399,227</td>
+<td>AL MADA</td>
+</tr>
+<tr class="even">
+<td>TAUD AYMANE</td>
+<td>3,611,795</td>
+<td>NAREVA HOLDING</td>
+</tr>
+<tr class="odd">
+<td>TAZLAOUI ABDELMJID</td>
+<td>2,750,475</td>
+<td>STE ONAPAR AMETYS</td>
+</tr>
+<tr class="even">
+<td>KESSAR NOUFISSA</td>
+<td>2,465,852</td>
+<td>AL MADA</td>
+</tr>
+<tr class="odd">
+<td>ZEMZAMI AISSA</td>
+<td>2,310,000</td>
+<td>FIRST MATERIEL SARL</td>
+</tr>
+<tr class="even">
+<td>EL MAJIDI MOHAMMED MOUNIR</td>
+<td>1,688,872</td>
+<td>ATELIER NUMERIQUE</td>
+</tr>
+<tr class="odd">
+<td>HARAKAT HICHAM</td>
+<td>1,547,971</td>
+<td>SA STE MARAISSA</td>
+</tr>
+<tr class="even">
+<td>EL HABTEY RACHID</td>
+<td>1,462,105</td>
+<td>TOURISME ET D’ANIMATION</td>
+</tr>
+<tr class="odd">
+<td>MAKRAM TARIQ</td>
+<td>1,340,529</td>
+<td>AL MADA</td>
+</tr>
+<tr class="even">
+<td>BAKKAL SANAA</td>
+<td>1,284,237</td>
+<td>AL MADA</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>A few structural features stand out from this dataset:</p>
+<ul>
+<li><strong>The median formal-sector salary in Morocco is 3,538 DH/month</strong> — less than €320. More than half the registered workforce earns below this figure.</li>
+<li><strong>Inequality is high</strong>: a Gini of 0.49 and a top decile capturing 43% of total wages. The formal labor market mirrors, and probably understates, the broader wealth distribution.</li>
+<li><strong>The gender pay gap is real, significant, and structural</strong>: women are overrepresented in the lowest-paid sectors and brackets. The gap widens in the most feminized industries, not because women are in different jobs, but because the jobs that attract more women systematically pay less.</li>
+<li><strong>Geography concentrates opportunity</strong>: Casablanca accounts for 43% of all formal employment and pays almost double the median salary of smaller cities.</li>
+<li><strong>The labor market is formally fragmented</strong> but the top of the distribution is extremely concentrated — a handful of holding companies and multinationals account for the highest-earning individuals.</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>data</category>
+  <category>economics</category>
+  <category>morocco</category>
+  <guid>https://nightowl97.github.io/personal_blog/posts/cnss-analysis/</guid>
+  <pubDate>Thu, 29 Feb 2024 23:00:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/cnss-analysis/city_employee_count.png" medium="image" type="image/png" height="136" width="144"/>
+</item>
+<item>
+  <title>Book notes - Hagarism The Making of the Islamic World (by Crone &amp; Cook)</title>
   <link>https://nightowl97.github.io/personal_blog/posts/hagarism/</link>
   <description><![CDATA[ 
 
@@ -647,9 +1085,7 @@
 <p>The authors are suggesting that Jesus’ response was a way of evading the question, and that this evasion became a central part of the formation of Christianity. This reinterpretation paved the way for the development of Christian theology, which diverged from traditional Jewish messianic expectations.</p>
 <p>For the Arabs, success precluded a gradual dissociation from Jewish messianism, and required instead a sharp and immediate break. Their acquirement of large numbers of Christian subjects also meant a doctrinal softening of the Arabs towards Christians</p>
 <p>The rest of the chapter is about the specifics of how the Hagarenes adopted Christian messianism and the technicalities and contradictions that it faced, while solving the problem of their separation from their jewish proteges while not diffusing into the Christians they were ruling in Palestine. With the conclusion that the only consistent way out was to erect an Ishmaelite prophetology of their own.</p>
-</section>
-<section id="the-prophet-like-moses" class="level1">
-<h1>The prophet like Moses</h1>
+<!-- # The prophet like Moses -->
 
 
 </section>
@@ -659,6 +1095,7 @@
   <category>book notes</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/hagarism/</guid>
   <pubDate>Sat, 19 Aug 2023 20:30:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/hagarism/hagarism_cover_2.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Book notes - The Dawn of Everything (by Graeber &amp; Wengrow)</title>
@@ -1140,6 +1577,7 @@
   <category>archaeology</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/</guid>
   <pubDate>Thu, 17 Aug 2023 20:30:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/dawn-of-everything/graeber.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Reading Notes on Brazilian Governance (2002–2023)</title>
@@ -1418,6 +1856,7 @@
   <category>political-economy</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/brasil/</guid>
   <pubDate>Tue, 01 Nov 2022 23:00:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/brasil/bra_flag.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Book notes - L’idéologie arabe contemporaine (by Abdallah Laroui)</title>
@@ -1514,6 +1953,7 @@
   <category>history</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/</guid>
   <pubDate>Wed, 17 Aug 2022 20:30:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/ideo-arabe-contemp/cover.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Electrochemistry Basics</title>
@@ -1762,6 +2202,7 @@
   <category>quantum electrodynamics</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/local-gauge-invariance.html</guid>
   <pubDate>Thu, 12 Dec 2019 09:20:00 GMT</pubDate>
+  <media:content url="https://nightowl97.github.io/personal_blog/posts/local-gauge-inv/u1_phase.png" medium="image" type="image/png" height="125" width="144"/>
 </item>
 <item>
   <title>A first look into Dynamic Programming</title>
@@ -1928,6 +2369,9 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
 </section>
 
  ]]></description>
+  <category>algorithms</category>
+  <category>recursion</category>
+  <category>code</category>
   <guid>https://nightowl97.github.io/personal_blog/posts/dynamic-prog/</guid>
   <pubDate>Thu, 19 Jan 2017 14:20:00 GMT</pubDate>
 </item>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-05-10">
-<meta name="description" content="Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics — axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.">
+<meta name="description" content="Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics: axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.">
 
 <title>Lectures notes on the Geometrical Anatomy of Theoretical Physics – Youssef Kharchouf</title>
 <style>
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9d5cfa64be14feea77f5ec138296d188.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-c1a70fc2c8ece0176d1e8d8d4640fae0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +106,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -156,7 +156,7 @@ window.Quarto = {
       <h1 class="title">Lectures notes on the Geometrical Anatomy of Theoretical Physics</h1>
                   <div>
         <div class="description">
-          Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics — axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.
+          Working notes from Frederic Schuller’s lecture series on the mathematical foundations of physics: axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -187,7 +187,37 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-logic-of-propositions-and-predicates" id="toc-introduction-logic-of-propositions-and-predicates" class="nav-link active" data-scroll-target="#introduction-logic-of-propositions-and-predicates">Introduction — Logic of Propositions and Predicates</a>
+  <ul class="collapse">
+  <li><a href="#structure-of-the-course" id="toc-structure-of-the-course" class="nav-link" data-scroll-target="#structure-of-the-course">Structure of the Course</a></li>
+  <li><a href="#i.i-propositional-logic" id="toc-i.i-propositional-logic" class="nav-link" data-scroll-target="#i.i-propositional-logic">I.I: Propositional Logic</a></li>
+  </ul></li>
+  <li><a href="#chapter-i-axiomatic-set-theory" id="toc-chapter-i-axiomatic-set-theory" class="nav-link" data-scroll-target="#chapter-i-axiomatic-set-theory">Chapter I: Axiomatic Set Theory</a>
+  <ul class="collapse">
+  <li><a href="#a-unary-operators" id="toc-a-unary-operators" class="nav-link" data-scroll-target="#a-unary-operators">a) Unary Operators</a></li>
+  <li><a href="#i.iv-the-epsilon-relation" id="toc-i.iv-the-epsilon-relation" class="nav-link" data-scroll-target="#i.iv-the-epsilon-relation">I.IV The <span class="math inline">\(\epsilon\)</span>-relation</a></li>
+  <li><a href="#i.v-zermelo-fraenkel-axioms-of-set-theory" id="toc-i.v-zermelo-fraenkel-axioms-of-set-theory" class="nav-link" data-scroll-target="#i.v-zermelo-fraenkel-axioms-of-set-theory">I.V Zermelo-Fraenkel Axioms of Set Theory</a></li>
+  <li><a href="#i.vi-classification-of-sets" id="toc-i.vi-classification-of-sets" class="nav-link" data-scroll-target="#i.vi-classification-of-sets">I.VI Classification of Sets</a></li>
+  <li><a href="#i.vii-equivalence-relations" id="toc-i.vii-equivalence-relations" class="nav-link" data-scroll-target="#i.vii-equivalence-relations">I.VII Equivalence Relations</a></li>
+  <li><a href="#i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr" id="toc-i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr" class="nav-link" data-scroll-target="#i.viii-construction-of-mathbbn-mathbbz-mathbbq-and-mathbbr">I.VIII Construction of <span class="math inline">\(\mathbb{N},\ \mathbb{Z},\ \mathbb{Q}\)</span> and <span class="math inline">\(\mathbb{R}\)</span></a></li>
+  </ul></li>
+  <li><a href="#chapter-ii-topological-spaces" id="toc-chapter-ii-topological-spaces" class="nav-link" data-scroll-target="#chapter-ii-topological-spaces">Chapter II: Topological Spaces</a>
+  <ul class="collapse">
+  <li><a href="#ii.ii-construction-of-new-topologies-from-given-ones" id="toc-ii.ii-construction-of-new-topologies-from-given-ones" class="nav-link" data-scroll-target="#ii.ii-construction-of-new-topologies-from-given-ones">II.II Construction of New Topologies from Given Ones</a></li>
+  <li><a href="#ii.iii-convergence" id="toc-ii.iii-convergence" class="nav-link" data-scroll-target="#ii.iii-convergence">II.III Convergence</a></li>
+  <li><a href="#ii.iv-continuity" id="toc-ii.iv-continuity" class="nav-link" data-scroll-target="#ii.iv-continuity">II.IV Continuity</a></li>
+  <li><a href="#ii.v-topological-properties-i-separation" id="toc-ii.v-topological-properties-i-separation" class="nav-link" data-scroll-target="#ii.v-topological-properties-i-separation">II.V Topological Properties I: Separation</a></li>
+  <li><a href="#ii.vi-connectedness-path-connectedness" id="toc-ii.vi-connectedness-path-connectedness" class="nav-link" data-scroll-target="#ii.vi-connectedness-path-connectedness">II.VI Connectedness &amp; Path-Connectedness</a></li>
+  <li><a href="#ii.viii-homotopic-curves-and-the-fundamental-group" id="toc-ii.viii-homotopic-curves-and-the-fundamental-group" class="nav-link" data-scroll-target="#ii.viii-homotopic-curves-and-the-fundamental-group">II.VIII Homotopic Curves and the Fundamental Group</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -722,7 +752,11 @@ window.Quarto = {
 <p><span class="math display">\[\mathcal{L}_p:= \left\{ \gamma : [0, 1] \longrightarrow M \Big|\ \gamma\ \text{is continuous,}\ \gamma(0) = \gamma(1) = p \right\}\]</span></p>
 <p><strong>Definition.</strong> <span class="math inline">\(*_p: \mathcal{L}_p\times\mathcal{L}_p \longrightarrow\mathcal{L}_p\)</span>, for <span class="math inline">\(\lambda \in [0,1]\)</span>:</p>
 <p><span class="math display">\[(\gamma * \delta)(\lambda) := \begin{cases} \gamma(2\lambda) &amp; 0\leq\lambda\leq\tfrac{1}{2}\\ \delta(2\lambda - 1) &amp; \tfrac{1}{2}\leq \lambda \leq 1 \end{cases}\]</span></p>
-<p><img src="Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center">{fig-align=“center”}</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Untitled 30.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <p>If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.</p>
 <p><strong>Definition.</strong> The fundamental group <span class="math inline">\((\pi_1, \cdot)\)</span> of a topological space is the set <span class="math inline">\(\pi_{1,p} := \mathcal{L}_p/_\sim\ = \left\{[\gamma]_\sim\ \Big|\ \gamma \in \mathcal{L}_p\right\}\)</span> together with:</p>
 <p><span class="math display">\[\cdot:\pi_{1,p}\times\pi_{1,p}\longrightarrow \pi_{1,p}, \qquad [\gamma]\cdot[\delta]:=[\gamma*\delta]\]</span></p>
