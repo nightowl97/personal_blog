@@ -1,9 +1,11 @@
 project:
   type: website
+  resources:
+    - CNAME
 
 website:
   description: "Youssef Kharchouf's personal notes"
-  site-url: https://nightowl97.github.io/personal_blog/ # you must change this appropriately for RSS feeds to work properly
+  site-url: https://kharchouf.com # you must change this appropriately for RSS feeds to work properly
   title: "Youssef Kharchouf"
   navbar:
     right:
