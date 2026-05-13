@@ -21,6 +21,10 @@
   border-bottom: 1px solid var(--cv-rule);
 }
 
+.cv-name .anchorjs-link {
+  display: none !important;
+}
+
 .cv-name {
   font-family: var(--cv-display);
   font-weight: 700;
