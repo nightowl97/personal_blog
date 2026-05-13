@@ -15,7 +15,7 @@ format:
 ---
 
 ::: {.cv-header}
-## Youssef Kharchouf {.cv-name}
+## Youssef Kharchouf {.cv-name .unnumbered .unlisted}
 
 [Research Engineer · Computational Scientist]{.cv-tagline}
 

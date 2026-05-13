@@ -6,6 +6,7 @@ description: "Notes on the basics of electrochemistry from when I first started 
 toc: true
 toc-location: right
 toc-title: "Contents"
+image: cv.png
 ---
 
 ## Balancing Redox Half-Reactions

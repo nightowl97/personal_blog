@@ -22,7 +22,8 @@ format:
       - flatly 
       - customtheme.scss
     css: styles.css
-    fontsize: 1.2em
+    fontsize: 1.0em
+    
     # template-partials:
     #   - title-block.html
 

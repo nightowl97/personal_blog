@@ -36,7 +36,7 @@ $navbar-bg:          #2C2926;
 .quarto-title-banner h1.title,
 .quarto-title-banner .title        { color: #F2EDE4 !important; }
 .quarto-title-banner .description,
-.quarto-title-banner p             { color: #ABA49A !important; }
+.quarto-title-banner p             { color: #ABA49A !important; margin-top: 0.75rem !important; }
 
 /* accent: tags in article banner */
 .quarto-title-banner .quarto-categories .quarto-category {
@@ -141,13 +141,40 @@ $navbar-bg:          #2C2926;
 }
 
 /* ── Thumbnails ── */
-.listing-image img,
-.quarto-post img {
+.quarto-post .thumbnail {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
   border-radius: 4px;
-  opacity: 0.75;
-  transition: opacity 0.2s ease;
+  background-color: #2C2926;
 }
-.quarto-post:hover img { opacity: 1; }
+
+.quarto-post .thumbnail a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Quarto sometimes wraps the img in a <p class="card-img-top"> */
+.quarto-post .thumbnail .card-img-top {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+  filter: saturate(0.2) brightness(0.75);
+  transition: filter 0.25s ease;
+}
+
+.quarto-post:hover .thumbnail-image {
+  filter: saturate(1) brightness(1);
+}
 
 /* ── Sidebar: "CATEGORIES" label ── */
 .quarto-listing-category-title {
