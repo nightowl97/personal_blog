@@ -1,7 +1,7 @@
 ---
 title: A first look into Dynamic Programming
 date: 2017-01-19 15:20
-tags: [algorithms, dynamic programming, recursion, code]
+categories: [algorithms, recursion, code]
 description: A gentle first look at dynamic programming - How storing intermediate results transforms a naive recursive Fibonacci from O(2ⁿ) to O(n), and why the name sounds considerably more impressive than the idea.
 ---
 

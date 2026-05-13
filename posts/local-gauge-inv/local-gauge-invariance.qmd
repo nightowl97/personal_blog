@@ -3,6 +3,7 @@ title: Local Gauge Invariance
 date: 2019-12-12 10:20
 categories: [physics, gauge theory, electromagnetism, quantum electrodynamics]
 description: If we insist on a symmetry on the Dirac Lagrangian, which we seemingly have no right to expect, the entire structure of QED falls out.
+image: u1_phase.png
 ---
 
 Our current understanding of the fundamental nature of reality is deeply tied with the concept of symmetry. 

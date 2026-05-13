@@ -3,6 +3,7 @@ title: Book notes - L’idéologie arabe contemporaine (by Abdallah Laroui)
 date: 2022-08-17 22:30
 categories: [book notes, philosophy, politics, culture, history]
 description: Reading notes on Laroui's anatomy of Arab intellectual thought.
+image: cover.jpg
 ---
 
 - Page 12:

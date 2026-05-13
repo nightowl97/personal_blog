@@ -3,6 +3,10 @@ title: Book notes - The Dawn of Everything (by Graeber & Wengrow)
 date: 2023-08-17 22:30
 categories: [history, book notes, anthropology, archaeology]
 description: The archaeological and anthropological case that our ancestors were conscious political actors who experimented with wildly different forms of social and political organization, and often deliberately rejected what is now often assumed to be inherent in human nature.
+toc: true
+toc-location: right
+toc-title: "Contents"
+image: graeber.jpg
 ---
 
 

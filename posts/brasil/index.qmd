@@ -3,6 +3,7 @@ title: "Reading Notes on Brazilian Governance (2002–2023)"
 date: 2022-11-02
 categories: [notes, political-economy]
 description: "Personal reading notes on Brazilian governance, environmental policy, and democratic institutions — from Lula's first presidency through the Bolsonaro years and back."
+image: bra_flag.jpg
 ---
 
 ## Lula da Silva

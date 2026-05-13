@@ -4,6 +4,9 @@ image: pp.png
 about:
   template: jolla
   links:
+    - icon: bi-file-person
+      text: CV
+      href: cv.html
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/youssefkhar/

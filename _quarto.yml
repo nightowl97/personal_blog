@@ -20,9 +20,13 @@ format:
       - flatly 
       - customtheme.scss
     css: styles.css
-    # fontsize: 1.3em
+    fontsize: 1.2em
     # template-partials:
     #   - title-block.html
 
-
-
+  # pdf:
+  #     include-in-header:
+  #       text: |
+  #         \usepackage{xcolor}
+  #         \pagecolor[HTML]{1E1E1E}
+  #         \color[HTML]{F5F5F5}

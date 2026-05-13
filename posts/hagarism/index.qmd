@@ -1,8 +1,9 @@
 ---
-title: Hagarism The Making of the Islamic World (by Crone & Cook)
+title: Book notes - Hagarism The Making of the Islamic World (by Crone & Cook)
 date: 2023-08-19 22:30
 categories: [history, book notes]
 description: Important book, from the school of skeptical historiography, which explores the early history of Islam and its relationship with Judaism and Christianity.
+image: hagarism_cover_2.jpg
 ---
 
 # Judeo-Hagarism 
@@ -76,5 +77,5 @@ For the Arabs, success precluded a gradual dissociation from Jewish messianism, 
 
 The rest of the chapter is about the specifics of how the Hagarenes adopted Christian messianism and the technicalities and contradictions that it faced, while solving the problem of their separation from their jewish proteges while not diffusing into the Christians they were ruling in Palestine. With the conclusion that the only consistent way out was to erect an Ishmaelite prophetology of their own.
 
-# The prophet like Moses
+<!-- # The prophet like Moses -->
 

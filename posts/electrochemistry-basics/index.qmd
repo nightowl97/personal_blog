@@ -3,6 +3,9 @@ title: Electrochemistry Basics
 date: 2021-10-16
 categories: [electrochemistry, notes]
 description: "Notes on the basics of electrochemistry from when I first started my PhD as a physicist with no prior background in chemistry around 2021."
+toc: true
+toc-location: right
+toc-title: "Contents"
 ---
 
 ## Balancing Redox Half-Reactions

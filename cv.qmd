@@ -1,0 +1,134 @@
+---
+title: ""
+pagetitle: "CV - Youssef Kharchouf"
+page-layout: article
+toc: true
+toc-location: right
+toc-title: "Contents"
+css: cv.css
+format:
+  html:
+    grid:
+      body-width: 900px
+      sidebar-width: 200px
+      margin-width: 210px
+---
+
+::: {.cv-header}
+## Youssef Kharchouf {.cv-name}
+
+[Research Engineer · Computational Scientist]{.cv-tagline}
+
+[Multiphysics modeling · Scientific machine learning · Energy systems]{.cv-subtagline}
+:::
+
+::: {.cv-summary}
+Computational scientist with a PhD from Sorbonne Université and postdoctoral experience at CNRS, working at the intersection of physics-based modeling, scientific machine learning, and experimental validation. I build simulation frameworks from first principles, develop data-driven models from heterogeneous scientific sources, and translate complex multiphysics phenomena into reproducible computational representations. Most recently for electrochemical energy systems within the French national hydrogen program.
+:::
+
+## Experience {.cv-section}
+
+### Postdoctoral Researcher {.cv-role}
+[Laboratoire de Réactivité de Surface, CNRS · 2024 – 2025]{.cv-role-meta}
+
+- Designed a multi-source data integration strategy combining polarization curves, accelerated aging protocols, and morphological measurements to validate coupled multiphysics models, translating heterogeneous experimental and simulation data into structured, comparable representations.
+- Led the multiphysics modeling strategy as sole simulation engineer, designing coupling architecture across electrochemistry, CFD transport, and morphological evolution, with quantitative agreement against experimental benchmarks within the PEPR H2 COSTO national hydrogen program.
+- Built a Transformer-based QSPR model (PyTorch) predicting ionic liquid viscosity and density from molecular descriptors, extending the team's toolbox from physics-based to data-driven property prediction.
+- Developed finite-element models in COMSOL Multiphysics integrating electrochemistry and multiphase transport (O₂/H₂O), with full convergence analysis and mesh-independence validation.
+- Implemented an automated testing framework validating simulation outputs against experimental polarization curves and accelerated aging protocols, ensuring model reliability.
+- Collaborated with experimental teams to translate physical phenomena into computational models and define research directions in degradation modeling.
+- Supervised Master's students on the Lattice Boltzmann method and molecular descriptor analysis for ML model development.
+
+### PhD Candidate in Physical Chemistry {.cv-role}
+[Sorbonne Université · 2020 – 2023]{.cv-role-meta}
+
+- Designed and implemented a custom Lattice Boltzmann solver in Python, coupling ionic transport, electrochemical reactions, and hydrodynamics for microfluidic redox flow batteries.
+- Achieved a 10× performance improvement over baseline laboratory designs by formulating and solving geometry optimization problems with physical constraints.
+- Validated numerical models through systematic comparison with experimental electrochemical characterization (cyclic voltammetry, chronopotentiometry, polarization curves).
+- Designed and fabricated optimized microfluidic devices via stereolithography 3D printing, closing the loop between computational models and physical prototypes through iterative design-test cycles.
+- Led the joint research project between Sorbonne Université and the Faculté des Sciences et Techniques de Tanger.
+- Taught Python programming, object-oriented design, and optimization algorithms; supervised student projects.
+
+
+## Education {.cv-section}
+
+::: {.cv-edu-item}
+**PhD, Physical Chemistry** [· Sorbonne Université, France · 2020 – 2023]{.cv-edu-meta}
+:::
+
+::: {.cv-edu-item}
+**MSc, Energy Engineering** [· FSTT, Morocco · 2018 – 2020]{.cv-edu-meta}
+
+Formulated solar-cell characterization as a constrained optimization problem and developed an improved differential-evolution algorithm for real-time control applications. Published in *Energy Conversion and Management*.
+:::
+
+::: {.cv-edu-item}
+**BSc, Engineering Physics** [· Université Moulay Ismaïl, Morocco · 2014 – 2018]{.cv-edu-meta}
+:::
+
+
+## Selected Publications {.cv-section}
+
+- **Kharchouf, Y.**, Assaud, L., Turmine, M., & Vivier, V. (2026). Coupling morphological evolution and multiphase transport to decipher degradation in PEM water electrolyzers. *Chemical Engineering Science*, 123687. [Q1 · IF 4.3]{.cv-pub-meta}
+
+- **Kharchouf, Y.**, Herbazi, R., & Chahboun, A. (2022). Parameters extraction of solar photovoltaic models using an improved differential evolution algorithm. *Energy Conversion and Management*, 251, 114972. [Q1 · IF 10.4]{.cv-pub-meta}
+
+- Herbazi, R., **Kharchouf, Y.**, Amechnoue, K., Khouya, A., & Chahboun, A. (2020). Solar Photovoltaic Cell Parameters Extraction Using Differential Evolution Algorithm. *Proceedings*, 63(1), 43. MDPI.
+
+
+## Conferences {.cv-section}
+
+- *Modelling the long-term effects of corrosion on proton exchange membrane electrolyzer performance.* 39th Topical Meeting of the International Society of Electrochemistry, March 2025, Natal, Brazil.
+
+- *Development of a Microfluidic Redox Flow Battery: Combining Theoretical and Experimental Methods.* 74th Annual Meeting of the International Society of Electrochemistry, September 2023, Lyon, France.
+
+- *Solar cell parameter identification using Differential Evolution.* 8th International Renewable and Sustainable Energy Conference, November 2020, Morocco.
+
+
+## Technical Expertise {.cv-section}
+
+::: {.cv-skills-grid}
+
+::: {.cv-skill-block}
+[Scientific Computing & Simulation]{.cv-skill-label}
+
+Python scientific stack (NumPy, SciPy, Pandas, Jupyter) with 6+ years in scientific programming. Custom solver development across finite differences and finite elements for level-set, Navier–Stokes, convection–diffusion–reaction in porous geometries, VoF, and Euler–Euler formulations. COMSOL Multiphysics for electrochemistry, multiphase CFD, and custom physics couplings. Numerical analysis: convergence studies, stability analysis, mesh independence, model validation. High-performance computing through vectorization, CUDA GPU acceleration, and code optimization.
+:::
+
+::: {.cv-skill-block}
+[Machine Learning & Data-Driven Modeling]{.cv-skill-label}
+
+Deep learning with PyTorch, transformer architectures for structured molecular data and QSPR prediction. Classical ML: regression, classification, ensemble methods, cross-validation, and benchmarking on scientific datasets. Cheminformatics: feature engineering from chemical structure, property-prediction pipelines, molecular descriptor analysis. Familiarity with graph-based methods (GNNs) for molecular representations. End-to-end workflows from preprocessing through structured benchmarking against experimental ground truth.
+:::
+
+::: {.cv-skill-block}
+[Energy Systems Modeling]{.cv-skill-label}
+
+Batteries and electrolyzers: state-dependent dynamics, efficiency and degradation modeling. Coupled physics: electrochemistry–transport–thermal interactions, interface tracking. Physics-constrained optimization and photovoltaic cell modeling.
+:::
+
+::: {.cv-skill-block}
+[Experimental & Analytical Chemistry]{.cv-skill-label}
+
+Electrochemical characterization: cyclic voltammetry, chronopotentiometry, EIS, polarization curves. Ionic-liquid synthesis. Experimental protocol development and systematic model–experiment validation. Microfluidics and stereolithography 3D printing.
+:::
+
+::: {.cv-skill-block}
+[Optimization & Numerical Methods]{.cv-skill-label}
+
+Evolutionary and gradient-free optimization (differential evolution); formulation of constrained scientific problems. Real-time control applications. Iterative design under physical constraints.
+:::
+
+::: {.cv-skill-block}
+[Software Engineering Practice]{.cv-skill-label}
+
+Version control with Git, unit testing, collaborative software-development workflows. Data visualization with Matplotlib, Seaborn, and custom plotting pipelines for scientific data analysis.
+:::
+
+:::
+
+## Languages {.cv-section}
+
+[**Amazigh**]{.cv-lang} Native 
+
+[**English · French · Arabic**]{.cv-lang} Full professional proficiency

@@ -2,7 +2,10 @@
 title: "Lectures notes on the Geometrical Anatomy of Theoretical Physics"
 date: 2026-05-10
 categories: [mathematics, physics, topology, set theory, notes]
-description: "Working notes from Frederic Schuller's lecture series on the mathematical foundations of physics — axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics."
+description: "Working notes from Frederic Schuller's lecture series on the mathematical foundations of physics: axiomatic set theory, topological spaces, and the structures underlying classical and quantum mechanics."
+toc: true
+toc-location: right
+toc-title: "Contents"
 ---
 
 Notes from [this lecture series](https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic) by Frederic Schuller, building the mathematical background for Classical Mechanics, Statistical Mechanics, SR, GR, EM & QM.
@@ -514,7 +517,7 @@ $$\mathcal{L}_p:= \left\{ \gamma : [0, 1] \longrightarrow M \Big|\ \gamma\ \text
 
 $$(\gamma * \delta)(\lambda) := \begin{cases} \gamma(2\lambda) & 0\leq\lambda\leq\tfrac{1}{2}\\ \delta(2\lambda - 1) & \tfrac{1}{2}\leq \lambda \leq 1 \end{cases}$$
 
-![](Untitled%2030.png){fig-align="center"}{fig-align="center"}
+![](Untitled%2030.png){fig-align="center"}
 
 If one of the loops goes around a hole, they are no longer homotopic because they cannot continuously deform into each other.
 
