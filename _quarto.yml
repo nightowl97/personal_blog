@@ -7,6 +7,16 @@ website:
   description: "Youssef Kharchouf's personal notes"
   site-url: https://kharchouf.com # you must change this appropriately for RSS feeds to work properly
   title: "Youssef Kharchouf"
+  comments:
+    giscus:
+      repo: nightowl97/personal_blog
+      repo-id: R_kgDOSZBZHA
+      category: Comments
+      category-id: DIC_kwDOSZBZHM4C-T4j
+      mapping: pathname
+      reactions-enabled: true
+      loading: lazy
+      theme: gruvbox_dark
   navbar:
     right:
       - about.qmd
