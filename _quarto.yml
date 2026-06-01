@@ -23,6 +23,11 @@ format:
       - customtheme.scss
     css: styles.css
     fontsize: 1.0em
+    highlight-style: gruvbox
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+    include-in-header: mathjax-config.html
     
     # template-partials:
     #   - title-block.html

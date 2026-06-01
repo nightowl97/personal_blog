@@ -2,3 +2,14 @@
 **/*.quarto_ipynb
 /_site/
 /.venv/
+
+# bus data pipeline — too large for GitHub, regeneratable
+posts/err-bus/data/
+
+# pipeline runtime state — not blog assets
+posts/err-bus/history.jsonl
+posts/err-bus/latest.json
+
+# dev/tooling scripts — not part of the published post
+posts/err-bus/simplify.py
+posts/err-bus/trace_builder.py

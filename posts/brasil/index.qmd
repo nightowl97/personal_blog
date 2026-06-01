@@ -1,8 +1,8 @@
 ---
-title: "Reading Notes on Brazilian Governance (2002–2023)"
+title: "Reading Notes on 20 years of Brazilian Governance (2002-2023)"
 date: 2022-11-02
 categories: [notes, political-economy]
-description: "Personal reading notes on Brazilian governance, environmental policy, and democratic institutions — from Lula's first presidency through the Bolsonaro years and back."
+description: "Personal reading notes on Brazilian governance, environmental policy, and democratic institutions - from Lula's first presidency through the Bolsonaro years and back."
 image: bra_flag.jpg
 ---
 
@@ -42,7 +42,7 @@ Work on sustainable development in Brazil had, therefore, already been watered d
 
 ## Bolsonaro
 
-Bolsonaro sowed doubt about the reliability of the nation's electronic voting system — without any evidence:
+Bolsonaro sowed doubt about the reliability of the nation's electronic voting system, without any evidence:
 
 - [Bolsonaro is sowing doubt in Brazil's electoral system (CNN)](https://edition.cnn.com/2021/08/06/americas/bolsonaro-brazil-elections-intl-latam/index.html)
 - [Bolsonaro vs. Lula: All you need to know (CNBC)](https://www.cnbc.com/2022/09/14/bolsonaro-vs-lula-all-you-need-to-know-ahead-of-brazils-election.html)
@@ -53,7 +53,7 @@ He also sought to dismiss the severity of torture and human rights abuses commit
 - [Brazil: Bolsonaro Celebrates Brutal Dictatorship (HRW)](https://www.hrw.org/news/2019/03/27/brazil-bolsonaro-celebrates-brutal-dictatorship)
 - [First Conviction for Dictatorship Crimes in Brazil (HRW)](https://www.hrw.org/news/2021/06/22/first-conviction-dictatorship-crimes-brazil)
 
-> "I am in favour of torture, you know that. And the people are in favour as well." — Jair Bolsonaro ([1999](https://www.nytimes.com/2018/10/28/world/americas/brazil-president-jair-bolsonaro-quotes.html))
+> "I am in favour of torture, you know that. And the people are in favour as well." - Jair Bolsonaro ([1999](https://www.nytimes.com/2018/10/28/world/americas/brazil-president-jair-bolsonaro-quotes.html))
 
 Once, following a visit to a settlement of African slave descendants called a quilombo, Bolsonaro suggested they were all overweight:
 
@@ -95,17 +95,17 @@ He weakened the Brazilian Institute of the Environment and Renewable Natural Res
 
 [Summary of racist remarks against indigenous people (Survival International)](https://www.survivalinternational.org/articles/3540-Bolsonaro)
 
-> "If I become President there will not be a centimeter more of Indigenous land." — Jair Bolsonaro
+> "If I become President there will not be a centimeter more of Indigenous land." - Jair Bolsonaro
 
-> ["Indians are undoubtedly changing … They are increasingly becoming human beings just like us."](https://www.theguardian.com/world/2020/jan/24/jair-bolsonaro-racist-comment-sparks-outrage-indigenous-groups) — Jair Bolsonaro
+> ["Indians are undoubtedly changing … They are increasingly becoming human beings just like us."](https://www.theguardian.com/world/2020/jan/24/jair-bolsonaro-racist-comment-sparks-outrage-indigenous-groups) - Jair Bolsonaro
 
-> "The Indians do not speak our language, they do not have money, they do not have culture. They are native peoples. How did they manage to get 13% of the national territory?" — Jair Bolsonaro
+> "The Indians do not speak our language, they do not have money, they do not have culture. They are native peoples. How did they manage to get 13% of the national territory?" - Jair Bolsonaro
 
-> "[Indigenous reserves] are an obstacle to agri-business. You can't reduce Indigenous land by even a square meter in Brazil." — Jair Bolsonaro
+> "[Indigenous reserves] are an obstacle to agri-business. You can't reduce Indigenous land by even a square meter in Brazil." - Jair Bolsonaro
 
-> "In 2019 we're going to rip up Raposa Serra do Sol [Indigenous Territory in Roraima, northern Brazil]. We're going to give all the ranchers guns." — Jair Bolsonaro
+> "In 2019 we're going to rip up Raposa Serra do Sol [Indigenous Territory in Roraima, northern Brazil]. We're going to give all the ranchers guns." - Jair Bolsonaro
 
-> "If I'm elected, I'll serve a blow to FUNAI (Brazil's department for Indigenous affairs); a blow to the neck. There's no other way. It's not useful anymore." — Jair Bolsonaro
+> "If I'm elected, I'll serve a blow to FUNAI (Brazil's department for Indigenous affairs); a blow to the neck. There's no other way. It's not useful anymore." - Jair Bolsonaro
 
 ### Sexist and Homophobic Remarks
 
@@ -127,7 +127,7 @@ He stated [he wouldn't pay women the same salary as men](https://www.redetv.uol.
 
 ### The Policies of Bolsonaro
 
-Bolsonaro increasingly disengaged Brazil from the international sustainability agenda. He cancelled the country's scheduled hosting of COP 25 in 2019, suspended the submission of further voluntary national reviews on the SDGs, and ditched most international collaboration on environmental conservation. Domestically, he abolished the Comissão Nacional para os Objetivos do Desenvolvimento Sustentável (CNODS, National Commission for the Sustainable Development Goals), created in October 2016 to coordinate SDG implementation between federal government agencies and civil society organisations. In April 2019 the Bolsonaro administration dissolved most public bodies that were not established by law but by decrees or ministerial orders — CNODS was terminated alongside about 500 other multi-stakeholder commissions and councils.
+Bolsonaro increasingly disengaged Brazil from the international sustainability agenda. He cancelled the country's scheduled hosting of COP 25 in 2019, suspended the submission of further voluntary national reviews on the SDGs, and ditched most international collaboration on environmental conservation. Domestically, he abolished the Comissão Nacional para os Objetivos do Desenvolvimento Sustentável (CNODS, National Commission for the Sustainable Development Goals), created in October 2016 to coordinate SDG implementation between federal government agencies and civil society organisations. In April 2019 the Bolsonaro administration dissolved most public bodies that were not established by law but by decrees or ministerial orders. CNODS was terminated alongside about 500 other multi-stakeholder commissions and councils.
 
 *Russo Lopes, G. and Bastos Lima, M. G. (2020) 'Necropolitics in the Jungle: COVID-19 and the Marginalisation of Brazil's Forest Peoples'. Bulletin of Latin American Research 39(S1): 92–97.*
 
@@ -196,7 +196,7 @@ His senator son, Flávio Bolsonaro, [paid 638,000 reais in cash](https://g1.glob
 
 ### COVID-19
 
-> "because of my background as an athlete, I wouldn't need to worry if I was infected by the virus. I wouldn't feel anything or at the very worst it would be like a little flu or a bit of a cold." — Jair Bolsonaro
+> "because of my background as an athlete, I wouldn't need to worry if I was infected by the virus. I wouldn't feel anything or at the very worst it would be like a little flu or a bit of a cold." - Jair Bolsonaro
 
 > "the people will soon see that they were tricked by these governors and by the large part of the media when it comes to coronavirus."
 
@@ -218,7 +218,7 @@ On 28 April 2020, when a reporter pointed out that Brazil's death toll had surpa
 
 Operation Car Wash is the infamous large-scale corruption investigation that began in Brazil in 2014. The operation initially focused on uncovering a money laundering scheme involving the state-owned oil company Petrobras, but it eventually expanded to investigate corruption across various sectors of Brazilian politics and business. The climax of *Lava Jato* was the conviction and imprisonment of Lula, the former president of Brazil, for allegedly accepting a triplex apartment in Guarujá from a company called OAS in exchange for contracts with Petrobras.
 
-Bolsonaro appointed Sergio Moro — the judge who put Lula in jail and prevented him from running in the 2018 election — as his "super justice minister" after his election. He also promised Moro a supreme court seat: [Folha de S.Paulo](https://www1.folha.uol.com.br/internacional/en/brazil/2019/05/bolsonaro-says-he-will-nominate-sergio-moro-to-the-supreme-court.shtml).
+Bolsonaro appointed Sergio Moro -the judge who put Lula in jail and prevented him from running in the 2018 election- as his "super justice minister" after his election. He also promised Moro a supreme court seat: [Folha de S.Paulo](https://www1.folha.uol.com.br/internacional/en/brazil/2019/05/bolsonaro-says-he-will-nominate-sergio-moro-to-the-supreme-court.shtml).
 
 [How anti-corruption crusades paved the way for Bolsonaro (The Atlantic)](https://www.theatlantic.com/international/archive/2019/08/anti-corruption-crusades-paved-way-bolsonaro/596449/)
 
@@ -229,11 +229,11 @@ It is now apparent that Moro was not acting as an impartial judge, but actively 
 
 The Intercept Brasil also revealed that wiretapping on Lula's phones was kept from the public; that there was a plot to [leak information to the Venezuelan opposition](https://theintercept.com/2019/07/09/brazil-car-wash-sergio-moro-venezuela-maduro/) at the suggestion of Moro; and that chief prosecutor Deltan Dallagnol gave [paid lectures](https://theintercept.com/2019/07/26/brazil-car-wash-deltan-dallagnol-paid-speaking/) to the very same banks he would later be tasked with investigating.
 
-Moro had accelerated court dates to ensure that Lula was sentenced and that an appellate court ruling could come in just in time for the former president to be barred from running in the 2018 elections. The rulings rendered Lula ineligible for the presidency — and in April 2018, he was arrested on Moro's orders. One of Moro's last acts in his judgeship was to publicly release plea-bargain testimony from one of Lula's former allies, Antonio Palocci, six days before the first round of elections.
+Moro had accelerated court dates to ensure that Lula was sentenced and that an appellate court ruling could come in just in time for the former president to be barred from running in the 2018 elections. The rulings rendered Lula ineligible for the presidency, and in April 2018, he was arrested on Moro's orders. One of Moro's last acts in his judgeship was to publicly release plea-bargain testimony from one of Lula's former allies, Antonio Palocci, six days before the first round of elections.
 
 "In a democratic and accusatory penal case, the role of prosecution must not be mixed with that of judgment," said Minister Gilmar Mendes. The chats published by The Intercept had [documented prohibited collaboration](https://theintercept.com/2019/06/09/brazil-lula-operation-car-wash-sergio-moro/) between the prosecutors and Moro, which Mendes said revealed lawbreaking: "Without a doubt, from the content of the conversations divulged, we can highlight manifestly illegal situations."
 
-On March 8, just a day before the judges publicly deliberated Moro's bias, Supreme Court Minister Edson Fachin made a surprise decision throwing out all the Car Wash convictions against Lula — on the grounds that Moro's mandate at the court in Curitiba was to judge crimes related to Petrobras, and so Lula's case fell outside his purview. Many critics saw this as a last-ditch effort to spare Moro the embarrassment of having the court rule against him on bias grounds. The remaining judges decided to continue their deliberations regardless — and finally ruled.
+On March 8, just a day before the judges publicly deliberated Moro's bias, Supreme Court Minister Edson Fachin made a surprise decision throwing out all the Car Wash convictions against Lula, on the grounds that Moro's mandate at the court in Curitiba was to judge crimes related to Petrobras, and so Lula's case fell outside his purview. Many critics saw this as a last-ditch effort to spare Moro the embarrassment of having the court rule against him on bias grounds. The remaining judges decided to continue their deliberations regardless, and finally ruled.
 
 Car Wash prosecutors, who long insisted that they were apolitical, were in fact internally plotting how to prevent the return to power of Lula: [The Intercept](https://theintercept.com/2019/06/09/brazil-car-wash-prosecutors-workers-party-lula).
 
@@ -250,19 +250,19 @@ Lula was accused of having received a beachfront triplex apartment from a contra
 Selected messages from the leaked chats:
 
 - After a month of silence from the Car Wash task force, Moro asked: "Hasn't it been a long time without an operation?" In another instance, Moro said, "You cannot make that kind of mistake now."
-- "What do you think of these crazy statements from the PT national board? Should we officially rebut?" — Moro, using "we," showing he viewed himself and the Car Wash prosecutors as united in the same cause.
-- December 7, 2015 — Moro informally passed on an investigative tip to prosecutors: "Source informed me that the contact person is annoyed at having been asked to issue draft property transfer deeds for one of the ex-president's children. Apparently the person would be willing to provide the information. I'm therefore passing it along. The source is serious." "Thank you!! We'll make contact," Dallagnol promptly replied.
+- "What do you think of these crazy statements from the PT national board? Should we officially rebut?" - Moro, using "we," showing he viewed himself and the Car Wash prosecutors as united in the same cause.
+- December 7, 2015,  Moro informally passed on an investigative tip to prosecutors: "Source informed me that the contact person is annoyed at having been asked to issue draft property transfer deeds for one of the ex-president's children. Apparently the person would be willing to provide the information. I'm therefore passing it along. The source is serious." "Thank you!! We'll make contact," Dallagnol promptly replied.
 
 Because they had no proof that Lula owned a triplex and were looking for one, they seized on an O Globo article:
 
 - Dallagnol messaged the group: "I'm so horny for this O GLOBO article from 2010. I'm going to kiss whichever one of you found this."
 
-> The [article](https://oglobo.globo.com/politica/caso-bancoop-triplex-do-casal-lula-esta-atrasado-3041591), headlined "Bancoop Case: Lula Couple's Triplex Is Delayed," was the first to publicly mention Lula owning an apartment in Guarujá. It does not mention OAS or Petrobras and covers instead the bankruptcy of the construction cooperative behind the development. There is also a telling inconsistency: the article puts Lula's penthouse in Tower B, while the prosecutors alleged he owned the beachfront triplex in Tower A — a different building. Car Wash prosecutors used the article as evidence but indicted and convicted Lula on a triplex in a different building, demonstrating imprecision on the central point of their case.
+> The [article](https://oglobo.globo.com/politica/caso-bancoop-triplex-do-casal-lula-esta-atrasado-3041591), headlined "Bancoop Case: Lula Couple's Triplex Is Delayed," was the first to publicly mention Lula owning an apartment in Guarujá. It does not mention OAS or Petrobras and covers instead the bankruptcy of the construction cooperative behind the development. There is also a telling inconsistency: the article puts Lula's penthouse in Tower B, while the prosecutors alleged he owned the beachfront triplex in Tower A, a different building. Car Wash prosecutors used the article as evidence but indicted and convicted Lula on a triplex in a different building, demonstrating imprecision on the central point of their case.
 >
 > In a now infamous moment, Dallagnol presented a typo-laden PowerPoint presentation that showed "Lula" written in a blue bubble surrounded by 14 other bubbles containing everything from "Lula's reaction" and "expressiveness" to "illicit enrichment" and "bribeocracy." All arrows pointed back to Lula, whom they characterised as the mastermind behind a sprawling criminal enterprise.
 
 - Moro responded: "Definitely, the criticisms of your presentation are disproportionate. Stand firm."
-- "Maybe, tomorrow, you should prepare a press release to point out inconsistencies in Lula's arguments. The defense already put on their little show." — Moro. Prosecutors did as he asked.
+- "Maybe, tomorrow, you should prepare a press release to point out inconsistencies in Lula's arguments. The defense already put on their little show." - Moro. Prosecutors did as he asked.
 
 Despite repeatedly using the phrase "alleged messages," Moro [acknowledged the authenticity](https://www1.folha.uol.com.br/poder/2019/06/foi-descuido-meu-diz-moro-sobre-mensagem-a-lava-jato-com-pistas-contra-lula.shtml) of at least one of the conversations. Questioned about having passed on an investigative lead to prosecutors on December 7, 2015, Moro said it was an "oversight on my part."
 
@@ -270,7 +270,7 @@ Despite repeatedly using the phrase "alleged messages," Moro [acknowledged the a
 
 [The Intercept, July 2019](https://theintercept.com/2019/07/21/in-secret-chats-brazils-chief-corruption-prosecutor-worried-that-bolsonaros-justice-minister-would-protect-bolsonaros-senator-son-flavio-from-scandals/)
 
-Senator Flávio Bolsonaro is accused of links to paramilitary gangs in Rio de Janeiro, stemming from a corruption scandal involving his former driver, Fabricio Queiroz, who is accused of transferring more than $1.5 million to Flávio's account — at least one of which ended up in the account of Jair Bolsonaro's wife, Michelle. Queiroz is also alleged to have connections to paramilitary gangs, and Flávio is accused of employing family members of one of the gang leaders. Deep worries were expressed that broader and more serious allegations might not be investigated, because Moro was concerned about angering the president.
+Senator Flávio Bolsonaro is accused of links to paramilitary gangs in Rio de Janeiro, stemming from a corruption scandal involving his former driver, Fabricio Queiroz, who is accused of transferring more than $1.5 million to Flávio's account, at least one of which ended up in the account of Jair Bolsonaro's wife, Michelle. Queiroz is also alleged to have connections to paramilitary gangs, and Flávio is accused of employing family members of one of the gang leaders. Deep worries were expressed that broader and more serious allegations might not be investigated, because Moro was concerned about angering the president.
 
 Lava Jato prosecutors mocking the death of Lula's wife: [UOL Notícias](https://noticias.uol.com.br/politica/ultimas-noticias/2019/08/27/procuradora-da-lava-jato-pede-desculpas-a-lula-por-ironizar-morte-de-marisa.htm)
 
@@ -283,4 +283,4 @@ Each time Lula's case made its way to the highest court, members of the military
 Lula won the 2022 election and returned to the presidency in January 2023. Among his first acts:
 
 - [In sweeping moves, Lula reestablished the Amazon Fund and signed environmental executive orders (Amazon Watch)](https://amazonwatch.org/news/2023/0105-in-sweeping-moves-president-lula-reestablished-the-amazon-fund-and-signed-environmental-executive-orders)
-- [Brazil's Lula recognises six new indigenous reserves (BBC)](https://www.bbc.com/news/world-latin-america-65433284): *The lands — including a vast area of Amazon rainforest — cover about 620,000 hectares (1.5m acres).*
+- [Brazil's Lula recognises six new indigenous reserves (BBC)](https://www.bbc.com/news/world-latin-america-65433284): *The lands -including a vast area of Amazon rainforest- cover about 620,000 hectares (1.5m acres).*

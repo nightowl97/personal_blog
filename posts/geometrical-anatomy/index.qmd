@@ -6,6 +6,7 @@ description: "Working notes from Frederic Schuller's lecture series on the mathe
 toc: true
 toc-location: right
 toc-title: "Contents"
+image: Screenshot_from_2021-11-07_01-56-56.png
 ---
 
 Notes from [this lecture series](https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic) by Frederic Schuller, building the mathematical background for Classical Mechanics, Statistical Mechanics, SR, GR, EM & QM.

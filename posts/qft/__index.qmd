@@ -1,0 +1,15 @@
+---
+title: "Introduction to Quantum Field Theory"
+date: 2026-05-15
+categories: [physics, quantum field theory, quantum mechanics, mathematical physics]
+description: "Working notes from Anthony Zee's 'Quantum Field Theory in a Nutshell' as well as David Tong's lectures."
+toc: true
+toc-location: right
+toc-title: "Contents"
+image: g2.png
+draft: true
+---
+
+## 1 - The Path Integral Formulation of Quantum Mechanics
+
+ongoing

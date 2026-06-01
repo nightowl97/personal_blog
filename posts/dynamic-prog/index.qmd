@@ -3,6 +3,7 @@ title: A first look into Dynamic Programming
 date: 2017-01-19 15:20
 categories: [algorithms, recursion, code]
 description: A gentle first look at dynamic programming - How storing intermediate results transforms a naive recursive Fibonacci from O(2ⁿ) to O(n), and why the name sounds considerably more impressive than the idea.
+image: complexity.png
 ---
 
 Something I didn't know existed until recently is Dynamic Programming. If, like me, you knew computer scientists 
@@ -23,7 +24,8 @@ If you ever took a programming/CS course, then at some point you must have learn
 ```
 
 This function clearly gives you the $n$-th number in the famous Fibonacci sequence. The first time you see and understand this, it seems brilliant, elegant and pretty much perfect. But with a deeper look, this algorithm is actually going to turn out to be pretty bad. I'm not going to talk about whether Recursion is inherently good or bad. If that's what you're interested in, I'll just refer you to this Stack Overflow answer. First, try and run this function for a big enough n, say 100 for example. It's going to take a very long time. This is the timing fib(40) in a python 2 interpreter:
-```
+
+```python
     fib(40): 102334155
     --- 80.5310001373 seconds ---
 ```
@@ -33,7 +35,7 @@ Here's why it's slow:
 
 As an example, let's take a look at the recursion tree when we compute fib(6):
 
-![fib6](tree.jpg)
+![](tree.jpg){fig-align="center"}
 
 Each node represents a function call, and as you can see, we call: `fib(4)` twice, `fib(3)` 3 times and `fib(2)` 
 5 times.
@@ -50,7 +52,7 @@ And so forth, each step calling T twice, which means: $T(n)=2∗2∗2∗...∗2 
 This is a time complexity $O(2^n)$ hence an exponential time algorithm. If you can help it, you should always try 
 to avoid exponential time, because it is very costly as you can see from the diagram:
 
-![comp](complexity.png)
+![](complexity.png){fig-align="center"}
 
 One last thing. Every time a recursive call happens, it takes a bit of memory from the call stack. The amount that is taken is called the stackframe, and is only freed when the function returns. In a low level language, deep recursion will eat up all the memory and cause a stack overflow. High level languages usually have some sort of guards against this. In python for example, you'll cause a maximum recursion depth error. Sure you can get around these guards, but they are there for a reason, and you'll rarely be justified in circumventing them.
 The Dynamic Programming approach:
@@ -92,10 +94,12 @@ that `T(n)=Time for each subproblem ∗ Number of subproblems`.
 If you try and run this, you're going to notice a gigantic jump in performance because this is now a linear 
 time algorithm O(n). So much so that even I had the patience to wait for it to calculate the 500-th number:
 
-    fib(500): 139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125
-    --- 0.00100016593933 seconds ---
+```python
+fib(500): 139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125
+--- 0.00100016593933 seconds ---
+```
 
-![ndt](ndt.gif)
+![](ndt.gif){fig-align="center"}
 
 That was a pretty big number and it did it in roughly 1 millisecond? Hey, that's pretty good!
 

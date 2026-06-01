@@ -23,16 +23,16 @@ we will do just that and see that it leads to surprising results!
 # Global Symmetry
 
 Let's start simple. The Lagrangian density of a Dirac Bi-spinor field is:
-$$\mathcal{L}_{Dirac}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + m c^2 \bar{\psi} \psi$$
+$$\mathcal{L}_{Dirac}= i\hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi - m c^2 \bar{\psi} \psi$$
 
 Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we're not interested in 
 that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start 
 off, we'll try one of the simplest possible transformations, a global phase-shift. This basically amounts to 
 changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit 
 circle in complex space:
-$$\psi \rightarrow \psi′ = e^{i q \phi}\psi$$
+$$\psi \rightarrow \psi' = e^{i q \phi}\psi$$
 
-A minor detail that we will need is that the Dirac adjoint is defined as $\bar{\psi}= i\psi^\dagger \gamma^0$
+A minor detail that we will need is that the Dirac adjoint is defined as $\bar{\psi}= \psi^\dagger \gamma^0$
 and it transforms like so:
 $$\bar{\psi} \rightarrow \bar{\psi'} = \bar{\psi}e^{-iq\phi}$$
 
@@ -97,7 +97,7 @@ electromagnetism in its quantum nature. Isn't that mindblowing?
 Since Aμ is now a field itself, it needs to play by the rules of Special Relativity, a.k.a obey the Klein-Gordon equation 
 which arises from the Proca Lagrangian:
 
-$$\mathcal{L_{Proca}} = \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu} + \frac{1}{8\pi} \left(\frac{mc^2}{\hbar}\right) A^\mu A_\mu$$
+$$\mathcal{L_{Proca}} = \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu} + \dfrac{1}{8\pi}\left(\dfrac{mc}{\hbar}\right)^2 A^\mu A_\mu$$
 
 The first term is already invariant, but we need to eliminate the second term to make the whole Lagrangian invariant
 by setting $m=0$. This is to be expected because excitations in the E&M field (a.k.a photons) are massless. Hence,
@@ -112,9 +112,9 @@ When we imposed $A_\mu \rightarrow A′_\mu = A_\mu - \partial_\mu \phi(x^\mu)$,
 that is nothing but the Lorenz Gauge condition from classical electrodynamics.
 
 Just for the sake of closure, and because you can never go wrong with them, Maxwell's equations can be pulled from 
-the QED Lagrangian by applying the Euler-Lagrange equations for Aμ where the four-current is defined as 
+the QED Lagrangian by applying the Euler-Lagrange equations for $A_\mu$ where the four-current is defined as 
 $J^\mu = (c\rho, \mathbf{J})$:
-$$\partial_\mu F^{\alpha \beta} = \mu_0 J^\beta$$
+$$\partial_\mu F^{\mu\nu} = \frac{4\pi}{c} J^\nu$$
 
 # Epilogue
 

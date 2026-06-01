@@ -1,0 +1,72 @@
+---
+title: Book notes - A People's History of the United States (by Howard Zinn)
+date: 2026-05-29 22:30
+categories: [history, book notes, politics]
+description: A bottom-up retelling of American history through the eyes of those its dominant narrative has always ignored; Native Americans, enslaved people, workers, women, and dissenters.
+toc: true
+toc-location: right
+toc-title: "Contents"
+image: HaymarketRiot-Harpers.jpg
+draft: true
+---
+
+## COLUMBUS, THE INDIANS, AND HUMAN PROGRESS
+
+- On October 12, 1492, a sailor called Rodrigo saw land and cried out. It was an island in the Bahamas. The first man to do so was supposed to get a yearly pension of 10,000 maravedis for life, but Rodrigo never got it. Columbus claimed he had seen a light the evening before. He got the reward.
+- Columbus and his crew land in the bahamas, and are greeted by the native people. They are described as friendly, generous, and hospitable. They have no iron or steel, no weapons, and are easily subjugated.
+
+    > "They [...] brought us parrots and balls of cotton and spears and many other things, which they exchanged for the glass beads and hawks' bells. They willingly traded everything they owned [...]. They were well-built, with good bodies and handsome features. [...] They do not bear arms, and do not know them, for I showed them a sword, they took it by the edge and cut themselves out of ignorance. They have no iron. Their spears are made of cane [...] . They would make fine servants [...]. With fifty men we could subjugate them all and make them do whatever we want"
+
+- The arawaks had no iron, but they wore gold ornaments in their ears. Columbus took some of them as prisoners aboard his ship and insisted they show him the source of the gold.
+
+- Columbus then set out to cuba, then to hispaniola (Haiti and the Dominican Republic currently). bits of gold in the rivers and a gold mask presented by a local chief led to wild visions of wealth.
+
+- A fort (named Navidad) was built from the timber of the Santa Maria, his largest ship, and took the other two ships back to spain, with some of the natives as prisoners, some of which died from the cold.
+
+- In spain, Columbus insisted he had reached asia, when he was actually in Cuba. He promised the royals as much gold as they need [...] and as many slaves as they ask." He was full of religious talk: 
+
+    > "Thus the eternal God, our Lord, gives victory to those who follow His way over apparent impossibilities
+
+- He was given 17 ships and 1200 men for his next expedition. The objective was slaves and gold.
+
+- Columbus returned to the Caribbean in 1493, and found that the fort had been destroyed. The sailors were killed in a battle with the Indians, after they had roamed the island in gangs looking for gold, taking women and children as slaves for sex and labor
+
+- No gold fields were found, but the natives were enslaved and sent to spain. in 1495, 1500 arawak men, women and children were rounded up and sent 500 of them to spain, 200 of which died on the way. The rest were sold as slaves. Columbus later wrote:
+
+    > "Let us in the name of the Holy Trinity go on sending all the slaves that can be sold."
+
+- Because so many enslaved Indians died, Columbus turned to gold to repay his investors. In the Cicao province of Haiti, he forced everyone aged 14 and older to collect a fixed quota of gold every three months, marking compliant individuals with copper tokens worn around the neck. Those caught without a token were punished by having their hands cut off, which killed them.
+
+- "The Indians had been given an impossible task. The only gold around was bits of dust garnered from the streams. So they fled, were hunted down with dogs, and were killed."
+
+- The Arawaks tried to mount armed resistance but were hopelessly outmatched by Spanish armor, muskets, swords, and horses. Captured Arawaks were hanged or burned alive. In despair, the Arawaks turned to mass suicide using cassava poison, and killed their own infants to spare them from the Spaniards. Within two years, half of Haiti's 250,000 Indians had died through murder, mutilation, or suicide.
+
+- Once it was clear there was no gold to be found, the Spanish forced the surviving Indians into slave labor on large estates called encomiendas, working them so brutally that they died by the thousands. The population collapsed in stages: roughly 50,000 left by 1515, only 500 by 1550, and by 1650 a report showed not a single original Arawak or descendant remaining on the island.
+
+- The chief source-and, on many matters the only source-of information about what happened on the islands after Columbus came is _Bartolome de las Casas_, who, as a young priest, participated in the conquest of Cuba. For a time he owned a plantation on which Indian slaves worked, but he gave that up and became a vehement critic of Spanish cruelty.
+
+- Las Casas notes that the Spaniards were startled by how well women were treated in Indian society. There were no marriage laws, men and women chose and left partners freely. Women who tired of their partners could induce abortions with herbs. And nakedness was treated as completely ordinary.
+
+- Quotes from book two of the _History of the Indies_ by Las Casas:
+
+    > "Endless testimonies [...] prove the mild and pacific temperament of the natives. [...] But our work was to exasperate, ravage, kill, mangle and destroy; small wonder, then, if they tried to kill one of us now and then. [...] The admiral, it is true, was blind as those who came after him, and he was so anxious to please the King that he committed irreparable crimes against the Indians"
+
+    > "Two of these so-called Christians met two Indian boys one day, each carrying a parrot; they took the parrots and for fun beheaded the boys."
+
+    > "Thus husbands and wives were together only once every eight or ten months and when they met
+
+    > "they were so exhausted and depressed on both sides [...] they ceased to procreate. As for the newly born, they died early because their mothers, overworked and famished, had no milk to nurse them, and for this reason, while I was in Cuba, 7000 children died in three months. Some mothers even drowned their babies from sheer desperation. [...] hi this way, husbands died in the mines, wives died at work, and children died from lack of milk [...] and in a short time this land which was so great, so powerful and fertile [...] was depopulated. [...] My eyes have seen these acts so foreign to human nature, and now I tremble as I write"
+
+    > "there were 60,000 people living on this island, including the Indians; so that from 1494 to 1508, over three million people had perished from war, slavery, and the mines. Who in future generations will believe this? I myself writing it as a knowledgeable eyewitness can hardly believe it [...]"
+
+- Samuel Eliot Morison, the most distinguished Columbus scholar, did not lie or omit. In his 1954 Christopher Columbus, Mariner, he flatly called the policy Columbus began and his successors continued "complete genocide." But that admission sits on a single page buried in what is otherwise a grand romance, and Morison's closing paragraph praises Columbus's will, faith, and above all his flawless seamanship. 
+
+    > He had his faults and his defects, but they were largely the defects of the qualities that made him great-his indomitable will, his superb faith in God and in his own mission as the Christ-bearer to lands beyond the seas, his stubborn persistence despite neglect, poverty and discouragement. But there was no flaw, no dark side to the most outstanding and essential of all his qualities-his seamanship
+    > - Samuel Eliot Morison
+
+- Zinn's point: there are three ways to distort the past — outright lying, quiet omission, and a third that Morison uses. Morison states the terrible truth and then buries it under a mass of other material, conveying with an "infectious calm" that yes, mass murder happened, but it shouldn't weigh much in our final judgment or affect how we act in the world.
+
+- Historians, like mapmakers, can't avoid selection and emphasis, choosing some facts over others is unavoidable. Historians are trained to treat knowledge as neutral excellence, not as a tool in social struggles. 
+A historian's distortion isn't technical like the mercator projection that a mapmaker uses, it's ideological. Any emphasis supports some kind of interest, either political, economic, national etc.
+
+- "To emphasize the heroism of Columbus and his successors as navigators and discoverers, and to de-emphasize their genocide, is not a technical necessity but an ideological choice."

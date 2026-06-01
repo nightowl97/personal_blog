@@ -53,11 +53,11 @@ Computational scientist with a PhD from Sorbonne Université and postdoctoral ex
 ## Education {.cv-section}
 
 ::: {.cv-edu-item}
-**PhD, Physical Chemistry** [· Sorbonne Université, France · 2020 – 2023]{.cv-edu-meta}
-:::
+**PhD, Physical Chemistry** [· Sorbonne Université, France & Université Abdelmalek Essaadi, Morocco · 2020 – 2023]{.cv-edu-meta}
+::: 
 
 ::: {.cv-edu-item}
-**MSc, Energy Engineering** [· FSTT, Morocco · 2018 – 2020]{.cv-edu-meta}
+**MSc, Energy Engineering** [· Faculté des Sciences et Techniques de Tanger, Morocco · 2018 – 2020]{.cv-edu-meta}
 
 Formulated solar-cell characterization as a constrained optimization problem and developed an improved differential-evolution algorithm for real-time control applications. Published in *Energy Conversion and Management*.
 :::

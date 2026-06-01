@@ -78,7 +78,7 @@ The peak happens because the rising Fermi level of the electrode allows it to gi
 
 Keep in mind the metal electrode's Fermi level will match the solution's Fermi level which is defined as $\frac{1}{2}$(HOMO + LUMO) almost instantaneously after putting the electrode in the solution.
 
-The peak is not a plateau because the reaction is limited by mass transport — the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.
+The peak is not a plateau because the reaction is limited by mass transport, the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.
 
 ## Levich Treatment
 
@@ -105,7 +105,7 @@ The *second step* is to plot the inverse of the current values as a function of 
 
 ***Figure 1:** **(a)** I vs. E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in **(b)**. These lines are then extrapolated **(c)** to obtain the electronic transfer current $I_t$ **(d)**.*
 
-The *third step* is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current $I_t$ — the current that you would obtain if there was absolutely no limitation by mass transport.
+The *third step* is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current $I_t$, the current that you would obtain if there was absolutely no limitation by mass transport.
 
 ![](kouteckylevich_fig2.gif)
 
@@ -125,7 +125,7 @@ Performing these three steps at several potential values (Fig. 2a, b, c, d) allo
 
 {{< video https://www.youtube.com/watch?v=kexDd0kFAK8 >}}
 
-In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system — the AC part of the signal is too big and becomes non-linear.
+In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system, the AC part of the signal is too big and becomes non-linear.
 
 Sometimes the chosen AC amplitude is good for some frequency ranges but not for others, meaning you have to make different measurements with different AC amplitudes.
 
@@ -187,7 +187,7 @@ The Tafel equation is an approximation of the Butler-Volmer equation at high ove
 
 #### Supporting Electrolyte
 
-When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution — this artificially added salt is called supporting electrolyte.
+When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution, this artificially added salt is called supporting electrolyte.
 The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.
 
 A negligible electric field provides two advantages for electroanalysis:
@@ -195,7 +195,7 @@ A negligible electric field provides two advantages for electroanalysis:
 - The voltage due to the resistance of the electrolyte when the cell draws current ("ohmic drop") is minimal. Therefore, the potential difference applied across the electrochemical cell is localized at the electrode–electrolyte interfaces, and so the activation overpotential perceived by the redox couple at this interface is almost exactly proportional to the applied cell voltage. The kinetic behavior of the electrochemical cell then has no explicit dependence on the magnitude of the drawn current.
 - The contribution of migration to the transport of charged chemical species is negligible compared to the contribution of diffusion (and of convection, in a forced flow). Therefore the transport properties of the system are linearized, and they do not depend on the magnitude of the drawn current.
 
-Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven — such as electrolysis, electrodeposition, batteries, and fuel cells — current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.
+Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven -such as electrolysis, electrodeposition, batteries, and fuel cells- current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.
 
 #### Scan Rate Influence
 
@@ -205,7 +205,7 @@ $$
 i_p = 0.446\, nFAC^0 \left(\frac{nF\nu D_0}{RT}\right)^{\frac{1}{2}}
 $$
 
-[^2]: Debatable — "normal" is the old name for "standard" in France.
+[^2]: Debatable - "normal" is the old name for "standard" in France.
 [^3]: Bard, Allen J.; Larry R. Faulkner (2000). *Electrochemical Methods: Fundamentals and Applications* (2nd ed.). Wiley. p. 336.
 [^4]: In theory, the Koutecký-Levich analysis only works for redox reactions with a standard kinetic constant $k°$ smaller or equal to several $10^2$ cm s$^{-1}$, that is to say, for sluggish reactions. In practice, most reactions are neither sluggish nor rapid.
 [^scanrate]: For a review see: Elgrishi, N. et al. *J. Chem. Educ.* 2018, 95, 197–206.

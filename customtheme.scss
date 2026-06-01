@@ -145,7 +145,6 @@ $navbar-bg:          #2C2926;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 4px;
-  background-color: #2C2926;
 }
 
 .quarto-post .thumbnail a {
@@ -234,6 +233,23 @@ $navbar-bg:          #2C2926;
   margin-left: 0;
   color: #ABA49A !important;
   font-style: italic;
+}
+
+/* ── Inline code ── */
+:not(pre) > code {
+  background-color: #2C2926 !important;
+  color: #B8693C;
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.88em;
+}
+
+/* ── Code blocks ── */
+div.sourceCode,
+pre.sourceCode {
+  background-color: #2C2926 !important;
+  border: 1px solid #3D3830;
+  border-radius: 4px;
 }
 
 /* Invert images for dark mode */
