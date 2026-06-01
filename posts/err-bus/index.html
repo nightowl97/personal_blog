@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-06-02">
+<meta name="description" content="Intercepting an Android transit app’s traffic to uncover its hidden API, then building a better live map with road-matched routes and arrival predictions.">
+
+<title>Reverse-Engineering My City’s Bus Tracker – Youssef Kharchouf</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e32cdaa352a166e3f711f9e6a2778ae5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } },
+  output: { font: 'mathjax-stix2' }
+};
+</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Youssef Kharchouf</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nightowl97"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/youssefkhar/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=rjjVxSYAAAAJ"> <i class="bi bi-mortarboard-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Reverse-Engineering My City’s Bus Tracker</h1>
+                  <div>
+        <div class="description">
+          Intercepting an Android transit app’s traffic to uncover its hidden API, then building a better live map with road-matched routes and arrival predictions.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">reverse engineering</div>
+                <div class="quarto-category">networking</div>
+                <div class="quarto-category">python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#reverse-engineering-the-app" id="toc-reverse-engineering-the-app" class="nav-link" data-scroll-target="#reverse-engineering-the-app">Reverse Engineering the App</a>
+  <ul class="collapse">
+  <li><a href="#anatomy-of-the-response" id="toc-anatomy-of-the-response" class="nav-link" data-scroll-target="#anatomy-of-the-response">Anatomy of the response</a></li>
+  </ul></li>
+  <li><a href="#rebuilding-the-polyline" id="toc-rebuilding-the-polyline" class="nav-link" data-scroll-target="#rebuilding-the-polyline">Rebuilding the Polyline</a></li>
+  <li><a href="#osrm-and-road-matching" id="toc-osrm-and-road-matching" class="nav-link" data-scroll-target="#osrm-and-road-matching">OSRM and Road Matching</a></li>
+  <li><a href="#deploying-a-worker-to-serve-the-map" id="toc-deploying-a-worker-to-serve-the-map" class="nav-link" data-scroll-target="#deploying-a-worker-to-serve-the-map">Deploying a Worker to Serve the Map</a></li>
+  <li><a href="#the-live-map" id="toc-the-live-map" class="nav-link" data-scroll-target="#the-live-map">The Live Map</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<div class="column-screen">
+<p><img src="header.png" class="img-fluid" style="width:100%;display:block;max-height:420px;object-fit:cover;"></p>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I was surprised to learn that my hometown had an android app that tracks the city’s buses in real time. It is very useful since the bus frequency is very low and unreliable, so knowing the real-time location of the buses is crucial in order to plan your trips. When I tried out the app, it was functional, but very basic, the interface was clunky, the design was not great, and the ETA predictions made no sense.</p>
+<p>I wondered if it was possible to build something better, and maybe a good learning experience since I was curious about how the app worked. I decided to reverse engineer it and build my own bus tracker. Maybe even later down the line, we could build a model to predict the arrival times of the buses at each stop using historical data, which would be more accurate than the app’s predictions.</p>
+</section>
+<section id="reverse-engineering-the-app" class="level2">
+<h2 class="anchored" data-anchor-id="reverse-engineering-the-app">Reverse Engineering the App</h2>
+<p>The first step was to reverse engineer the app to understand how it worked and how it communicated with its server. This is a small town, so I expected the communications to be pretty basic. First thing I tried was to see what kind of requests the app was making to fetch the live bus data. I already have the app on my phone, so I set up a proxy server on my computer using mitmproxy, configured my phone to route its traffic through the proxy, and installed the mitmproxy certificate in order to intercept HTTPS traffic. Thankfully we will not be decompiling any APKs or binaries today, nor will we need to fire up wireshark or any kind of disassembler, as I would be way out of my depth for that kind of challenge. I simply opened the app and watched the traffic. Lo and behold, the request wasn’t even using HTTPS, installing the certificate wasn’t even necessary. The app was making simple periodic POST requests to a single endpoint with the same payload, and the response contained over 100 KB of data.</p>
+<section id="anatomy-of-the-response" class="level3">
+<h3 class="anchored" data-anchor-id="anatomy-of-the-response">Anatomy of the response</h3>
+<p>A single <code>POST</code> to <code>/api/line_horaires/48</code> with the body <code>{"reseaux_id": 8}</code> returns <em>everything</em> the app needs to draw the map. There’s no second call for stops, no separate endpoint for live positions, it all comes back in one ~100 KB JSON object with five top-level keys:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"line"</span><span class="fu">:</span>            <span class="fu">{</span> <span class="er">/*</span> <span class="er">line</span> <span class="er">+</span> <span class="er">network</span> <span class="er">metadata</span> <span class="er">*/</span> <span class="fu">},</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"stations_aller"</span><span class="fu">:</span>  <span class="ot">[</span> <span class="er">/*</span> <span class="dv">32</span> <span class="er">stops</span><span class="ot">,</span> <span class="er">outbound</span> <span class="er">order</span> <span class="er">*/</span> <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"stations_retour"</span><span class="fu">:</span> <span class="ot">[</span> <span class="er">/*</span> <span class="er">the</span> <span class="er">same</span> <span class="dv">32</span> <span class="er">stops</span><span class="ot">,</span> <span class="er">reversed</span> <span class="er">*/</span> <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"buses_aller"</span><span class="fu">:</span>     <span class="ot">[</span> <span class="er">/*</span> <span class="er">live</span> <span class="er">buses</span> <span class="er">heading</span> <span class="er">outbound</span> <span class="er">*/</span> <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"buses_retour"</span><span class="fu">:</span>    <span class="ot">[</span> <span class="er">/*</span> <span class="er">live</span> <span class="er">buses</span> <span class="er">heading</span> <span class="er">back</span> <span class="er">*/</span> <span class="ot">]</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>aller</code> and <code>retour</code> are French for the outbound and return legs, this line runs one physical route in two directions, and the API mirrors that split everywhere.</p>
+<section id="line-what-this-route-is" class="level4">
+<h4 class="anchored" data-anchor-id="line-what-this-route-is"><code>line</code>, what this route <em>is</em></h4>
+<p>The metadata block. The useful fields are <code>line_name</code> (<code>"L02"</code>), <code>line_color</code> (<code>"#e81e63"</code>, the route’s own pink, which I reuse for every marker and line on the map), and the two human-readable direction labels, <code>aller_direction</code> (<code>"Ahibous(31)"</code>) and <code>retour_direction</code> (<code>"Omrane (1)"</code>).</p>
+<p>Nested inside is a <code>reseaux</code> (“network”) object describing the city itself: Errachidia, network <code>id</code> 8, that <code>8</code> is exactly what the request body sends as <code>reseaux_id</code>. It even carries the network’s own backend <code>host</code>, a different IP from the one the app talks to, which is presumably where the raw GPS data originates before this server aggregates it.</p>
+</section>
+<section id="stations_aller-stations_retour-the-stops" class="level4">
+<h4 class="anchored" data-anchor-id="stations_aller-stations_retour-the-stops"><code>stations_aller</code> / <code>stations_retour</code>, the stops</h4>
+<p>Two ordered lists of the same 32 stops. (They’re numbered Omrane <strong>(1)</strong> through Ahibous <strong>(31)</strong>, but there are 32 because of a half-numbered insert, “Bachaouia (17/2)”, wedged between Ocean (17) and Grande Salle (18).) Each entry carries what you’d expect:</p>
+<ul>
+<li><code>station_name</code>, <code>station_lat</code>, <code>station_lng</code>, the label and position</li>
+<li><code>step</code>, the stop’s order along the route, <code>0</code> to <code>31</code></li>
+<li><code>sens</code>, direction flag: <code>1</code> outbound, <code>0</code> return</li>
+<li><code>direction</code>, the terminus this direction heads toward</li>
+</ul>
+<p><code>stations_retour</code> is just <code>stations_aller</code> reversed: Omrane’s <code>step 0</code> outbound becomes its <code>step 30</code> on the way back. So for drawing purposes, one list of coordinates sorted by <code>step</code> gives you both the stop markers and a first-draft route line.</p>
+<p>A quirk worth noting: every station object also contains nested <code>lines</code> and <code>line_stations</code> arrays that re-describe <em>the same stop again</em>, mostly as a duplicate of itself viewed from the opposite direction. It’s redundant denormalization, the kind of thing an ORM emits when you serialize a record with all its relations eagerly loaded. For rendering, I ignore it entirely.</p>
+</section>
+<section id="buses_aller-buses_retour-the-live-part" class="level4">
+<h4 class="anchored" data-anchor-id="buses_aller-buses_retour-the-live-part"><code>buses_aller</code> / <code>buses_retour</code>, the live part</h4>
+<p>This is the data that actually moves, and the two arrays are mutually exclusive in practice: whichever way the bus is currently travelling, that array holds it and the other is empty. In this snapshot the bus is on its return leg, so <code>buses_aller</code> is <code>[]</code> and <code>buses_retour</code> has one entry. Each bus object gives:</p>
+<ul>
+<li><code>bus</code>: the vehicle ID (<code>"12203"</code>)</li>
+<li><code>sens</code>: its current direction</li>
+<li><code>localisation</code>: current position as a <code>"lat,lng"</code> <strong>string</strong></li>
+<li><code>updated_at</code>: when the GPS last reported</li>
+<li><code>param</code>: a much larger field, described below</li>
+</ul>
+<p>(Across both of my captures only a single vehicle, 12203, ever appeared — one bus shuttling back and forth; usually there are two, but it’s the Eid holidays this week, though the array shape clearly allows several at once.)</p>
+</section>
+<section id="param-the-whole-trip-plan-stringified" class="level4">
+<h4 class="anchored" data-anchor-id="param-the-whole-trip-plan-stringified"><code>param</code>: the whole trip plan, stringified</h4>
+<p>The richest field is <code>param</code>, and it’s a piece of JSON that’s been <strong>serialized into a string</strong> and stuffed inside the outer JSON, so you have to parse it a second time to read it. Accented French names show up as unicode escapes inside it (<code>Universit\u00e9</code>, <code>March\u00e9</code>), which decode normally.</p>
+<p>Once parsed, it’s essentially the bus’s entire journey: the full ordered <code>lineStations</code>, the two termini (<code>lineStart</code> and <code>lineDirection</code>), a <code>stops</code> array giving a predicted <code>arrivalTime</code> and segment <code>duration</code> for every upcoming stop, a <code>totalDuration</code> for the whole run, and <code>arrivalTimeAtLastStop</code>. It’s the single most information-dense part of the payload.</p>
+</section>
+<section id="horaires-predicted-arrivals-attached-per-stop" class="level4">
+<h4 class="anchored" data-anchor-id="horaires-predicted-arrivals-attached-per-stop"><code>horaires</code>: predicted arrivals, attached per-stop</h4>
+<p>When a bus is active in a given direction, each upcoming stop in <em>that</em> direction’s station list also gets a small <code>horaires</code> array: the bus’s current <code>localisation</code>, an <code>arrivalTime</code>/<code>duration</code> in minutes, and a human <code>arrivalHour</code>. In this return-leg snapshot these appear on the <code>stations_retour</code> entries; on the outbound capture they were on <code>stations_aller</code>. Note the encoding flips here too, inside <code>horaires</code>, <code>localisation</code> is an <strong>array</strong> <code>["lat", "lng"]</code> rather than the comma-joined string the bus object uses. Same data, two formats, in one response.</p>
+</section>
+<section id="two-quirks-worth-noting" class="level4">
+<h4 class="anchored" data-anchor-id="two-quirks-worth-noting">Two quirks worth noting</h4>
+<p>Comparing the two captures surfaced a couple of findings that aren’t obvious from a single response:</p>
+<p><strong>The direction toggle in the app is cosmetic.</strong> The request never changes, same endpoint, same <code>{"reseaux_id": 8}</code> body, and the server <em>always</em> returns both station lists. Only the live bus and its <code>horaires</code> populate whichever direction is currently being served. So flipping the app’s direction tab just re-renders data the client already has; it isn’t fetching anything new. Watching the bus migrate from <code>buses_aller</code> to <code>buses_retour</code> between captures confirmed it.</p>
+<p><strong>There’s a timezone trap.</strong> <code>updated_at</code> is in UTC with no timezone suffix (<code>2026-05-30 16:13:06</code>), but every <code>arrivalHour</code> is Morocco local time, UTC+1. They sit side by side in the same payload looking like the same clock. The cross-check: at 16:13 UTC (17:13 local) the bus had just reached Ahibous, and the next stop Asrir shows <code>arrivalTime: 2</code> with <code>arrivalHour: "17:15"</code>, two minutes later in local time. Miss that one-hour offset and every “last updated” label on the map reads an hour stale.</p>
+<p>That’s pretty much the whole API for this single line. As you can see, the “reverse engineering” here is very basic and straightforward. I was initially worried that I might have to do some APK decompilation or more complex network analysis, but luckily the process was transparent enough to be done within a couple of minutes. On to building something better with this data.</p>
+</section>
+</section>
+</section>
+<section id="rebuilding-the-polyline" class="level2">
+<h2 class="anchored" data-anchor-id="rebuilding-the-polyline">Rebuilding the Polyline</h2>
+<p>Currently, the app uses straight lines between the stops, which neither shows the actual path the bus takes nor looks good.</p>
+<p><img src="original_line.png" class="img-fluid" alt="The original app’s straight-line route between stops"> One way to solve this problem is to collect enough GPS datapoints from a bus traversing the route in both directions, then feed those points to OSRM (<em>Open Source Routing Machine</em>) to get a cleaner, road-snapped path. I used the following script to collect the datapoints and progressively build a <code>.jsonl</code> file we can use with OSRM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timezone</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>API_URL <span class="op">=</span> <span class="st">"http://xxx.xxx.xx.xx/api/line_horaires/48"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>PAYLOAD <span class="op">=</span> {<span class="st">"reseaux_id"</span>: <span class="dv">8</span>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>OUT_DIR <span class="op">=</span> Path(<span class="va">__file__</span>).parent</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>LATEST <span class="op">=</span> OUT_DIR <span class="op">/</span> <span class="st">"latest.json"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>HISTORY <span class="op">=</span> OUT_DIR <span class="op">/</span> <span class="st">"history.jsonl"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>TIMEOUT <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_buses(data):</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Flatten buses_aller + buses_retour into simple position dicts."""</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    buses <span class="op">=</span> []</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> direction_key <span class="kw">in</span> (<span class="st">"buses_aller"</span>, <span class="st">"buses_retour"</span>):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> b <span class="kw">in</span> data.get(direction_key, []):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            loc <span class="op">=</span> b.get(<span class="st">"localisation"</span>, <span class="st">""</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                lat_str, lng_str <span class="op">=</span> loc.split(<span class="st">","</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                lat, lng <span class="op">=</span> <span class="bu">float</span>(lat_str), <span class="bu">float</span>(lng_str)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> (<span class="pp">ValueError</span>, <span class="pp">AttributeError</span>):</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                <span class="co"># malformed/empty localisation -&gt; skip this bus this tick</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            buses.append({</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">"bus"</span>: b.get(<span class="st">"bus"</span>),</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">"sens"</span>: b.get(<span class="st">"sens"</span>),</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                <span class="st">"lat"</span>: lat,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                <span class="st">"lng"</span>: lng,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                <span class="co"># the API's own GPS timestamp (note: appears to be UTC)</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                <span class="st">"src_updated_at"</span>: b.get(<span class="st">"updated_at"</span>),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> buses</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poll_once():</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch, parse, write latest.json, append to history.jsonl. Returns bus count."""</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># client-side timestamp, when WE fetched it</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    fetched_at <span class="op">=</span> datetime.now(timezone.utc).isoformat()</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    resp <span class="op">=</span> requests.post(API_URL, json<span class="op">=</span>PAYLOAD, timeout<span class="op">=</span>TIMEOUT)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    resp.raise_for_status()</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> resp.json()</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    buses <span class="op">=</span> parse_buses(data)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    snapshot <span class="op">=</span> {<span class="st">"fetched_at"</span>: fetched_at, <span class="st">"buses"</span>: buses}</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># latest.json: overwrite (write to temp then replace, so the map never</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reads a half-written file)</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> LATEST.with_suffix(<span class="st">".json.tmp"</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    tmp.write_text(json.dumps(snapshot, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    tmp.replace(LATEST)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># history.jsonl: append one compact line</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> HISTORY.<span class="bu">open</span>(<span class="st">"a"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        f.write(json.dumps(snapshot, ensure_ascii<span class="op">=</span><span class="va">False</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(buses)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    ap <span class="op">=</span> argparse.ArgumentParser()</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    ap.add_argument(<span class="st">"--once"</span>, action<span class="op">=</span><span class="st">"store_true"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"poll a single time and exit"</span>)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    ap.add_argument(<span class="st">"--interval"</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>, default<span class="op">=</span><span class="dv">15</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"seconds between polls"</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> ap.parse_args()</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> args.once:</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> poll_once()</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"ok: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> bus(es) logged"</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            sys.exit(<span class="dv">1</span>)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"polling every </span><span class="sc">{</span>args<span class="sc">.</span>interval<span class="sc">}</span><span class="ss">s -&gt; </span><span class="sc">{</span>LATEST<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> + </span><span class="sc">{</span>HISTORY<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> "</span>)</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> poll_once()</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>            stamp <span class="op">=</span> datetime.now().strftime(<span class="st">"%H:%M:%S"</span>)</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[</span><span class="sc">{</span>stamp<span class="sc">}</span><span class="ss">] </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> bus(es)"</span>)</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> requests.RequestException <span class="im">as</span> e:</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>            <span class="co"># network hiccup: log it and keep going, don't crash the loop</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[</span><span class="sc">{</span>datetime<span class="sc">.</span>now()<span class="sc">:</span><span class="op">%</span>H<span class="sc">:</span><span class="op">%</span>M<span class="sc">:</span><span class="op">%</span>S<span class="sc">}</span><span class="ss">] request failed: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>                  <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[</span><span class="sc">{</span>datetime<span class="sc">.</span>now()<span class="sc">:</span><span class="op">%</span>H<span class="sc">:</span><span class="op">%</span>M<span class="sc">:</span><span class="op">%</span>S<span class="sc">}</span><span class="ss">] unexpected: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>        time.sleep(args.interval)</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The script is straightforward. It polls the API, parses the bus positions, and writes two files: <code>latest.json</code> which is the most recent snapshot of the bus positions, and <code>history.jsonl</code> which is a line-delimited JSON file that accumulates every snapshot over time. The <code>latest.json</code> file is what the map will read to show the current bus positions, while <code>history.jsonl</code> is what we will use to extract the GPS traces for building the polyline with OSRM. The script can be run in a loop with a specified interval, or just once for testing.</p>
+<p>Once we have enough datapoints, we can use a preprocessed version of the <code>history.jsonl</code> file to feed into OSRM and get our improved route line. I wanted to try a simpler approach first, which is to just gather a dense set of GPS points and use them as the polyline. This is not ideal, since the points are noisy and sparse, and it was an improvement over the straight lines station-to-station from the official app:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="simple_poly.webp" class="img-fluid figure-img"></p>
+<figcaption>Raw GPS points from bus location polling, connected directly stop-to-stop</figcaption>
+</figure>
+</div>
+<p>As you can see, the main issue is that the polyline does a lot of corner-cutting due to the low resolution of the GPS points. I do not want to overload the server that is providing the bus data, so I am only polling every 10 seconds, which is in line with their own app’s frequency. The reason I didn’t feel the need to try higher frequency polling is that 1. I do not want to risk overloading their server, 2. I’m not sure the bus’s GPS updates are actually more frequent than that, so it might not even help, and 3. I can use OSRM map-matching to fill in the gaps and get a smoother line without needing more points.</p>
+</section>
+<section id="osrm-and-road-matching" class="level2">
+<h2 class="anchored" data-anchor-id="osrm-and-road-matching">OSRM and Road Matching</h2>
+<p>OSRM (Open Source Routing Machine) is a powerful tool for routing and map-matching. It can take a sequence of GPS points and match them to the most likely path on the road network, which is exactly what we need to clean up our bus route. By feeding our collected GPS points into OSRM’s map-matching API, we can get a much more accurate and visually appealing polyline that follows the actual roads the bus takes, rather than cutting corners between stops.</p>
+<p>A couple of hours of polling has collected a couple of thousand locations, and since I do not want to bother with preprocessing and clean up of duplicate points when the bus is stationary or points that are too close to each other, I decided to use a local OSRM instance and just feed it the entire history. I retrieved Morocco’s OSM data from <a href="https://download.geofabrik.de/africa/morocco-latest.osm.pbf">Geofabrik in PBF format</a>, which is an XML-like binary format well-suited for storage and editing, but not for running routing algorithms directly (Dijkstra, A*, etc.). So we extract the data, build the road graph, and then run the map-matching step. I used a Docker instance to run the OSRM pipeline locally:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract the data and build the graph using the car profile to get the right routing for a bus</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-v</span> <span class="st">"</span><span class="va">${PWD}</span><span class="st">/data:/data"</span> osrm/osrm-backend osrm-extract <span class="at">-p</span> /opt/car.lua /data/morocco-260529.osm.pbf</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Cut the graph into nested cells (like a hierarchy of regions)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-v</span> <span class="st">"</span><span class="va">${PWD}</span><span class="st">/data:/data"</span> osrm/osrm-backend osrm-partition /data/morocco-260529.osrm</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Compute actual travel-time weights for each cell boundary. Separate topology (partition) from weights (customize).</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-v</span> <span class="st">"</span><span class="va">${PWD}</span><span class="st">/data:/data"</span> osrm/osrm-backend osrm-customize /data/morocco-260529.osrm</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Run the OSRM server to serve map-matching requests, allow 1000 points per request since we have a long history of GPS points to match.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-i</span> <span class="at">-p</span> 5000:5000 <span class="at">-v</span> <span class="st">"</span><span class="va">${PWD}</span><span class="st">/data:/data"</span> osrm/osrm-backend osrm-routed <span class="at">--algorithm</span> mld <span class="at">--max-matching-size</span> 1000 /data/morocco-260529.osrm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will create a bunch of output files (.osrm, .osrm.ebg, etc.) which will be written directly into a <code>data/</code> folder alongside the original <code>.pbf</code>. Once the server is running, we use the following script to feed it the GPS points and get the matched route:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json, time, math</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>OSRM <span class="op">=</span> <span class="st">"http://localhost:5000/match/v1/driving/"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>MIN_MOVE_M <span class="op">=</span> <span class="dv">5</span>      <span class="co"># drop points closer than this to the previous one</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>MAX_POINTS <span class="op">=</span> <span class="dv">4000</span>    <span class="co"># OSRM public limit per request</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>RADIUS_M <span class="op">=</span> <span class="dv">25</span>       <span class="co"># GPS accuracy hint</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> haversine(a, b):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> <span class="dv">6371000</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    p1, p2 <span class="op">=</span> math.radians(a[<span class="dv">0</span>]), math.radians(b[<span class="dv">0</span>])</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    dphi <span class="op">=</span> math.radians(b[<span class="dv">0</span>]<span class="op">-</span>a[<span class="dv">0</span>])<span class="op">;</span> dl <span class="op">=</span> math.radians(b[<span class="dv">1</span>]<span class="op">-</span>a[<span class="dv">1</span>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> math.sin(dphi<span class="op">/</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> math.cos(p1)<span class="op">*</span>math.cos(p2)<span class="op">*</span>math.sin(dl<span class="op">/</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>R<span class="op">*</span>math.asin(math.sqrt(h))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. load</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"history.jsonl"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        line <span class="op">=</span> line.strip()</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> line: <span class="cf">continue</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        o <span class="op">=</span> json.loads(line)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> b <span class="kw">in</span> o[<span class="st">"buses"</span>]:</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            rows.append({<span class="st">"ts"</span>: o[<span class="st">"fetched_at"</span>], <span class="st">"sens"</span>: b[<span class="st">"sens"</span>],</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"lat"</span>: b[<span class="st">"lat"</span>], <span class="st">"lng"</span>: b[<span class="st">"lng"</span>]})</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. segment into runs by sens</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>segs, cur, cursens <span class="op">=</span> [], [], <span class="va">None</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> rows:</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r[<span class="st">"sens"</span>] <span class="op">!=</span> cursens:</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cur: segs.append((cursens, cur))</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        cur, cursens <span class="op">=</span> [], r[<span class="st">"sens"</span>]</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    cur.append(r)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> cur: segs.append((cursens, cur))</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Runs found:"</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,(s,c) <span class="kw">in</span> <span class="bu">enumerate</span>(segs):</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  [</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">] sens=</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">  n=</span><span class="sc">{</span><span class="bu">len</span>(c)<span class="sc">}</span><span class="ss">  </span><span class="sc">{</span>c[<span class="dv">0</span>][<span class="st">'ts'</span>][<span class="dv">11</span>:<span class="dv">19</span>]<span class="sc">}</span><span class="ss">–</span><span class="sc">{</span>c[<span class="op">-</span><span class="dv">1</span>][<span class="st">'ts'</span>][<span class="dv">11</span>:<span class="dv">19</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean(run):</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> run:</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> (r[<span class="st">"lat"</span>], r[<span class="st">"lng"</span>])</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> out <span class="kw">or</span> haversine((out[<span class="op">-</span><span class="dv">1</span>][<span class="st">"lat"</span>], out[<span class="op">-</span><span class="dv">1</span>][<span class="st">"lng"</span>]), p) <span class="op">&gt;=</span> MIN_MOVE_M:</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            out.append(r)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># thin to MAX_POINTS evenly if still too long</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(out) <span class="op">&gt;</span> MAX_POINTS:</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        step <span class="op">=</span> <span class="bu">len</span>(out)<span class="op">/</span>MAX_POINTS</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> [out[<span class="bu">int</span>(i<span class="op">*</span>step)] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(MAX_POINTS)]</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match(run):</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    run <span class="op">=</span> clean(run)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    coords <span class="op">=</span> <span class="st">";"</span>.join(<span class="ss">f"</span><span class="sc">{</span>r[<span class="st">'lng'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>r[<span class="st">'lat'</span>]<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> run)  <span class="co"># OSRM is lng,lat</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    radii  <span class="op">=</span> <span class="st">";"</span>.join(<span class="bu">str</span>(RADIUS_M) <span class="cf">for</span> _ <span class="kw">in</span> run)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    ts     <span class="op">=</span> <span class="st">";"</span>.join(<span class="bu">str</span>(<span class="bu">int</span>(datetime.fromisoformat(r[<span class="st">"ts"</span>]).timestamp())) <span class="cf">for</span> r <span class="kw">in</span> run)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {<span class="st">"geometries"</span>: <span class="st">"geojson"</span>, <span class="st">"overview"</span>: <span class="st">"full"</span>,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>              <span class="st">"radiuses"</span>: radii, <span class="st">"timestamps"</span>: ts}</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    resp <span class="op">=</span> requests.get(OSRM <span class="op">+</span> coords, params<span class="op">=</span>params, timeout<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    resp.raise_for_status()</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> resp.json()</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data.get(<span class="st">"code"</span>) <span class="op">!=</span> <span class="st">"Ok"</span>:</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"OSRM: </span><span class="sc">{</span>data<span class="sc">.</span>get(<span class="st">'code'</span>)<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>data<span class="sc">.</span>get(<span class="st">'message'</span>,<span class="st">''</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># stitch geometry from all matched segments</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    feats <span class="op">=</span> [m[<span class="st">"geometry"</span>][<span class="st">"coordinates"</span>] <span class="cf">for</span> m <span class="kw">in</span> data[<span class="st">"matchings"</span>]]</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    coords_out <span class="op">=</span> [pt <span class="cf">for</span> seg <span class="kw">in</span> feats <span class="cf">for</span> pt <span class="kw">in</span> seg]</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    conf <span class="op">=</span> [<span class="bu">round</span>(m.get(<span class="st">"confidence"</span>,<span class="dv">0</span>),<span class="dv">3</span>) <span class="cf">for</span> m <span class="kw">in</span> data[<span class="st">"matchings"</span>]]</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  matched: </span><span class="sc">{</span><span class="bu">len</span>(coords_out)<span class="sc">}</span><span class="ss"> pts, confidence=</span><span class="sc">{</span>conf<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"type"</span>:<span class="st">"Feature"</span>,<span class="st">"geometry"</span>:{<span class="st">"type"</span>:<span class="st">"LineString"</span>,<span class="st">"coordinates"</span>:coords_out},</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>            <span class="st">"properties"</span>:{<span class="st">"confidence"</span>:conf}}</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. pick one clean run per direction and match.</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="co">#    EDIT these indices after reading the "Runs found" printout.</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>ALLER_IDX  <span class="op">=</span> <span class="dv">1</span>   <span class="co"># a sens=1 run</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>RETOUR_IDX <span class="op">=</span> <span class="dv">0</span>   <span class="co"># a sens=0 run</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, idx <span class="kw">in</span> [(<span class="st">"route_aller"</span>, ALLER_IDX), (<span class="st">"route_retour"</span>, RETOUR_IDX)]:</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    sens, run <span class="op">=</span> segs[idx]</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">  (seg </span><span class="sc">{</span>idx<span class="sc">}</span><span class="ss">, sens=</span><span class="sc">{</span>sens<span class="sc">}</span><span class="ss">):"</span>)</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    gj <span class="op">=</span> match(run)</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.geojson"</span>,<span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>        json.dump(gj, f)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  wrote </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.geojson"</span>)</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)   <span class="co"># be polite to the server if using public OSRM instance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s break down the script. We define the haversine function, which is simply a way to calculate the distance between two coordinates on a sphere. It calculates the great-circle distance between two points on the Earth’s surface, which is why it uses earth’s radius of 6371 km as a hardcoded value. You could use something like <span class="math inline">\sqrt{\Delta lat^2 + \Delta lng^2}</span> for a rough approximation, but it gets inaccurate over larger distances or near the poles, so haversine is a more robust choice for a couple of extra lines of code. We start by loading the jsonl file and parsing the bus positions into a list of rows. We then segment the data into runs based on the <code>sens</code> value, which indicates the direction of the bus. Each run is a sequence of GPS points for a single direction. We print out the runs we found, along with their timestamps, so we can choose which ones to use for matching. The <code>clean</code> function filters out points that are too close to each other, and also thins the points if there are more than <code>MAX_POINTS</code>. The <code>match</code> function takes a run of GPS points, formats them for the OSRM API, and sends a request to get the matched route. It then stitches together the matched segments into a single GeoJSON LineString feature. Finally, we pick one run for each direction (based on the printed output), match it, and write the resulting GeoJSON to a file.</p>
+<p>Now we have two GeoJSON files, <code>route_aller.geojson</code> and <code>route_retour.geojson</code>, which contain the matched routes for the outbound and return legs of the bus line. We can use these files to draw the routes on our map: <img src="map_matching_ex.png" class="img-fluid" alt="Road-matched routes from OSRM, outbound and return legs"></p>
+<p>The routes are much smoother now, following the actual roads instead of cutting corners between stops.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="roundabout.png" class="img-fluid figure-img"></p>
+<figcaption>The matched route correctly tracing a roundabout</figcaption>
+</figure>
+</div>
+<p>The confidence values from OSRM can also be used to indicate how well the GPS points matched the road network, which can be useful for debugging or further refining the data collection process. These polylines can now be used in our custom bus tracker map to show the actual paths the buses take, which looks much better and is more informative.</p>
+</section>
+<section id="deploying-a-worker-to-serve-the-map" class="level2">
+<h2 class="anchored" data-anchor-id="deploying-a-worker-to-serve-the-map">Deploying a Worker to Serve the Map</h2>
+<p>Right now, I’m polling the API from my machine and writing the latest bus positions to a local file. If we want to run this continuously and reliably enough to serve a live map, we should deploy the polling script to a server or cloud function that can run uninterrupted. This way the <code>latest.json</code> file stays current and we can serve it to the frontend without worrying about downtime or connectivity issues. Since scaling isn’t a concern, a simple Cloudflare Worker is sufficient.</p>
+<p>The worker’s job is to be a request handler: every time the map frontend calls the worker URL, Cloudflare invokes the <code>fetch</code> function of the default export. The skeleton looks like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">async</span> <span class="fu">fetch</span>(request) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>async</code> allows the function to use <code>await</code> for asynchronous operations. Next, we handle CORS. Our frontend is served from a different origin than the worker, so we need the appropriate CORS headers. The browser sends an <code>OPTIONS</code> preflight request to check if the server allows cross-origin requests:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (request<span class="op">.</span><span class="at">method</span> <span class="op">===</span> <span class="st">"OPTIONS"</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="kw">null</span><span class="op">,</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headers</span><span class="op">:</span> {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Access-Control-Allow-Origin"</span><span class="op">:</span> <span class="st">"*"</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Access-Control-Allow-Methods"</span><span class="op">:</span> <span class="st">"GET"</span><span class="op">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>Access-Control-Allow-Origin: *</code> means “any website is allowed to call me”, a wildcard is fine since the bus data is public. <code>Access-Control-Allow-Methods: GET</code> marks <code>GET</code> requests as permitted. The response body is <code>null</code> because preflights don’t need content, just headers.</p>
+<p>Now we fetch the actual bus API:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> resp <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">"http://HOSTNAME/api/line_horaires/48"</span><span class="op">,</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">method</span><span class="op">:</span> <span class="st">"POST"</span><span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">headers</span><span class="op">:</span> { <span class="st">"Content-Type"</span><span class="op">:</span> <span class="st">"application/json"</span> }<span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">body</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ <span class="dt">reseaux_id</span><span class="op">:</span> <span class="dv">8</span> })<span class="op">,</span>  <span class="co">// Number 8 identifies the city/network which we found out during our reverse engineering step</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Notice the <code>HOSTNAME</code> instead of the raw IP address I used in the polling script. Cloudflare Workers don’t allow outgoing requests to bare IP addresses for security reasons. A quick <code>nslookup</code> on the IP revealed the associated hostname, so I used that instead.</p>
+<p>Finally, we parse the response with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> resp<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>But this is the full ~100 KB object we saw earlier. We only need the fields useful to us:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> buses <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">const</span> key <span class="kw">of</span> [<span class="st">"buses_aller"</span><span class="op">,</span> <span class="st">"buses_retour"</span>]) {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> b <span class="kw">of</span> (data[key] <span class="op">||</span> [])) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> [lat<span class="op">,</span> lng] <span class="op">=</span> (b<span class="op">.</span><span class="at">localisation</span> <span class="op">||</span> <span class="st">""</span>)<span class="op">.</span><span class="fu">split</span>(<span class="st">","</span>)<span class="op">.</span><span class="fu">map</span>(<span class="bu">Number</span>)<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="pp">isNaN</span>(lat) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="pp">isNaN</span>(lng)) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      buses<span class="op">.</span><span class="fu">push</span>({</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bus</span><span class="op">:</span> b<span class="op">.</span><span class="at">bus</span><span class="op">,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">sens</span><span class="op">:</span> b<span class="op">.</span><span class="at">sens</span><span class="op">,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        lat<span class="op">,</span> lng<span class="op">,</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">src_updated_at</span><span class="op">:</span> b<span class="op">.</span><span class="at">updated_at</span><span class="op">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Walking through the snippet:</p>
+<ul>
+<li><code>for (const key of ["buses_aller", "buses_retour"])</code>: iterates over both direction arrays in one loop rather than duplicating the code.</li>
+<li><code>(data[key] || [])</code>: if a direction has no buses (empty or missing array), <code>|| []</code> yields an empty iterable instead of crashing.</li>
+<li><code>b.localisation.split(",").map(Number)</code>: the API gives position as the string <code>"31.883,-4.355"</code>. Split on the comma to get <code>["31.883", "-4.355"]</code>, then <code>map(Number)</code> converts each to a float. The destructuring <code>const [lat, lng] =</code> unpacks them in one line.</li>
+<li><code>if (!isNaN(lat) &amp;&amp; !isNaN(lng))</code>: guards against a missing or malformed <code>localisation</code>. <code>Number("") === NaN</code>, so this safely skips bad rows rather than pushing garbage coordinates.</li>
+<li><code>{ bus, sens, lat, lng, src_updated_at }</code>: just the five fields the map needs. <code>lat, lng</code> is shorthand for <code>lat: lat, lng: lng</code> in modern JavaScript, which I only know about thanks to one of those LLM chatbots, I haven’t read the JS documentation in over 10 years at this point.</li>
+</ul>
+<p>Now we have a clean <code>buses</code> array with the current positions and metadata for all active buses. We can return this as JSON to the frontend using a response like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ <span class="dt">fetched_at</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">.</span><span class="fu">toISOString</span>()<span class="op">,</span> buses })<span class="op">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headers</span><span class="op">:</span> {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Content-Type"</span><span class="op">:</span> <span class="st">"application/json"</span><span class="op">,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Access-Control-Allow-Origin"</span><span class="op">:</span> <span class="st">"*"</span><span class="op">,</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Cache-Control"</span><span class="op">:</span> <span class="st">"no-store"</span><span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The only thing really new here is <code>"Cache-Control": "no-store"</code>, which tells browsers and intermediate caches not to store this response at all, ensuring that every request to the worker gets fresh data from the bus API.</p>
+<p>Once deployed, we point our frontend map at the worker URL instead of the original API. It serves live bus positions with the same data structure we had in <code>latest.json</code>, but now it’s always up to date and doesn’t depend on a local machine running the polling script.</p>
+</section>
+<section id="the-live-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-live-map">The Live Map</h2>
+<p>The pipeline comes together here. GPS positions arrive from the bus API every 10-15 seconds, a Cloudflare Worker strips the 100 KB payload down to the handful of fields the map actually needs, and Leaflet renders them against road-matched routes built from the historical GPS trace.</p>
+<p>The city runs three lines: L02, examined in detail above, runs between Omrane and Ahibous; L01 connects Amazouj to Meski; L03 covers the route between My Mhamed and Tizegdalt. The same API structure, polling pipeline, and OSRM map-matching process applies to all three.</p>
+<iframe src="map.html?lines=l01,l02,l03" style="width:100%;height:560px;border:none;border-radius:6px;display:block;" loading="lazy" title="Errachidia live bus map - L01, L02, L03">
+</iframe>
+<p>Clicking a bus marker highlights its line; the section of route already traveled is shown at reduced opacity to indicate which way it is heading.</p>
+<p>Is it better than the original app? On the things that matter for a bus tracker, knowing where the bus actually is and what route it takes, probably yes. The routes here follow real streets, the data is refreshed at the same rate the app uses, and all three lines are visible at once. I’m no design expert, but I think this is also a better looking map and a better user experience. Of course we can do further improvements, like selecting a destination and have the map route you through the network to get there, or as mentioned at the top, building a model to predict the arrival times of the buses at each stop using historical data. This would be more accurate than the app’s predictions, but would mean more work when I aleady have a list of other on-hold projects I should be picking back up. But I’m satisfied with this as an initial milestone.</p>
+<p>The step I found most unexpectedly interesting was the map-matching. Taking a scattered cloud of GPS pings sampled every 15 seconds from a moving bus, feeding them to OSRM’s Hidden Markov Model matcher, and getting back a clean polyline that follows actual roads.</p>
+<p>The historical data is still accumulating. I mentioned arrival-time prediction at the top, and that is still on the table. Weeks of 15-second GPS snapshots across all three lines is a reasonable foundation for a model that does better than the app’s current estimations, which by the way, is not clear how those are calculated. Something that learns the actual shape of the schedule, the morning delays, the time it takes to clear the roundabout near the market etc. That is for another post.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/kharchouf\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

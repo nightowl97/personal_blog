@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ec29bce8d090bce099758ae5e789ed41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e32cdaa352a166e3f711f9e6a2778ae5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,9 +72,16 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } },
+  output: { font: 'mathjax-stix2' }
+};
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -267,7 +274,7 @@ E = E_0 + \frac{RT}{nF}\ln\left(\frac{[\text{Ox}]}{[\text{Red}]}\right)
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NG1x-aiHdW4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>The peak happens because the rising Fermi level of the electrode allows it to give (and falling <span class="math inline">\(E_F\)</span> allows it to take <span class="math inline">\(e^-\)</span>) electrons from the solution.</p>
 <p>Keep in mind the metal electrode’s Fermi level will match the solution’s Fermi level which is defined as <span class="math inline">\(\frac{1}{2}\)</span>(HOMO + LUMO) almost instantaneously after putting the electrode in the solution.</p>
-<p>The peak is not a plateau because the reaction is limited by mass transport — the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.</p>
+<p>The peak is not a plateau because the reaction is limited by mass transport, the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.</p>
 </section>
 <section id="levich-treatment" class="level2">
 <h2 class="anchored" data-anchor-id="levich-treatment">Levich Treatment</h2>
@@ -289,7 +296,7 @@ I_L = 0.201 n F A D^\frac{2}{3}\omega^\frac{1}{2}\nu^\frac{-1}{6} C
 <p>The <em>first step</em> is to plot at a fixed potential the values of the current at the various rotation rates (Fig. 1a). The value of the potential is chosen before the current plateau. The <em>second step</em> is to plot the inverse of the current values as a function of the inverse of the square root of the rotation speed (Fig. 1b). This is what is called the Koutecký-Levich plot.</p>
 <p><img src="kouteckylevich_fig1.gif" class="img-fluid"></p>
 <p><em><strong>Figure 1:</strong> <strong>(a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <span class="math inline">\(I_t\)</span> <strong>(d)</strong>.</em></p>
-<p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <span class="math inline">\(I_t\)</span> — the current that you would obtain if there was absolutely no limitation by mass transport.</p>
+<p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <span class="math inline">\(I_t\)</span>, the current that you would obtain if there was absolutely no limitation by mass transport.</p>
 <p><img src="kouteckylevich_fig2.gif" class="img-fluid"></p>
 <p><em><strong>Figure 2: (a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <span class="math inline">\(I_t\)</span> <strong>(d)</strong>. This is carried out at various potentials to obtain the Tafel curve shown in <strong>(e)</strong>.</em></p>
 <p>Performing these three steps at several potential values (Fig. 2a, b, c, d) allows you to plot the Tafel curve (Fig. 2e). The slope of this curve gives the value of the symmetry factor <span class="math inline">\(\alpha_r\)</span> while the current value at <span class="math inline">\(E = E°\)</span> gives the value of the standard kinetic constant <span class="math inline">\(k°\)</span>, given the concentration of the reactive species and the number of electrons involved in the redox reaction.</p>
@@ -301,7 +308,7 @@ I_L = 0.201 n F A D^\frac{2}{3}\omega^\frac{1}{2}\nu^\frac{-1}{6} C
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/5puDQjCl2pk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GM0o1BbbXy8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kexDd0kFAK8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system — the AC part of the signal is too big and becomes non-linear.</p>
+<p>In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system, the AC part of the signal is too big and becomes non-linear.</p>
 <p>Sometimes the chosen AC amplitude is good for some frequency ranges but not for others, meaning you have to make different measurements with different AC amplitudes.</p>
 <p>Electrochemical systems are modeled using equivalent circuits (with basic R, L, C components or others like CPE: Constant Phase Element).</p>
 <section id="some-basic-bodenyquist-plots" class="level3">
@@ -375,13 +382,13 @@ j = j_0 \left\{e^{\left(\frac{\alpha_a z F}{RT}\eta\right)} - e^{\left(-\frac{\a
 <p>The Tafel equation is an approximation of the Butler-Volmer equation at high overpotentials <span class="math inline">\((\lvert\eta\rvert &gt; 0.1 V)\)</span>. It assumes that the concentrations at the electrode are practically equal to the concentrations in the bulk electrolyte, allowing the current to be expressed as a function of potential only. In other words, it assumes that the electrode mass transfer rate is much greater than the reaction rate, and that the reaction is dominated by the slower chemical reaction rate. Also, at a given electrode the Tafel equation assumes that the reverse half reaction rate is negligible compared to the forward reaction rate.</p>
 <section id="supporting-electrolyte" class="level4">
 <h4 class="anchored" data-anchor-id="supporting-electrolyte">Supporting Electrolyte</h4>
-<p>When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution — this artificially added salt is called supporting electrolyte. The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.</p>
+<p>When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution, this artificially added salt is called supporting electrolyte. The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.</p>
 <p>A negligible electric field provides two advantages for electroanalysis:</p>
 <ul>
 <li>The voltage due to the resistance of the electrolyte when the cell draws current (“ohmic drop”) is minimal. Therefore, the potential difference applied across the electrochemical cell is localized at the electrode–electrolyte interfaces, and so the activation overpotential perceived by the redox couple at this interface is almost exactly proportional to the applied cell voltage. The kinetic behavior of the electrochemical cell then has no explicit dependence on the magnitude of the drawn current.</li>
 <li>The contribution of migration to the transport of charged chemical species is negligible compared to the contribution of diffusion (and of convection, in a forced flow). Therefore the transport properties of the system are linearized, and they do not depend on the magnitude of the drawn current.</li>
 </ul>
-<p>Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven — such as electrolysis, electrodeposition, batteries, and fuel cells — current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.</p>
+<p>Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven -such as electrolysis, electrodeposition, batteries, and fuel cells- current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.</p>
 </section>
 <section id="scan-rate-influence" class="level4">
 <h4 class="anchored" data-anchor-id="scan-rate-influence">Scan Rate Influence</h4>
@@ -399,7 +406,7 @@ i_p = 0.446\, nFAC^0 \left(\frac{nF\nu D_0}{RT}\right)^{\frac{1}{2}}
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Debatable — “normal” is the old name for “standard” in France.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Debatable - “normal” is the old name for “standard” in France.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Bard, Allen J.; Larry R. Faulkner (2000). <em>Electrochemical Methods: Fundamentals and Applications</em> (2nd ed.). Wiley. p.&nbsp;336.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>In theory, the Koutecký-Levich analysis only works for redox reactions with a standard kinetic constant <span class="math inline">\(k°\)</span> smaller or equal to several <span class="math inline">\(10^2\)</span> cm s<span class="math inline">\(^{-1}\)</span>, that is to say, for sluggish reactions. In practice, most reactions are neither sluggish nor rapid.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>For a review see: Elgrishi, N. et al.&nbsp;<em>J. Chem. Educ.</em> 2018, 95, 197–206.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

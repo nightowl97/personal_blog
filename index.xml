@@ -10,7 +10,1922 @@
 <atom:link href="https://kharchouf.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Youssef Kharchouf&#39;s personal notes</description>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Sat, 09 May 2026 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 01 Jun 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Reverse-Engineering My City’s Bus Tracker</title>
+  <link>https://kharchouf.com/posts/err-bus/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="column-screen">
+<p><img src="https://kharchouf.com/posts/err-bus/header.png" class="img-fluid" style="width:100%;display:block;max-height:420px;object-fit:cover;"></p>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I was surprised to learn that my hometown had an android app that tracks the city’s buses in real time. It is very useful since the bus frequency is very low and unreliable, so knowing the real-time location of the buses is crucial in order to plan your trips. When I tried out the app, it was functional, but very basic, the interface was clunky, the design was not great, and the ETA predictions made no sense.</p>
+<p>I wondered if it was possible to build something better, and maybe a good learning experience since I was curious about how the app worked. I decided to reverse engineer it and build my own bus tracker. Maybe even later down the line, we could build a model to predict the arrival times of the buses at each stop using historical data, which would be more accurate than the app’s predictions.</p>
+</section>
+<section id="reverse-engineering-the-app" class="level2">
+<h2 class="anchored" data-anchor-id="reverse-engineering-the-app">Reverse Engineering the App</h2>
+<p>The first step was to reverse engineer the app to understand how it worked and how it communicated with its server. This is a small town, so I expected the communications to be pretty basic. First thing I tried was to see what kind of requests the app was making to fetch the live bus data. I already have the app on my phone, so I set up a proxy server on my computer using mitmproxy, configured my phone to route its traffic through the proxy, and installed the mitmproxy certificate in order to intercept HTTPS traffic. Thankfully we will not be decompiling any APKs or binaries today, nor will we need to fire up wireshark or any kind of disassembler, as I would be way out of my depth for that kind of challenge. I simply opened the app and watched the traffic. Lo and behold, the request wasn’t even using HTTPS, installing the certificate wasn’t even necessary. The app was making simple periodic POST requests to a single endpoint with the same payload, and the response contained over 100 KB of data.</p>
+<section id="anatomy-of-the-response" class="level3">
+<h3 class="anchored" data-anchor-id="anatomy-of-the-response">Anatomy of the response</h3>
+<p>A single <code>POST</code> to <code>/api/line_horaires/48</code> with the body <code>{"reseaux_id": 8}</code> returns <em>everything</em> the app needs to draw the map. There’s no second call for stops, no separate endpoint for live positions, it all comes back in one ~100 KB JSON object with five top-level keys:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb1-2">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"line"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span>            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">/*</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">line</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">+</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">network</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">metadata</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">},</span></span>
+<span id="cb1-3">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"stations_aller"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span>  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">/*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">32</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">stops</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">outbound</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">order</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-4">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"stations_retour"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">/*</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">the</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">same</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">32</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">stops</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reversed</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-5">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"buses_aller"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span>     <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">/*</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">live</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">buses</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">heading</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">outbound</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb1-6">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"buses_retour"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span>    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">/*</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">live</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">buses</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">heading</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">back</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+<p><code>aller</code> and <code>retour</code> are French for the outbound and return legs, this line runs one physical route in two directions, and the API mirrors that split everywhere.</p>
+<section id="line-what-this-route-is" class="level4">
+<h4 class="anchored" data-anchor-id="line-what-this-route-is"><code>line</code>, what this route <em>is</em></h4>
+<p>The metadata block. The useful fields are <code>line_name</code> (<code>"L02"</code>), <code>line_color</code> (<code>"#e81e63"</code>, the route’s own pink, which I reuse for every marker and line on the map), and the two human-readable direction labels, <code>aller_direction</code> (<code>"Ahibous(31)"</code>) and <code>retour_direction</code> (<code>"Omrane (1)"</code>).</p>
+<p>Nested inside is a <code>reseaux</code> (“network”) object describing the city itself: Errachidia, network <code>id</code> 8, that <code>8</code> is exactly what the request body sends as <code>reseaux_id</code>. It even carries the network’s own backend <code>host</code>, a different IP from the one the app talks to, which is presumably where the raw GPS data originates before this server aggregates it.</p>
+</section>
+<section id="stations_aller-stations_retour-the-stops" class="level4">
+<h4 class="anchored" data-anchor-id="stations_aller-stations_retour-the-stops"><code>stations_aller</code> / <code>stations_retour</code>, the stops</h4>
+<p>Two ordered lists of the same 32 stops. (They’re numbered Omrane <strong>(1)</strong> through Ahibous <strong>(31)</strong>, but there are 32 because of a half-numbered insert, “Bachaouia (17/2)”, wedged between Ocean (17) and Grande Salle (18).) Each entry carries what you’d expect:</p>
+<ul>
+<li><code>station_name</code>, <code>station_lat</code>, <code>station_lng</code>, the label and position</li>
+<li><code>step</code>, the stop’s order along the route, <code>0</code> to <code>31</code></li>
+<li><code>sens</code>, direction flag: <code>1</code> outbound, <code>0</code> return</li>
+<li><code>direction</code>, the terminus this direction heads toward</li>
+</ul>
+<p><code>stations_retour</code> is just <code>stations_aller</code> reversed: Omrane’s <code>step 0</code> outbound becomes its <code>step 30</code> on the way back. So for drawing purposes, one list of coordinates sorted by <code>step</code> gives you both the stop markers and a first-draft route line.</p>
+<p>A quirk worth noting: every station object also contains nested <code>lines</code> and <code>line_stations</code> arrays that re-describe <em>the same stop again</em>, mostly as a duplicate of itself viewed from the opposite direction. It’s redundant denormalization, the kind of thing an ORM emits when you serialize a record with all its relations eagerly loaded. For rendering, I ignore it entirely.</p>
+</section>
+<section id="buses_aller-buses_retour-the-live-part" class="level4">
+<h4 class="anchored" data-anchor-id="buses_aller-buses_retour-the-live-part"><code>buses_aller</code> / <code>buses_retour</code>, the live part</h4>
+<p>This is the data that actually moves, and the two arrays are mutually exclusive in practice: whichever way the bus is currently travelling, that array holds it and the other is empty. In this snapshot the bus is on its return leg, so <code>buses_aller</code> is <code>[]</code> and <code>buses_retour</code> has one entry. Each bus object gives:</p>
+<ul>
+<li><code>bus</code>: the vehicle ID (<code>"12203"</code>)</li>
+<li><code>sens</code>: its current direction</li>
+<li><code>localisation</code>: current position as a <code>"lat,lng"</code> <strong>string</strong></li>
+<li><code>updated_at</code>: when the GPS last reported</li>
+<li><code>param</code>: a much larger field, described below</li>
+</ul>
+<p>(Across both of my captures only a single vehicle, 12203, ever appeared — one bus shuttling back and forth; usually there are two, but it’s the Eid holidays this week, though the array shape clearly allows several at once.)</p>
+</section>
+<section id="param-the-whole-trip-plan-stringified" class="level4">
+<h4 class="anchored" data-anchor-id="param-the-whole-trip-plan-stringified"><code>param</code>: the whole trip plan, stringified</h4>
+<p>The richest field is <code>param</code>, and it’s a piece of JSON that’s been <strong>serialized into a string</strong> and stuffed inside the outer JSON, so you have to parse it a second time to read it. Accented French names show up as unicode escapes inside it (<code>Universit\u00e9</code>, <code>March\u00e9</code>), which decode normally.</p>
+<p>Once parsed, it’s essentially the bus’s entire journey: the full ordered <code>lineStations</code>, the two termini (<code>lineStart</code> and <code>lineDirection</code>), a <code>stops</code> array giving a predicted <code>arrivalTime</code> and segment <code>duration</code> for every upcoming stop, a <code>totalDuration</code> for the whole run, and <code>arrivalTimeAtLastStop</code>. It’s the single most information-dense part of the payload.</p>
+</section>
+<section id="horaires-predicted-arrivals-attached-per-stop" class="level4">
+<h4 class="anchored" data-anchor-id="horaires-predicted-arrivals-attached-per-stop"><code>horaires</code>: predicted arrivals, attached per-stop</h4>
+<p>When a bus is active in a given direction, each upcoming stop in <em>that</em> direction’s station list also gets a small <code>horaires</code> array: the bus’s current <code>localisation</code>, an <code>arrivalTime</code>/<code>duration</code> in minutes, and a human <code>arrivalHour</code>. In this return-leg snapshot these appear on the <code>stations_retour</code> entries; on the outbound capture they were on <code>stations_aller</code>. Note the encoding flips here too, inside <code>horaires</code>, <code>localisation</code> is an <strong>array</strong> <code>["lat", "lng"]</code> rather than the comma-joined string the bus object uses. Same data, two formats, in one response.</p>
+</section>
+<section id="two-quirks-worth-noting" class="level4">
+<h4 class="anchored" data-anchor-id="two-quirks-worth-noting">Two quirks worth noting</h4>
+<p>Comparing the two captures surfaced a couple of findings that aren’t obvious from a single response:</p>
+<p><strong>The direction toggle in the app is cosmetic.</strong> The request never changes, same endpoint, same <code>{"reseaux_id": 8}</code> body, and the server <em>always</em> returns both station lists. Only the live bus and its <code>horaires</code> populate whichever direction is currently being served. So flipping the app’s direction tab just re-renders data the client already has; it isn’t fetching anything new. Watching the bus migrate from <code>buses_aller</code> to <code>buses_retour</code> between captures confirmed it.</p>
+<p><strong>There’s a timezone trap.</strong> <code>updated_at</code> is in UTC with no timezone suffix (<code>2026-05-30 16:13:06</code>), but every <code>arrivalHour</code> is Morocco local time, UTC+1. They sit side by side in the same payload looking like the same clock. The cross-check: at 16:13 UTC (17:13 local) the bus had just reached Ahibous, and the next stop Asrir shows <code>arrivalTime: 2</code> with <code>arrivalHour: "17:15"</code>, two minutes later in local time. Miss that one-hour offset and every “last updated” label on the map reads an hour stale.</p>
+<p>That’s pretty much the whole API for this single line. As you can see, the “reverse engineering” here is very basic and straightforward. I was initially worried that I might have to do some APK decompilation or more complex network analysis, but luckily the process was transparent enough to be done within a couple of minutes. On to building something better with this data.</p>
+</section>
+</section>
+</section>
+<section id="rebuilding-the-polyline" class="level2">
+<h2 class="anchored" data-anchor-id="rebuilding-the-polyline">Rebuilding the Polyline</h2>
+<p>Currently, the app uses straight lines between the stops, which neither shows the actual path the bus takes nor looks good.</p>
+<p><img src="https://kharchouf.com/posts/err-bus/original_line.png" class="img-fluid" alt="The original app’s straight-line route between stops"> One way to solve this problem is to collect enough GPS datapoints from a bus traversing the route in both directions, then feed those points to OSRM (<em>Open Source Routing Machine</em>) to get a cleaner, road-snapped path. I used the following script to collect the datapoints and progressively build a <code>.jsonl</code> file we can use with OSRM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> argparse</span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> json</span>
+<span id="cb2-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> sys</span>
+<span id="cb2-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> time</span>
+<span id="cb2-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> datetime <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> datetime, timezone</span>
+<span id="cb2-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Path</span>
+<span id="cb2-7"></span>
+<span id="cb2-8"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> requests</span>
+<span id="cb2-9"></span>
+<span id="cb2-10">API_URL <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"http://xxx.xxx.xx.xx/api/line_horaires/48"</span></span>
+<span id="cb2-11">PAYLOAD <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"reseaux_id"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>}</span>
+<span id="cb2-12">OUT_DIR <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Path(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">__file__</span>).parent</span>
+<span id="cb2-13">LATEST <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OUT_DIR <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"latest.json"</span></span>
+<span id="cb2-14">HISTORY <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> OUT_DIR <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"history.jsonl"</span></span>
+<span id="cb2-15">TIMEOUT <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb2-16"></span>
+<span id="cb2-17"></span>
+<span id="cb2-18"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> parse_buses(data):</span>
+<span id="cb2-19">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Flatten buses_aller + buses_retour into simple position dicts."""</span></span>
+<span id="cb2-20">    buses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb2-21">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> direction_key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses_aller"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses_retour"</span>):</span>
+<span id="cb2-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> data.get(direction_key, []):</span>
+<span id="cb2-23">            loc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> b.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"localisation"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb2-24">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb2-25">                lat_str, lng_str <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> loc.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">","</span>)</span>
+<span id="cb2-26">                lat, lng <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(lat_str), <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(lng_str)</span>
+<span id="cb2-27">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span> (<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ValueError</span>, <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">AttributeError</span>):</span>
+<span id="cb2-28">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># malformed/empty localisation -&gt; skip this bus this tick</span></span>
+<span id="cb2-29">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">continue</span></span>
+<span id="cb2-30">            buses.append({</span>
+<span id="cb2-31">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bus"</span>: b.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bus"</span>),</span>
+<span id="cb2-32">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>: b.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>),</span>
+<span id="cb2-33">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>: lat,</span>
+<span id="cb2-34">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lng"</span>: lng,</span>
+<span id="cb2-35">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the API's own GPS timestamp (note: appears to be UTC)</span></span>
+<span id="cb2-36">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"src_updated_at"</span>: b.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"updated_at"</span>),</span>
+<span id="cb2-37">            })</span>
+<span id="cb2-38">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> buses</span>
+<span id="cb2-39"></span>
+<span id="cb2-40"></span>
+<span id="cb2-41"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> poll_once():</span>
+<span id="cb2-42">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Fetch, parse, write latest.json, append to history.jsonl. Returns bus count."""</span></span>
+<span id="cb2-43">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># client-side timestamp, when WE fetched it</span></span>
+<span id="cb2-44">    fetched_at <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> datetime.now(timezone.utc).isoformat()</span>
+<span id="cb2-45"></span>
+<span id="cb2-46">    resp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> requests.post(API_URL, json<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>PAYLOAD, timeout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>TIMEOUT)</span>
+<span id="cb2-47">    resp.raise_for_status()</span>
+<span id="cb2-48">    data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> resp.json()</span>
+<span id="cb2-49"></span>
+<span id="cb2-50">    buses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> parse_buses(data)</span>
+<span id="cb2-51">    snapshot <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fetched_at"</span>: fetched_at, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses"</span>: buses}</span>
+<span id="cb2-52"></span>
+<span id="cb2-53">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># latest.json: overwrite (write to temp then replace, so the map never</span></span>
+<span id="cb2-54">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># reads a half-written file)</span></span>
+<span id="cb2-55">    tmp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> LATEST.with_suffix(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".json.tmp"</span>)</span>
+<span id="cb2-56">    tmp.write_text(json.dumps(snapshot, ensure_ascii<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>, indent<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-57">    tmp.replace(LATEST)</span>
+<span id="cb2-58"></span>
+<span id="cb2-59">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># history.jsonl: append one compact line</span></span>
+<span id="cb2-60">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> HISTORY.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"a"</span>, encoding<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb2-61">        f.write(json.dumps(snapshot, ensure_ascii<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb2-62"></span>
+<span id="cb2-63">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(buses)</span>
+<span id="cb2-64"></span>
+<span id="cb2-65"></span>
+<span id="cb2-66"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> main():</span>
+<span id="cb2-67">    ap <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> argparse.ArgumentParser()</span>
+<span id="cb2-68">    ap.add_argument(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--once"</span>, action<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"store_true"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">help</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"poll a single time and exit"</span>)</span>
+<span id="cb2-69">    ap.add_argument(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--interval"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>, default<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">help</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"seconds between polls"</span>)</span>
+<span id="cb2-70">    args <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ap.parse_args()</span>
+<span id="cb2-71"></span>
+<span id="cb2-72">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> args.once:</span>
+<span id="cb2-73">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb2-74">            n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> poll_once()</span>
+<span id="cb2-75">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"ok: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>n<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> bus(es) logged"</span>)</span>
+<span id="cb2-76">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">Exception</span> <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> e:</span>
+<span id="cb2-77">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"error: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>e<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>sys.stderr)</span>
+<span id="cb2-78">            sys.exit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-79">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb2-80"></span>
+<span id="cb2-81">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"polling every </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>args<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>interval<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">s -&gt; </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>LATEST<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> + </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>HISTORY<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>)</span>
+<span id="cb2-82">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">while</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>:</span>
+<span id="cb2-83">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb2-84">            n <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> poll_once()</span>
+<span id="cb2-85">            stamp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> datetime.now().strftime(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>)</span>
+<span id="cb2-86">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"[</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>stamp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>n<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> bus(es)"</span>)</span>
+<span id="cb2-87">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span> requests.RequestException <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> e:</span>
+<span id="cb2-88">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># network hiccup: log it and keep going, don't crash the loop</span></span>
+<span id="cb2-89">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"[</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>datetime<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>now()<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>H<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>M<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>S<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] request failed: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>e<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>,</span>
+<span id="cb2-90">                  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>sys.stderr)</span>
+<span id="cb2-91">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">Exception</span> <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> e:</span>
+<span id="cb2-92">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"[</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>datetime<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>now()<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>H<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>M<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span>S<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] unexpected: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>e<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>sys.stderr)</span>
+<span id="cb2-93">        time.sleep(args.interval)</span>
+<span id="cb2-94"></span>
+<span id="cb2-95"></span>
+<span id="cb2-96"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">__name__</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"__main__"</span>:</span>
+<span id="cb2-97">    main()</span></code></pre></div></div>
+<p>The script is straightforward. It polls the API, parses the bus positions, and writes two files: <code>latest.json</code> which is the most recent snapshot of the bus positions, and <code>history.jsonl</code> which is a line-delimited JSON file that accumulates every snapshot over time. The <code>latest.json</code> file is what the map will read to show the current bus positions, while <code>history.jsonl</code> is what we will use to extract the GPS traces for building the polyline with OSRM. The script can be run in a loop with a specified interval, or just once for testing.</p>
+<p>Once we have enough datapoints, we can use a preprocessed version of the <code>history.jsonl</code> file to feed into OSRM and get our improved route line. I wanted to try a simpler approach first, which is to just gather a dense set of GPS points and use them as the polyline. This is not ideal, since the points are noisy and sparse, and it was an improvement over the straight lines station-to-station from the official app:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://kharchouf.com/posts/err-bus/simple_poly.webp" class="img-fluid figure-img"></p>
+<figcaption>Raw GPS points from bus location polling, connected directly stop-to-stop</figcaption>
+</figure>
+</div>
+<p>As you can see, the main issue is that the polyline does a lot of corner-cutting due to the low resolution of the GPS points. I do not want to overload the server that is providing the bus data, so I am only polling every 10 seconds, which is in line with their own app’s frequency. The reason I didn’t feel the need to try higher frequency polling is that 1. I do not want to risk overloading their server, 2. I’m not sure the bus’s GPS updates are actually more frequent than that, so it might not even help, and 3. I can use OSRM map-matching to fill in the gaps and get a smoother line without needing more points.</p>
+</section>
+<section id="osrm-and-road-matching" class="level2">
+<h2 class="anchored" data-anchor-id="osrm-and-road-matching">OSRM and Road Matching</h2>
+<p>OSRM (Open Source Routing Machine) is a powerful tool for routing and map-matching. It can take a sequence of GPS points and match them to the most likely path on the road network, which is exactly what we need to clean up our bus route. By feeding our collected GPS points into OSRM’s map-matching API, we can get a much more accurate and visually appealing polyline that follows the actual roads the bus takes, rather than cutting corners between stops.</p>
+<p>A couple of hours of polling has collected a couple of thousand locations, and since I do not want to bother with preprocessing and clean up of duplicate points when the bus is stationary or points that are too close to each other, I decided to use a local OSRM instance and just feed it the entire history. I retrieved Morocco’s OSM data from <a href="https://download.geofabrik.de/africa/morocco-latest.osm.pbf">Geofabrik in PBF format</a>, which is an XML-like binary format well-suited for storage and editing, but not for running routing algorithms directly (Dijkstra, A*, etc.). So we extract the data, build the road graph, and then run the map-matching step. I used a Docker instance to run the OSRM pipeline locally:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1. Extract the data and build the graph using the car profile to get the right routing for a bus</span></span>
+<span id="cb3-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">docker</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-t</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${PWD}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/data:/data"</span> osrm/osrm-backend osrm-extract <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> /opt/car.lua /data/morocco-260529.osm.pbf</span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. Cut the graph into nested cells (like a hierarchy of regions)</span></span>
+<span id="cb3-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">docker</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-t</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${PWD}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/data:/data"</span> osrm/osrm-backend osrm-partition /data/morocco-260529.osrm</span>
+<span id="cb3-6"></span>
+<span id="cb3-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3. Compute actual travel-time weights for each cell boundary. Separate topology (partition) from weights (customize).</span></span>
+<span id="cb3-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">docker</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-t</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${PWD}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/data:/data"</span> osrm/osrm-backend osrm-customize /data/morocco-260529.osrm</span>
+<span id="cb3-9"></span>
+<span id="cb3-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 4. Run the OSRM server to serve map-matching requests, allow 1000 points per request since we have a long history of GPS points to match.</span></span>
+<span id="cb3-11"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">docker</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-t</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-i</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> 5000:5000 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${PWD}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/data:/data"</span> osrm/osrm-backend osrm-routed <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--algorithm</span> mld <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--max-matching-size</span> 1000 /data/morocco-260529.osrm</span></code></pre></div></div>
+<p>This will create a bunch of output files (.osrm, .osrm.ebg, etc.) which will be written directly into a <code>data/</code> folder alongside the original <code>.pbf</code>. Once the server is running, we use the following script to feed it the GPS points and get the matched route:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> json, time, math</span>
+<span id="cb4-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> datetime <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> datetime</span>
+<span id="cb4-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> requests</span>
+<span id="cb4-4"></span>
+<span id="cb4-5">OSRM <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"http://localhost:5000/match/v1/driving/"</span></span>
+<span id="cb4-6">MIN_MOVE_M <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># drop points closer than this to the previous one</span></span>
+<span id="cb4-7">MAX_POINTS <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4000</span>    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># OSRM public limit per request</span></span>
+<span id="cb4-8">RADIUS_M <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># GPS accuracy hint</span></span>
+<span id="cb4-9"></span>
+<span id="cb4-10"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> haversine(a, b):</span>
+<span id="cb4-11">    R <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6371000</span></span>
+<span id="cb4-12">    p1, p2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> math.radians(a[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]), math.radians(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])</span>
+<span id="cb4-13">    dphi <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> math.radians(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>a[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> dl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> math.radians(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>a[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb4-14">    h <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> math.sin(dphi<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> math.cos(p1)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>math.cos(p2)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>math.sin(dl<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb4-15">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>R<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>math.asin(math.sqrt(h))</span>
+<span id="cb4-16"></span>
+<span id="cb4-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1. load</span></span>
+<span id="cb4-18">rows <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb4-19"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"history.jsonl"</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb4-20">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> f:</span>
+<span id="cb4-21">        line <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> line.strip()</span>
+<span id="cb4-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> line: <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">continue</span></span>
+<span id="cb4-23">        o <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> json.loads(line)</span>
+<span id="cb4-24">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> o[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses"</span>]:</span>
+<span id="cb4-25">            rows.append({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ts"</span>: o[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fetched_at"</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>: b[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>],</span>
+<span id="cb4-26">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>: b[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lng"</span>: b[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lng"</span>]})</span>
+<span id="cb4-27"></span>
+<span id="cb4-28"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. segment into runs by sens</span></span>
+<span id="cb4-29">segs, cur, cursens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [], [], <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb4-30"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> r <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> rows:</span>
+<span id="cb4-31">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> cursens:</span>
+<span id="cb4-32">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> cur: segs.append((cursens, cur))</span>
+<span id="cb4-33">        cur, cursens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [], r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sens"</span>]</span>
+<span id="cb4-34">    cur.append(r)</span>
+<span id="cb4-35"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> cur: segs.append((cursens, cur))</span>
+<span id="cb4-36"></span>
+<span id="cb4-37"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Runs found:"</span>)</span>
+<span id="cb4-38"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i,(s,c) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">enumerate</span>(segs):</span>
+<span id="cb4-39">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  [</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>i<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">] sens=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  n=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(c)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>c[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ts'</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">–</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>c[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ts'</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb4-40"></span>
+<span id="cb4-41"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> clean(run):</span>
+<span id="cb4-42">    out <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb4-43">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> r <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> run:</span>
+<span id="cb4-44">        p <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>], r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lng"</span>])</span>
+<span id="cb4-45">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> out <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">or</span> haversine((out[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lat"</span>], out[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lng"</span>]), p) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> MIN_MOVE_M:</span>
+<span id="cb4-46">            out.append(r)</span>
+<span id="cb4-47">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># thin to MAX_POINTS evenly if still too long</span></span>
+<span id="cb4-48">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(out) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> MAX_POINTS:</span>
+<span id="cb4-49">        step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(out)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>MAX_POINTS</span>
+<span id="cb4-50">        out <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [out[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>step)] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(MAX_POINTS)]</span>
+<span id="cb4-51">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> out</span>
+<span id="cb4-52"></span>
+<span id="cb4-53"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> match(run):</span>
+<span id="cb4-54">    run <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> clean(run)</span>
+<span id="cb4-55">    coords <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">";"</span>.join(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'lng'</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">,</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'lat'</span>]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> r <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> run)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># OSRM is lng,lat</span></span>
+<span id="cb4-56">    radii  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">";"</span>.join(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(RADIUS_M) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> run)</span>
+<span id="cb4-57">    ts     <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">";"</span>.join(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(datetime.fromisoformat(r[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ts"</span>]).timestamp())) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> r <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> run)</span>
+<span id="cb4-58">    params <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"geometries"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"geojson"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"overview"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"full"</span>,</span>
+<span id="cb4-59">              <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"radiuses"</span>: radii, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"timestamps"</span>: ts}</span>
+<span id="cb4-60">    resp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> requests.get(OSRM <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> coords, params<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>params, timeout<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>)</span>
+<span id="cb4-61">    resp.raise_for_status()</span>
+<span id="cb4-62">    data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> resp.json()</span>
+<span id="cb4-63">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> data.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"code"</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Ok"</span>:</span>
+<span id="cb4-64">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">raise</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">RuntimeError</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"OSRM: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'code'</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'message'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb4-65">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># stitch geometry from all matched segments</span></span>
+<span id="cb4-66">    feats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [m[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"geometry"</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"coordinates"</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> m <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"matchings"</span>]]</span>
+<span id="cb4-67">    coords_out <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [pt <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> seg <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> feats <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> pt <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> seg]</span>
+<span id="cb4-68">    conf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">round</span>(m.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"confidence"</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>),<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> m <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"matchings"</span>]]</span>
+<span id="cb4-69">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  matched: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(coords_out)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> pts, confidence=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>conf<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb4-70">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Feature"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"geometry"</span>:{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>:<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LineString"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"coordinates"</span>:coords_out},</span>
+<span id="cb4-71">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"properties"</span>:{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"confidence"</span>:conf}}</span>
+<span id="cb4-72"></span>
+<span id="cb4-73"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3. pick one clean run per direction and match.</span></span>
+<span id="cb4-74"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#    EDIT these indices after reading the "Runs found" printout.</span></span>
+<span id="cb4-75">ALLER_IDX  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># a sens=1 run</span></span>
+<span id="cb4-76">RETOUR_IDX <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># a sens=0 run</span></span>
+<span id="cb4-77"></span>
+<span id="cb4-78"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> name, idx <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"route_aller"</span>, ALLER_IDX), (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"route_retour"</span>, RETOUR_IDX)]:</span>
+<span id="cb4-79">    sens, run <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> segs[idx]</span>
+<span id="cb4-80">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  (seg </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>idx<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">, sens=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>sens<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">):"</span>)</span>
+<span id="cb4-81">    gj <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> match(run)</span>
+<span id="cb4-82">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.geojson"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"w"</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb4-83">        json.dump(gj, f)</span>
+<span id="cb4-84">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  wrote </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.geojson"</span>)</span>
+<span id="cb4-85">    time.sleep(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># be polite to the server if using public OSRM instance</span></span></code></pre></div></div>
+<p>Let’s break down the script. We define the haversine function, which is simply a way to calculate the distance between two coordinates on a sphere. It calculates the great-circle distance between two points on the Earth’s surface, which is why it uses earth’s radius of 6371 km as a hardcoded value. You could use something like <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7B%5CDelta%20lat%5E2%20+%20%5CDelta%20lng%5E2%7D"> for a rough approximation, but it gets inaccurate over larger distances or near the poles, so haversine is a more robust choice for a couple of extra lines of code. We start by loading the jsonl file and parsing the bus positions into a list of rows. We then segment the data into runs based on the <code>sens</code> value, which indicates the direction of the bus. Each run is a sequence of GPS points for a single direction. We print out the runs we found, along with their timestamps, so we can choose which ones to use for matching. The <code>clean</code> function filters out points that are too close to each other, and also thins the points if there are more than <code>MAX_POINTS</code>. The <code>match</code> function takes a run of GPS points, formats them for the OSRM API, and sends a request to get the matched route. It then stitches together the matched segments into a single GeoJSON LineString feature. Finally, we pick one run for each direction (based on the printed output), match it, and write the resulting GeoJSON to a file.</p>
+<p>Now we have two GeoJSON files, <code>route_aller.geojson</code> and <code>route_retour.geojson</code>, which contain the matched routes for the outbound and return legs of the bus line. We can use these files to draw the routes on our map: <img src="https://kharchouf.com/posts/err-bus/map_matching_ex.png" class="img-fluid" alt="Road-matched routes from OSRM, outbound and return legs"></p>
+<p>The routes are much smoother now, following the actual roads instead of cutting corners between stops.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://kharchouf.com/posts/err-bus/roundabout.png" class="img-fluid figure-img"></p>
+<figcaption>The matched route correctly tracing a roundabout</figcaption>
+</figure>
+</div>
+<p>The confidence values from OSRM can also be used to indicate how well the GPS points matched the road network, which can be useful for debugging or further refining the data collection process. These polylines can now be used in our custom bus tracker map to show the actual paths the buses take, which looks much better and is more informative.</p>
+</section>
+<section id="deploying-a-worker-to-serve-the-map" class="level2">
+<h2 class="anchored" data-anchor-id="deploying-a-worker-to-serve-the-map">Deploying a Worker to Serve the Map</h2>
+<p>Right now, I’m polling the API from my machine and writing the latest bus positions to a local file. If we want to run this continuously and reliably enough to serve a live map, we should deploy the polling script to a server or cloud function that can run uninterrupted. This way the <code>latest.json</code> file stays current and we can serve it to the frontend without worrying about downtime or connectivity issues. Since scaling isn’t a concern, a simple Cloudflare Worker is sufficient.</p>
+<p>The worker’s job is to be a request handler: every time the map frontend calls the worker URL, Cloudflare invokes the <code>fetch</code> function of the default export. The skeleton looks like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">export</span> <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">default</span> {</span>
+<span id="cb5-2">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">async</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fetch</span>(request) {</span>
+<span id="cb5-3">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// ...</span></span>
+<span id="cb5-4">  }</span>
+<span id="cb5-5">}<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div></div>
+<p><code>async</code> allows the function to use <code>await</code> for asynchronous operations. Next, we handle CORS. Our frontend is served from a different origin than the worker, so we need the appropriate CORS headers. The browser sends an <code>OPTIONS</code> preflight request to check if the server allows cross-origin requests:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (request<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">===</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"OPTIONS"</span>) {</span>
+<span id="cb6-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">new</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Response</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">null</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> {</span>
+<span id="cb6-3">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">headers</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> {</span>
+<span id="cb6-4">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Access-Control-Allow-Origin"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb6-5">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Access-Control-Allow-Methods"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"GET"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb6-6">    }</span>
+<span id="cb6-7">  })<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb6-8">}</span></code></pre></div></div>
+<p><code>Access-Control-Allow-Origin: *</code> means “any website is allowed to call me”, a wildcard is fine since the bus data is public. <code>Access-Control-Allow-Methods: GET</code> marks <code>GET</code> requests as permitted. The response body is <code>null</code> because preflights don’t need content, just headers.</p>
+<p>Now we fetch the actual bus API:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> resp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">await</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fetch</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"http://HOSTNAME/api/line_horaires/48"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> {</span>
+<span id="cb7-2">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">method</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"POST"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb7-3">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">headers</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> { <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Content-Type"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"application/json"</span> }<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb7-4">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">body</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">JSON</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stringify</span>({ <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">reseaux_id</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span> })<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// Number 8 identifies the city/network which we found out during our reverse engineering step</span></span>
+<span id="cb7-5">})<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div></div>
+<p>Notice the <code>HOSTNAME</code> instead of the raw IP address I used in the polling script. Cloudflare Workers don’t allow outgoing requests to bare IP addresses for security reasons. A quick <code>nslookup</code> on the IP revealed the associated hostname, so I used that instead.</p>
+<p>Finally, we parse the response with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">await</span> resp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">json</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div></div>
+<p>But this is the full ~100 KB object we saw earlier. We only need the fields useful to us:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> buses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb9-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">of</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses_aller"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"buses_retour"</span>]) {</span>
+<span id="cb9-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> b <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">of</span> (data[key] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">||</span> [])) {</span>
+<span id="cb9-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">const</span> [lat<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> lng] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (b<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">localisation</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">||</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">","</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">Number</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb9-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">isNaN</span>(lat) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;&amp;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">isNaN</span>(lng)) {</span>
+<span id="cb9-6">      buses<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">push</span>({</span>
+<span id="cb9-7">        <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">bus</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> b<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bus</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb9-8">        <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">sens</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> b<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sens</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb9-9">        lat<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> lng<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb9-10">        <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">src_updated_at</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> b<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">updated_at</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb9-11">      })<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb9-12">    }</span>
+<span id="cb9-13">  }</span>
+<span id="cb9-14">}</span></code></pre></div></div>
+<p>Walking through the snippet:</p>
+<ul>
+<li><code>for (const key of ["buses_aller", "buses_retour"])</code>: iterates over both direction arrays in one loop rather than duplicating the code.</li>
+<li><code>(data[key] || [])</code>: if a direction has no buses (empty or missing array), <code>|| []</code> yields an empty iterable instead of crashing.</li>
+<li><code>b.localisation.split(",").map(Number)</code>: the API gives position as the string <code>"31.883,-4.355"</code>. Split on the comma to get <code>["31.883", "-4.355"]</code>, then <code>map(Number)</code> converts each to a float. The destructuring <code>const [lat, lng] =</code> unpacks them in one line.</li>
+<li><code>if (!isNaN(lat) &amp;&amp; !isNaN(lng))</code>: guards against a missing or malformed <code>localisation</code>. <code>Number("") === NaN</code>, so this safely skips bad rows rather than pushing garbage coordinates.</li>
+<li><code>{ bus, sens, lat, lng, src_updated_at }</code>: just the five fields the map needs. <code>lat, lng</code> is shorthand for <code>lat: lat, lng: lng</code> in modern JavaScript, which I only know about thanks to one of those LLM chatbots, I haven’t read the JS documentation in over 10 years at this point.</li>
+</ul>
+<p>Now we have a clean <code>buses</code> array with the current positions and metadata for all active buses. We can return this as JSON to the frontend using a response like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">new</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Response</span>(</span>
+<span id="cb10-2">  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">JSON</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stringify</span>({ <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">fetched_at</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">new</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">Date</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toISOString</span>()<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> buses })<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-3">  {</span>
+<span id="cb10-4">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">headers</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> {</span>
+<span id="cb10-5">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Content-Type"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"application/json"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Access-Control-Allow-Origin"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-7">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cache-Control"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"no-store"</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb10-8">    }</span>
+<span id="cb10-9">  }</span>
+<span id="cb10-10">)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span></code></pre></div></div>
+<p>The only thing really new here is <code>"Cache-Control": "no-store"</code>, which tells browsers and intermediate caches not to store this response at all, ensuring that every request to the worker gets fresh data from the bus API.</p>
+<p>Once deployed, we point our frontend map at the worker URL instead of the original API. It serves live bus positions with the same data structure we had in <code>latest.json</code>, but now it’s always up to date and doesn’t depend on a local machine running the polling script.</p>
+</section>
+<section id="the-live-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-live-map">The Live Map</h2>
+<p>The pipeline comes together here. GPS positions arrive from the bus API every 10-15 seconds, a Cloudflare Worker strips the 100 KB payload down to the handful of fields the map actually needs, and Leaflet renders them against road-matched routes built from the historical GPS trace.</p>
+<p>The city runs three lines: L02, examined in detail above, runs between Omrane and Ahibous; L01 connects Amazouj to Meski; L03 covers the route between My Mhamed and Tizegdalt. The same API structure, polling pipeline, and OSRM map-matching process applies to all three.</p>
+<iframe src="map.html?lines=l01,l02,l03" style="width:100%;height:560px;border:none;border-radius:6px;display:block;" loading="lazy" title="Errachidia live bus map - L01, L02, L03">
+</iframe>
+<p>Clicking a bus marker highlights its line; the section of route already traveled is shown at reduced opacity to indicate which way it is heading.</p>
+<p>Is it better than the original app? On the things that matter for a bus tracker, knowing where the bus actually is and what route it takes, probably yes. The routes here follow real streets, the data is refreshed at the same rate the app uses, and all three lines are visible at once. I’m no design expert, but I think this is also a better looking map and a better user experience. Of course we can do further improvements, like selecting a destination and have the map route you through the network to get there, or as mentioned at the top, building a model to predict the arrival times of the buses at each stop using historical data. This would be more accurate than the app’s predictions, but would mean more work when I aleady have a list of other on-hold projects I should be picking back up. But I’m satisfied with this as an initial milestone.</p>
+<p>The step I found most unexpectedly interesting was the map-matching. Taking a scattered cloud of GPS pings sampled every 15 seconds from a moving bus, feeding them to OSRM’s Hidden Markov Model matcher, and getting back a clean polyline that follows actual roads.</p>
+<p>The historical data is still accumulating. I mentioned arrival-time prediction at the top, and that is still on the table. Weeks of 15-second GPS snapshots across all three lines is a reasonable foundation for a model that does better than the app’s current estimations, which by the way, is not clear how those are calculated. Something that learns the actual shape of the schedule, the morning delays, the time it takes to clear the roundabout near the market etc. That is for another post.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>reverse engineering</category>
+  <category>networking</category>
+  <category>python</category>
+  <guid>https://kharchouf.com/posts/err-bus/</guid>
+  <pubDate>Mon, 01 Jun 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://kharchouf.com/posts/err-bus/header.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>Lectures notes on the Geometrical Anatomy of Theoretical Physics</title>
   <link>https://kharchouf.com/posts/geometrical-anatomy/</link>
@@ -589,9 +2504,10 @@
   <category>notes</category>
   <guid>https://kharchouf.com/posts/geometrical-anatomy/</guid>
   <pubDate>Sat, 09 May 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://kharchouf.com/posts/geometrical-anatomy/Screenshot_from_2021-11-07_01-56-56.png" medium="image" type="image/png" height="149" width="144"/>
 </item>
 <item>
-  <title>Morocco’s Wage Landscape: An Analysis of 1.6 Million Employees</title>
+  <title>Morocco’s Wage Landscape: A Data Analysis of 1.6 Million Employees</title>
   <link>https://kharchouf.com/posts/cnss-analysis/</link>
   <description><![CDATA[ 
 
@@ -599,7 +2515,7 @@
 
 
 
-<p>In 2022, the database of declared employees registered with Morocco’s <em>Caisse Nationale de Sécurité Sociale</em> (CNSS) was leaked and made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco’s formal labor market.</p>
+<p>In 2022, the database of declared employees registered with Morocco’s <em>Caisse Nationale de Sécurité Sociale</em> (CNSS) was made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco’s formal labor market.</p>
 <p>After cleaning the data (removing entries with missing or inconsistent values), the working dataset contains <strong>1,590,950 employees</strong> spread across <strong>160 cities</strong>, <strong>22,338 declared activity sectors</strong>, and <strong>40,184 companies</strong>, representing 94.6% of the raw records. Gender was inferred from first names using a name-gender mapping dictionary, achieving a 97% match rate; 33.2% of identified employees are women.</p>
 <section id="salary-distribution" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="salary-distribution">Salary Distribution</h2>
@@ -647,7 +2563,7 @@
 </tbody>
 </table>
 <p>The gap between the mean (6,279 DH) and the median (3,538 DH) is a signature of a right-skewed distribution: a relatively small number of very high earners pulls the mean well above what most workers actually take home. More than half of formal-sector employees earn under 3,538 DH per month.</p>
-<p>The <strong>Gini coefficient is 0.4857</strong> — classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong> — meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
+<p>The <strong>Gini coefficient is 0.4857</strong>, classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong>, meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="https://kharchouf.com/posts/cnss-analysis/inequality_analysis.png" class="img-fluid" style="width:80.0%"></p>
 </div>
@@ -686,14 +2602,14 @@
 </tr>
 </tbody>
 </table>
-<p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms — roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
+<p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms, roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="https://kharchouf.com/posts/cnss-analysis/histogram.png" class="img-fluid" style="width:60.0%"></p>
 </div>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="https://kharchouf.com/posts/cnss-analysis/cdf.png" class="img-fluid" style="width:60.0%"></p>
 </div>
-<p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises — women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
+<p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises, women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="https://kharchouf.com/posts/cnss-analysis/salary_tranches_gender.png" class="img-fluid" style="width:70.0%"></p>
 </div>
@@ -708,7 +2624,7 @@
 <p class="page-columns page-full"><img src="https://kharchouf.com/posts/cnss-analysis/geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
-<p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities — Casablanca, Tanger, Rabat, Marrakech, and Kénitra — together represent <strong>66.7%</strong> of the total workforce.</p>
+<p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities: Casablanca, Tanger, Rabat, Marrakech, and Kénitra, together represent <strong>66.7%</strong> of the total workforce.</p>
 <p>Salary levels vary significantly by city, with Casablanca leading by a wide margin:</p>
 <table class="caption-top table">
 <thead>
@@ -871,7 +2787,7 @@
 </tr>
 </tbody>
 </table>
-<p>The pattern is stark: the most feminized sectors are also among the lowest-paid. Sectors with more than 60% female workforce — automotive parts manufacturing (87% women), preschool education (81%), garment manufacturing (67%), cable manufacturing (75%) — cluster at the bottom of the wage distribution. Conversely, the lowest-feminization sectors (construction, security, heavy industry) tend to pay more.</p>
+<p>The pattern is stark: the most feminized sectors are also among the lowest-paid. Sectors with more than 60% female workforce, automotive parts manufacturing (87% women), preschool education (81%), garment manufacturing (67%), cable manufacturing (75%), cluster at the bottom of the wage distribution. Conversely, the lowest-feminization sectors (construction, security, heavy industry) tend to pay more.</p>
 <p>The sector-level gender pay gap follows a similar pattern: the largest gaps appear precisely in the most feminized industries, where women earn 50–58% less than men on average in the same sector.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -938,7 +2854,7 @@
 </section>
 <section id="the-top-1" class="level2">
 <h2 class="anchored" data-anchor-id="the-top-1">The Top 1%</h2>
-<p>The top 1% of earners (15,505 individuals) sit above a threshold of <strong>48,170 DH/month</strong>, with a mean of <strong>87,630 DH</strong> and a maximum of <strong>7,399,227 DH</strong> — over 7.3 million dirhams per month, declared to CNSS.</p>
+<p>The top 1% of earners (15,505 individuals) sit above a threshold of <strong>48,170 DH/month</strong>, with a mean of <strong>87,630 DH</strong> and a maximum of <strong>7,399,227 DH</strong>, over 7.3 million dirhams per month, declared to CNSS.</p>
 <p>The ten highest individual salaries in the database:</p>
 <table class="caption-top table">
 <thead>
@@ -1006,11 +2922,11 @@
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>A few structural features stand out from this dataset:</p>
 <ul>
-<li><strong>The median formal-sector salary in Morocco is 3,538 DH/month</strong> — less than €320. More than half the registered workforce earns below this figure.</li>
+<li><strong>The median formal-sector salary in Morocco is 3,538 DH/month</strong>, less than €320. More than half the registered workforce earns below this figure.</li>
 <li><strong>Inequality is high</strong>: a Gini of 0.49 and a top decile capturing 43% of total wages. The formal labor market mirrors, and probably understates, the broader wealth distribution.</li>
 <li><strong>The gender pay gap is real, significant, and structural</strong>: women are overrepresented in the lowest-paid sectors and brackets. The gap widens in the most feminized industries, not because women are in different jobs, but because the jobs that attract more women systematically pay less.</li>
 <li><strong>Geography concentrates opportunity</strong>: Casablanca accounts for 43% of all formal employment and pays almost double the median salary of smaller cities.</li>
-<li><strong>The labor market is formally fragmented</strong> but the top of the distribution is extremely concentrated — a handful of holding companies and multinationals account for the highest-earning individuals.</li>
+<li><strong>The labor market is formally fragmented</strong> but the top of the distribution is extremely concentrated, a handful of holding companies and multinationals account for the highest-earning individuals.</li>
 </ul>
 
 
@@ -1580,7 +3496,7 @@
   <media:content url="https://kharchouf.com/posts/dawn-of-everything/graeber.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Reading Notes on Brazilian Governance (2002–2023)</title>
+  <title>Reading Notes on 20 years of Brazilian Governance (2002-2023)</title>
   <link>https://kharchouf.com/posts/brasil/</link>
   <description><![CDATA[ 
 
@@ -1613,7 +3529,7 @@
 </section>
 <section id="bolsonaro" class="level2">
 <h2 class="anchored" data-anchor-id="bolsonaro">Bolsonaro</h2>
-<p>Bolsonaro sowed doubt about the reliability of the nation’s electronic voting system — without any evidence:</p>
+<p>Bolsonaro sowed doubt about the reliability of the nation’s electronic voting system, without any evidence:</p>
 <ul>
 <li><a href="https://edition.cnn.com/2021/08/06/americas/bolsonaro-brazil-elections-intl-latam/index.html">Bolsonaro is sowing doubt in Brazil’s electoral system (CNN)</a></li>
 <li><a href="https://www.cnbc.com/2022/09/14/bolsonaro-vs-lula-all-you-need-to-know-ahead-of-brazils-election.html">Bolsonaro vs.&nbsp;Lula: All you need to know (CNBC)</a></li>
@@ -1625,7 +3541,7 @@
 <li><a href="https://www.hrw.org/news/2021/06/22/first-conviction-dictatorship-crimes-brazil">First Conviction for Dictatorship Crimes in Brazil (HRW)</a></li>
 </ul>
 <blockquote class="blockquote">
-<p>“I am in favour of torture, you know that. And the people are in favour as well.” — Jair Bolsonaro (<a href="https://www.nytimes.com/2018/10/28/world/americas/brazil-president-jair-bolsonaro-quotes.html">1999</a>)</p>
+<p>“I am in favour of torture, you know that. And the people are in favour as well.” - Jair Bolsonaro (<a href="https://www.nytimes.com/2018/10/28/world/americas/brazil-president-jair-bolsonaro-quotes.html">1999</a>)</p>
 </blockquote>
 <p>Once, following a visit to a settlement of African slave descendants called a quilombo, Bolsonaro suggested they were all overweight:</p>
 <blockquote class="blockquote">
@@ -1665,22 +3581,22 @@
 <p><a href="https://www.hrw.org/news/2022/08/09/brazil-indigenous-rights-under-serious-threat">Brazil: Indigenous Rights Under Serious Threat (HRW)</a></p>
 <p><a href="https://www.survivalinternational.org/articles/3540-Bolsonaro">Summary of racist remarks against indigenous people (Survival International)</a></p>
 <blockquote class="blockquote">
-<p>“If I become President there will not be a centimeter more of Indigenous land.” — Jair Bolsonaro</p>
+<p>“If I become President there will not be a centimeter more of Indigenous land.” - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
-<p><a href="https://www.theguardian.com/world/2020/jan/24/jair-bolsonaro-racist-comment-sparks-outrage-indigenous-groups">“Indians are undoubtedly changing … They are increasingly becoming human beings just like us.”</a> — Jair Bolsonaro</p>
+<p><a href="https://www.theguardian.com/world/2020/jan/24/jair-bolsonaro-racist-comment-sparks-outrage-indigenous-groups">“Indians are undoubtedly changing … They are increasingly becoming human beings just like us.”</a> - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>“The Indians do not speak our language, they do not have money, they do not have culture. They are native peoples. How did they manage to get 13% of the national territory?” — Jair Bolsonaro</p>
+<p>“The Indians do not speak our language, they do not have money, they do not have culture. They are native peoples. How did they manage to get 13% of the national territory?” - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>“[Indigenous reserves] are an obstacle to agri-business. You can’t reduce Indigenous land by even a square meter in Brazil.” — Jair Bolsonaro</p>
+<p>“[Indigenous reserves] are an obstacle to agri-business. You can’t reduce Indigenous land by even a square meter in Brazil.” - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>“In 2019 we’re going to rip up Raposa Serra do Sol [Indigenous Territory in Roraima, northern Brazil]. We’re going to give all the ranchers guns.” — Jair Bolsonaro</p>
+<p>“In 2019 we’re going to rip up Raposa Serra do Sol [Indigenous Territory in Roraima, northern Brazil]. We’re going to give all the ranchers guns.” - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>“If I’m elected, I’ll serve a blow to FUNAI (Brazil’s department for Indigenous affairs); a blow to the neck. There’s no other way. It’s not useful anymore.” — Jair Bolsonaro</p>
+<p>“If I’m elected, I’ll serve a blow to FUNAI (Brazil’s department for Indigenous affairs); a blow to the neck. There’s no other way. It’s not useful anymore.” - Jair Bolsonaro</p>
 </blockquote>
 </section>
 <section id="sexist-and-homophobic-remarks" class="level3">
@@ -1702,7 +3618,7 @@
 </section>
 <section id="the-policies-of-bolsonaro" class="level3">
 <h3 class="anchored" data-anchor-id="the-policies-of-bolsonaro">The Policies of Bolsonaro</h3>
-<p>Bolsonaro increasingly disengaged Brazil from the international sustainability agenda. He cancelled the country’s scheduled hosting of COP 25 in 2019, suspended the submission of further voluntary national reviews on the SDGs, and ditched most international collaboration on environmental conservation. Domestically, he abolished the Comissão Nacional para os Objetivos do Desenvolvimento Sustentável (CNODS, National Commission for the Sustainable Development Goals), created in October 2016 to coordinate SDG implementation between federal government agencies and civil society organisations. In April 2019 the Bolsonaro administration dissolved most public bodies that were not established by law but by decrees or ministerial orders — CNODS was terminated alongside about 500 other multi-stakeholder commissions and councils.</p>
+<p>Bolsonaro increasingly disengaged Brazil from the international sustainability agenda. He cancelled the country’s scheduled hosting of COP 25 in 2019, suspended the submission of further voluntary national reviews on the SDGs, and ditched most international collaboration on environmental conservation. Domestically, he abolished the Comissão Nacional para os Objetivos do Desenvolvimento Sustentável (CNODS, National Commission for the Sustainable Development Goals), created in October 2016 to coordinate SDG implementation between federal government agencies and civil society organisations. In April 2019 the Bolsonaro administration dissolved most public bodies that were not established by law but by decrees or ministerial orders. CNODS was terminated alongside about 500 other multi-stakeholder commissions and councils.</p>
 <p><em>Russo Lopes, G. and Bastos Lima, M. G. (2020) ‘Necropolitics in the Jungle: COVID-19 and the Marginalisation of Brazil’s Forest Peoples’. Bulletin of Latin American Research 39(S1): 92–97.</em></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/OWVrKNScCc0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>Instead of bolstering the institutions of law and order so that they can restore calm and prosecute gang bosses, Bolsonaro argued the way to tackle violence was with more violence. He allowed more Brazilians to own and carry guns, encouraging them to confront criminals themselves, and sought to make it harder to punish police officers who kill suspects. (<a href="https://www.economist.com/leaders/2019/05/30/jair-bolsonaro-will-not-defeat-crime-in-brazil-by-tolerating-militias">The Economist</a>)</p>
@@ -1767,7 +3683,7 @@
 <section id="covid-19" class="level3">
 <h3 class="anchored" data-anchor-id="covid-19">COVID-19</h3>
 <blockquote class="blockquote">
-<p>“because of my background as an athlete, I wouldn’t need to worry if I was infected by the virus. I wouldn’t feel anything or at the very worst it would be like a little flu or a bit of a cold.” — Jair Bolsonaro</p>
+<p>“because of my background as an athlete, I wouldn’t need to worry if I was infected by the virus. I wouldn’t feel anything or at the very worst it would be like a little flu or a bit of a cold.” - Jair Bolsonaro</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>“the people will soon see that they were tricked by these governors and by the large part of the media when it comes to coronavirus.”</p>
@@ -1791,7 +3707,7 @@
 <li><a href="https://www.brasilwire.com/white-house-admits-cia-involvement-in-latin-americas-war-on-corruption/">White House admits CIA involvement in Latin America’s war on corruption (Brasil Wire)</a></li>
 </ul>
 <p>Operation Car Wash is the infamous large-scale corruption investigation that began in Brazil in 2014. The operation initially focused on uncovering a money laundering scheme involving the state-owned oil company Petrobras, but it eventually expanded to investigate corruption across various sectors of Brazilian politics and business. The climax of <em>Lava Jato</em> was the conviction and imprisonment of Lula, the former president of Brazil, for allegedly accepting a triplex apartment in Guarujá from a company called OAS in exchange for contracts with Petrobras.</p>
-<p>Bolsonaro appointed Sergio Moro — the judge who put Lula in jail and prevented him from running in the 2018 election — as his “super justice minister” after his election. He also promised Moro a supreme court seat: <a href="https://www1.folha.uol.com.br/internacional/en/brazil/2019/05/bolsonaro-says-he-will-nominate-sergio-moro-to-the-supreme-court.shtml">Folha de S.Paulo</a>.</p>
+<p>Bolsonaro appointed Sergio Moro -the judge who put Lula in jail and prevented him from running in the 2018 election- as his “super justice minister” after his election. He also promised Moro a supreme court seat: <a href="https://www1.folha.uol.com.br/internacional/en/brazil/2019/05/bolsonaro-says-he-will-nominate-sergio-moro-to-the-supreme-court.shtml">Folha de S.Paulo</a>.</p>
 <p><a href="https://www.theatlantic.com/international/archive/2019/08/anti-corruption-crusades-paved-way-bolsonaro/596449/">How anti-corruption crusades paved the way for Bolsonaro (The Atlantic)</a></p>
 <p>It is now apparent that Moro was not acting as an impartial judge, but actively conspiring with the prosecution to ensure Lula was imprisoned. The prosecution presented evidence despite knowing it was weak; Moro gave the team tips on how to go after Lula and attack him in the press. The most recent of many explosive reports indicate prosecutors coordinated to put pressure on Brazil’s Supreme Court.</p>
 <ul>
@@ -1799,9 +3715,9 @@
 <li><a href="https://theintercept.com/2020/01/20/linha-do-tempo-vaza-jato/">The Intercept, timeline</a></li>
 </ul>
 <p>The Intercept Brasil also revealed that wiretapping on Lula’s phones was kept from the public; that there was a plot to <a href="https://theintercept.com/2019/07/09/brazil-car-wash-sergio-moro-venezuela-maduro/">leak information to the Venezuelan opposition</a> at the suggestion of Moro; and that chief prosecutor Deltan Dallagnol gave <a href="https://theintercept.com/2019/07/26/brazil-car-wash-deltan-dallagnol-paid-speaking/">paid lectures</a> to the very same banks he would later be tasked with investigating.</p>
-<p>Moro had accelerated court dates to ensure that Lula was sentenced and that an appellate court ruling could come in just in time for the former president to be barred from running in the 2018 elections. The rulings rendered Lula ineligible for the presidency — and in April 2018, he was arrested on Moro’s orders. One of Moro’s last acts in his judgeship was to publicly release plea-bargain testimony from one of Lula’s former allies, Antonio Palocci, six days before the first round of elections.</p>
+<p>Moro had accelerated court dates to ensure that Lula was sentenced and that an appellate court ruling could come in just in time for the former president to be barred from running in the 2018 elections. The rulings rendered Lula ineligible for the presidency, and in April 2018, he was arrested on Moro’s orders. One of Moro’s last acts in his judgeship was to publicly release plea-bargain testimony from one of Lula’s former allies, Antonio Palocci, six days before the first round of elections.</p>
 <p>“In a democratic and accusatory penal case, the role of prosecution must not be mixed with that of judgment,” said Minister Gilmar Mendes. The chats published by The Intercept had <a href="https://theintercept.com/2019/06/09/brazil-lula-operation-car-wash-sergio-moro/">documented prohibited collaboration</a> between the prosecutors and Moro, which Mendes said revealed lawbreaking: “Without a doubt, from the content of the conversations divulged, we can highlight manifestly illegal situations.”</p>
-<p>On March 8, just a day before the judges publicly deliberated Moro’s bias, Supreme Court Minister Edson Fachin made a surprise decision throwing out all the Car Wash convictions against Lula — on the grounds that Moro’s mandate at the court in Curitiba was to judge crimes related to Petrobras, and so Lula’s case fell outside his purview. Many critics saw this as a last-ditch effort to spare Moro the embarrassment of having the court rule against him on bias grounds. The remaining judges decided to continue their deliberations regardless — and finally ruled.</p>
+<p>On March 8, just a day before the judges publicly deliberated Moro’s bias, Supreme Court Minister Edson Fachin made a surprise decision throwing out all the Car Wash convictions against Lula, on the grounds that Moro’s mandate at the court in Curitiba was to judge crimes related to Petrobras, and so Lula’s case fell outside his purview. Many critics saw this as a last-ditch effort to spare Moro the embarrassment of having the court rule against him on bias grounds. The remaining judges decided to continue their deliberations regardless, and finally ruled.</p>
 <p>Car Wash prosecutors, who long insisted that they were apolitical, were in fact internally plotting how to prevent the return to power of Lula: <a href="https://theintercept.com/2019/06/09/brazil-car-wash-prosecutors-workers-party-lula">The Intercept</a>.</p>
 <section id="the-telegram-leaks" class="level3">
 <h3 class="anchored" data-anchor-id="the-telegram-leaks">The Telegram Leaks</h3>
@@ -1814,26 +3730,26 @@
 <p>Selected messages from the leaked chats:</p>
 <ul>
 <li>After a month of silence from the Car Wash task force, Moro asked: “Hasn’t it been a long time without an operation?” In another instance, Moro said, “You cannot make that kind of mistake now.”</li>
-<li>“What do you think of these crazy statements from the PT national board? Should we officially rebut?” — Moro, using “we,” showing he viewed himself and the Car Wash prosecutors as united in the same cause.</li>
-<li>December 7, 2015 — Moro informally passed on an investigative tip to prosecutors: “Source informed me that the contact person is annoyed at having been asked to issue draft property transfer deeds for one of the ex-president’s children. Apparently the person would be willing to provide the information. I’m therefore passing it along. The source is serious.” “Thank you!! We’ll make contact,” Dallagnol promptly replied.</li>
+<li>“What do you think of these crazy statements from the PT national board? Should we officially rebut?” - Moro, using “we,” showing he viewed himself and the Car Wash prosecutors as united in the same cause.</li>
+<li>December 7, 2015, Moro informally passed on an investigative tip to prosecutors: “Source informed me that the contact person is annoyed at having been asked to issue draft property transfer deeds for one of the ex-president’s children. Apparently the person would be willing to provide the information. I’m therefore passing it along. The source is serious.” “Thank you!! We’ll make contact,” Dallagnol promptly replied.</li>
 </ul>
 <p>Because they had no proof that Lula owned a triplex and were looking for one, they seized on an O Globo article:</p>
 <ul>
 <li>Dallagnol messaged the group: “I’m so horny for this O GLOBO article from 2010. I’m going to kiss whichever one of you found this.”</li>
 </ul>
 <blockquote class="blockquote">
-<p>The <a href="https://oglobo.globo.com/politica/caso-bancoop-triplex-do-casal-lula-esta-atrasado-3041591">article</a>, headlined “Bancoop Case: Lula Couple’s Triplex Is Delayed,” was the first to publicly mention Lula owning an apartment in Guarujá. It does not mention OAS or Petrobras and covers instead the bankruptcy of the construction cooperative behind the development. There is also a telling inconsistency: the article puts Lula’s penthouse in Tower B, while the prosecutors alleged he owned the beachfront triplex in Tower A — a different building. Car Wash prosecutors used the article as evidence but indicted and convicted Lula on a triplex in a different building, demonstrating imprecision on the central point of their case.</p>
+<p>The <a href="https://oglobo.globo.com/politica/caso-bancoop-triplex-do-casal-lula-esta-atrasado-3041591">article</a>, headlined “Bancoop Case: Lula Couple’s Triplex Is Delayed,” was the first to publicly mention Lula owning an apartment in Guarujá. It does not mention OAS or Petrobras and covers instead the bankruptcy of the construction cooperative behind the development. There is also a telling inconsistency: the article puts Lula’s penthouse in Tower B, while the prosecutors alleged he owned the beachfront triplex in Tower A, a different building. Car Wash prosecutors used the article as evidence but indicted and convicted Lula on a triplex in a different building, demonstrating imprecision on the central point of their case.</p>
 <p>In a now infamous moment, Dallagnol presented a typo-laden PowerPoint presentation that showed “Lula” written in a blue bubble surrounded by 14 other bubbles containing everything from “Lula’s reaction” and “expressiveness” to “illicit enrichment” and “bribeocracy.” All arrows pointed back to Lula, whom they characterised as the mastermind behind a sprawling criminal enterprise.</p>
 </blockquote>
 <ul>
 <li>Moro responded: “Definitely, the criticisms of your presentation are disproportionate. Stand firm.”</li>
-<li>“Maybe, tomorrow, you should prepare a press release to point out inconsistencies in Lula’s arguments. The defense already put on their little show.” — Moro. Prosecutors did as he asked.</li>
+<li>“Maybe, tomorrow, you should prepare a press release to point out inconsistencies in Lula’s arguments. The defense already put on their little show.” - Moro. Prosecutors did as he asked.</li>
 </ul>
 <p>Despite repeatedly using the phrase “alleged messages,” Moro <a href="https://www1.folha.uol.com.br/poder/2019/06/foi-descuido-meu-diz-moro-sobre-mensagem-a-lava-jato-com-pistas-contra-lula.shtml">acknowledged the authenticity</a> of at least one of the conversations. Questioned about having passed on an investigative lead to prosecutors on December 7, 2015, Moro said it was an “oversight on my part.”</p>
 <section id="flávio-bolsonaro" class="level4">
 <h4 class="anchored" data-anchor-id="flávio-bolsonaro">Flávio Bolsonaro</h4>
 <p><a href="https://theintercept.com/2019/07/21/in-secret-chats-brazils-chief-corruption-prosecutor-worried-that-bolsonaros-justice-minister-would-protect-bolsonaros-senator-son-flavio-from-scandals/">The Intercept, July 2019</a></p>
-<p>Senator Flávio Bolsonaro is accused of links to paramilitary gangs in Rio de Janeiro, stemming from a corruption scandal involving his former driver, Fabricio Queiroz, who is accused of transferring more than $1.5 million to Flávio’s account — at least one of which ended up in the account of Jair Bolsonaro’s wife, Michelle. Queiroz is also alleged to have connections to paramilitary gangs, and Flávio is accused of employing family members of one of the gang leaders. Deep worries were expressed that broader and more serious allegations might not be investigated, because Moro was concerned about angering the president.</p>
+<p>Senator Flávio Bolsonaro is accused of links to paramilitary gangs in Rio de Janeiro, stemming from a corruption scandal involving his former driver, Fabricio Queiroz, who is accused of transferring more than $1.5 million to Flávio’s account, at least one of which ended up in the account of Jair Bolsonaro’s wife, Michelle. Queiroz is also alleged to have connections to paramilitary gangs, and Flávio is accused of employing family members of one of the gang leaders. Deep worries were expressed that broader and more serious allegations might not be investigated, because Moro was concerned about angering the president.</p>
 <p>Lava Jato prosecutors mocking the death of Lula’s wife: <a href="https://noticias.uol.com.br/politica/ultimas-noticias/2019/08/27/procuradora-da-lava-jato-pede-desculpas-a-lula-por-ironizar-morte-de-marisa.htm">UOL Notícias</a></p>
 <p>Each time Lula’s case made its way to the highest court, members of the military, both active and retired, <a href="http://agenciabrasil.ebc.com.br/en/politica/noticia/2018-04/amnesty-international-condemns-statement-brazil-army-commandant">warned the court</a> in quite explicit terms that they were being watched. Bolsonaro’s son Eduardo warned that adverse Supreme Court decisions <a href="https://www.reuters.com/article/us-brazil-election/brazils-right-wing-candidate-scolds-son-for-threat-to-shut-top-court-idUSKCN1MW13C">could be addressed</a> by “sending a soldier and a corporal” to the doors of the court.</p>
 <p><a href="https://theintercept.com/2020/03/12/united-states-justice-department-brazil-car-wash-lava-jato-international-treaty/">US Justice Department involvement in Car Wash (The Intercept)</a></p>
@@ -1845,7 +3761,7 @@
 <p>Lula won the 2022 election and returned to the presidency in January 2023. Among his first acts:</p>
 <ul>
 <li><a href="https://amazonwatch.org/news/2023/0105-in-sweeping-moves-president-lula-reestablished-the-amazon-fund-and-signed-environmental-executive-orders">In sweeping moves, Lula reestablished the Amazon Fund and signed environmental executive orders (Amazon Watch)</a></li>
-<li><a href="https://www.bbc.com/news/world-latin-america-65433284">Brazil’s Lula recognises six new indigenous reserves (BBC)</a>: <em>The lands — including a vast area of Amazon rainforest — cover about 620,000 hectares (1.5m acres).</em></li>
+<li><a href="https://www.bbc.com/news/world-latin-america-65433284">Brazil’s Lula recognises six new indigenous reserves (BBC)</a>: <em>The lands -including a vast area of Amazon rainforest- cover about 620,000 hectares (1.5m acres).</em></li>
 </ul>
 
 
@@ -2004,7 +3920,7 @@
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NG1x-aiHdW4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>The peak happens because the rising Fermi level of the electrode allows it to give (and falling <img src="https://latex.codecogs.com/png.latex?E_F"> allows it to take <img src="https://latex.codecogs.com/png.latex?e%5E-">) electrons from the solution.</p>
 <p>Keep in mind the metal electrode’s Fermi level will match the solution’s Fermi level which is defined as <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7B2%7D">(HOMO + LUMO) almost instantaneously after putting the electrode in the solution.</p>
-<p>The peak is not a plateau because the reaction is limited by mass transport — the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.</p>
+<p>The peak is not a plateau because the reaction is limited by mass transport, the reactants no longer have enough time to reach the electrode surface and the concentration decreases as they are consumed, leading to falling current values.</p>
 </section>
 <section id="levich-treatment" class="level2">
 <h2 class="anchored" data-anchor-id="levich-treatment">Levich Treatment</h2>
@@ -2024,7 +3940,7 @@
 <p>The <em>first step</em> is to plot at a fixed potential the values of the current at the various rotation rates (Fig. 1a). The value of the potential is chosen before the current plateau. The <em>second step</em> is to plot the inverse of the current values as a function of the inverse of the square root of the rotation speed (Fig. 1b). This is what is called the Koutecký-Levich plot.</p>
 <p><img src="https://kharchouf.com/posts/electrochemistry-basics/kouteckylevich_fig1.gif" class="img-fluid"></p>
 <p><em><strong>Figure 1:</strong> <strong>(a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>.</em></p>
-<p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> — the current that you would obtain if there was absolutely no limitation by mass transport.</p>
+<p>The <em>third step</em> is to extrapolate the Koutecký-Levich line to 0, which corresponds to a theoretical infinite rotation speed (Fig. 1c, black dot). At this point, the current value corresponds to the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t">, the current that you would obtain if there was absolutely no limitation by mass transport.</p>
 <p><img src="https://kharchouf.com/posts/electrochemistry-basics/kouteckylevich_fig2.gif" class="img-fluid"></p>
 <p><em><strong>Figure 2: (a)</strong> I vs.&nbsp;E curves obtained on an irreversible system on a Rotating Disk Electrode at various rotation speeds. The dots represent the points chosen to plot the Koutecký-Levich lines shown in <strong>(b)</strong>. These lines are then extrapolated <strong>(c)</strong> to obtain the electronic transfer current <img src="https://latex.codecogs.com/png.latex?I_t"> <strong>(d)</strong>. This is carried out at various potentials to obtain the Tafel curve shown in <strong>(e)</strong>.</em></p>
 <p>Performing these three steps at several potential values (Fig. 2a, b, c, d) allows you to plot the Tafel curve (Fig. 2e). The slope of this curve gives the value of the symmetry factor <img src="https://latex.codecogs.com/png.latex?%5Calpha_r"> while the current value at <img src="https://latex.codecogs.com/png.latex?E%20=%20E%C2%B0"> gives the value of the standard kinetic constant <img src="https://latex.codecogs.com/png.latex?k%C2%B0">, given the concentration of the reactive species and the number of electrons involved in the redox reaction.</p>
@@ -2036,7 +3952,7 @@
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/5puDQjCl2pk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GM0o1BbbXy8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kexDd0kFAK8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system — the AC part of the signal is too big and becomes non-linear.</p>
+<p>In a Lissajous curve, a distorted ellipse means there is too much of a perturbation on the system, the AC part of the signal is too big and becomes non-linear.</p>
 <p>Sometimes the chosen AC amplitude is good for some frequency ranges but not for others, meaning you have to make different measurements with different AC amplitudes.</p>
 <p>Electrochemical systems are modeled using equivalent circuits (with basic R, L, C components or others like CPE: Constant Phase Element).</p>
 <section id="some-basic-bodenyquist-plots" class="level3">
@@ -2104,13 +4020,13 @@
 <p>The Tafel equation is an approximation of the Butler-Volmer equation at high overpotentials <img src="https://latex.codecogs.com/png.latex?(%5Clvert%5Ceta%5Crvert%20%3E%200.1%20V)">. It assumes that the concentrations at the electrode are practically equal to the concentrations in the bulk electrolyte, allowing the current to be expressed as a function of potential only. In other words, it assumes that the electrode mass transfer rate is much greater than the reaction rate, and that the reaction is dominated by the slower chemical reaction rate. Also, at a given electrode the Tafel equation assumes that the reverse half reaction rate is negligible compared to the forward reaction rate.</p>
 <section id="supporting-electrolyte" class="level4">
 <h4 class="anchored" data-anchor-id="supporting-electrolyte">Supporting Electrolyte</h4>
-<p>When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution — this artificially added salt is called supporting electrolyte. The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.</p>
+<p>When performing electroanalytical experiments, it is conventional to add a large quantity of inert salt to the solution, this artificially added salt is called supporting electrolyte. The purpose of the supporting electrolyte is to increase the conductivity of the solution, and hence to eliminate the electric field from the electrolyte.</p>
 <p>A negligible electric field provides two advantages for electroanalysis:</p>
 <ul>
 <li>The voltage due to the resistance of the electrolyte when the cell draws current (“ohmic drop”) is minimal. Therefore, the potential difference applied across the electrochemical cell is localized at the electrode–electrolyte interfaces, and so the activation overpotential perceived by the redox couple at this interface is almost exactly proportional to the applied cell voltage. The kinetic behavior of the electrochemical cell then has no explicit dependence on the magnitude of the drawn current.</li>
 <li>The contribution of migration to the transport of charged chemical species is negligible compared to the contribution of diffusion (and of convection, in a forced flow). Therefore the transport properties of the system are linearized, and they do not depend on the magnitude of the drawn current.</li>
 </ul>
-<p>Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven — such as electrolysis, electrodeposition, batteries, and fuel cells — current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.</p>
+<p>Even for the conductivities of electrolyte solutions in the presence of excess supporting electrolyte, the electric field is not negligible if significant current density is drawn. Electroanalysis typically draws small currents because the purpose is measurement. In processes where an electrochemical reaction is driven -such as electrolysis, electrodeposition, batteries, and fuel cells- current densities are typically much larger, so that the desired extent of reaction is achieved in a reasonable time. Under these conditions, significant electric fields are likely and other charge conservation models should be used instead.</p>
 </section>
 <section id="scan-rate-influence" class="level4">
 <h4 class="anchored" data-anchor-id="scan-rate-influence">Scan Rate Influence</h4>
@@ -2126,7 +4042,7 @@
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Debatable — “normal” is the old name for “standard” in France.↩︎</p></li>
+<li id="fn1"><p>Debatable - “normal” is the old name for “standard” in France.↩︎</p></li>
 <li id="fn2"><p>Bard, Allen J.; Larry R. Faulkner (2000). <em>Electrochemical Methods: Fundamentals and Applications</em> (2nd ed.). Wiley. p.&nbsp;336.↩︎</p></li>
 <li id="fn3"><p>In theory, the Koutecký-Levich analysis only works for redox reactions with a standard kinetic constant <img src="https://latex.codecogs.com/png.latex?k%C2%B0"> smaller or equal to several <img src="https://latex.codecogs.com/png.latex?10%5E2"> cm s<img src="https://latex.codecogs.com/png.latex?%5E%7B-1%7D">, that is to say, for sluggish reactions. In practice, most reactions are neither sluggish nor rapid.↩︎</p></li>
 <li id="fn4"><p>For a review see: Elgrishi, N. et al.&nbsp;<em>J. Chem. Educ.</em> 2018, 95, 197–206.↩︎</p></li>
@@ -2155,9 +4071,9 @@
 <p>Given a certain Lagrangian density (for a free fermion field <img src="https://latex.codecogs.com/png.latex?%5Cpsi"> for example), one could attempt to find the sets of different transformations in which it is invariant. In this post we will do just that and see that it leads to surprising results!</p>
 <section id="global-symmetry" class="level1">
 <h1>Global Symmetry</h1>
-<p>Let’s start simple. The Lagrangian density of a Dirac Bi-spinor field is: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D_%7BDirac%7D=%20%5Chbar%20c%20%5Cbar%7B%5Cpsi%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20%5Cpsi%20+%20m%20c%5E2%20%5Cbar%7B%5Cpsi%7D%20%5Cpsi"></p>
-<p>Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we’re not interested in that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start off, we’ll try one of the simplest possible transformations, a global phase-shift. This basically amounts to changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit circle in complex space: <img src="https://latex.codecogs.com/png.latex?%5Cpsi%20%5Crightarrow%20%5Cpsi%E2%80%B2%20=%20e%5E%7Bi%20q%20%5Cphi%7D%5Cpsi"></p>
-<p>A minor detail that we will need is that the Dirac adjoint is defined as <img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Cpsi%7D=%20i%5Cpsi%5E%5Cdagger%20%5Cgamma%5E0"> and it transforms like so: <img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Cpsi%7D%20%5Crightarrow%20%5Cbar%7B%5Cpsi'%7D%20=%20%5Cbar%7B%5Cpsi%7De%5E%7B-iq%5Cphi%7D"></p>
+<p>Let’s start simple. The Lagrangian density of a Dirac Bi-spinor field is: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D_%7BDirac%7D=%20i%5Chbar%20c%20%5Cbar%7B%5Cpsi%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20%5Cpsi%20-%20m%20c%5E2%20%5Cbar%7B%5Cpsi%7D%20%5Cpsi"></p>
+<p>Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we’re not interested in that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start off, we’ll try one of the simplest possible transformations, a global phase-shift. This basically amounts to changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit circle in complex space: <img src="https://latex.codecogs.com/png.latex?%5Cpsi%20%5Crightarrow%20%5Cpsi'%20=%20e%5E%7Bi%20q%20%5Cphi%7D%5Cpsi"></p>
+<p>A minor detail that we will need is that the Dirac adjoint is defined as <img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Cpsi%7D=%20%5Cpsi%5E%5Cdagger%20%5Cgamma%5E0"> and it transforms like so: <img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Cpsi%7D%20%5Crightarrow%20%5Cbar%7B%5Cpsi'%7D%20=%20%5Cbar%7B%5Cpsi%7De%5E%7B-iq%5Cphi%7D"></p>
 <p>Plugging this new transformed field in to the Lagrangian: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%5E%E2%80%B2%7D=%20%5Chbar%20c%20%5Cbar%7B%5Cpsi'%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20%5Cpsi'%20+%20m%20c%5E2%20%5Cbar%7B%5Cpsi'%7D%20%5Cpsi'"> <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%5E%E2%80%B2%7D=%20%5Chbar%20c%20%5Cbar%7B%5Cpsi%7De%5E%7B-iq%5Cphi%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20e%5E%7Biq%5Cphi%7D%5Cpsi%20+%20m%20c%5E2%20%5Cbar%7B%5Cpsi%7De%5E%7B-iq%5Cphi%7D%20e%5E%7Biq%5Cphi%7D%5Cpsi"></p>
 <p>Now <img src="https://latex.codecogs.com/png.latex?e%5E%7Biq%5Cphi%7D"> and <img src="https://latex.codecogs.com/png.latex?e%5E%7B-iq%5Cphi%7D"> are just complex phases and have no spacetime dependance so we can just move them next to eachother, they cancel out and our Lagrangian is invariant: <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%5E%E2%80%B2%7D=%20%5Chbar%20c%20%5Cbar%7B%5Cpsi%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20%5Cpsi%20+%20m%20c%5E2%20%5Cbar%7B%5Cpsi%7D%20%5Cpsi%20=%20%5Cmathcal%7BL%7D"></p>
 </section>
@@ -2181,12 +4097,12 @@
 <section id="tying-up-some-loose-ends" class="level1">
 <h1>Tying up some loose ends</h1>
 <p>Since Aμ is now a field itself, it needs to play by the rules of Special Relativity, a.k.a obey the Klein-Gordon equation which arises from the Proca Lagrangian:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL_%7BProca%7D%7D%20=%20%5Cfrac%7B1%7D%7B16%5Cpi%7D%20F%5E%7B%5Cmu%20%5Cnu%7D%20F_%7B%5Cmu%20%5Cnu%7D%20+%20%5Cfrac%7B1%7D%7B8%5Cpi%7D%20%5Cleft(%5Cfrac%7Bmc%5E2%7D%7B%5Chbar%7D%5Cright)%20A%5E%5Cmu%20A_%5Cmu"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL_%7BProca%7D%7D%20=%20%5Cfrac%7B1%7D%7B16%5Cpi%7D%20F%5E%7B%5Cmu%20%5Cnu%7D%20F_%7B%5Cmu%20%5Cnu%7D%20+%20%5Cdfrac%7B1%7D%7B8%5Cpi%7D%5Cleft(%5Cdfrac%7Bmc%7D%7B%5Chbar%7D%5Cright)%5E2%20A%5E%5Cmu%20A_%5Cmu"></p>
 <p>The first term is already invariant, but we need to eliminate the second term to make the whole Lagrangian invariant by setting <img src="https://latex.codecogs.com/png.latex?m=0">. This is to be expected because excitations in the E&amp;M field (a.k.a photons) are massless. Hence, our new full-blown Lagrangian of Quantum Electrodynamics is:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL_%7BQED%7D%7D%20=%20%5Chbar%20c%20%5Cbar%7B%5Cpsi%7D%20%5Cgamma%5E%5Cmu%20%5Cpartial_%5Cmu%20%5Cpsi%20+%20i%20q%20%5Chbar%20c%20%5Cbar%7B%5Cpsi%7D%20%5Cgamma%5E%5Cmu%20A_%5Cmu%20%5Cpsi%20+%20%5Cfrac%7B1%7D%7B16%5Cpi%7D%20F%5E%7B%5Cmu%20%5Cnu%7D%20F_%7B%5Cmu%20%5Cnu%7D"></p>
 <p>We can construct the well known antisymmetric Electromagnetic Field Tensor as follows: <img src="https://latex.codecogs.com/png.latex?F_%7B%5Cmu%20%5Cnu%7D%20=%20%5Cpartial_%5Cmu%20A_%5Cnu%20-%20%5Cpartial_%5Cnu%20A_%5Cmu"></p>
 <p>When we imposed <img src="https://latex.codecogs.com/png.latex?A_%5Cmu%20%5Crightarrow%20A%E2%80%B2_%5Cmu%20=%20A_%5Cmu%20-%20%5Cpartial_%5Cmu%20%5Cphi(x%5E%5Cmu)">, that is nothing but the Lorenz Gauge condition from classical electrodynamics.</p>
-<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell’s equations can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for Aμ where the four-current is defined as <img src="https://latex.codecogs.com/png.latex?J%5E%5Cmu%20=%20(c%5Crho,%20%5Cmathbf%7BJ%7D)">: <img src="https://latex.codecogs.com/png.latex?%5Cpartial_%5Cmu%20F%5E%7B%5Calpha%20%5Cbeta%7D%20=%20%5Cmu_0%20J%5E%5Cbeta"></p>
+<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell’s equations can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for <img src="https://latex.codecogs.com/png.latex?A_%5Cmu"> where the four-current is defined as <img src="https://latex.codecogs.com/png.latex?J%5E%5Cmu%20=%20(c%5Crho,%20%5Cmathbf%7BJ%7D)">: <img src="https://latex.codecogs.com/png.latex?%5Cpartial_%5Cmu%20F%5E%7B%5Cmu%5Cnu%7D%20=%20%5Cfrac%7B4%5Cpi%7D%7Bc%7D%20J%5E%5Cnu"></p>
 </section>
 <section id="epilogue" class="level1">
 <h1>Epilogue</h1>
@@ -2251,14 +4167,23 @@ font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div></div>
 <p>This function clearly gives you the <img src="https://latex.codecogs.com/png.latex?n">-th number in the famous Fibonacci sequence. The first time you see and understand this, it seems brilliant, elegant and pretty much perfect. But with a deeper look, this algorithm is actually going to turn out to be pretty bad. I’m not going to talk about whether Recursion is inherently good or bad. If that’s what you’re interested in, I’ll just refer you to this Stack Overflow answer. First, try and run this function for a big enough n, say 100 for example. It’s going to take a very long time. This is the timing fib(40) in a python 2 interpreter:</p>
-<pre><code>    fib(40): 102334155
-    --- 80.5310001373 seconds ---</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">    fib(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40</span>): <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">102334155</span></span>
+<span id="cb2-2">    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80.5310001373</span> seconds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span></span></code></pre></div></div>
 <p>The time it takes doesn’t increase linearly with n, this algorithm takes exponential time. I’m sure you can understand if I don’t have the patience to wait for it to calculate a higher number. Here’s why it’s slow:</p>
 <p>As an example, let’s take a look at the recursion tree when we compute fib(6):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://kharchouf.com/posts/dynamic-prog/tree.jpg" class="img-fluid figure-img"></p>
-<figcaption>fib6</figcaption>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/tree.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>Each node represents a function call, and as you can see, we call: <code>fib(4)</code> twice, <code>fib(3)</code> 3 times and <code>fib(2)</code> 5 times.</p>
@@ -2267,8 +4192,7 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
 <p>This is a time complexity <img src="https://latex.codecogs.com/png.latex?O(2%5En)"> hence an exponential time algorithm. If you can help it, you should always try to avoid exponential time, because it is very costly as you can see from the diagram:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://kharchouf.com/posts/dynamic-prog/complexity.png" class="img-fluid figure-img"></p>
-<figcaption>comp</figcaption>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/complexity.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>One last thing. Every time a recursive call happens, it takes a bit of memory from the call stack. The amount that is taken is called the stackframe, and is only freed when the function returns. In a low level language, deep recursion will eat up all the memory and cause a stack overflow. High level languages usually have some sort of guards against this. In python for example, you’ll cause a maximum recursion depth error. Sure you can get around these guards, but they are there for a reason, and you’ll rarely be justified in circumventing them. The Dynamic Programming approach:</p>
@@ -2349,12 +4273,21 @@ background-color: null;
 font-style: inherit;"># And now you can return the result.</span></span></code></pre></div></div>
 <p>In dynamic programming, we solve all the subproblems and use their results to solve our main problem. The “subproblems” in our case are the all the <code>fib(k)</code> s where <img src="https://latex.codecogs.com/png.latex?k%3Cn"> and we stored the result of each subproblem in memory for eventual reuse. It’s also pretty clear that <code>T(n)=Time for each subproblem ∗ Number of subproblems</code>.</p>
 <p>If you try and run this, you’re going to notice a gigantic jump in performance because this is now a linear time algorithm O(n). So much so that even I had the patience to wait for it to calculate the 500-th number:</p>
-<pre><code>fib(500): 139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125
---- 0.00100016593933 seconds ---</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">fib(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>): <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125</span></span>
+<span id="cb4-2"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.00100016593933</span> seconds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">---</span></span></code></pre></div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://kharchouf.com/posts/dynamic-prog/ndt.gif" class="img-fluid figure-img"></p>
-<figcaption>ndt</figcaption>
+<p><img src="https://kharchouf.com/posts/dynamic-prog/ndt.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>That was a pretty big number and it did it in roughly 1 millisecond? Hey, that’s pretty good!</p>
@@ -2375,6 +4308,7 @@ font-style: inherit;"># And now you can return the result.</span></span></code><
   <category>code</category>
   <guid>https://kharchouf.com/posts/dynamic-prog/</guid>
   <pubDate>Thu, 19 Jan 2017 14:20:00 GMT</pubDate>
+  <media:content url="https://kharchouf.com/posts/dynamic-prog/complexity.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
   <title>What would happen if aliens attack</title>

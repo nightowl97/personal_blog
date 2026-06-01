@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/err-bus/index.html",
       "/posts/geometrical-anatomy/index.html",
       "/posts/cnss-analysis/index.html",
       "/posts/hagarism/index.html",

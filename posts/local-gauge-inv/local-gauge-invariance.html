@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ec29bce8d090bce099758ae5e789ed41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e32cdaa352a166e3f711f9e6a2778ae5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,9 +72,16 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } },
+  output: { font: 'mathjax-stix2' }
+};
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -202,9 +209,9 @@ window.Quarto = {
 <p>Given a certain Lagrangian density (for a free fermion field <span class="math inline">\(\psi\)</span> for example), one could attempt to find the sets of different transformations in which it is invariant. In this post we will do just that and see that it leads to surprising results!</p>
 <section id="global-symmetry" class="level1">
 <h1>Global Symmetry</h1>
-<p>Let’s start simple. The Lagrangian density of a Dirac Bi-spinor field is: <span class="math display">\[\mathcal{L}_{Dirac}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + m c^2 \bar{\psi} \psi\]</span></p>
-<p>Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we’re not interested in that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start off, we’ll try one of the simplest possible transformations, a global phase-shift. This basically amounts to changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit circle in complex space: <span class="math display">\[\psi \rightarrow \psi′ = e^{i q \phi}\psi\]</span></p>
-<p>A minor detail that we will need is that the Dirac adjoint is defined as <span class="math inline">\(\bar{\psi}= i\psi^\dagger \gamma^0\)</span> and it transforms like so: <span class="math display">\[\bar{\psi} \rightarrow \bar{\psi'} = \bar{\psi}e^{-iq\phi}\]</span></p>
+<p>Let’s start simple. The Lagrangian density of a Dirac Bi-spinor field is: <span class="math display">\[\mathcal{L}_{Dirac}= i\hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi - m c^2 \bar{\psi} \psi\]</span></p>
+<p>Applying the Euler-Lagrange equations would give us the famous Dirac Equation, but we’re not interested in that right now. We want to see if there are any transformations which leave this Lagrangian invariant. To start off, we’ll try one of the simplest possible transformations, a global phase-shift. This basically amounts to changing the phase of the field by the same amount everywhere and is equivalent to rotating around the unit circle in complex space: <span class="math display">\[\psi \rightarrow \psi' = e^{i q \phi}\psi\]</span></p>
+<p>A minor detail that we will need is that the Dirac adjoint is defined as <span class="math inline">\(\bar{\psi}= \psi^\dagger \gamma^0\)</span> and it transforms like so: <span class="math display">\[\bar{\psi} \rightarrow \bar{\psi'} = \bar{\psi}e^{-iq\phi}\]</span></p>
 <p>Plugging this new transformed field in to the Lagrangian: <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi'} \gamma^\mu \partial_\mu \psi' + m c^2 \bar{\psi'} \psi'\]</span> <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi}e^{-iq\phi} \gamma^\mu \partial_\mu e^{iq\phi}\psi + m c^2 \bar{\psi}e^{-iq\phi} e^{iq\phi}\psi\]</span></p>
 <p>Now <span class="math inline">\(e^{iq\phi}\)</span> and <span class="math inline">\(e^{-iq\phi}\)</span> are just complex phases and have no spacetime dependance so we can just move them next to eachother, they cancel out and our Lagrangian is invariant: <span class="math display">\[\mathcal{L^′}= \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + m c^2 \bar{\psi} \psi = \mathcal{L}\]</span></p>
 </section>
@@ -229,12 +236,12 @@ i q \hbar c \bar{\psi} \gamma^\mu \partial_\mu \phi(x^\mu) \psi - i q \hbar c \b
 <section id="tying-up-some-loose-ends" class="level1">
 <h1>Tying up some loose ends</h1>
 <p>Since Aμ is now a field itself, it needs to play by the rules of Special Relativity, a.k.a obey the Klein-Gordon equation which arises from the Proca Lagrangian:</p>
-<p><span class="math display">\[\mathcal{L_{Proca}} = \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu} + \frac{1}{8\pi} \left(\frac{mc^2}{\hbar}\right) A^\mu A_\mu\]</span></p>
+<p><span class="math display">\[\mathcal{L_{Proca}} = \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu} + \dfrac{1}{8\pi}\left(\dfrac{mc}{\hbar}\right)^2 A^\mu A_\mu\]</span></p>
 <p>The first term is already invariant, but we need to eliminate the second term to make the whole Lagrangian invariant by setting <span class="math inline">\(m=0\)</span>. This is to be expected because excitations in the E&amp;M field (a.k.a photons) are massless. Hence, our new full-blown Lagrangian of Quantum Electrodynamics is:</p>
 <p><span class="math display">\[\mathcal{L_{QED}} = \hbar c \bar{\psi} \gamma^\mu \partial_\mu \psi + i q \hbar c \bar{\psi} \gamma^\mu A_\mu \psi + \frac{1}{16\pi} F^{\mu \nu} F_{\mu \nu}\]</span></p>
 <p>We can construct the well known antisymmetric Electromagnetic Field Tensor as follows: <span class="math display">\[F_{\mu \nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\]</span></p>
 <p>When we imposed <span class="math inline">\(A_\mu \rightarrow A′_\mu = A_\mu - \partial_\mu \phi(x^\mu)\)</span>, that is nothing but the Lorenz Gauge condition from classical electrodynamics.</p>
-<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell’s equations can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for Aμ where the four-current is defined as <span class="math inline">\(J^\mu = (c\rho, \mathbf{J})\)</span>: <span class="math display">\[\partial_\mu F^{\alpha \beta} = \mu_0 J^\beta\]</span></p>
+<p>Just for the sake of closure, and because you can never go wrong with them, Maxwell’s equations can be pulled from the QED Lagrangian by applying the Euler-Lagrange equations for <span class="math inline">\(A_\mu\)</span> where the four-current is defined as <span class="math inline">\(J^\mu = (c\rho, \mathbf{J})\)</span>: <span class="math display">\[\partial_\mu F^{\mu\nu} = \frac{4\pi}{c} J^\nu\]</span></p>
 </section>
 <section id="epilogue" class="level1">
 <h1>Epilogue</h1>

@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2024-03-01">
 <meta name="description" content="Salary distribution, gender pay gaps, geographic disparities, and industry patterns from a database covering 1.6 million Moroccan formal-sector employees in 2022.">
 
-<title>Morocco’s Wage Landscape: An Analysis of 1.6 Million Employees – Youssef Kharchouf</title>
+<title>Morocco’s Wage Landscape: A Data Analysis of 1.6 Million Employees – Youssef Kharchouf</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ec29bce8d090bce099758ae5e789ed41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e32cdaa352a166e3f711f9e6a2778ae5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,6 +72,13 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } },
+  output: { font: 'mathjax-stix2' }
+};
+</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -124,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Morocco’s Wage Landscape: An Analysis of 1.6 Million Employees</h1>
+      <h1 class="title">Morocco’s Wage Landscape: A Data Analysis of 1.6 Million Employees</h1>
                   <div>
         <div class="description">
           Salary distribution, gender pay gaps, geographic disparities, and industry patterns from a database covering 1.6 million Moroccan formal-sector employees in 2022.
@@ -164,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>In 2022, the database of declared employees registered with Morocco’s <em>Caisse Nationale de Sécurité Sociale</em> (CNSS) was leaked and made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco’s formal labor market.</p>
+<p>In 2022, the database of declared employees registered with Morocco’s <em>Caisse Nationale de Sécurité Sociale</em> (CNSS) was made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco’s formal labor market.</p>
 <p>After cleaning the data (removing entries with missing or inconsistent values), the working dataset contains <strong>1,590,950 employees</strong> spread across <strong>160 cities</strong>, <strong>22,338 declared activity sectors</strong>, and <strong>40,184 companies</strong>, representing 94.6% of the raw records. Gender was inferred from first names using a name-gender mapping dictionary, achieving a 97% match rate; 33.2% of identified employees are women.</p>
 <section id="salary-distribution" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="salary-distribution">Salary Distribution</h2>
@@ -212,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>The gap between the mean (6,279 DH) and the median (3,538 DH) is a signature of a right-skewed distribution: a relatively small number of very high earners pulls the mean well above what most workers actually take home. More than half of formal-sector employees earn under 3,538 DH per month.</p>
-<p>The <strong>Gini coefficient is 0.4857</strong> — classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong> — meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
+<p>The <strong>Gini coefficient is 0.4857</strong>, classifying Morocco’s formal-sector wage inequality as high by international standards, comparable to some of the most unequal economies in the world. The top decile captures <strong>43.4%</strong> of total declared wage mass; the bottom decile, just <strong>2.2%</strong>. The D9/D1 inter-decile ratio is <strong>6.2x</strong>, meaning the threshold to enter the top 10% of earners is more than six times the threshold at the bottom 10%.</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="inequality_analysis.png" class="img-fluid" style="width:80.0%"></p>
 </div>
@@ -251,14 +258,14 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms — roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
+<p>The mean-based gender pay gap stands at <strong>9.56%</strong> (women earn 90.4 cents for every dirham men earn), or <strong>619 DH/month</strong> in absolute terms, roughly 7,437 DH per year. The median-based gap is 5.32%. All three statistical tests applied (Student’s t-test, Mann-Whitney U, Kolmogorov-Smirnov) confirm the difference is highly significant (p ≈ 0).</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="histogram.png" class="img-fluid" style="width:60.0%"></p>
 </div>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="cdf.png" class="img-fluid" style="width:60.0%"></p>
 </div>
-<p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises — women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
+<p>The gap is not uniform across the distribution. At a given salary level, the share of women drops as pay rises, women are overrepresented at the bottom of the distribution. In the lowest bracket (under 2,500 DH/month), women represent <strong>45%</strong> of workers; in brackets above 5,000 DH, they drop to around 29–35%.</p>
 <div class="column-screen-inset" style="text-align: center;">
 <p><img src="salary_tranches_gender.png" class="img-fluid" style="width:70.0%"></p>
 </div>
@@ -273,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
 <p class="page-columns page-full"><img src="geographic_analysis.png" class="column-screen-inset img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
-<p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities — Casablanca, Tanger, Rabat, Marrakech, and Kénitra — together represent <strong>66.7%</strong> of the total workforce.</p>
+<p>Morocco’s formal labor market is heavily concentrated. <strong>Casablanca alone accounts for 43.2%</strong> of all registered employees (670,439 workers), and the top five cities: Casablanca, Tanger, Rabat, Marrakech, and Kénitra, together represent <strong>66.7%</strong> of the total workforce.</p>
 <p>Salary levels vary significantly by city, with Casablanca leading by a wide margin:</p>
 <table class="caption-top table">
 <thead>
@@ -436,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>The pattern is stark: the most feminized sectors are also among the lowest-paid. Sectors with more than 60% female workforce — automotive parts manufacturing (87% women), preschool education (81%), garment manufacturing (67%), cable manufacturing (75%) — cluster at the bottom of the wage distribution. Conversely, the lowest-feminization sectors (construction, security, heavy industry) tend to pay more.</p>
+<p>The pattern is stark: the most feminized sectors are also among the lowest-paid. Sectors with more than 60% female workforce, automotive parts manufacturing (87% women), preschool education (81%), garment manufacturing (67%), cable manufacturing (75%), cluster at the bottom of the wage distribution. Conversely, the lowest-feminization sectors (construction, security, heavy industry) tend to pay more.</p>
 <p>The sector-level gender pay gap follows a similar pattern: the largest gaps appear precisely in the most feminized industries, where women earn 50–58% less than men on average in the same sector.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -503,7 +510,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-top-1" class="level2">
 <h2 class="anchored" data-anchor-id="the-top-1">The Top 1%</h2>
-<p>The top 1% of earners (15,505 individuals) sit above a threshold of <strong>48,170 DH/month</strong>, with a mean of <strong>87,630 DH</strong> and a maximum of <strong>7,399,227 DH</strong> — over 7.3 million dirhams per month, declared to CNSS.</p>
+<p>The top 1% of earners (15,505 individuals) sit above a threshold of <strong>48,170 DH/month</strong>, with a mean of <strong>87,630 DH</strong> and a maximum of <strong>7,399,227 DH</strong>, over 7.3 million dirhams per month, declared to CNSS.</p>
 <p>The ten highest individual salaries in the database:</p>
 <table class="caption-top table">
 <thead>
@@ -571,11 +578,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>A few structural features stand out from this dataset:</p>
 <ul>
-<li><strong>The median formal-sector salary in Morocco is 3,538 DH/month</strong> — less than €320. More than half the registered workforce earns below this figure.</li>
+<li><strong>The median formal-sector salary in Morocco is 3,538 DH/month</strong>, less than €320. More than half the registered workforce earns below this figure.</li>
 <li><strong>Inequality is high</strong>: a Gini of 0.49 and a top decile capturing 43% of total wages. The formal labor market mirrors, and probably understates, the broader wealth distribution.</li>
 <li><strong>The gender pay gap is real, significant, and structural</strong>: women are overrepresented in the lowest-paid sectors and brackets. The gap widens in the most feminized industries, not because women are in different jobs, but because the jobs that attract more women systematically pay less.</li>
 <li><strong>Geography concentrates opportunity</strong>: Casablanca accounts for 43% of all formal employment and pays almost double the median salary of smaller cities.</li>
-<li><strong>The labor market is formally fragmented</strong> but the top of the distribution is extremely concentrated — a handful of holding companies and multinationals account for the highest-earning individuals.</li>
+<li><strong>The labor market is formally fragmented</strong> but the top of the distribution is extremely concentrated, a handful of holding companies and multinationals account for the highest-earning individuals.</li>
 </ul>
 
 
