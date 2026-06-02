@@ -45,7 +45,7 @@ A single `POST` to `/api/line_horaires/48` with the body `{"reseaux_id": 8}` ret
 
 #### `line`, what this route *is*
 
-The metadata block. The useful fields are `line_name` (`"L02"`), `line_color` (`"#e81e63"`, the route's own pink, which I reuse for every marker and line on the map), and the two human-readable direction labels, `aller_direction` (`"Ahibous(31)"`) and `retour_direction` (`"Omrane (1)"`).
+The metadata block. The useful fields are `line_name` (`"L02"`), `line_color` (`"#e81e63"`, the route's own pink, which I will not reuse for mny own map), and the two human-readable direction labels, `aller_direction` (`"Ahibous(31)"`) and `retour_direction` (`"Omrane (1)"`).
 
 Nested inside is a `reseaux` ("network") object describing the city itself: Errachidia, network `id` 8, that `8` is exactly what the request body sends as `reseaux_id`. It even carries the network's own backend `host`, a different IP from the one the app talks to, which is presumably where the raw GPS data originates before this server aggregates it.
 

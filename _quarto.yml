@@ -7,6 +7,7 @@ website:
   description: "Youssef Kharchouf's personal notes"
   site-url: https://kharchouf.com # you must change this appropriately for RSS feeds to work properly
   title: "Youssef Kharchouf"
+  google-analytics: "G-NMTV7Y60PQ"
   comments:
     giscus:
       repo: nightowl97/personal_blog
