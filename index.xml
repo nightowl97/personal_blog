@@ -160,7 +160,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <p><code>aller</code> and <code>retour</code> are French for the outbound and return legs, this line runs one physical route in two directions, and the API mirrors that split everywhere.</p>
 <section id="line-what-this-route-is" class="level4">
 <h4 class="anchored" data-anchor-id="line-what-this-route-is"><code>line</code>, what this route <em>is</em></h4>
-<p>The metadata block. The useful fields are <code>line_name</code> (<code>"L02"</code>), <code>line_color</code> (<code>"#e81e63"</code>, the route’s own pink, which I reuse for every marker and line on the map), and the two human-readable direction labels, <code>aller_direction</code> (<code>"Ahibous(31)"</code>) and <code>retour_direction</code> (<code>"Omrane (1)"</code>).</p>
+<p>The metadata block. The useful fields are <code>line_name</code> (<code>"L02"</code>), <code>line_color</code> (<code>"#e81e63"</code>, the route’s own pink, which I will not reuse for mny own map), and the two human-readable direction labels, <code>aller_direction</code> (<code>"Ahibous(31)"</code>) and <code>retour_direction</code> (<code>"Omrane (1)"</code>).</p>
 <p>Nested inside is a <code>reseaux</code> (“network”) object describing the city itself: Errachidia, network <code>id</code> 8, that <code>8</code> is exactly what the request body sends as <code>reseaux_id</code>. It even carries the network’s own backend <code>host</code>, a different IP from the one the app talks to, which is presumably where the raw GPS data originates before this server aggregates it.</p>
 </section>
 <section id="stations_aller-stations_retour-the-stops" class="level4">
