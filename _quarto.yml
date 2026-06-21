@@ -2,8 +2,11 @@ project:
   type: website
   resources:
     - CNAME
+    - assets/icons/apple-touch-icon.png
+    - assets/icons/02-letter-charcoal-*.png
 
 website:
+  favicon: assets/icons/favicon.png
   description: "Youssef Kharchouf's personal notes"
   site-url: https://kharchouf.com # you must change this appropriately for RSS feeds to work properly
   title: "Youssef Kharchouf"
@@ -38,7 +41,9 @@ format:
     html-math-method:
       method: mathjax
       url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
-    include-in-header: mathjax-config.html
+    include-in-header:
+      - mathjax-config.html
+      - head-favicons.html
     
     # template-partials:
     #   - title-block.html

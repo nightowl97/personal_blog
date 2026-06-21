@@ -13,3 +13,11 @@ posts/err-bus/latest.json
 # dev/tooling scripts — not part of the published post
 posts/err-bus/simplify.py
 posts/err-bus/trace_builder.py
+
+# LaTeX build artifacts (regeneratable from *.tex)
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv

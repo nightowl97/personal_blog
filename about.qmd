@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: pp.png
+image: assets/img/pp.png
 about:
   template: jolla
   links:
