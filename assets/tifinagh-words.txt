@@ -1,0 +1,199 @@
+# Tifinagh trainer — example words
+#
+# One section per letter. Within a section, one word per line, in the form:
+#     <tifinagh> — <pronunciation> — <meaning>
+# The "[id]" in each header is the letter's id used by the app (do not change it);
+# the glyph and name after it are just for your reference. Blank lines and lines
+# starting with "#" are ignored. The app shows one of a letter's words at a time,
+# rotating through the list, so add as many as you like.
+#
+# >>> PLEASE VERIFY spelling, pronunciation and meaning. I'm least sure about the
+#     emphatics / pharyngeals / labialized letters: ṣ (s2), ɛ (ayn), gʷ (gw),
+#     kʷ (kw) — those sections are short and the most likely to need fixing.
+
+# ───────────────────────── Batch 1 — core vowels & first consonants
+[a]  ⴰ  (ya)
+ⴰⵎⴰⵏ — aman — water
+ⴰⴷⵔⴰⵔ — adrar — mountain
+ⴰⵔⴳⴰⵣ — argaz — man
+ⴰⴼⵓⵙ — afus — hand
+
+[i]  ⵉ  (yi)
+ⵉⵎⵉ — imi — mouth
+ⵉⵍⵙ — ils — tongue
+ⵉⴹ — iḍ — night
+ⵉⵅⴼ — ixf — head
+
+[u]  ⵓ  (yu)
+ⵓⵍ — ul — heart
+ⵓⴷⵎ — udm — face
+ⵓⵛⵛⵏ — uššen — jackal
+
+[t]  ⵜ  (yat)
+ⵜⴰⵎⵓⵔⵜ — tamurt — country, land
+ⵜⴰⴷⴷⴰⵔⵜ — taddart — house
+ⵜⴰⴼⵓⴽⵜ — tafukt — sun
+ⵜⴰⵎⵖⴰⵔⵜ — tamɣart — woman
+ⵉⵜⵔⵉ — itri — star
+
+[n]  ⵏ  (yan)
+ⴰⴼⵓⵏⴰⵙ — afunas — ox
+ⴰⵏⵓ — anu — well (for water)
+ⵏⴻⴽⴽ — nekk — I, me
+ⴰⵎⴰⵏ — aman — water
+ⵉⴳⴻⵏⵏⴰ — igenna — sky
+
+[m]  ⵎ  (yam)
+ⴰⵖⵔⵓⵎ — aɣrum — bread
+ⵉⵎⵉ — imi — mouth
+ⵎⵎⵉ — mmi — my son
+ⴰⵎⴰⵏ — aman — water
+
+# ───────────────────────── Batch 2
+[r]  ⵔ  (yar)
+ⵜⴰⵎⵓⵔⵜ — tamurt — country, land
+ⴰⴷⵔⴰⵔ — adrar — mountain
+ⴰⴱⵔⵉⴷ — abrid — road
+ⴰⵔⴳⴰⵣ — argaz — man
+
+[l]  ⵍ  (yal)
+ⵉⵍⵙ — ils — tongue
+ⵓⵍ — ul — heart
+ⴰⵣⵓⵍ — azul — hello
+ⴰⵡⴰⵍ — awal — word, speech
+
+[s]  ⵙ  (yas)
+ⴰⵙⵙ — ass — day
+ⴰⴼⵓⵙ — afus — hand
+ⴰⵙⵉⴼ — asif — river
+ⴰⴼⵓⵏⴰⵙ — afunas — ox
+
+[d]  ⴷ  (yad)
+ⴰⴷⵔⴰⵔ — adrar — mountain
+ⴰⴱⵔⵉⴷ — abrid — road
+ⵜⴰⴷⴷⴰⵔⵜ — taddart — house
+ⵓⴷⵎ — udm — face
+
+[k]  ⴽ  (yak)
+ⵜⴰⴼⵓⴽⵜ — tafukt — sun
+ⴰⴽⴰⵍ — akal — earth, soil
+ⴽⵔⴰ — kra — something
+
+[b]  ⴱ  (yab)
+ⴰⴱⵔⵉⴷ — abrid — road
+ⴱⴰⴱ — bab — owner, master
+ⵜⴰⴱⵔⴰⵜ — tabrat — letter, message
+
+# ───────────────────────── Batch 3
+[g]  ⴳ  (yag)
+ⴰⵔⴳⴰⵣ — argaz — man
+ⴰⴳⴰⴷⵉⵔ — agadir — fortified granary
+ⴰⴳⴻⵍⵍⵉⴷ — agellid — king
+ⴳⵏ — gn — to sleep
+ⵜⵉⴳⴻⵎⵎⵉ — tigemmi — house
+ⴰⴳⵏⵙⵓ — agnsu — inside
+
+[f]  ⴼ  (yaf)
+ⴰⴼⵓⵙ — afus — hand
+ⵜⴰⴼⵓⴽⵜ — tafukt — sun
+ⴰⵙⵉⴼ — asif — river
+ⵉⵅⴼ — ixf — head
+ⴰⴼⵓⵍⵍⵓⵙ — afullus — rooster
+
+[z]  ⵣ  (yaz)
+ⴰⵣⵓⵍ — azul — hello
+ⴰⵎⴰⵣⵉⵖ — amaziɣ — a free person
+ⵜⴰⵣⴰⵔⵜ — tazart — figs
+ⴰⵣⴻⴳⵣⴰⵡ — azegzaw — green
+ⵉⵣⵎ — izem — lion
+
+[w]  ⵡ  (yaw)
+ⴰⵡⴰⵍ — awal — word, speech
+ⴰⵣⴻⴳⵣⴰⵡ — azegzaw — green
+
+[y]  ⵢ  (yay)
+ⵜⴰⵢⵔⵉ — tayri — love
+ⴰⵢⵢⵓⵔ — ayyur — moon
+ⴰⵖⵢⵓⵍ — aɣyul — donkey
+ⵢⴰⵏ — yan — one
+ⴰⵢⴷⵉ — aydi — dog
+
+[h]  ⵀ  (yah)
+ⵜⴰⵀⴰⵏⵓⵜ — tahanut — shop
+ⵉⵀ — ih — yes
+ⵓⵀⵓ — uhu — no
+
+# ───────────────────────── Batch 4 — emphatics & pharyngeals
+[d2]  ⴹ  (yaḍ)
+ⵉⴹ — iḍ — night
+ⴰⴹⴰⵕ — aḍaṛ — foot
+ⴰⴳⴹⵉⴹ — agḍiḍ — bird
+
+[t2]  ⵟ  (yaṭ)
+ⵟⵟⴼ — ṭṭef — to hold, grab
+ⵜⵉⵟ — tiṭ — eye
+ⵜⴰⵖⴰⵟ — taɣaṭ — goat
+
+[s2]  ⵚ  (yaṣ)
+ⴰⵚⴻⵎⵎⵉⴹ — aṣemmiḍ — cold
+ⵚⴱⵕ — ṣbeṛ — patience
+
+[z2]  ⵥ  (yaẓ)
+ⴰⵥⵔⵓ — aẓru — stone
+ⵉⵥⵉ — iẓi — fly (insect)
+ⵜⴰⵥⴰⵍⵍⵉⵜ — taẓallit — prayer
+
+[r2]  ⵕ  (yaṛ)
+ⴰⴹⴰⵕ — aḍaṛ — foot
+ⴰⵎⵇⵇⵕⴰⵏ — ameqqṛan — big, elder
+
+[ayn]  ⵄ  (yaɛ)
+ⵜⴰⵊⵎⴰⵄⵜ — tajmaɛt — village assembly
+ⵍⵄⵉⴷ — lɛid — the feast (Eid)
+ⵄⴰⵡⴷ — ɛawd — to repeat, again
+ⵍⵄⵎⵕ — lɛmeṛ — age, lifetime
+
+# ───────────────────────── Batch 5
+[h2]  ⵃ  (yaḥ)
+ⴰⵃⵡⴰⵛ — aḥwaš — communal song-and-dance gathering
+ⵜⴰⵛⵍⵃⵉⵜ — tašlḥit — the Tashelhit language
+
+[x]  ⵅ  (yax)
+ⵉⵅⴼ — ixf — head
+ⵜⴰⵅⵙⴰⵢⵜ — taxsayt — pumpkin, squash
+ⴰⴱⴻⵅⴰⵏ — abexan — black
+
+[gh]  ⵖ  (yaɣ)
+ⴰⵖⵔⵓⵎ — aɣrum — bread
+ⴰⵎⴰⵣⵉⵖ — amaziɣ — a free person
+ⵜⴰⵎⴰⵣⵉⵖⵜ — tamaziɣt — the Amazigh language
+ⴰⵖⵢⵓⵍ — aɣyul — donkey
+
+[q]  ⵇ  (yaq)
+ⵜⴰⵇⴱⵉⵍⵜ — taqbilt — tribe
+ⴰⵇⵇⴻⵎⵓ — aqqemu — face
+ⴰⵎⵇⵇⵕⴰⵏ — ameqqṛan — big, elder
+
+[j]  ⵊ  (yaj)
+ⵜⴰⵊⵎⴰⵄⵜ — tajmaɛt — village assembly
+ⵜⴰⵏⵊⵊⵉⴳⵜ — tanjjigt — flower
+
+[sh]  ⵛ  (yaš)
+ⴰⵎⵓⵛ — amuš — cat
+ⵜⴰⵛⵍⵃⵉⵜ — tašlḥit — the Tashelhit language
+ⵓⵛⵛⵏ — uššen — jackal
+
+# ───────────────────────── Batch 6 — labialized & schwa
+[gw]  ⴳⵯ  (yagʷ)
+ⴰⵙⴳⴳⵯⴰⵙ — aseggʷas — year
+ⴰⴳⵯⵔⵔⴰⵎ — agʷrram — marabout, holy man
+
+[kw]  ⴽⵯ  (yakʷ)
+ⵏⴻⴽⴽⵯⵏⵉ — nekkʷni — we
+ⴽⵯⵏⵏⵉ — kʷnni — you (plural)
+
+[e]  ⴻ  (yey)
+ⴰⴳⴻⵍⵍⵉⴷ — agellid — king
+ⴰⵎⴻⵍⵍⴰⵍ — amellal — white
+ⴰⴱⴻⵅⴰⵏ — abexan — black
+ⴰⵣⴻⴳⵣⴰⵡ — azegzaw — green

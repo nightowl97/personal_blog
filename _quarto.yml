@@ -4,6 +4,10 @@ project:
     - CNAME
     - assets/icons/apple-touch-icon.png
     - assets/icons/02-letter-charcoal-*.png
+    - assets/tifinagh-trainer.html
+    - assets/tifinagh-dc-runtime.js
+    - assets/tifinagh-design-system.js
+    - assets/tifinagh-words.txt
 
 website:
   favicon: assets/icons/favicon.png

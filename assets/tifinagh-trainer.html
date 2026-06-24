@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="tifinagh-dc-runtime.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Noto+Sans+Tifinagh&display=swap">
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>/* ============================================================
+   FONTS — Playfair Display (display), Merriweather (body),
+   DM Sans (meta/labels). These are the exact families used on
+   kharchouf.com, loaded from Google Fonts.
+   ============================================================ */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+
+</style>
+  <style>/* ============================================================
+   COLORS — warm, earthy, terracotta-on-charcoal editorial palette
+   Lifted directly from kharchouf.com (customtheme.scss / cv.css)
+   ============================================================ */
+
+:root {
+  /* ── Base neutrals (warm charcoal → warm white) ── */
+  --ink-900: #1E1C1A;   /* page background — deepest warm charcoal */
+  --ink-800: #2C2926;   /* surface: navbar, cards, dividers, code */
+  --ink-700: #3D3830;   /* subtle borders / hairlines */
+  --ink-500: #5C5450;   /* tertiary text: dates, meta, captions */
+  --ink-300: #ABA49A;   /* secondary text: body, descriptions */
+  --ink-100: #F2EDE4;   /* primary text: warm white */
+
+  /* ── Accent (terracotta) — use sparingly ── */
+  --terracotta-600: #8A3324; /* deep brick (print / pressed) */
+  --terracotta-500: #B8693C; /* core accent — links, marks */
+  --terracotta-700: #704030; /* muted accent border */
+
+  /* ── Semantic aliases ── */
+  --bg:               var(--ink-900);
+  --surface:          var(--ink-800);
+  --surface-raised:   #34302B; /* one step above surface for hover */
+  --border:           var(--ink-700);
+  --border-strong:    #4A443C;
+
+  --text-primary:     var(--ink-100);
+  --text-secondary:   var(--ink-300);
+  --text-muted:       var(--ink-500);
+
+  --accent:           var(--terracotta-500);
+  --accent-strong:    var(--terracotta-600);
+  --accent-border:    var(--terracotta-700);
+
+  /* Interactive */
+  --link:             var(--terracotta-500);
+  --link-hover:       #CE7E4E; /* slightly lighter terracotta on hover */
+  --focus-ring:       rgba(184, 105, 60, 0.45);
+}
+</style>
+  <style>/* ============================================================
+   TYPOGRAPHY — editorial pairing.
+   Display & headings: Playfair Display (serif)
+   Body & long-form:   Merriweather (serif)
+   Meta, labels, UI:   DM Sans (sans)
+   ============================================================ */
+
+:root {
+  /* ── Families ── */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-serif:   'Merriweather', Georgia, serif;
+  --font-sans:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* ── Type scale (editorial; 1rem = 16px base) ── */
+  --text-xs:    0.7rem;    /* meta, dates */
+  --text-sm:    0.82rem;   /* captions, small labels */
+  --text-base:  0.95rem;   /* body / descriptions */
+  --text-md:    1.08rem;   /* lead paragraphs */
+  --text-lg:    1.35rem;   /* card titles */
+  --text-xl:    1.75rem;   /* h2 */
+  --text-2xl:   2.2rem;    /* h1 */
+  --text-3xl:   2.8rem;    /* page title */
+  --text-display: clamp(2.2rem, 4vw, 3rem); /* hero name */
+
+  /* ── Weights ── */
+  --weight-light:   300;
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+  --weight-black:   800;
+
+  /* ── Line heights ── */
+  --leading-tight:  1.25;  /* display / titles */
+  --leading-snug:   1.5;
+  --leading-normal: 1.75;  /* descriptions */
+  --leading-loose:  1.8;   /* long-form body */
+
+  /* ── Letter spacing ── */
+  --tracking-tight:  -0.01em; /* large display */
+  --tracking-normal: 0;
+  --tracking-wide:   0.1em;   /* uppercase meta */
+  --tracking-wider:  0.16em;  /* uppercase labels */
+  --tracking-widest: 0.18em;  /* CV section headings */
+
+  /* ── Semantic roles ── */
+  --eyebrow-size:  var(--text-xs);
+  --eyebrow-track: var(--tracking-wider);
+}
+</style>
+  <style>/* ============================================================
+   SPACING, RADII, SHADOWS, MOTION
+   A restrained editorial system: small radii, hairline borders,
+   near-flat surfaces. Depth comes from value contrast, not shadow.
+   ============================================================ */
+
+:root {
+  /* ── Spacing scale (rem) ── */
+  --space-0:   0;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   2.5rem;
+  --space-8:   3rem;
+  --space-9:   4rem;
+  --space-10:  6rem;
+
+  /* ── Radii — deliberately tight ── */
+  --radius-xs: 2px;   /* tags, chips */
+  --radius-sm: 3px;   /* inline code, inputs */
+  --radius-md: 4px;   /* cards, thumbnails, code blocks */
+  --radius-lg: 8px;   /* media / embeds */
+  --radius-pill: 999px;
+
+  /* ── Borders ── */
+  --border-hair:   1px solid var(--border);
+  --border-accent: 2px solid var(--accent);
+  --border-width:  1px;
+
+  /* ── Shadows — used sparingly; warm-tinted ── */
+  --shadow-none: none;
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md:  0 4px 14px rgba(0, 0, 0, 0.40);
+  --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.50);
+
+  /* ── Motion ── */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast:   0.15s; /* @kind other */
+  --dur-mid:    0.25s; /* @kind other */
+  --dur-slow:   0.4s; /* @kind other */
+
+  /* ── Layout ── */
+  --measure:        65ch;   /* ideal reading width */
+  --content-width:  900px;
+  --sidebar-width:  200px;
+}
+</style>
+  <style>/* ============================================================
+   Kharchouf Editorial Design System — global entry point.
+   Consumers link THIS file. It is a manifest of @imports only.
+   ============================================================ */
+
+/* ============================================================
+   FONTS — Playfair Display (display), Merriweather (body),
+   DM Sans (meta/labels). These are the exact families used on
+   kharchouf.com, loaded from Google Fonts.
+   ============================================================ */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+
+
+/* ============================================================
+   COLORS — warm, earthy, terracotta-on-charcoal editorial palette
+   Lifted directly from kharchouf.com (customtheme.scss / cv.css)
+   ============================================================ */
+
+:root {
+  /* ── Base neutrals (warm charcoal → warm white) ── */
+  --ink-900: #1E1C1A;   /* page background — deepest warm charcoal */
+  --ink-800: #2C2926;   /* surface: navbar, cards, dividers, code */
+  --ink-700: #3D3830;   /* subtle borders / hairlines */
+  --ink-500: #5C5450;   /* tertiary text: dates, meta, captions */
+  --ink-300: #ABA49A;   /* secondary text: body, descriptions */
+  --ink-100: #F2EDE4;   /* primary text: warm white */
+
+  /* ── Accent (terracotta) — use sparingly ── */
+  --terracotta-600: #8A3324; /* deep brick (print / pressed) */
+  --terracotta-500: #B8693C; /* core accent — links, marks */
+  --terracotta-700: #704030; /* muted accent border */
+
+  /* ── Semantic aliases ── */
+  --bg:               var(--ink-900);
+  --surface:          var(--ink-800);
+  --surface-raised:   #34302B; /* one step above surface for hover */
+  --border:           var(--ink-700);
+  --border-strong:    #4A443C;
+
+  --text-primary:     var(--ink-100);
+  --text-secondary:   var(--ink-300);
+  --text-muted:       var(--ink-500);
+
+  --accent:           var(--terracotta-500);
+  --accent-strong:    var(--terracotta-600);
+  --accent-border:    var(--terracotta-700);
+
+  /* Interactive */
+  --link:             var(--terracotta-500);
+  --link-hover:       #CE7E4E; /* slightly lighter terracotta on hover */
+  --focus-ring:       rgba(184, 105, 60, 0.45);
+}
+
+/* ============================================================
+   TYPOGRAPHY — editorial pairing.
+   Display & headings: Playfair Display (serif)
+   Body & long-form:   Merriweather (serif)
+   Meta, labels, UI:   DM Sans (sans)
+   ============================================================ */
+
+:root {
+  /* ── Families ── */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-serif:   'Merriweather', Georgia, serif;
+  --font-sans:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* ── Type scale (editorial; 1rem = 16px base) ── */
+  --text-xs:    0.7rem;    /* meta, dates */
+  --text-sm:    0.82rem;   /* captions, small labels */
+  --text-base:  0.95rem;   /* body / descriptions */
+  --text-md:    1.08rem;   /* lead paragraphs */
+  --text-lg:    1.35rem;   /* card titles */
+  --text-xl:    1.75rem;   /* h2 */
+  --text-2xl:   2.2rem;    /* h1 */
+  --text-3xl:   2.8rem;    /* page title */
+  --text-display: clamp(2.2rem, 4vw, 3rem); /* hero name */
+
+  /* ── Weights ── */
+  --weight-light:   300;
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+  --weight-black:   800;
+
+  /* ── Line heights ── */
+  --leading-tight:  1.25;  /* display / titles */
+  --leading-snug:   1.5;
+  --leading-normal: 1.75;  /* descriptions */
+  --leading-loose:  1.8;   /* long-form body */
+
+  /* ── Letter spacing ── */
+  --tracking-tight:  -0.01em; /* large display */
+  --tracking-normal: 0;
+  --tracking-wide:   0.1em;   /* uppercase meta */
+  --tracking-wider:  0.16em;  /* uppercase labels */
+  --tracking-widest: 0.18em;  /* CV section headings */
+
+  /* ── Semantic roles ── */
+  --eyebrow-size:  var(--text-xs);
+  --eyebrow-track: var(--tracking-wider);
+}
+
+/* ============================================================
+   SPACING, RADII, SHADOWS, MOTION
+   A restrained editorial system: small radii, hairline borders,
+   near-flat surfaces. Depth comes from value contrast, not shadow.
+   ============================================================ */
+
+:root {
+  /* ── Spacing scale (rem) ── */
+  --space-0:   0;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   2.5rem;
+  --space-8:   3rem;
+  --space-9:   4rem;
+  --space-10:  6rem;
+
+  /* ── Radii — deliberately tight ── */
+  --radius-xs: 2px;   /* tags, chips */
+  --radius-sm: 3px;   /* inline code, inputs */
+  --radius-md: 4px;   /* cards, thumbnails, code blocks */
+  --radius-lg: 8px;   /* media / embeds */
+  --radius-pill: 999px;
+
+  /* ── Borders ── */
+  --border-hair:   1px solid var(--border);
+  --border-accent: 2px solid var(--accent);
+  --border-width:  1px;
+
+  /* ── Shadows — used sparingly; warm-tinted ── */
+  --shadow-none: none;
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md:  0 4px 14px rgba(0, 0, 0, 0.40);
+  --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.50);
+
+  /* ── Motion ── */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast:   0.15s; /* @kind other */
+  --dur-mid:    0.25s; /* @kind other */
+  --dur-slow:   0.4s; /* @kind other */
+
+  /* ── Layout ── */
+  --measure:        65ch;   /* ideal reading width */
+  --content-width:  900px;
+  --sidebar-width:  200px;
+}
+
+</style>
+  <style>/* tifinagh */
+
+/* latin-ext */
+
+/* latin */
+
+</style>
+  <script src="tifinagh-design-system.js"></script>
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#1E1C1A}
+    ::selection{background:rgba(184,105,60,0.30)}
+    button{font:inherit}
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:var(--ink-900); color:var(--text-primary); font-family:var(--font-serif); display:flex; flex-direction:column; align-items:center; padding:34px 24px 60px;">
+
+  <header style="width:100%; max-width:860px;">
+    <x-import component-from-global-scope="KharchoufEditorialDesignSystem_43c58f.Eyebrow" hint-size="220px,16px">Spaced recall · ⵜⵉⴼⵉⵏⴰⵖ</x-import>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; font-size:2.45rem; letter-spacing:-0.01em; margin:10px 0 4px; color:var(--text-primary);">Tifinagh letter trainer</h1>
+    <p style="font-family:'Merriweather',serif; font-style:italic; color:var(--accent); margin:0 0 22px; font-size:1.04rem;">Learn Tifinagh, especially helpful if you already speak Amazigh.</p>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:10px 0; flex-wrap:wrap; gap:14px;">
+      <div style="display:flex; gap:22px;">
+        <button onclick="{{ goStudy }}" style="background:none; border:none; border-bottom:{{navStudyRule}}; padding:5px 0; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; cursor:pointer; color:{{navStudyColor}};">Study</button>
+        <button onclick="{{ goDashboard }}" style="background:none; border:none; border-bottom:{{navDashRule}}; padding:5px 0; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; cursor:pointer; color:{{navDashColor}};">Progress</button>
+      </div>
+      <sc-if value="{{ isStudy }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="font-family:'DM Sans',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); margin-right:2px;">Card</span>
+          <button onclick="{{ setMonolith }}" style="background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:{{monoColor}};">Monolith</button>
+          <span style="color:var(--text-muted); font-size:0.7rem;">/</span>
+          <button onclick="{{ setSpecimen }}" style="background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:{{specColor}};">Specimen</button>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <main style="width:100%; max-width:860px; flex:1; display:flex; flex-direction:column; padding-top:28px;">
+
+    <!-- ============ STUDY ============ -->
+    <sc-if value="{{ isStudy }}" hint-placeholder-val="{{ true }}">
+
+      <sc-if value="{{ hasCard }}" hint-placeholder-val="{{ true }}">
+        <div style="width:{{ui.cardW}}px; max-width:100%; margin:0 auto 16px; display:flex; justify-content:space-between; align-items:baseline; font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); gap:10px;">
+          <span>Batch {{batchFocus}}</span>
+          <span style="color:var(--accent);">{{dirLabel}}</span>
+          <span>{{sessReviewed}} done · {{sessRemaining}} due</span>
+        </div>
+
+        <div onclick="{{ flip }}" style="position:relative; width:{{ui.cardW}}px; height:{{ui.cardH}}px; max-width:100%; perspective:1800px; cursor:pointer; margin:0 auto;">
+          <div style="position:relative; width:100%; height:100%; transition:{{flipTransition}}; transform-style:preserve-3d; transform:{{flipTransform}};">
+
+            <!-- FRONT -->
+            <div style="position:absolute; inset:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:{{ui.facePad}}; display:flex; flex-direction:column; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; box-shadow:var(--shadow-md);">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding-bottom:12px; border-bottom:1px solid {{ui.chromeRule}};">
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.66rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:var(--accent);">{{f.eyebrow}}</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted);">{{f.tag}}</span>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:{{ui.align}}; text-align:{{ui.textAlign}}; gap:14px; border-left:{{ui.accentRule}}; padding:{{ui.bodyPad}};">
+                <sc-if value="{{ f.showGlyph }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:{{ui.glyphSize}}px; line-height:1; color:{{f.glyphColor}};">{{f.glyph}}</div>
+                </sc-if>
+                <sc-if value="{{ f.showLatin }}">
+                  <div style="display:flex; flex-direction:column; gap:10px; align-items:{{ui.align}};">
+                    <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:{{ui.latinSize}}px; line-height:1; color:{{f.latinColor}};">{{f.latin}}</div>
+                    <div style="font-family:'DM Sans',sans-serif; font-size:{{ui.ipaSize}}px; color:var(--text-secondary); letter-spacing:0.02em;">{{f.ipa}}</div>
+                    <div style="font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.6; color:var(--text-secondary); max-width:34ch;">{{f.hint}}</div>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="margin-top:auto; padding-top:14px; border-top:1px solid {{ui.chromeRule}}; display:flex; align-items:center;">
+                <span style="font-family:'Merriweather',serif; font-style:italic; font-size:0.84rem; color:var(--text-muted);">{{f.prompt}}</span>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div style="position:absolute; inset:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:{{ui.facePad}}; display:flex; flex-direction:column; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; box-shadow:var(--shadow-md); transform:rotateY(180deg);">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding-bottom:12px; border-bottom:1px solid {{ui.chromeRule}};">
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.66rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:var(--accent);">{{b.eyebrow}}</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted);">{{b.tag}}</span>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:{{ui.align}}; text-align:{{ui.textAlign}}; gap:14px; border-left:{{ui.accentRule}}; padding:{{ui.bodyPad}};">
+                <sc-if value="{{ b.showGlyph }}">
+                  <div style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:{{ui.glyphSize}}px; line-height:1; color:var(--accent);">{{b.glyph}}</div>
+                </sc-if>
+                <sc-if value="{{ b.showLatin }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex; flex-direction:column; gap:10px; align-items:{{ui.align}};">
+                    <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:{{ui.latinSize}}px; line-height:1; color:var(--accent);">{{b.latin}}</div>
+                    <div style="font-family:'DM Sans',sans-serif; font-size:{{ui.ipaSize}}px; color:var(--text-secondary); letter-spacing:0.02em;">{{b.ipa}}</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.showHint }}">
+                  <div style="font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.6; color:var(--text-secondary); max-width:36ch;">{{b.hint}}</div>
+                </sc-if>
+                <sc-if value="{{ b.showPair }}">
+                  <div style="display:flex; align-items:center; gap:11px; border-left:2px solid var(--accent); padding-left:12px; text-align:left;">
+                    <span style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:30px; line-height:1; color:var(--text-primary);">{{b.pairGlyph}}</span>
+                    <span style="font-family:'Merriweather',serif; font-size:0.82rem; color:var(--text-secondary); line-height:1.4;">{{b.pairNote}}</span>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-if value="{{ w.show }}">
+                <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border); display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">
+                  <span style="font-family:'DM Sans',sans-serif; font-size:0.56rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted);">Word</span>
+                  <span style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:1.5rem; color:var(--text-primary); line-height:1;">{{w.tif}}</span>
+                  <span style="font-family:'Merriweather',serif; font-style:italic; font-size:0.95rem; color:var(--text-secondary);">{{w.lat}}</span>
+                  <span style="font-family:'Merriweather',serif; font-size:0.9rem; color:var(--text-muted);">{{w.gloss}}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ b.showNote }}">
+                <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border);">
+                  <span style="font-family:'Merriweather',serif; font-size:0.86rem; color:var(--text-secondary); line-height:1.5;">{{b.footerNote}}</span>
+                </div>
+              </sc-if>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div style="width:{{ui.cardW}}px; max-width:100%; margin:22px auto 0;">
+          <sc-if value="{{ notFlipped }}" hint-placeholder-val="{{ true }}">
+            <button onclick="{{ showAnswer }}" style="width:100%; display:flex; align-items:center; justify-content:center; gap:10px; padding:14px; background:var(--accent); border:1px solid var(--accent); border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-900);" style-hover="background:var(--link-hover);">Show answer <span style="opacity:0.65; font-size:0.66rem; border:1px solid rgba(30,28,26,0.4); border-radius:3px; padding:1px 6px;">Space</span></button>
+          </sc-if>
+          <sc-if value="{{ flipped }}">
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+              <button onclick="{{ gradeAgain }}" style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:13px 6px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; transition:background 0.15s,border-color 0.15s;" style-hover="background:var(--surface-raised);">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border:1px solid var(--border); border-radius:3px; font-family:'DM Sans',sans-serif; font-size:0.6rem; color:var(--text-muted);">1</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Again</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; color:var(--text-muted);">{{gAgain}}</span>
+              </button>
+              <button onclick="{{ gradeHard }}" style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:13px 6px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; transition:background 0.15s,border-color 0.15s;" style-hover="background:var(--surface-raised);">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border:1px solid var(--border); border-radius:3px; font-family:'DM Sans',sans-serif; font-size:0.6rem; color:var(--text-muted);">2</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Hard</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; color:var(--text-muted);">{{gHard}}</span>
+              </button>
+              <button onclick="{{ gradeGood }}" style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:13px 6px; background:var(--surface); border:1px solid var(--accent); border-radius:var(--radius-sm); cursor:pointer; transition:background 0.15s,border-color 0.15s;" style-hover="background:var(--surface-raised);">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border:1px solid var(--accent); border-radius:3px; font-family:'DM Sans',sans-serif; font-size:0.6rem; color:var(--accent);">3</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent);">Good</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; color:var(--text-muted);">{{gGood}}</span>
+              </button>
+              <button onclick="{{ gradeEasy }}" style="display:flex; flex-direction:column; align-items:center; gap:6px; padding:13px 6px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; transition:background 0.15s,border-color 0.15s;" style-hover="background:var(--surface-raised);">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border:1px solid var(--border); border-radius:3px; font-family:'DM Sans',sans-serif; font-size:0.6rem; color:var(--text-muted);">4</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">Easy</span>
+                <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; color:var(--text-muted);">{{gEasy}}</span>
+              </button>
+            </div>
+            <div style="text-align:center; margin-top:12px; font-family:'Merriweather',serif; font-style:italic; font-size:0.82rem; color:var(--text-muted);">Grade honestly — how did the recall actually feel?</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- REST / CAUGHT UP -->
+      <sc-if value="{{ caughtUp }}">
+        <div style="max-width:520px; margin:36px auto; text-align:center; display:flex; flex-direction:column; gap:18px; align-items:center;">
+          <div style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:60px; color:var(--accent); line-height:1;">ⵣ</div>
+          <h2 style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.9rem; margin:0; color:var(--text-primary);">{{restTitle}}</h2>
+          <p style="font-family:'Merriweather',serif; font-size:1rem; line-height:1.7; color:var(--text-secondary); margin:0;">{{restMsg}}</p>
+          <div style="display:flex; gap:12px; margin-top:4px;">
+            <button onclick="{{ studyAhead }}" style="padding:11px 22px; background:var(--accent); border:1px solid var(--accent); border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.76rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-900);" style-hover="background:var(--link-hover);">Study ahead</button>
+            <button onclick="{{ goDashboard }}" style="padding:11px 22px; background:none; border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.76rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-secondary);" style-hover="border-color:var(--accent);">View progress</button>
+          </div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ============ DASHBOARD ============ -->
+    <sc-if value="{{ isDashboard }}">
+      <div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px;">
+          <div style="flex:1; min-width:130px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--text-primary); line-height:1;">{{stGrad}}<span style="font-size:1rem; color:var(--text-muted);">/{{stTotal}}</span></div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); margin-top:9px;">Letters learned</div>
+          </div>
+          <div style="flex:1; min-width:130px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--text-primary); line-height:1;">{{stMature}}</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); margin-top:9px;">Mature (3wk+)</div>
+          </div>
+          <div style="flex:1; min-width:130px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--accent); line-height:1;">{{stDue}}</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); margin-top:9px;">Due now</div>
+          </div>
+          <div style="flex:1; min-width:130px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--text-primary); line-height:1;">{{stUnlocked}}<span style="font-size:1rem; color:var(--text-muted);">/6</span></div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); margin-top:9px;">Batches open</div>
+          </div>
+          <div style="flex:1; min-width:130px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px;">
+            <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--text-primary); line-height:1;">{{stReviews}}</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); margin-top:9px;">Total reviews</div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:var(--accent);">Overall mastery</span>
+          <span style="font-family:'DM Sans',sans-serif; font-size:0.66rem; color:var(--text-muted);">{{stGrad}} / {{stTotal}} · {{stPct}}%</span>
+        </div>
+        <div style="height:8px; background:var(--surface); border:1px solid var(--border); border-radius:999px; overflow:hidden;">
+          <div style="height:100%; width:{{stPct}}%; background:var(--accent); transition:width 0.4s cubic-bezier(0.4,0,0.2,1);"></div>
+        </div>
+
+        <sc-for list="{{ batches }}" as="batch" hint-placeholder-count="6">
+          <div style="margin-top:26px; opacity:{{batch.lockOpacity}};">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:14px;">
+              <span style="font-family:'DM Sans',sans-serif; font-size:0.66rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:var(--accent);">Batch {{batch.idx}} — {{batch.label}}</span>
+              <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">{{batch.statusLabel}}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <sc-for list="{{ batch.cells }}" as="cell" hint-placeholder-count="6">
+                <div style="width:62px; height:72px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; background:{{cell.bg}}; border:{{cell.border}}; border-radius:var(--radius-md);">
+                  <span style="font-family:'Noto Sans Tifinagh','Noto Sans',sans-serif; font-size:26px; line-height:1; color:{{cell.color}};">{{cell.glyph}}</span>
+                  <span style="font-family:'DM Sans',sans-serif; font-size:0.62rem; color:{{cell.color}};">{{cell.latin}}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:18px; padding-top:18px; border-top:1px solid var(--border);">
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:15px; height:15px; border-radius:3px; background:var(--surface); border:1px solid var(--border);"></span><span style="font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">New</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:15px; height:15px; border-radius:3px; background:var(--surface); border:1px solid var(--accent-border);"></span><span style="font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">Learning</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:15px; height:15px; border-radius:3px; background:var(--surface); border:1px solid var(--accent);"></span><span style="font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">Young</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:15px; height:15px; border-radius:3px; background:var(--accent); border:1px solid var(--accent);"></span><span style="font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">Mature</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="width:15px; height:15px; border-radius:3px; background:transparent; border:1px dashed var(--ink-700);"></span><span style="font-family:'DM Sans',sans-serif; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted);">Locked</span></div>
+        </div>
+
+        <div style="margin-top:26px;">
+          <button onclick="{{ resetProgress }}" style="background:none; border:1px solid var(--border); border-radius:var(--radius-sm); padding:9px 16px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.66rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted);" style-hover="border-color:var(--accent); color:var(--accent);">Reset all progress</button>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="margin-top:42px; font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); text-align:center;">Space to flip · 1–4 to grade · progress saves automatically</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;cardLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;monolith&quot;,&quot;specimen&quot;],&quot;default&quot;:&quot;monolith&quot;,&quot;tsType&quot;:&quot;'monolith' | 'specimen'&quot;},&quot;newPerSession&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:1,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;},&quot;frontGlyphColor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;warm&quot;,&quot;terracotta&quot;],&quot;default&quot;:&quot;warm&quot;,&quot;tsType&quot;:&quot;'warm' | 'terracotta'&quot;}}">
+const DAY = 86400000;
+const MIN = 60000;
+const LEARN_STEPS = [1, 10];
+
+const LETTERS = [
+  {id:'a', glyph:'ⴰ', latin:'a', ipa:'a', name:'ya', batch:0, hint:"Open 'a' as in 'father'.", word:{tif:'ⴰⵎⴰⵏ', lat:'aman', gloss:'water'}},
+  {id:'i', glyph:'ⵉ', latin:'i', ipa:'i', name:'yi', batch:0, hint:"'ee' as in 'see'.", word:{tif:'ⵉⵎⵉ', lat:'imi', gloss:'mouth'}},
+  {id:'u', glyph:'ⵓ', latin:'u', ipa:'u', name:'yu', batch:0, hint:"'oo' as in 'moon'.", word:{tif:'ⵓⵍ', lat:'ul', gloss:'heart'}},
+  {id:'t', glyph:'ⵜ', latin:'t', ipa:'t', name:'yat', batch:0, hint:"Plain 't' as in 'stop'.", pair:'t2', word:{tif:'ⵜⴰⴷⴷⴰⵔⵜ', lat:'taddart', gloss:'house'}},
+  {id:'n', glyph:'ⵏ', latin:'n', ipa:'n', name:'yan', batch:0, hint:"'n' as in 'no'.", word:{tif:'ⴰⴼⵓⵏⴰⵙ', lat:'afunas', gloss:'ox'}},
+  {id:'m', glyph:'ⵎ', latin:'m', ipa:'m', name:'yam', batch:0, hint:"'m' as in 'mat'.", word:{tif:'ⴰⵖⵔⵓⵎ', lat:'aɣrum', gloss:'bread'}},
+
+  {id:'r', glyph:'ⵔ', latin:'r', ipa:'r', name:'yar', batch:1, hint:"A tapped, lightly rolled 'r'.", pair:'r2', word:{tif:'ⵜⴰⵎⵓⵔⵜ', lat:'tamurt', gloss:'country'}},
+  {id:'l', glyph:'ⵍ', latin:'l', ipa:'l', name:'yal', batch:1, hint:"'l' as in 'let'.", word:{tif:'ⵉⵍⵙ', lat:'ils', gloss:'tongue'}},
+  {id:'s', glyph:'ⵙ', latin:'s', ipa:'s', name:'yas', batch:1, hint:"'s' as in 'see'.", pair:'s2', word:{tif:'ⴰⵙⵙ', lat:'ass', gloss:'day'}},
+  {id:'d', glyph:'ⴷ', latin:'d', ipa:'d', name:'yad', batch:1, hint:"Plain 'd' as in 'door'.", pair:'d2', word:{tif:'ⴰⴷⵔⴰⵔ', lat:'adrar', gloss:'mountain'}},
+  {id:'k', glyph:'ⴽ', latin:'k', ipa:'k', name:'yak', batch:1, hint:"'k' as in 'kite'.", word:{tif:'ⵜⴰⴼⵓⴽⵜ', lat:'tafukt', gloss:'sun'}},
+  {id:'b', glyph:'ⴱ', latin:'b', ipa:'b', name:'yab', batch:1, hint:"'b' as in 'bat'.", word:{tif:'ⴰⴱⵔⵉⴷ', lat:'abrid', gloss:'road'}},
+
+  {id:'g', glyph:'ⴳ', latin:'g', ipa:'ɡ', name:'yag', batch:2, hint:"Hard 'g' as in 'go'.", word:{tif:'ⴰⵔⴳⴰⵣ', lat:'argaz', gloss:'man'}},
+  {id:'f', glyph:'ⴼ', latin:'f', ipa:'f', name:'yaf', batch:2, hint:"'f' as in 'fish'.", word:{tif:'ⴰⴼⵓⵙ', lat:'afus', gloss:'hand'}},
+  {id:'z', glyph:'ⵣ', latin:'z', ipa:'z', name:'yaz', batch:2, hint:"'z' as in 'zoo' — this is the yaz, the symbol on the flag.", pair:'z2', word:{tif:'ⴰⵣⵓⵍ', lat:'azul', gloss:'hello'}},
+  {id:'w', glyph:'ⵡ', latin:'w', ipa:'w', name:'yaw', batch:2, hint:"'w' as in 'we'.", word:{tif:'ⴰⵡⴰⵍ', lat:'awal', gloss:'word'}},
+  {id:'y', glyph:'ⵢ', latin:'y', ipa:'j', name:'yay', batch:2, hint:"'y' as in 'yes'.", word:{tif:'ⵜⴰⵢⵔⵉ', lat:'tayri', gloss:'love'}},
+  {id:'h', glyph:'ⵀ', latin:'h', ipa:'h', name:'yah', batch:2, hint:"Light 'h' as in 'hat'.", word:null},
+
+  {id:'d2', glyph:'ⴹ', latin:'ḍ', ipa:'dˤ', name:'yaḍ', batch:3, hint:"Emphatic 'd' — pharyngealised, heavier and deeper than ⴷ.", pair:'d', word:{tif:'ⵉⴹ', lat:'iḍ', gloss:'night'}},
+  {id:'t2', glyph:'ⵟ', latin:'ṭ', ipa:'tˤ', name:'yaṭ', batch:3, hint:"Emphatic 't' — pharyngealised, deeper than ⵜ.", pair:'t', word:null},
+  {id:'s2', glyph:'ⵚ', latin:'ṣ', ipa:'sˤ', name:'yaṣ', batch:3, hint:"Emphatic 's' — pharyngealised, deeper than ⵙ.", pair:'s', word:null},
+  {id:'z2', glyph:'ⵥ', latin:'ẓ', ipa:'zˤ', name:'yaẓ', batch:3, hint:"Emphatic 'z' — pharyngealised, deeper than ⵣ.", pair:'z', word:null},
+  {id:'r2', glyph:'ⵕ', latin:'ṛ', ipa:'rˤ', name:'yaṛ', batch:3, hint:"Emphatic 'r' — pharyngealised, deeper than ⵔ.", pair:'r', word:{tif:'ⴰⴹⴰⵕ', lat:'aḍaṛ', gloss:'foot'}},
+  {id:'ayn', glyph:'ⵄ', latin:'ɛ', ipa:'ʕ', name:'yaɛ', batch:3, hint:"Voiced pharyngeal — like Arabic ع (ʿayn).", word:null},
+
+  {id:'h2', glyph:'ⵃ', latin:'ḥ', ipa:'ħ', name:'yaḥ', batch:4, hint:"Voiceless pharyngeal — like Arabic ح, a hard whispered 'h'.", word:null},
+  {id:'x', glyph:'ⵅ', latin:'x', ipa:'χ', name:'yax', batch:4, hint:"Like 'ch' in Scottish 'loch' / German 'Bach'.", word:{tif:'ⵉⵅⴼ', lat:'ixf', gloss:'head'}},
+  {id:'gh', glyph:'ⵖ', latin:'ɣ', ipa:'ɣ', name:'yaɣ', batch:4, hint:"Voiced version of x — like a French/Arabic 'r' (غ).", word:{tif:'ⴰⵎⴰⵣⵉⵖ', lat:'amaziɣ', gloss:'a free person'}},
+  {id:'q', glyph:'ⵇ', latin:'q', ipa:'q', name:'yaq', batch:4, hint:"A 'k' made deep in the throat (uvular).", word:null},
+  {id:'j', glyph:'ⵊ', latin:'j', ipa:'ʒ', name:'yaj', batch:4, hint:"Like 's' in 'measure' / French 'j'.", word:null},
+  {id:'sh', glyph:'ⵛ', latin:'š', ipa:'ʃ', name:'yaš', batch:4, hint:"'sh' as in 'ship'.", word:null},
+
+  {id:'gw', glyph:'ⴳⵯ', latin:'gʷ', ipa:'ɡʷ', name:'yagʷ', batch:5, hint:"Labialised 'g' — a 'gw' said with rounded lips.", word:null},
+  {id:'kw', glyph:'ⴽⵯ', latin:'kʷ', ipa:'kʷ', name:'yakʷ', batch:5, hint:"Labialised 'k' — like 'qu' in 'queen'.", word:null},
+  {id:'e', glyph:'ⴻ', latin:'e', ipa:'ə', name:'yey', batch:5, hint:"Neutral vowel (schwa) — the 'e' in 'the'.", word:null}
+];
+
+const byId = {};
+LETTERS.forEach(L => byId[L.id] = L);
+const KEY = 'tifinagh_srs_v2';
+const NBATCH = 6;
+
+// Example words are kept in assets/tifinagh-words.txt (easy to read / verify) and
+// fetched at runtime. Format per line: "<tifinagh> — <pronunciation> — <meaning>",
+// grouped under "[letter-id]" section headers. The inline `word:` on each LETTER
+// stays as a fallback if the file can't be loaded.
+function parseWords(txt) {
+  const map = {}; let cur = null;
+  txt.split(/\r?\n/).forEach(line => {
+    const t = line.trim();
+    if (!t || t[0] === '#') return;
+    const h = t.match(/^\[([^\]]+)\]/);
+    if (h) { cur = h[1].trim(); map[cur] = map[cur] || []; return; }
+    const p = t.split(' — ');
+    if (cur && p.length >= 3) map[cur].push({tif: p[0].trim(), lat: p[1].trim(), gloss: p.slice(2).join(' — ').trim()});
+  });
+  return map;
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'study', layout: null, ready: false,
+      sched: {}, unlocked: 1, totalReviews: 0,
+      current: null, flipped: false, animate: true,
+      tick: 0, sessionReviewed: 0, sessionNew: 0, words: null
+    };
+    this.onKey = this.onKey.bind(this);
+  }
+
+  componentDidMount() {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    const sched = {};
+    LETTERS.forEach(L => {
+      const s = saved && saved.sched && saved.sched[L.id];
+      sched[L.id] = s || {introduced:false, graduated:false, step:0, reps:0, ease:2.5, interval:0, due:0, dueTick:0, lapses:0};
+    });
+    const unlocked = (saved && saved.unlocked) || 1;
+    const totalReviews = (saved && saved.totalReviews) || 0;
+    const layout = (saved && saved.layout) || this.props.cardLayout || 'monolith';
+    this.setState({sched, unlocked, totalReviews, layout, ready:true, tick:0, sessionReviewed:0, sessionNew:0}, () => {
+      this.setState({current: this.pickNext(this.state)});
+    });
+    window.addEventListener('keydown', this.onKey);
+    fetch('tifinagh-words.txt')
+      .then(r => r.ok ? r.text() : '')
+      .then(t => { if (t) this.setState({words: parseWords(t)}); })
+      .catch(() => {});
+  }
+
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+
+  getLayout() { return this.state.layout || this.props.cardLayout || 'monolith'; }
+
+  save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        sched: this.state.sched, unlocked: this.state.unlocked,
+        totalReviews: this.state.totalReviews, layout: this.state.layout
+      }));
+    } catch (e) {}
+  }
+
+  setLayout(l) { this.setState({layout: l}, () => this.save()); }
+  flip() { this.setState(s => ({flipped: !s.flipped, animate: true})); }
+
+  onKey(e) {
+    if (this.state.view !== 'study' || !this.state.current) return;
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); this.flip(); }
+    else if (this.state.flipped) {
+      if (e.key === '1') this.grade('again');
+      else if (e.key === '2') this.grade('hard');
+      else if (e.key === '3') this.grade('good');
+      else if (e.key === '4') this.grade('easy');
+    }
+  }
+
+  mk(L, sched) {
+    const s = sched[L.id];
+    const dir = (!s.graduated) ? 'recognition' : (Math.random() < 0.5 ? 'recognition' : 'production');
+    return {id: L.id, direction: dir};
+  }
+
+  pickNext(state, allowFuture) {
+    const {sched, unlocked, tick, sessionNew} = state;
+    const cap = this.props.newPerSession || 6;
+    const now = Date.now();
+    let pool = LETTERS.filter(L => { const s = sched[L.id]; return s.introduced && !s.graduated && (s.dueTick||0) <= tick; });
+    if (pool.length) { pool.sort((a,b) => (sched[a.id].dueTick||0) - (sched[b.id].dueTick||0)); return this.mk(pool[0], sched); }
+    if (sessionNew < cap) {
+      const news = LETTERS.filter(L => L.batch < unlocked && !sched[L.id].introduced);
+      if (news.length) return this.mk(news[0], sched);
+    }
+    let rev = LETTERS.filter(L => { const s = sched[L.id]; return s.graduated && (s.due||0) <= now; });
+    if (rev.length) { rev.sort((a,b) => sched[a.id].due - sched[b.id].due); return this.mk(rev[0], sched); }
+    let lf = LETTERS.filter(L => { const s = sched[L.id]; return s.introduced && !s.graduated; });
+    if (lf.length) { lf.sort((a,b) => (sched[a.id].dueTick||0) - (sched[b.id].dueTick||0)); return this.mk(lf[0], sched); }
+    if (allowFuture) {
+      let fr = LETTERS.filter(L => sched[L.id].graduated);
+      if (fr.length) { fr.sort((a,b) => sched[a.id].due - sched[b.id].due); return this.mk(fr[0], sched); }
+    }
+    return null;
+  }
+
+  countDue(state) {
+    const {sched, unlocked, sessionNew} = state;
+    const cap = this.props.newPerSession || 6;
+    const now = Date.now();
+    let n = LETTERS.filter(L => { const s = sched[L.id]; return s.introduced && !s.graduated; }).length;
+    const news = LETTERS.filter(L => L.batch < unlocked && !sched[L.id].introduced).length;
+    n += Math.max(0, Math.min(news, cap - sessionNew));
+    n += LETTERS.filter(L => { const s = sched[L.id]; return s.graduated && (s.due||0) <= now; }).length;
+    return n;
+  }
+
+  grade(g) {
+    const cur = this.state.current;
+    if (!cur) return;
+    const tick = this.state.tick;
+    const sched = Object.assign({}, this.state.sched);
+    const s = Object.assign({}, sched[cur.id]);
+    const wasIntro = s.introduced;
+    s.introduced = true;
+    if (!s.graduated) {
+      s.step = s.step || 0;
+      if (g === 'again') { s.step = 0; s.dueTick = tick + 1; s.lapses = (s.lapses||0) + 1; }
+      else if (g === 'hard') { s.dueTick = tick + (this.props.newPerSession || 6); }
+      else if (g === 'good') {
+        if (s.step < LEARN_STEPS.length - 1) { s.step++; s.dueTick = tick + 2; }
+        else { s.graduated = true; s.reps = 1; s.interval = 1; s.ease = s.ease || 2.5; s.due = Date.now() + DAY; }
+      } else { s.graduated = true; s.reps = 1; s.interval = 4; s.ease = (s.ease||2.5) + 0.15; s.due = Date.now() + 4*DAY; }
+    } else {
+      const e = s.ease || 2.5, iv = s.interval || 1, r = s.reps || 1;
+      if (g === 'again') { s.graduated = false; s.step = 0; s.dueTick = tick + 1; s.interval = 1; s.reps = 1; s.ease = Math.max(1.3, e - 0.2); s.lapses = (s.lapses||0) + 1; }
+      else if (g === 'hard') { s.ease = Math.max(1.3, e - 0.15); s.interval = Math.max(1, Math.round(iv * 1.2)); s.reps = r + 1; s.due = Date.now() + s.interval*DAY; }
+      else if (g === 'good') { s.interval = Math.max(1, Math.round(iv * e)); s.reps = r + 1; s.due = Date.now() + s.interval*DAY; }
+      else { s.ease = e + 0.15; s.interval = Math.max(1, Math.round(iv * e * 1.3)); s.reps = r + 1; s.due = Date.now() + s.interval*DAY; }
+    }
+    sched[cur.id] = s;
+    let unlocked = this.state.unlocked;
+    while (unlocked < NBATCH) {
+      const fr = unlocked - 1;
+      const ls = LETTERS.filter(L => L.batch === fr);
+      if (ls.every(L => sched[L.id].graduated)) unlocked++; else break;
+    }
+    this.setState({
+      sched, unlocked, tick: tick + 1,
+      sessionReviewed: this.state.sessionReviewed + 1,
+      totalReviews: this.state.totalReviews + 1,
+      sessionNew: this.state.sessionNew + (wasIntro ? 0 : 1),
+      flipped: false, animate: false
+    }, () => { this.save(); this.setState({current: this.pickNext(this.state)}); });
+  }
+
+  studyAhead() {
+    const n = this.pickNext(this.state, true);
+    if (n) this.setState({current: n, flipped: false, animate: false});
+  }
+
+  resetProgress() {
+    const sched = {};
+    LETTERS.forEach(L => { sched[L.id] = {introduced:false, graduated:false, step:0, reps:0, ease:2.5, interval:0, due:0, dueTick:0, lapses:0}; });
+    this.setState({sched, unlocked:1, totalReviews:0, sessionReviewed:0, sessionNew:0, tick:0, flipped:false, view:'study'},
+      () => { this.save(); this.setState({current: this.pickNext(this.state)}); });
+  }
+
+  fmtDays(d) {
+    if (d < 1) return '<1d';
+    if (d < 21) return Math.round(d) + 'd';
+    if (d < 60) return Math.round(d/7) + 'w';
+    return Math.round(d/30) + 'mo';
+  }
+
+  previewLabel(s, grade) {
+    if (!s.graduated) {
+      const step = s.step || 0;
+      if (grade === 'again') return '1m';
+      if (grade === 'hard') return LEARN_STEPS[step] + 'm';
+      if (grade === 'good') return (step < LEARN_STEPS.length - 1) ? LEARN_STEPS[step+1] + 'm' : '1d';
+      return '4d';
+    }
+    const e = s.ease || 2.5, iv = s.interval || 1;
+    if (grade === 'again') return '10m';
+    if (grade === 'hard') return this.fmtDays(Math.max(1, Math.round(iv * 1.2)));
+    if (grade === 'good') return this.fmtDays(Math.round(iv * e));
+    return this.fmtDays(Math.round(iv * e * 1.3));
+  }
+
+  nextDueText() {
+    const sched = this.state.sched;
+    const fut = LETTERS.filter(L => sched[L.id].graduated).map(L => sched[L.id].due).filter(d => d > Date.now());
+    if (!fut.length) return '';
+    const mins = (Math.min.apply(null, fut) - Date.now()) / MIN;
+    let t;
+    if (mins < 60) t = Math.max(1, Math.round(mins)) + ' min';
+    else if (mins < 1440) t = Math.round(mins/60) + ' h';
+    else t = Math.round(mins/1440) + ' day(s)';
+    return 'Next review in about ' + t + '.';
+  }
+
+  restVals() {
+    const st = this.state, sched = st.sched;
+    const grad = LETTERS.filter(L => sched[L.id].graduated).length;
+    const cap = this.props.newPerSession || 6;
+    const newsRemain = LETTERS.filter(L => L.batch < st.unlocked && !sched[L.id].introduced).length;
+    const capReached = st.sessionNew >= cap && newsRemain > 0;
+    let restTitle, restMsg;
+    if (grad >= LETTERS.length) {
+      restTitle = 'All 33 letters graduated';
+      restMsg = "You've cleared the whole alphabet. Keep reviewing to push them into long-term memory, or open Progress to see the map.";
+    } else if (capReached) {
+      restTitle = 'New-letter limit reached';
+      restMsg = "You've introduced " + cap + " new letters this session — about the sweet spot. Let them settle and come back, or study ahead to review early.";
+    } else {
+      restTitle = 'Caught up';
+      restMsg = 'Nothing is due right now. ' + this.nextDueText() + ' Studying ahead is optional — spacing works best when you let time pass.';
+    }
+    return {restTitle, restMsg};
+  }
+
+  dashVals() {
+    const st = this.state, sched = st.sched;
+    const grad = LETTERS.filter(L => sched[L.id].graduated).length;
+    const mature = LETTERS.filter(L => sched[L.id].graduated && (sched[L.id].interval||0) >= 21).length;
+    const dueNow = LETTERS.filter(L => sched[L.id].graduated && (sched[L.id].due||0) <= Date.now()).length;
+    const intro = LETTERS.filter(L => sched[L.id].introduced).length;
+    const pct = Math.round(grad / LETTERS.length * 100);
+    const names = ['Vowels & core', 'Common consonants', 'More consonants', 'Emphatics & ʿayn', 'Gutturals', 'Labiovelars & schwa'];
+    const batches = [0,1,2,3,4,5].map(bi => {
+      const ls = LETTERS.filter(L => L.batch === bi);
+      const unlocked = bi < st.unlocked;
+      const gradN = ls.filter(L => sched[L.id].graduated).length;
+      const cells = ls.map(L => {
+        const s = sched[L.id];
+        let bg, border, color;
+        if (!unlocked) { bg = 'transparent'; border = '1px dashed var(--ink-700)'; color = 'var(--ink-700)'; }
+        else if (!s.introduced) { bg = 'var(--surface)'; border = '1px solid var(--border)'; color = 'var(--text-muted)'; }
+        else if (!s.graduated) { bg = 'var(--surface)'; border = '1px solid var(--accent-border)'; color = 'var(--text-secondary)'; }
+        else if ((s.interval||0) >= 21) { bg = 'var(--accent)'; border = '1px solid var(--accent)'; color = 'var(--ink-900)'; }
+        else { bg = 'var(--surface)'; border = '1px solid var(--accent)'; color = 'var(--text-primary)'; }
+        return {glyph: L.glyph, latin: L.latin, bg, border, color};
+      });
+      return {idx: bi+1, label: names[bi], unlocked, statusLabel: unlocked ? (gradN + '/' + ls.length + ' learned') : 'Locked', cells, lockOpacity: unlocked ? '1' : '0.5'};
+    });
+    return {stIntro: intro, stGrad: grad, stMature: mature, stDue: dueNow, stPct: pct, stTotal: LETTERS.length, stUnlocked: st.unlocked, stReviews: st.totalReviews, batches};
+  }
+
+  studyVals() {
+    const st = this.state, cur = st.current;
+    const o = {flipped: st.flipped, notFlipped: !st.flipped, flipTransform: st.flipped ? 'rotateY(180deg)' : 'rotateY(0deg)', flipTransition: (st.animate !== false) ? 'transform 0.55s cubic-bezier(0.4,0,0.2,1)' : 'none'};
+    if (!cur) { o.hasCard = false; o.caughtUp = true; Object.assign(o, this.restVals()); return o; }
+    o.hasCard = true; o.caughtUp = false;
+    const L = byId[cur.id], s = st.sched[cur.id], dir = cur.direction;
+    o.batchFocus = L.batch + 1;
+    o.sessReviewed = st.sessionReviewed;
+    o.sessRemaining = this.countDue(st);
+    o.dirLabel = dir === 'recognition' ? 'Glyph → sound' : 'Sound → glyph';
+    const glyphFront = (this.props.frontGlyphColor === 'terracotta') ? 'var(--accent)' : 'var(--text-primary)';
+    const tag = 'Batch ' + (L.batch + 1);
+    const ipaTxt = '[' + L.ipa + ']';
+    let pair = null;
+    if (L.pair) {
+      const p = byId[L.pair];
+      const emph = L.id.endsWith('2');
+      pair = {glyph: p.glyph, latin: p.latin, note: emph ? ('Emphatic form of ' + p.glyph + ' (' + p.latin + ')') : ('Has an emphatic pair — ' + p.glyph + ' (' + p.latin + ')')};
+    }
+    if (dir === 'recognition') {
+      o.f = {eyebrow: 'Recognise', tag, showGlyph: true, glyph: L.glyph, glyphColor: glyphFront, showLatin: false, latin: '', latinColor: '', ipa: '', hint: '', prompt: 'What sound is this? Say it aloud, then flip.'};
+      o.b = {eyebrow: L.name, tag, showGlyph: false, glyph: '', showLatin: true, latin: L.latin, ipa: ipaTxt, hint: L.hint, showHint: true, showPair: !!pair, pairGlyph: pair ? pair.glyph : '', pairNote: pair ? pair.note : ''};
+    } else {
+      o.f = {eyebrow: 'Produce', tag, showGlyph: false, glyph: '', glyphColor: '', showLatin: true, latin: L.latin, latinColor: 'var(--text-primary)', ipa: ipaTxt, hint: L.hint, prompt: 'Picture or trace the glyph from memory, then flip.'};
+      o.b = {eyebrow: L.name, tag, showGlyph: true, glyph: L.glyph, showLatin: false, latin: '', ipa: '', hint: L.hint, showHint: false, showPair: !!pair, pairGlyph: pair ? pair.glyph : '', pairNote: pair ? pair.note : ''};
+    }
+    const wl = (this.state.words && this.state.words[L.id]) || null;
+    const word = (wl && wl.length) ? wl[this.state.tick % wl.length] : L.word;
+    if (word) {
+      o.w = {show: true, tif: word.tif, lat: word.lat, gloss: '— ' + word.gloss};
+      o.b.showNote = false; o.b.footerNote = '';
+    } else {
+      o.w = {show: false, tif: '', lat: '', gloss: ''};
+      if (dir === 'production') { o.b.showNote = true; o.b.footerNote = L.hint; }
+      else { o.b.showNote = false; o.b.footerNote = ''; }
+    }
+    o.gAgain = this.previewLabel(s, 'again');
+    o.gHard = this.previewLabel(s, 'hard');
+    o.gGood = this.previewLabel(s, 'good');
+    o.gEasy = this.previewLabel(s, 'easy');
+    return o;
+  }
+
+  renderVals() {
+    const st = this.state;
+    const layout = this.getLayout();
+    const spec = layout === 'specimen';
+    const base = {
+      isStudy: st.view === 'study', isDashboard: st.view === 'dashboard',
+      goStudy: () => this.setState({view: 'study'}),
+      goDashboard: () => this.setState({view: 'dashboard'}),
+      setMonolith: () => this.setLayout('monolith'),
+      setSpecimen: () => this.setLayout('specimen'),
+      flip: () => this.flip(),
+      showAnswer: () => this.setState({flipped: true, animate: true}),
+      gradeAgain: () => this.grade('again'), gradeHard: () => this.grade('hard'),
+      gradeGood: () => this.grade('good'), gradeEasy: () => this.grade('easy'),
+      studyAhead: () => this.studyAhead(), resetProgress: () => this.resetProgress()
+    };
+    base.navStudyColor = base.isStudy ? 'var(--text-primary)' : 'var(--text-muted)';
+    base.navStudyRule = base.isStudy ? '2px solid var(--accent)' : '2px solid transparent';
+    base.navDashColor = base.isDashboard ? 'var(--text-primary)' : 'var(--text-muted)';
+    base.navDashRule = base.isDashboard ? '2px solid var(--accent)' : '2px solid transparent';
+    base.monoColor = layout === 'monolith' ? 'var(--accent)' : 'var(--text-muted)';
+    base.specColor = spec ? 'var(--accent)' : 'var(--text-muted)';
+    base.ui = spec
+      ? {cardW: 540, cardH: 430, align: 'flex-start', textAlign: 'left', bodyPad: '0 0 0 24px', accentRule: '2px solid var(--accent)', chromeRule: 'var(--border)', glyphSize: 132, latinSize: 64, ipaSize: 22, facePad: '30px 34px'}
+      : {cardW: 380, cardH: 476, align: 'center', textAlign: 'center', bodyPad: '0', accentRule: '0px solid transparent', chromeRule: 'transparent', glyphSize: 172, latinSize: 92, ipaSize: 26, facePad: '30px'};
+    if (!st.ready) { base.hasCard = false; base.caughtUp = false; return base; }
+    Object.assign(base, this.dashVals());
+    Object.assign(base, this.studyVals());
+    return base;
+  }
+}
+</script>
+
+
+</body></html>
