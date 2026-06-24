@@ -10,7 +10,68 @@
 <atom:link href="https://kharchouf.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Youssef Kharchouf&#39;s personal notes</description>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Mon, 01 Jun 2026 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 22 Jun 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <link>https://kharchouf.com/tifinagh.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<iframe id="tifinagh-frame" src="assets/tifinagh-trainer.html" title="Tifinagh Trainer" scrolling="no" style="width:100%; border:0; display:block; height:85vh; background:#1E1C1A;"></iframe>
+<script>
+(function () {
+  var frame = document.getElementById('tifinagh-frame');
+
+  // space from the frame's top to the bottom of the window, so short content still
+  // fills the screen while taller content makes the *page* (not the frame) scroll.
+  function availableHeight() {
+    var top = frame.getBoundingClientRect().top + window.pageYOffset;
+    return Math.max(0, window.innerHeight - top);
+  }
+
+  function fit() {
+    var doc = frame.contentWindow && frame.contentWindow.document;
+    if (!doc || !doc.body) return;
+    var natural = Math.max(doc.body.scrollHeight, doc.body.offsetHeight);
+    if (!natural) return;
+    frame.style.height = Math.max(natural + 2, availableHeight()) + 'px';
+  }
+
+  frame.addEventListener('load', function () {
+    var doc = frame.contentWindow && frame.contentWindow.document;
+    if (!doc) return;
+    // The trainer is built to fill 100% height (html,body,#dc-root all height:100%).
+    // Relax that with !important so the body reports its real content height — then
+    // we size the frame to it: no inner scrollbar, the page scrolls instead.
+    var s = doc.createElement('style');
+    s.textContent =
+      'html,body{height:auto!important}' +
+      '#dc-root,#dc-root .sc-host{height:auto!important;min-height:0!important}' +
+      '#dc-root .sc-host>*{min-height:0!important}' +
+      '[style*="min-height:100vh"],[style*="min-height: 100vh"]{min-height:0!important}';
+    (doc.head || doc.documentElement).appendChild(s);
+
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(doc.body);
+    fit();
+    // React mounts async (loads from a CDN), so re-fit a few times as it settles.
+    [60, 200, 600, 1500].forEach(function (t) { setTimeout(fit, t); });
+  });
+
+  window.addEventListener('resize', fit);
+})();
+</script>
+
+
+
+ ]]></description>
+  <category>tools</category>
+  <category>language</category>
+  <guid>https://kharchouf.com/tifinagh.html</guid>
+  <pubDate>Mon, 22 Jun 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://kharchouf.com/assets/yaz.png" medium="image" type="image/png" height="123" width="144"/>
+</item>
 <item>
   <title>Reverse-Engineering My City’s Bus Tracker</title>
   <link>https://kharchouf.com/posts/err-bus/</link>

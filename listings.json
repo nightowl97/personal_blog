@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/tifinagh.html",
       "/posts/err-bus/index.html",
       "/posts/geometrical-anatomy/index.html",
       "/posts/cnss-analysis/index.html",
