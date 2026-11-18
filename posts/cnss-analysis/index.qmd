@@ -4,6 +4,7 @@ date: 2024-03-01
 categories: [data, economics, morocco]
 description: "Salary distribution, gender pay gaps, geographic disparities, and industry patterns from a database covering 1.6 million Moroccan formal-sector employees in 2022."
 image: city_employee_count.png
+draft: true
 ---
 
 In 2022, the database of declared employees registered with Morocco's *Caisse Nationale de Sécurité Sociale* (CNSS) was made public. The database contains declared salaries, regional information, and economic activity sectors for approximately 1.6 million employees, offering an unusually detailed cross-section of Morocco's formal labor market.
